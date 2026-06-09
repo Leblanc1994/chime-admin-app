@@ -22,7 +22,7 @@
 						</view>
 
 						<view class="profile-hero__refresh" @tap="refreshAll">
-							<cl-icon name="refresh" :size="34" color="currentColor" />
+							<cl-icon name="refresh" :size="28" color="currentColor" />
 							<text>{{ refreshLoading ? "刷新中..." : "刷新档案" }}</text>
 						</view>
 					</view>

@@ -16,7 +16,7 @@ DEFAULT_BUILD_DIR="${PROJECT_ROOT}/dist/build/h5"
 FALLBACK_BUILD_DIR="${PROJECT_ROOT}/unpackage/dist/build/web"
 BUILD_DIR="${BUILD_DIR:-${DEFAULT_BUILD_DIR}}"
 
-if [[ ! -d "${BUILD_DIR}" && "${BUILD_DIR}" == "${DEFAULT_BUILD_DIR}" ]]; then
+if [[ "${BUILD_DIR}" == "${DEFAULT_BUILD_DIR}" && ! -f "${BUILD_DIR}/index.html" ]]; then
 	BUILD_DIR="${FALLBACK_BUILD_DIR}"
 fi
 RELOAD_NGINX="${RELOAD_NGINX:-0}"

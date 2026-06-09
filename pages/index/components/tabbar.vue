@@ -1,5 +1,5 @@
 <template>
-	<cl-footer class="tabbar-shell" :flex="false" border :z-index="399" :padding="0">
+	<cl-footer class="tabbar-shell" :flex="false" background-color="transparent" :z-index="399" :padding="0">
 		<view class="tabbar">
 			<view
 				class="item"
@@ -21,7 +21,8 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from "vue";
+import { onShow } from "@dcloudio/uni-app";
+import { computed, ref } from "vue";
 import { useCool } from "/@/cool";
 import { useI18n } from "vue-i18n";
 
@@ -29,13 +30,17 @@ const { router } = useCool();
 const { t } = useI18n();
 
 // 当前页面路径
-const pagePath = router.path;
+const currentPagePath = ref(normalizePath(router.path));
+
+function normalizePath(path?: string) {
+	return (path || "").replace(/^\//, "");
+}
 
 const list = computed(() => {
 	const arr = [...router.tabs];
 
 	return arr.map((e) => {
-		const active = pagePath?.includes(e.pagePath);
+		const active = normalizePath(e.pagePath) === currentPagePath.value;
 
 		return {
 			...e,
@@ -73,11 +78,15 @@ function toLink(pagePath: string) {
 	}
 }
 
+onShow(() => {
+	currentPagePath.value = normalizePath(router.path);
+});
+
 uni.hideTabBar();
 </script>
 
 <style lang="scss" scoped>
-$icon-size: 56rpx;
+$icon-size: 54rpx;
 
 .tabbar-shell :deep(.cl-footer) {
 	background: transparent;
@@ -90,13 +99,15 @@ $icon-size: 56rpx;
 .tabbar {
 	display: flex;
 	align-items: center;
-	height: 128rpx;
-	width: 100%;
-	padding: 12rpx 18rpx calc(12rpx + env(safe-area-inset-bottom));
+	width: calc(100% - 68rpx);
+	height: 112rpx;
+	margin: 0 34rpx calc(22rpx + env(safe-area-inset-bottom));
+	padding: 10rpx 22rpx;
 	box-sizing: border-box;
-	background: rgba(255, 251, 245, 0.92);
-	border-top: 1rpx solid rgba(95, 77, 55, 0.08);
-	box-shadow: 0 -12rpx 30rpx rgba(73, 57, 36, 0.06);
+	border: 1rpx solid rgba(255, 255, 255, 0.94);
+	border-radius: 999rpx;
+	background: rgba(253, 254, 255, 0.96);
+	box-shadow: 0 -12rpx 42rpx rgba(55, 87, 129, 0.11);
 
 	.item {
 		display: flex;
@@ -106,7 +117,7 @@ $icon-size: 56rpx;
 		flex: 1;
 		position: relative;
 		height: 100%;
-		border-radius: 22rpx;
+		border-radius: 999rpx;
 		transition: all 0.2s ease;
 
 		.icon {
@@ -115,7 +126,7 @@ $icon-size: 56rpx;
 			justify-content: center;
 			height: $icon-size;
 			width: $icon-size;
-			margin-bottom: 2rpx;
+			margin-bottom: 1rpx;
 
 			image {
 				height: 100%;
@@ -124,9 +135,10 @@ $icon-size: 56rpx;
 		}
 
 		.label {
-			font-size: 22rpx;
-			font-weight: 500;
-			color: #b8b1a4;
+			font-size: 23rpx;
+			font-weight: 600;
+			line-height: 1;
+			color: #727d95;
 		}
 
 		.badge {
@@ -150,7 +162,8 @@ $icon-size: 56rpx;
 
 		&.is-active {
 			.label {
-				color: #1f6a52;
+				color: #1677ff;
+				font-weight: 800;
 			}
 		}
 	}

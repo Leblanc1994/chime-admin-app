@@ -128,5 +128,9 @@
   "输入验证码": "Enter verification code",
   "已发送至": "Has been sent to",
   "登录失效，请重试~": "Login expired, please try again~",
-  "联系我们": "Contact us"
+  "联系我们": "Contact us",
+  "首页": "Home",
+  "工作台": "Workbench",
+  "会员": "Members",
+  "消费统计": "Consumption"
 }

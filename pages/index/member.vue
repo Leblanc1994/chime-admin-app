@@ -903,34 +903,37 @@ onReachBottom(async () => {
 .member-hero__top {
 	display: flex;
 	align-items: center;
-	justify-content: flex-end;
-	gap: 22rpx;
-	height: 150rpx;
-	padding-top: 34rpx;
+	justify-content: flex-start;
+	height: 116rpx;
+	padding-left: 278rpx;
 	box-sizing: border-box;
 }
 
 .member-hero__count {
 	display: inline-flex;
 	align-items: center;
-	justify-content: center;
-	height: 58rpx;
-	padding: 0 24rpx;
-	border-radius: 999rpx;
-	background: rgba(255, 255, 255, 0.7);
-	box-shadow: 0 12rpx 28rpx rgba(64, 100, 82, 0.08);
-	backdrop-filter: blur(12rpx);
-	font-size: 26rpx;
-	font-weight: 500;
-	line-height: 58rpx;
+	height: 44rpx;
+	padding: 0;
+	font-size: 24rpx;
+	font-weight: 600;
+	line-height: 44rpx;
 	color: #28313f;
 	white-space: nowrap;
 }
 
+.member-hero__count::before {
+	content: "";
+	display: inline-block;
+	width: 1rpx;
+	height: 28rpx;
+	margin-right: 18rpx;
+	background: rgba(40, 49, 63, 0.42);
+}
+
 .member-hero__count-value {
-	font-size: 34rpx;
+	font-size: 30rpx;
 	font-weight: 800;
-	line-height: 58rpx;
+	line-height: 44rpx;
 	color: #26a365;
 	margin: 0 4rpx;
 }
@@ -940,7 +943,7 @@ onReachBottom(async () => {
 	align-items: center;
 	gap: 18rpx;
 	height: 112rpx;
-	margin-top: 8rpx;
+	margin-top: 42rpx;
 	padding: 0 14rpx 0 34rpx;
 	border-radius: 999rpx;
 	background: rgba(255, 255, 255, 0.94);
