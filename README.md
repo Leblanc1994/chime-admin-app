@@ -24,7 +24,7 @@
 
 👉👉 [服务端（node、midway）开发文档、一键生成代码](https://cool-js.com/admin/node/introduce.html#%E4%BB%A3%E7%A0%81%E4%BB%93%E5%BA%93)
 
-👉👉 [演示地址](https://show.cool-admin.com) 😁
+👉👉 [演示地址](http://www.chime.pink/admin-app) 😁
 
     <img src="https://vue.cool-admin.com/show/admin.jpg" width="500px" />
 
@@ -110,3 +110,38 @@
 -   [PDF 打印](https://cool-js.com/plugin/detail.html?id=44)
 
 -   [更多](https://cool-js.com/plugin/list.html)
+
+## 部署
+
+当前仓库的 `H5` 构建产物目录为 `dist/build/h5`，推荐和 `pc` 端一样使用 `Nginx` 托管静态文件，并反向代理后端接口：
+
+- `Nginx` 提供前端静态资源
+- 后端服务运行在 `127.0.0.1:8001`
+- `Nginx` 反向代理 `/api`、`/upload`、`/socket`
+
+相关文件：
+
+- `deploy/deploy-frontend.sh`：一键上传 `dist/build/h5`
+- `deploy/nginx.admin-app.conf`：服务器站点配置模板
+- `deploy/nginx.admin-app.path.conf`：挂到已有站点子路径(`/admin-app/`)的配置片段
+
+默认部署目标：
+
+- `SERVER_HOST=www.chime.pink`
+- `SERVER_USER=admin`
+- `SSH_KEY=~/.ssh/id_rsa`
+- `REMOTE_WEB_ROOT=/var/www/chime-admin-app`
+
+执行方式：
+
+```bash
+bash deploy/deploy-frontend.sh
+```
+
+如果服务器上的 `Nginx` 配置已经就位，可以加上自动重载：
+
+```bash
+RELOAD_NGINX=1 bash deploy/deploy-frontend.sh
+```
+
+如果服务器当前已经有 `pc` 端默认站点占用了域名首页，可以把 H5 应用挂到同一站点的 `/admin-app/` 子路径。

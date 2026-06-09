@@ -12,7 +12,7 @@ export const config = {
 	// 应用信息
 	app: {
 		// 应用名称
-		name: "COOL-UNI",
+		name: "CHIME",
 		// 应用描述
 		desc: "uniapp快速开发脚手架",
 		// 页面配置
@@ -27,7 +27,7 @@ export const config = {
 
 	// 忽略
 	ignore: {
-		token: [],
+		token: ["/admin/base/open/"],
 	},
 
 	...proxy,

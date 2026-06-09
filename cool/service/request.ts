@@ -51,7 +51,14 @@ export default function request(options: any) {
 						if (router.info()?.path == router.pages.login) {
 							return reject({ message });
 						} else {
-							user.logout();
+							user.logout({
+								remote: false,
+								showMessage: true,
+							});
+							return reject({
+								message: message || t("登录失效，请重试~"),
+								code: 401,
+							});
 						}
 					}
 
@@ -97,7 +104,10 @@ export default function request(options: any) {
 					// 判断 refreshToken 是否过期
 					if (storage.isExpired("refreshToken")) {
 						// 退出登录
-						return user.logout();
+						return user.logout({
+							remote: false,
+							showMessage: true,
+						});
 					}
 
 					// 是否在刷新中
@@ -110,7 +120,12 @@ export default function request(options: any) {
 								isRefreshing = false;
 							})
 							.catch((err) => {
-								user.logout();
+								isRefreshing = false;
+								requests = [];
+								user.logout({
+									remote: false,
+									showMessage: true,
+								});
 								reject(err);
 							});
 					}

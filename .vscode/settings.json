@@ -1,4 +1,7 @@
 {
 	"editor.cursorSmoothCaretAnimation": "on",
 	"editor.formatOnSave": true,
+	"i18n-ally.localesPaths": [
+		"locale"
+	],
 }

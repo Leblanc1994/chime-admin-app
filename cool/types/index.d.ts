@@ -25,7 +25,18 @@ export namespace User {
 		refreshExpire: number;
 	}
 
-	interface Info extends Eps.UserInfoEntity {}
+	interface Info {
+		id?: number;
+		username?: string;
+		name?: string;
+		nickName?: string;
+		phone?: string;
+		email?: string;
+		headImg?: string;
+		avatarUrl?: string;
+		remark?: string;
+		[key: string]: any;
+	}
 }
 
 export namespace Dict {

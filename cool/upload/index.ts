@@ -77,7 +77,7 @@ export async function upload(file: any, cb?: UploadCallback): Promise<string> {
 
 		if (isLocal) {
 			next({
-				host: config.baseUrl + "/app/base/comm/upload",
+				host: config.baseUrl + "/admin/base/comm/upload",
 			});
 		} else {
 			service.base.comm

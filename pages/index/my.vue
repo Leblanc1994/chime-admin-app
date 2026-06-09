@@ -1,5 +1,5 @@
 <template>
-	<cl-page status-bar-background="transparent">
+	<cl-page status-bar-background="transparent" :background-color="pageBackground">
 		<!-- #ifdef MP -->
 		<cl-sticky>
 			<cl-topbar :show-back="false" :border="false" background-color="transparent" />
@@ -7,131 +7,82 @@
 		<!-- #endif -->
 
 		<view class="page-my">
-			<view class="header">
-				<view class="icon" @tap="toEdit">
-					<text class="cl-icon-edit"></text>
-				</view>
-
-				<view class="icon" @tap="toSet">
-					<text class="cl-icon-set"></text>
-				</view>
-
-				<view class="icon" @tap="toMsg">
-					<text class="cl-icon-msg"></text>
-				</view>
-			</view>
-
-			<view class="user" @tap="toEdit">
-				<cl-avatar :src="user.info?.avatarUrl" :size="100" />
-
-				<view class="det">
-					<cl-text :size="32" block :margin="[0, 0, 8, 0]">{{
-						user.info?.nickName || t("未登录")
-					}}</cl-text>
-					<cl-text :size="24" color="info">{{
-						t("写签名会更容易获得别人的关注哦～")
-					}}</cl-text>
-				</view>
-			</view>
-
-			<view class="count">
-				<view class="item">
-					<text>171</text>
-					<text>{{ t("总点击") }}</text>
-				</view>
-
-				<view class="item">
-					<text>24</text>
-					<text>{{ t("赞") }}</text>
-				</view>
-
-				<view class="item">
-					<text>89</text>
-					<text>{{ t("关注") }}</text>
-				</view>
-
-				<view class="item">
-					<text>653</text>
-					<text>{{ t("粉丝") }}</text>
-				</view>
-			</view>
-
-			<view class="switch">
-				<view class="item">
-					<cl-text :size="28" bold block :margin="[0, 0, 10, 0]">{{
-						t("接单模式")
-					}}</cl-text>
-					<cl-text :size="24" color="info">{{ t("已关闭") }}</cl-text>
-
-					<view class="inner">
-						<cl-switch />
+			<view class="profile-card">
+				<view class="profile-card__header">
+					<view class="profile-card__heading">
+						<text class="profile-card__eyebrow">账号中心</text>
+						<text class="profile-card__title">当前登录账号</text>
 					</view>
+
+					<text class="status-badge" :class="{ 'is-offline': !user.token }">
+						{{ user.token ? "已登录" : "未登录" }}
+					</text>
 				</view>
 
-				<view class="item">
-					<cl-text :size="28" bold block :margin="[0, 0, 10, 0]">{{
-						t("消息通知")
-					}}</cl-text>
-					<cl-text :size="24" color="info">{{ t("已开启") }}</cl-text>
+				<view class="profile-card__body" @tap="user.token ? toEdit() : toLogin()">
+					<cl-avatar :src="user.info?.avatarUrl" :size="108" />
 
-					<view class="inner">
-						<cl-switch />
+					<view class="profile-card__identity">
+						<text class="profile-card__name">{{ profileName }}</text>
+						<text class="profile-card__subtitle">{{ profileSubtitle }}</text>
+					</view>
+
+					<text class="profile-card__arrow">›</text>
+				</view>
+
+				<view class="profile-card__meta">
+					<text class="summary-pill" v-for="item in profileMeta" :key="item">
+						{{ item }}
+					</text>
+				</view>
+			</view>
+
+			<view class="action-grid">
+				<view class="action-card" @tap="user.token ? toEdit() : toLogin()">
+					<text class="action-card__title">{{ user.token ? "编辑资料" : "立即登录" }}</text>
+					<text class="action-card__desc">
+						{{ user.token ? "补充头像、昵称和基础账号资料" : "登录后查看并管理当前账号信息" }}
+					</text>
+				</view>
+
+				<view class="action-card" @tap="user.token ? toSet() : toLogin()">
+					<text class="action-card__title">账号设置</text>
+					<text class="action-card__desc">
+						{{ user.token ? "进入设置页处理头像、协议和登录状态" : "当前未登录，先进入登录页完成验证" }}
+					</text>
+				</view>
+			</view>
+
+			<view class="section-card">
+				<view class="section-card__header">
+					<text class="section-card__title">账号信息</text>
+					<text class="section-card__caption">
+						{{ user.token ? "以下信息来自当前登录账户" : "登录后会自动同步账号资料" }}
+					</text>
+				</view>
+
+				<view class="detail-list">
+					<view class="detail-row" v-for="item in accountDetails" :key="item.label">
+						<text class="detail-row__label">{{ item.label }}</text>
+						<text class="detail-row__value" :class="{ 'is-empty': item.value === '-' }">
+							{{ item.value }}
+						</text>
 					</view>
 				</view>
 			</view>
 
-			<view class="status">
-				<cl-text block :size="30" bold>{{ t("我的订单") }}</cl-text>
-
-				<view class="list">
-					<view
-						class="item"
-						v-for="(item, index) in order.list"
-						:key="index"
-						@tap="order.toLink(item.value)"
-					>
-						<cl-icon :name="item.icon" :size="50" />
-						<cl-text :margin="[18, 0, 0, 0]" :size="24" color="info">
-							{{ t(item.label) }}
-						</cl-text>
-					</view>
+			<view class="section-card section-card--danger">
+				<view class="section-card__header">
+					<text class="section-card__title">安全操作</text>
+					<text class="section-card__caption">
+						{{ user.token ? "退出后将返回登录页" : "当前设备还没有登录账号" }}
+					</text>
 				</view>
-			</view>
 
-			<view class="menu">
-				<cl-list :radius="24" :border="false">
-					<cl-list-item :label="t('我的账单')" @tap="toBill">
-						<template #icon>
-							<cl-icon name="bill" :size="40" />
-						</template>
-					</cl-list-item>
-
-					<cl-list-item :label="t('观看历史')">
-						<template #icon>
-							<cl-icon name="time" :size="40" />
-						</template>
-					</cl-list-item>
-
-					<cl-list-item :label="t('数据看板')">
-						<template #icon>
-							<cl-icon name="chart-bar" :size="40" />
-						</template>
-					</cl-list-item>
-
-					<cl-list-item :label="t('邀请好友')">
-						<template #icon>
-							<cl-icon name="share" :size="40" />
-						</template>
-					</cl-list-item>
-				</cl-list>
-
-				<cl-list :radius="24" :border="false">
-					<cl-list-item :label="t('设置')" @tap="toSet">
-						<template #icon>
-							<cl-icon name="set" :size="40" />
-						</template>
-					</cl-list-item>
-				</cl-list>
+				<view class="menu-action" @tap="user.token ? confirmLogout() : toLogin()">
+					<text class="menu-action__label">{{ user.token ? "退出登录" : "前往登录" }}</text>
+					<text class="menu-action__arrow">›</text>
+				</view>
 			</view>
 		</view>
 
@@ -141,56 +92,86 @@
 
 <script lang="ts" setup>
 import { onPullDownRefresh, onShow } from "@dcloudio/uni-app";
-import { useCool, useStore, module } from "/@/cool";
+import { useCool, useStore } from "/@/cool";
 import { useUi } from "/$/cool-ui";
-import { reactive } from "vue";
-import { useI18n } from "vue-i18n";
+import { computed } from "vue";
 import Tabbar from "./components/tabbar.vue";
 
 const { router } = useCool();
 const { user } = useStore();
 const ui = useUi();
-const { t } = useI18n();
 
-async function refresh() {
-	if (user.token) {
+const pageBackground =
+	"radial-gradient(circle at top left, rgba(135, 76, 93, 0.14), transparent 38%), radial-gradient(circle at top right, rgba(31, 106, 82, 0.12), transparent 32%), linear-gradient(180deg, #fbf7f1 0%, #f4efe7 50%, #efe8de 100%)";
+
+const profileName = computed(() => {
+	return user.info?.nickName || user.info?.name || user.info?.username || "未登录";
+});
+
+const profileSubtitle = computed(() => {
+	if (!user.token) {
+		return "登录后可查看账号信息、设置和资料页";
+	}
+
+	return user.info?.phone || user.info?.email || user.info?.username || "点击完善账号资料";
+});
+
+const profileMeta = computed(() => {
+	const items: string[] = [];
+
+	if (user.info?.id) {
+		items.push(`ID ${user.info.id}`);
+	}
+
+	if (user.info?.username) {
+		items.push(`用户名 ${user.info.username}`);
+	}
+
+	if (user.info?.phone) {
+		items.push(`手机号 ${user.info.phone}`);
+	}
+
+	if (!items.length) {
+		items.push(user.token ? "资料可在设置页继续完善" : "当前设备未登录账号");
+	}
+
+	return items;
+});
+
+const accountDetails = computed(() => {
+	return [
+		{ label: "昵称", value: user.info?.nickName || "-" },
+		{ label: "用户名", value: user.info?.username || "-" },
+		{ label: "手机号", value: user.info?.phone || "-" },
+		{ label: "邮箱", value: user.info?.email || "-" },
+		{ label: "账号 ID", value: user.info?.id ? String(user.info.id) : "-" },
+	];
+});
+
+async function refresh(showMessage = false) {
+	if (!user.token) {
+		if (showMessage) {
+			ui.showTips("当前还没有登录账号");
+		}
+
+		return;
+	}
+
+	try {
 		await user.get();
-	} else {
-		// user.logout();
+
+		if (showMessage) {
+			ui.showTips("账号信息已刷新");
+		}
+	} catch (err: any) {
+		if (showMessage) {
+			ui.showTips(err?.message || "账号信息刷新失败");
+		}
 	}
 }
 
-const order = reactive({
-	list: [
-		{
-			icon: "order-paid",
-			label: t("待支付"),
-			value: 1,
-		},
-		{
-			icon: "order-not-shipped",
-			label: t("未发货"),
-			value: 2,
-		},
-		{
-			icon: "order-received",
-			label: t("已发货"),
-			value: 3,
-		},
-		{
-			icon: "order-refund",
-			label: t("售后 / 退款"),
-			value: 4,
-		},
-	],
-
-	toLink(value: number) {
-		ui.showToast(t("订单模块不存在，请在插件市场中下载"));
-	},
-});
-
-function toBill() {
-	ui.showToast(t("财务模块不存在，请在插件市场中下载"));
+function toLogin() {
+	router.push("/pages/user/login");
 }
 
 function toSet() {
@@ -201,12 +182,22 @@ function toEdit() {
 	router.push("/pages/user/edit");
 }
 
-function toMsg() {
-	if (module.get("cool-msg")) {
-		router.push("/uni_modules/cool-msg/pages/list");
-	} else {
-		ui.showToast(t("消息模块不存在，请在插件市场中下载"));
-	}
+function confirmLogout() {
+	ui.showConfirm({
+		title: "退出登录",
+		type: "warning",
+		message: "确认退出当前账号吗？退出后将返回登录页。",
+		confirmButtonText: "确认退出",
+		beforeClose(action, { done }) {
+			if (action !== "confirm") {
+				done();
+				return;
+			}
+
+			done();
+			user.logout();
+		},
+	});
 }
 
 onPullDownRefresh(async () => {
@@ -220,121 +211,247 @@ onShow(() => {
 </script>
 
 <style lang="scss" scoped>
-$gap: 24rpx;
-
 .page-my {
-	padding: $gap;
+	min-height: 100%;
+	padding: 28rpx 24rpx 156rpx;
+	box-sizing: border-box;
+}
 
-	.header {
-		display: flex;
+.profile-card,
+.section-card {
+	border-radius: 32rpx;
+	padding: 30rpx;
+	margin-bottom: 20rpx;
+	background: rgba(255, 252, 247, 0.92);
+	border: 1rpx solid rgba(255, 255, 255, 0.72);
+	box-shadow: 0 22rpx 50rpx rgba(73, 57, 36, 0.08);
+	box-sizing: border-box;
+}
 
-		.icon {
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			height: 60rpx;
-			width: 60rpx;
-			background-color: rgba(150, 150, 150, 0.1);
-			border-radius: 16rpx;
-			font-size: 32rpx;
-			margin-right: $gap;
+.profile-card__header,
+.section-card__header,
+.profile-card__body,
+.detail-row,
+.menu-action {
+	display: flex;
+	align-items: center;
+}
 
-			&:last-child {
-				margin-left: auto;
-				margin-right: 0;
-			}
-		}
+.profile-card__header,
+.section-card__header {
+	justify-content: space-between;
+}
+
+.profile-card__heading {
+	display: flex;
+	flex-direction: column;
+}
+
+.profile-card__eyebrow {
+	display: block;
+	font-size: 22rpx;
+	letter-spacing: 6rpx;
+	text-transform: uppercase;
+	color: #9b7b57;
+	margin-bottom: 10rpx;
+}
+
+.profile-card__title,
+.section-card__title,
+.profile-card__name {
+	display: block;
+	color: #2f3129;
+	font-weight: 600;
+}
+
+.profile-card__title,
+.section-card__title {
+	font-size: 30rpx;
+}
+
+.status-badge {
+	flex-shrink: 0;
+	padding: 10rpx 18rpx;
+	border-radius: 999rpx;
+	background: rgba(31, 106, 82, 0.1);
+	color: #1f6a52;
+	font-size: 22rpx;
+	font-weight: 600;
+}
+
+.status-badge.is-offline {
+	background: rgba(135, 76, 93, 0.1);
+	color: #874c5d;
+}
+
+.profile-card__body {
+	padding: 30rpx 0 26rpx;
+}
+
+.profile-card__identity {
+	flex: 1;
+	min-width: 0;
+	margin-left: 24rpx;
+}
+
+.profile-card__name {
+	display: block;
+	font-size: 40rpx;
+	line-height: 1.2;
+}
+
+.profile-card__subtitle,
+.section-card__caption,
+.action-card__desc,
+.detail-row__label {
+	color: #6c695d;
+}
+
+.profile-card__subtitle {
+	display: block;
+	margin-top: 12rpx;
+	font-size: 24rpx;
+	line-height: 1.6;
+}
+
+.profile-card__arrow,
+.menu-action__arrow {
+	flex-shrink: 0;
+	color: #a18463;
+	font-size: 36rpx;
+	line-height: 1;
+}
+
+.profile-card__meta {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12rpx;
+}
+
+.summary-pill {
+	padding: 10rpx 18rpx;
+	border-radius: 999rpx;
+	background: rgba(255, 255, 255, 0.76);
+	border: 1rpx solid rgba(92, 74, 54, 0.08);
+	font-size: 22rpx;
+	color: #6f6658;
+}
+
+.action-grid {
+	display: flex;
+	flex-wrap: wrap;
+	margin: 0 -8rpx 20rpx;
+}
+
+.action-grid > .action-card {
+	width: calc(50% - 16rpx);
+	margin: 0 8rpx 16rpx;
+	margin-bottom: 20rpx;
+}
+
+.action-card {
+	min-height: 174rpx;
+	padding: 28rpx 26rpx;
+	border-radius: 28rpx;
+	background: linear-gradient(160deg, rgba(255, 255, 255, 0.94) 0%, rgba(249, 241, 231, 0.88) 100%);
+	border: 1rpx solid rgba(103, 84, 61, 0.08);
+	box-shadow: 0 16rpx 40rpx rgba(88, 67, 46, 0.06);
+	box-sizing: border-box;
+}
+
+.action-card__title {
+	display: block;
+	color: #2f3129;
+	font-size: 30rpx;
+	font-weight: 600;
+	margin-bottom: 14rpx;
+}
+
+.action-card__desc {
+	display: block;
+	font-size: 24rpx;
+	line-height: 1.7;
+}
+
+.section-card__caption {
+	display: block;
+	font-size: 22rpx;
+	text-align: right;
+}
+
+.detail-list {
+	margin-top: 16rpx;
+}
+
+.detail-row {
+	justify-content: space-between;
+	padding: 24rpx 0;
+	border-bottom: 1rpx solid rgba(111, 102, 88, 0.08);
+	gap: 24rpx;
+}
+
+.detail-row:last-child {
+	border-bottom: 0;
+	padding-bottom: 0;
+}
+
+.detail-row__label,
+.detail-row__value,
+.menu-action__label {
+	font-size: 26rpx;
+}
+
+.detail-row__value,
+.menu-action__label {
+	color: #2f3129;
+}
+
+.detail-row__value {
+	flex: 1;
+	text-align: right;
+	word-break: break-all;
+}
+
+.detail-row__value.is-empty {
+	color: #b3a794;
+}
+
+.section-card--danger .menu-action__label {
+	color: #b85c4a;
+}
+
+.menu-action {
+	justify-content: space-between;
+	margin-top: 16rpx;
+	padding-top: 8rpx;
+}
+
+@media screen and (max-width: 720rpx) {
+	.page-my {
+		padding-left: 20rpx;
+		padding-right: 20rpx;
 	}
 
-	.user {
-		display: flex;
-		align-items: center;
-		padding: 48rpx 12rpx;
-
-		.det {
-			flex: 1;
-			margin-left: 32rpx;
-		}
+	.profile-card,
+	.section-card {
+		padding: 26rpx;
+		border-radius: 28rpx;
 	}
 
-	.count {
-		display: flex;
-		margin-bottom: 32rpx;
-
-		.item {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			justify-content: center;
-			flex: 1;
-
-			text {
-				&:nth-child(1) {
-					font-size: 40rpx;
-					margin-bottom: 4rpx;
-					font-weight: bold;
-				}
-
-				&:nth-child(2) {
-					font-size: 24rpx;
-					color: $cl-color-info;
-				}
-			}
-		}
+	.action-grid {
+		display: block;
+		margin-left: 0;
+		margin-right: 0;
 	}
 
-	.switch {
-		display: flex;
-		margin-bottom: 24rpx;
-
-		.item {
-			flex: 1;
-			border-radius: 24rpx;
-			padding: 32rpx;
-			background-color: #fff;
-			position: relative;
-
-			.inner {
-				position: absolute;
-				right: 24rpx;
-				top: calc(50% - 30rpx);
-				transform: scale(0.8);
-			}
-
-			&:nth-child(1) {
-				margin-right: 12rpx;
-			}
-
-			&:nth-child(2) {
-				margin-left: 12rpx;
-			}
-		}
+	.action-grid > .action-card {
+		width: 100%;
+		margin-left: 0;
+		margin-right: 0;
 	}
 
-	.status {
-		background-color: #fff;
-		border-radius: 24rpx;
-		padding: 32rpx;
-		margin-bottom: 24rpx;
-
-		.list {
-			display: flex;
-
-			.item {
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-				justify-content: center;
-				flex: 1;
-				padding: 48rpx 0 24rpx 0;
-			}
-		}
-	}
-
-	.menu {
-		:deep(.cl-list-item) {
-			padding: 4rpx 6rpx 4rpx 12rpx;
-		}
+	.profile-card__name {
+		font-size: 36rpx;
 	}
 }
 </style>

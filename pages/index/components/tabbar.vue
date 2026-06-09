@@ -1,5 +1,5 @@
 <template>
-	<cl-footer :flex="false" border :z-index="399" :padding="0">
+	<cl-footer class="tabbar-shell" :flex="false" border :z-index="399" :padding="0">
 		<view class="tabbar">
 			<view
 				class="item"
@@ -64,7 +64,7 @@ function toLink(pagePath: string) {
 			break;
 
 		case "admin":
-			to("https://show.cool-admin.com");
+			to("http://www.chime.pink/admin-app");
 			break;
 
 		default:
@@ -79,10 +79,24 @@ uni.hideTabBar();
 <style lang="scss" scoped>
 $icon-size: 56rpx;
 
+.tabbar-shell :deep(.cl-footer) {
+	background: transparent;
+}
+
+.tabbar-shell :deep(.cl-footer__border) {
+	display: none;
+}
+
 .tabbar {
 	display: flex;
-	height: 120rpx;
+	align-items: center;
+	height: 128rpx;
 	width: 100%;
+	padding: 12rpx 18rpx calc(12rpx + env(safe-area-inset-bottom));
+	box-sizing: border-box;
+	background: rgba(255, 251, 245, 0.92);
+	border-top: 1rpx solid rgba(95, 77, 55, 0.08);
+	box-shadow: 0 -12rpx 30rpx rgba(73, 57, 36, 0.06);
 
 	.item {
 		display: flex;
@@ -91,10 +105,17 @@ $icon-size: 56rpx;
 		justify-content: center;
 		flex: 1;
 		position: relative;
+		height: 100%;
+		border-radius: 22rpx;
+		transition: all 0.2s ease;
 
 		.icon {
+			display: flex;
+			align-items: center;
+			justify-content: center;
 			height: $icon-size;
 			width: $icon-size;
+			margin-bottom: 2rpx;
 
 			image {
 				height: 100%;
@@ -104,7 +125,8 @@ $icon-size: 56rpx;
 
 		.label {
 			font-size: 22rpx;
-			color: #bfbfbf;
+			font-weight: 500;
+			color: #b8b1a4;
 		}
 
 		.badge {
@@ -128,7 +150,7 @@ $icon-size: 56rpx;
 
 		&.is-active {
 			.label {
-				color: $cl-color-primary;
+				color: #1f6a52;
 			}
 		}
 	}

@@ -84,11 +84,11 @@ export function useWx() {
 	function getMpConfig() {
 		// #ifdef H5
 		if (isWxBrowser()) {
-			service.user.comm
+			(service as any).user.comm
 				.wxMpConfig({
 					url: `${location.origin}${location.pathname}`,
 				})
-				.then((res) => {
+				.then((res: any) => {
 					wx.config({
 						debug: config.app.wx.debug,
 						jsApiList: ["chooseWXPay"],

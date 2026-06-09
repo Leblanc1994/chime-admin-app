@@ -21,7 +21,7 @@ const useDictStore = defineStore("dict", () => {
 
 		return arr
 			.map((e) => {
-				return (isString(name) ? get(name) : name).find((a) => a.value == e)?.label;
+				return (isString(name) ? get(name) : name).find((a: any) => a.value == e)?.label;
 			})
 			.filter(Boolean)
 			.join(",");

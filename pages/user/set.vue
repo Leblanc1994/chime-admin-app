@@ -26,8 +26,14 @@
 					<cl-list-item :label="t('昵称')" @tap="router.push('/pages/user/edit')">
 						<cl-text :value="user.info.nickName" />
 					</cl-list-item>
+					<cl-list-item :label="t('用户名')" :arrow-icon="false">
+						<cl-text :value="user.info.username || '-'" />
+					</cl-list-item>
 					<cl-list-item :label="t('手机号')" :arrow-icon="false">
-						<cl-text :value="user.info.phone" />
+						<cl-text :value="user.info.phone || '-'" />
+					</cl-list-item>
+					<cl-list-item :label="t('邮箱')" :arrow-icon="false">
+						<cl-text :value="user.info.email || '-'" />
 					</cl-list-item>
 					<cl-list-item label="ID" :arrow-icon="false" :border="false">
 						<cl-text :value="user.info.id" />

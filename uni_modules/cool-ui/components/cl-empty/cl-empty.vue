@@ -8,7 +8,7 @@
 	>
 		<image
 			class="cl-empty__icon"
-			:src="`/static/empty/${icon}.png`"
+			:src="`static/empty/${icon}.png`"
 			:style="{
 				height: parseRpx(iconSize),
 			}"

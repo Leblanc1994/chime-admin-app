@@ -1,12 +1,16 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
-import { deepMerge, storage } from "../utils";
+import { storage } from "../utils";
 import { router } from "../router";
 import { service } from "../service";
 import type { User } from "../types";
+import { t } from "/@/locale";
 
 // 本地缓存
 const data = storage.info();
+function getService() {
+	return service as any;
+}
 
 const useUserStore = defineStore("user", function () {
 	// 标识
@@ -24,11 +28,11 @@ const useUserStore = defineStore("user", function () {
 
 	// 刷新标识
 	async function refreshToken() {
-		return service.user.login
+		return getService().base.open
 			.refreshToken({
 				refreshToken: storage.get("refreshToken"),
 			})
-			.then((res) => {
+			.then((res: User.Token) => {
 				setToken(res);
 				return res.token;
 			});
@@ -39,43 +43,93 @@ const useUserStore = defineStore("user", function () {
 
 	// 设置用户信息
 	function set(value: User.Info) {
-		info.value = value;
-		storage.set("userInfo", value);
+		const data = {
+			...value,
+			avatarUrl: value.avatarUrl || value.headImg || "",
+			headImg: value.headImg || value.avatarUrl || "",
+		};
+
+		info.value = data;
+		storage.set("userInfo", data);
 	}
 
 	// 更新用户信息
 	async function update(data: User.Info & { [key: string]: any }) {
-		set(deepMerge(info.value, data));
-		return service.user.info.updatePerson(data);
+		const payload = {
+			...data,
+			headImg: data.headImg || data.avatarUrl,
+		};
+
+		return getService().base.comm.personUpdate(payload).then(() => {
+			set({
+				...(info.value || {}),
+				...data,
+				headImg: payload.headImg,
+				avatarUrl: payload.headImg,
+			});
+		});
 	}
 
 	// 清除用户
 	function clear() {
 		storage.remove("userInfo");
 		storage.remove("token");
+		storage.remove("token_deadtime");
 		storage.remove("refreshToken");
+		storage.remove("refreshToken_deadtime");
 		token.value = "";
 		info.value = undefined;
 	}
 
-	// 退出
-	function logout() {
+	function redirectToLogin(showMessage?: boolean) {
 		clear();
-		router.login({ reLaunch: true });
+
+		if (showMessage) {
+			uni.showToast({
+				title: t("登录失效，请重试~"),
+				icon: "none",
+			});
+		}
+
+		if (router.info()?.path !== router.pages.login) {
+			router.login({ reLaunch: true });
+		}
+	}
+
+	// 退出
+	function logout(options?: { remote?: boolean; showMessage?: boolean }) {
+		const { remote = true, showMessage = false } = options || {};
+
+		if (!remote) {
+			redirectToLogin(showMessage);
+			return Promise.resolve();
+		}
+
+		return getService().base.comm
+			.logout()
+			.catch(() => {
+				//
+			})
+			.finally(() => {
+				redirectToLogin(showMessage);
+			});
 	}
 
 	// 获取用户信息
 	async function get() {
-		return service.user.info
+		return getService().base.comm
 			.person()
-			.then((res) => {
+			.then((res: User.Info) => {
 				if (res) {
 					set(res);
 				}
 				return res;
 			})
 			.catch(() => {
-				logout();
+				return logout({
+					remote: false,
+					showMessage: true,
+				});
 			});
 	}
 

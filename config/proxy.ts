@@ -6,13 +6,13 @@ const proxy = {
 	},
 
 	"/prod/": {
-		target: "https://show.cool-admin.com",
+		target: "http://www.chime.pink",
 		changeOrigin: true,
 		rewrite: (path: string) => path.replace(/^\/prod/, "/api"),
 	},
 };
 
-const value = "dev";
+const value = "prod";
 const host = proxy[`/${value}/`]?.target;
 
 export { proxy, host, value };
