@@ -315,7 +315,7 @@
 			</cl-popup>
 
 			<view class="member-fab" @tap="openUpsert('add')">
-				<cl-icon name="plus" :size="48" color="#fff" />
+				<cl-icon name="plus" :size="40" color="#fff" />
 			</view>
 		</view>
 
@@ -905,12 +905,14 @@ onReachBottom(async () => {
 	align-items: center;
 	justify-content: flex-end;
 	gap: 22rpx;
-	min-height: 116rpx;
+	height: 150rpx;
+	padding-top: 34rpx;
+	box-sizing: border-box;
 }
 
 .member-hero__count {
 	display: inline-flex;
-	align-items: baseline;
+	align-items: center;
 	justify-content: center;
 	height: 58rpx;
 	padding: 0 24rpx;
@@ -920,6 +922,7 @@ onReachBottom(async () => {
 	backdrop-filter: blur(12rpx);
 	font-size: 26rpx;
 	font-weight: 500;
+	line-height: 58rpx;
 	color: #28313f;
 	white-space: nowrap;
 }
@@ -927,6 +930,7 @@ onReachBottom(async () => {
 .member-hero__count-value {
 	font-size: 34rpx;
 	font-weight: 800;
+	line-height: 58rpx;
 	color: #26a365;
 	margin: 0 4rpx;
 }
@@ -936,7 +940,7 @@ onReachBottom(async () => {
 	align-items: center;
 	gap: 18rpx;
 	height: 112rpx;
-	margin-top: 42rpx;
+	margin-top: 8rpx;
 	padding: 0 14rpx 0 34rpx;
 	border-radius: 999rpx;
 	background: rgba(255, 255, 255, 0.94);
@@ -1326,17 +1330,17 @@ onReachBottom(async () => {
 
 .member-fab {
 	position: fixed;
-	right: 28rpx;
-	bottom: calc(136rpx + env(safe-area-inset-bottom));
+	right: 30rpx;
+	bottom: calc(148rpx + env(safe-area-inset-bottom));
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	width: 128rpx;
-	height: 128rpx;
+	width: 104rpx;
+	height: 104rpx;
 	border-radius: 50%;
 	background: linear-gradient(145deg, #32e0a1 0%, #19a963 100%);
-	box-shadow: 0 22rpx 42rpx rgba(25, 169, 99, 0.34);
+	box-shadow: 0 18rpx 34rpx rgba(25, 169, 99, 0.3);
 	color: #fff;
 	z-index: 30;
 }
@@ -1350,18 +1354,18 @@ onReachBottom(async () => {
 }
 
 .member-fab::before {
-	top: -22rpx;
-	right: 10rpx;
-	width: 14rpx;
-	height: 24rpx;
+	top: -18rpx;
+	right: 8rpx;
+	width: 12rpx;
+	height: 20rpx;
 	background: #4db4ff;
 }
 
 .member-fab::after {
-	top: 4rpx;
-	right: -18rpx;
-	width: 12rpx;
-	height: 18rpx;
+	top: 2rpx;
+	right: -14rpx;
+	width: 10rpx;
+	height: 16rpx;
 	background: #ee62bf;
 }
 
