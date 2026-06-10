@@ -168,6 +168,7 @@ const MEMBER_CARD_TYPE = "会员次卡";
 const consumeRecordService = new MemberConsumeRecordService();
 const ui = useUi();
 const today = dayjs().format("YYYY-MM-DD");
+const currentMonthRange = getCurrentMonthRange();
 const pageBackground =
 	"linear-gradient(156deg, #fbfdff 0%, #edf7ff 32%, #f7fbff 58%, #f4f8fc 100%)";
 const weekdayLabels = ["一", "二", "三", "四", "五", "六", "日"];
@@ -193,14 +194,14 @@ const pagination = reactive({
 });
 
 const filters = reactive({
-	consumeStartDate: today,
-	consumeEndDate: today,
+	consumeStartDate: currentMonthRange.start,
+	consumeEndDate: currentMonthRange.end,
 	memberKeyword: "",
 });
 
 const draftFilters = reactive({
-	consumeStartDate: today,
-	consumeEndDate: today,
+	consumeStartDate: currentMonthRange.start,
+	consumeEndDate: currentMonthRange.end,
 });
 
 const calendarMonthTitle = computed(() => calendarMonth.value.format("YYYY年MM月"));
@@ -253,6 +254,13 @@ function normalizeDate(value: string) {
 	return date.isValid() ? date.format("YYYY-MM-DD") : today;
 }
 
+function getCurrentMonthRange() {
+	return {
+		start: dayjs().startOf("month").format("YYYY-MM-DD"),
+		end: dayjs().endOf("month").format("YYYY-MM-DD"),
+	};
+}
+
 function getQuickRange(type: QuickRangeValue) {
 	if (type === "yesterday") {
 		const date = dayjs().subtract(1, "day").format("YYYY-MM-DD");
@@ -287,7 +295,7 @@ function buildSearchParams() {
 		order: "consumeTime",
 		sort: "desc",
 		consumeStartTime: dayjs(startDate).startOf("day").format("YYYY-MM-DD HH:mm:ss"),
-		consumeEndTime: dayjs(endDate).endOf("day").format("YYYY-MM-DD HH:mm:ss"),
+		consumeEndTime: dayjs(endDate).add(1, "day").startOf("day").format("YYYY-MM-DD HH:mm:ss"),
 		memberKeyword: filters.memberKeyword || undefined,
 	};
 }
@@ -370,9 +378,11 @@ async function reload() {
 }
 
 function resetPopupFilters() {
-	draftFilters.consumeStartDate = today;
-	draftFilters.consumeEndDate = today;
-	calendarMonth.value = dayjs(today).startOf("month");
+	const range = getCurrentMonthRange();
+
+	draftFilters.consumeStartDate = range.start;
+	draftFilters.consumeEndDate = range.end;
+	calendarMonth.value = dayjs(range.start).startOf("month");
 	calendarSelectStep.value = "start";
 }
 

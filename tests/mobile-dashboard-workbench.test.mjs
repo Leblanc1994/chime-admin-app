@@ -110,3 +110,26 @@ test("consume statistics page mirrors pc readonly filters and list contract", ()
 	assert.doesNotMatch(source, /consumeRecordService\.update\(/);
 	assert.doesNotMatch(source, /consumeRecordService\.add\(/);
 });
+
+test("consume statistics page defaults filters to the current month range", () => {
+	const source = read("pages/index/consume-statistics.vue");
+
+	assert.match(source, /const\s+currentMonthRange\s*=\s*getCurrentMonthRange\(\)/);
+	assert.match(source, /function\s+getCurrentMonthRange\(\)/);
+	assert.match(source, /dayjs\(\)\.startOf\("month"\)\.format\("YYYY-MM-DD"\)/);
+	assert.match(source, /dayjs\(\)\.endOf\("month"\)\.format\("YYYY-MM-DD"\)/);
+	assert.match(source, /consumeStartDate:\s*currentMonthRange\.start/);
+	assert.match(source, /consumeEndDate:\s*currentMonthRange\.end/);
+	assert.doesNotMatch(source, /consumeStartDate:\s*today/);
+	assert.doesNotMatch(source, /consumeEndDate:\s*today/);
+});
+
+test("consume statistics page uses an exclusive next-day end time like pc", () => {
+	const source = read("pages/index/consume-statistics.vue");
+
+	assert.match(
+		source,
+		/consumeEndTime:\s*dayjs\(endDate\)\.add\(1,\s*"day"\)\.startOf\("day"\)\.format\("YYYY-MM-DD HH:mm:ss"\)/,
+	);
+	assert.doesNotMatch(source, /consumeEndTime:\s*dayjs\(endDate\)\.endOf\("day"\)/);
+});
