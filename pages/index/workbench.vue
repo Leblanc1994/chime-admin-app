@@ -42,8 +42,8 @@ const menus = [
 		tone: "green",
 	},
 	{
-		title: "消费统计",
-		desc: "按日期、客户和类型查看消费记录",
+		title: "消费记录",
+		desc: "查看会员与散客消费记录，并可直接录入散客消费",
 		path: "/pages/index/consume-statistics",
 		glyph: "consume",
 		tone: "copper",

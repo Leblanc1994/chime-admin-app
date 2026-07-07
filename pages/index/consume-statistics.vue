@@ -13,6 +13,15 @@
 						@confirm="reload"
 					/>
 				</view>
+
+				<view class="search-panel__actions">
+					<view class="search-panel__button search-panel__button--secondary" @tap="openDateFilter">
+						筛选日期
+					</view>
+					<view class="search-panel__button search-panel__button--primary" @tap="openGuestConsumePopup">
+						新增散客消费
+					</view>
+				</view>
 			</view>
 
 			<view class="statistics-summary" @tap="openDateFilter">
@@ -61,6 +70,11 @@
 					</view>
 
 					<text class="record-card__remark" v-if="row.remark">{{ row.remark }}</text>
+
+					<view class="record-card__actions" v-if="isGuestRecord(row)">
+						<text class="record-card__action" @tap="editGuestConsumeRecord(row)">编辑</text>
+						<text class="record-card__action is-danger" @tap="deleteGuestConsumeRecord(row)">删除</text>
+					</view>
 				</view>
 			</view>
 
@@ -68,7 +82,7 @@
 
 			<view class="loading-wrap" v-if="loading">
 				<cl-loading :size="34" />
-				<text>正在加载消费统计</text>
+				<text>正在加载消费记录</text>
 			</view>
 
 			<view class="bottom-tip" v-else-if="list.length">
@@ -139,13 +153,118 @@
 				</view>
 			</view>
 		</cl-popup>
+
+		<cl-popup
+			v-model="guestConsumeDialog.visible"
+			:title="guestConsumeDialog.title"
+			direction="bottom"
+			border-radius="36rpx 36rpx 0 0"
+			:padding="0"
+		>
+			<view class="popup-shell">
+				<view class="popup-summary">
+					<text class="popup-summary__title">{{ guestConsumeDialog.title }}</text>
+					<text class="popup-summary__text">
+						{{
+							guestConsumeDialog.isEdit
+								? "修改散客档案和本次消费记录。"
+								: "直接登记一次散客消费，不进入会员列表。"
+						}}
+					</text>
+				</view>
+
+				<scroll-view class="popup-body" scroll-y>
+					<cl-form
+						ref="GuestConsumeForm"
+						:model-value="guestConsumeDialog.form"
+						:rules="guestConsumeRules"
+						:disabled="guestConsumeDialog.loading"
+						label-position="top"
+						tips="toast"
+					>
+						<cl-form-item label="姓名" prop="name">
+							<cl-input
+								v-model="guestConsumeDialog.form.name"
+								placeholder="请输入姓名"
+								:maxlength="50"
+							/>
+						</cl-form-item>
+
+						<cl-form-item label="手机号">
+							<cl-input
+								v-model="guestConsumeDialog.form.phone"
+								placeholder="选填，用于后续识别散客"
+								:maxlength="20"
+							/>
+						</cl-form-item>
+
+						<cl-form-item label="消费类型" prop="consumeType">
+							<view class="choice-group">
+								<view
+									v-for="item in guestConsumeTypeOptions"
+									:key="item.value"
+									class="choice-chip"
+									:class="{ 'is-active': guestConsumeDialog.form.consumeType === item.value }"
+									@tap="guestConsumeDialog.form.consumeType = item.value"
+								>
+									{{ item.label }}
+								</view>
+							</view>
+						</cl-form-item>
+
+						<cl-form-item label="消费时间" prop="consumeTime">
+							<cl-select-date
+								v-model="guestConsumeDialog.form.consumeTime"
+								:mode="dateTimePickerMode"
+								:format="minuteDateTimeFormat"
+								:display-format="formatMinuteDateTimeDisplay"
+							/>
+						</cl-form-item>
+
+						<cl-form-item label="顾客备注">
+							<cl-textarea
+								v-model="guestConsumeDialog.form.remark"
+								placeholder="记录散客来源或偏好，可留空"
+								count
+								auto-height
+								:maxlength="200"
+							/>
+						</cl-form-item>
+
+						<cl-form-item label="消费备注">
+							<cl-textarea
+								v-model="guestConsumeDialog.form.consumeRemark"
+								placeholder="记录本次服务说明，可留空"
+								count
+								auto-height
+								:maxlength="200"
+							/>
+						</cl-form-item>
+					</cl-form>
+				</scroll-view>
+
+				<view class="popup-footer">
+					<view class="popup-secondary" @tap="resetGuestConsumeForm">重置</view>
+					<view class="popup-secondary" @tap="guestConsumeDialog.visible = false">取消</view>
+					<view class="popup-primary" @tap="submitGuestConsumeRecord">
+						{{
+							guestConsumeDialog.loading
+								? "保存中..."
+								: guestConsumeDialog.isEdit
+									? "保存修改"
+									: "保存散客消费"
+						}}
+					</view>
+				</view>
+			</view>
+		</cl-popup>
 	</cl-page>
 </template>
 
 <script lang="ts" setup>
 import { onPullDownRefresh, onReachBottom, onShow } from "@dcloudio/uni-app";
 import dayjs, { type Dayjs } from "dayjs";
-import { computed, reactive, ref } from "vue";
+import { computed, nextTick, reactive, ref } from "vue";
 import { useUi } from "/$/cool-ui";
 import MemberConsumeRecordService from "../../service/member/consume-record";
 
@@ -154,6 +273,7 @@ type ConsumeRecordRow = {
 	memberName?: string;
 	memberNickName?: string;
 	memberPhone?: string;
+	customerType?: string;
 	cardAccountId?: number;
 	cardName?: string;
 	consumeType?: string;
@@ -164,7 +284,21 @@ type ConsumeRecordRow = {
 	createTime?: string;
 };
 
+type GuestConsumeTypeValue = "抖音新客福利" | "美团团购" | "纹绣" | "眼线";
+
+interface GuestConsumeFormData {
+	name: string;
+	phone: string;
+	remark: string;
+	consumeType: GuestConsumeTypeValue;
+	consumeTime: string;
+	consumeRemark: string;
+}
+
 const MEMBER_CARD_TYPE = "会员次卡";
+const minuteDateTimeFormat = "YYYY-MM-DD HH:mm";
+const secondDateTimeFormat = "YYYY-MM-DD HH:mm:ss";
+const dateTimePickerMode = ["year", "month", "date", "hour", "minute"] as const;
 const consumeRecordService = new MemberConsumeRecordService();
 const ui = useUi();
 const today = dayjs().format("YYYY-MM-DD");
@@ -178,6 +312,13 @@ const quickRanges = [
 	{ label: "去年", value: "lastYear" },
 ] as const;
 type QuickRangeValue = (typeof quickRanges)[number]["value"];
+
+const guestConsumeTypeOptions = [
+	{ label: "抖音新客福利", value: "抖音新客福利" as GuestConsumeTypeValue },
+	{ label: "美团团购", value: "美团团购" as GuestConsumeTypeValue },
+	{ label: "纹绣", value: "纹绣" as GuestConsumeTypeValue },
+	{ label: "眼线", value: "眼线" as GuestConsumeTypeValue },
+];
 
 const loading = ref(false);
 const loaded = ref(false);
@@ -202,6 +343,32 @@ const filters = reactive({
 const draftFilters = reactive({
 	consumeStartDate: currentMonthRange.start,
 	consumeEndDate: currentMonthRange.end,
+});
+
+const guestConsumeDialog = reactive({
+	visible: false,
+	loading: false,
+	isEdit: false,
+	editingId: undefined as number | undefined,
+	title: "新增散客消费",
+	form: createGuestConsumeForm(),
+});
+
+const GuestConsumeForm = ref<ClForm.Ref>();
+
+const guestConsumeRules = reactive({
+	name: {
+		required: true,
+		message: "请输入姓名",
+	},
+	consumeType: {
+		required: true,
+		message: "请选择消费类型",
+	},
+	consumeTime: {
+		required: true,
+		message: "请选择消费时间",
+	},
 });
 
 const calendarMonthTitle = computed(() => calendarMonth.value.format("YYYY年MM月"));
@@ -309,11 +476,42 @@ function formatDateTime(value?: string) {
 	return time.isValid() ? time.format("YYYY-MM-DD HH:mm") : value;
 }
 
+function formatMinuteDateTimeDisplay(value?: string) {
+	if (!value) {
+		return "";
+	}
+
+	const time = dayjs(value, [minuteDateTimeFormat, secondDateTimeFormat], true);
+	return time.isValid() ? time.format(minuteDateTimeFormat) : value;
+}
+
+function normalizeMinuteDateTime(value?: string) {
+	if (!value) {
+		return "";
+	}
+
+	const time = dayjs(value);
+	return time.isValid() ? time.format(minuteDateTimeFormat) : value;
+}
+
+function toSecondPrecisionDateTime(value?: string) {
+	if (!value) {
+		return "";
+	}
+
+	const time = dayjs(value, [minuteDateTimeFormat, secondDateTimeFormat], true);
+	return time.isValid() ? time.format(secondDateTimeFormat) : value;
+}
+
 function isCardRecord(row: ConsumeRecordRow) {
 	return Boolean(
 		row.cardAccountId ||
 			(row.consumeType && (row.consumeType === MEMBER_CARD_TYPE || row.consumeType.endsWith("次卡"))),
 	);
+}
+
+function isGuestRecord(row: ConsumeRecordRow) {
+	return row.customerType === "guest";
 }
 
 function getMemberName(row: ConsumeRecordRow) {
@@ -338,6 +536,44 @@ function getConsumeTypeTone(type?: string) {
 	}
 
 	return "is-gray";
+}
+
+function createGuestConsumeForm(): GuestConsumeFormData {
+	return {
+		name: "",
+		phone: "",
+		remark: "",
+		consumeType: "抖音新客福利",
+		consumeTime: dayjs().format(minuteDateTimeFormat),
+		consumeRemark: "",
+	};
+}
+
+async function validateForm(formRef?: ClForm.Ref) {
+	return new Promise<boolean>((resolve) => {
+		if (!formRef) {
+			resolve(false);
+			return;
+		}
+
+		formRef.validate((valid: boolean) => {
+			resolve(valid);
+		});
+	});
+}
+
+function resetGuestConsumeForm() {
+	guestConsumeDialog.form = createGuestConsumeForm();
+	GuestConsumeForm.value?.clearValidate();
+}
+
+function openGuestConsumePopup() {
+	guestConsumeDialog.visible = true;
+	guestConsumeDialog.loading = false;
+	guestConsumeDialog.isEdit = false;
+	guestConsumeDialog.editingId = undefined;
+	guestConsumeDialog.title = "新增散客消费";
+	resetGuestConsumeForm();
 }
 
 async function fetchList(options?: { append?: boolean; silent?: boolean }) {
@@ -365,7 +601,7 @@ async function fetchList(options?: { append?: boolean; silent?: boolean }) {
 			pagination.page -= 1;
 		}
 
-		ui.showTips(err?.message || "消费统计加载失败");
+		ui.showTips(err?.message || "消费记录加载失败");
 	} finally {
 		loading.value = false;
 	}
@@ -375,6 +611,123 @@ async function reload() {
 	pagination.page = 1;
 	finished.value = false;
 	await fetchList();
+}
+
+async function submitGuestConsumeRecord() {
+	if (guestConsumeDialog.loading) {
+		return;
+	}
+
+	const valid = await validateForm(GuestConsumeForm.value);
+
+	if (!valid) {
+		return;
+	}
+
+	if (!guestConsumeDialog.form.consumeTime) {
+		ui.showTips("请选择消费时间");
+		return;
+	}
+
+	guestConsumeDialog.loading = true;
+
+	try {
+		const payload = {
+			name: guestConsumeDialog.form.name.trim(),
+			phone: guestConsumeDialog.form.phone.trim(),
+			remark: guestConsumeDialog.form.remark.trim(),
+			consumeType: guestConsumeDialog.form.consumeType,
+			consumeTime: toSecondPrecisionDateTime(guestConsumeDialog.form.consumeTime),
+			consumeRemark: guestConsumeDialog.form.consumeRemark.trim(),
+		};
+
+		if (guestConsumeDialog.isEdit && guestConsumeDialog.editingId) {
+			await consumeRecordService.updateGuestConsume({
+				id: guestConsumeDialog.editingId,
+				...payload,
+			});
+		} else {
+			await consumeRecordService.addGuestConsume(payload);
+		}
+
+		guestConsumeDialog.visible = false;
+		await reload();
+		ui.showTips(guestConsumeDialog.isEdit ? "散客消费已更新" : "散客消费保存成功");
+	} catch (err: any) {
+		ui.showTips(err?.message || "散客消费保存失败");
+	} finally {
+		guestConsumeDialog.loading = false;
+	}
+}
+
+async function editGuestConsumeRecord(row: ConsumeRecordRow) {
+	if (!row.id) {
+		ui.showTips("没有找到可编辑的消费记录");
+		return;
+	}
+
+	if (!isGuestRecord(row)) {
+		ui.showTips("会员消费请到会员详情中编辑");
+		return;
+	}
+
+	guestConsumeDialog.visible = true;
+	guestConsumeDialog.loading = false;
+	guestConsumeDialog.isEdit = true;
+	guestConsumeDialog.editingId = row.id;
+	guestConsumeDialog.title = "编辑散客消费";
+	guestConsumeDialog.form = {
+		name: getMemberName(row),
+		phone: row.memberPhone || "",
+		remark: "",
+		consumeType: (row.consumeType as GuestConsumeTypeValue) || "抖音新客福利",
+		consumeTime: normalizeMinuteDateTime(row.consumeTime) || dayjs().format(minuteDateTimeFormat),
+		consumeRemark: row.remark || "",
+	};
+
+	await nextTick();
+	GuestConsumeForm.value?.clearValidate();
+}
+
+function deleteGuestConsumeRecord(row: ConsumeRecordRow) {
+	if (!row.id) {
+		ui.showTips("没有找到可删除的消费记录");
+		return;
+	}
+
+	if (!isGuestRecord(row)) {
+		ui.showTips("会员消费请到会员详情中删除");
+		return;
+	}
+
+	ui.showConfirm({
+		title: "删除消费记录",
+		type: "warning",
+		message: `确认删除「${getMemberName(row)}」这条消费记录吗？删除后无法恢复。`,
+		confirmButtonText: "确认删除",
+		beforeClose(action, { done, showLoading, hideLoading }) {
+			if (action !== "confirm") {
+				done();
+				return;
+			}
+
+			showLoading();
+
+			consumeRecordService
+				.delete({
+					ids: [row.id],
+				})
+				.then(async () => {
+					await reload();
+					done();
+					ui.showTips("消费记录已删除");
+				})
+				.catch((err: any) => {
+					hideLoading();
+					ui.showTips(err?.message || "消费记录删除失败，请稍后重试");
+				});
+		},
+	});
 }
 
 function resetPopupFilters() {
@@ -528,7 +881,8 @@ onReachBottom(async () => {
 
 .search-panel,
 .statistics-summary,
-.record-card {
+.record-card,
+.popup-shell {
 	background: linear-gradient(145deg, rgba(254, 255, 255, 0.96), rgba(248, 252, 255, 0.94));
 	border: 1rpx solid rgba(255, 255, 255, 0.92);
 	border-radius: 28rpx;
@@ -560,6 +914,36 @@ onReachBottom(async () => {
 
 .keyword-box__placeholder {
 	color: #969ca7;
+}
+
+.search-panel__actions {
+	display: flex;
+	gap: 16rpx;
+	margin-top: 18rpx;
+}
+
+.search-panel__button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex: 1;
+	height: 72rpx;
+	border-radius: 999rpx;
+	font-size: 24rpx;
+	font-weight: 800;
+	box-sizing: border-box;
+}
+
+.search-panel__button--secondary {
+	border: 1rpx solid rgba(184, 205, 233, 0.72);
+	background: rgba(237, 245, 255, 0.92);
+	color: #596a8a;
+}
+
+.search-panel__button--primary {
+	background: linear-gradient(145deg, #24d7b3, #07947f);
+	color: #fbfdff;
+	box-shadow: 0 14rpx 28rpx rgba(7, 148, 127, 0.18);
 }
 
 .statistics-summary {
@@ -708,6 +1092,25 @@ onReachBottom(async () => {
 	font-size: 24rpx;
 	line-height: 1.5;
 	color: #6f7c98;
+}
+
+.record-card__actions {
+	display: flex;
+	justify-content: flex-end;
+	gap: 26rpx;
+	margin-top: 20rpx;
+	padding-top: 18rpx;
+	border-top: 1rpx solid rgba(120, 133, 160, 0.14);
+}
+
+.record-card__action {
+	font-size: 24rpx;
+	font-weight: 800;
+	color: var(--statistics-blue);
+}
+
+.record-card__action.is-danger {
+	color: #e24c4c;
 }
 
 .loading-wrap,
@@ -918,14 +1321,17 @@ onReachBottom(async () => {
 	background: rgba(22, 119, 255, 0.1);
 }
 
-.filter-actions {
+.filter-actions,
+.popup-footer {
 	display: flex;
 	gap: 18rpx;
 	margin-top: 28rpx;
 }
 
 .filter-actions__secondary,
-.filter-actions__primary {
+.filter-actions__primary,
+.popup-secondary,
+.popup-primary {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -937,16 +1343,76 @@ onReachBottom(async () => {
 	box-sizing: border-box;
 }
 
-.filter-actions__secondary {
+.filter-actions__secondary,
+.popup-secondary {
 	border: 1rpx solid rgba(184, 205, 233, 0.72);
 	background: rgba(237, 245, 255, 0.92);
 	color: #596a8a;
 }
 
-.filter-actions__primary {
+.filter-actions__primary,
+.popup-primary {
 	background: linear-gradient(145deg, #24d7b3, #07947f);
 	color: #fbfdff;
 	box-shadow: 0 14rpx 28rpx rgba(7, 148, 127, 0.18);
+}
+
+.popup-shell {
+	position: relative;
+	padding: 0 0 calc(30rpx + env(safe-area-inset-bottom));
+}
+
+.popup-summary {
+	padding: 26rpx 28rpx 12rpx;
+}
+
+.popup-summary__title {
+	display: block;
+	font-size: 30rpx;
+	font-weight: 900;
+	color: var(--statistics-ink);
+}
+
+.popup-summary__text {
+	display: block;
+	margin-top: 10rpx;
+	font-size: 23rpx;
+	line-height: 1.5;
+	color: var(--statistics-muted);
+}
+
+.popup-body {
+	max-height: 68vh;
+	padding: 0 28rpx;
+	box-sizing: border-box;
+}
+
+.choice-group {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 14rpx;
+}
+
+.choice-chip {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 168rpx;
+	padding: 0 22rpx;
+	height: 64rpx;
+	border-radius: 999rpx;
+	border: 1rpx solid rgba(184, 205, 233, 0.72);
+	background: rgba(237, 245, 255, 0.92);
+	color: #596a8a;
+	font-size: 24rpx;
+	font-weight: 800;
+	box-sizing: border-box;
+}
+
+.choice-chip.is-active {
+	border-color: rgba(7, 148, 127, 0.2);
+	background: rgba(36, 210, 196, 0.14);
+	color: var(--statistics-green);
 }
 
 :deep(.cl-popup__modal) {
@@ -978,5 +1444,32 @@ onReachBottom(async () => {
 	bottom: 0;
 	height: 1rpx;
 	background: linear-gradient(90deg, rgba(211, 228, 251, 0), rgba(178, 210, 249, 0.56), rgba(211, 228, 251, 0));
+}
+
+.popup-body :deep(.cl-form-item__label) {
+	color: var(--statistics-ink);
+	font-size: 24rpx;
+	font-weight: 800;
+}
+
+.popup-body :deep(.cl-input),
+.popup-body :deep(.cl-textarea),
+.popup-body :deep(.cl-select-date__value) {
+	background: transparent;
+}
+
+.popup-body :deep(.cl-input.is-border),
+.popup-body :deep(.cl-textarea.is-border),
+.popup-body :deep(.cl-select-date__value.is-border) {
+	border: 1rpx solid rgba(184, 205, 233, 0.72);
+	border-radius: 24rpx;
+	background: rgba(248, 251, 255, 0.96);
+}
+
+.popup-body :deep(.cl-input__inner),
+.popup-body :deep(.cl-textarea__inner),
+.popup-body :deep(.cl-select-date__value) {
+	color: #283757;
+	font-size: 25rpx;
 }
 </style>

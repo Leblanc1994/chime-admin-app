@@ -2,8 +2,6 @@
 	<cl-page status-bar-background="transparent" :background-color="pageBackground">
 		<view class="page-member">
 			<view class="member-hero">
-				<image class="member-hero__bg" src="/static/member-bg.png" mode="scaleToFill" />
-
 				<view class="member-hero__content">
 					<view class="member-hero__top">
 						<text class="member-hero__count">
@@ -335,7 +333,7 @@ type GenderValue = -1 | 0 | 1 | 2;
 type SourceValue = -1 | 1 | 2 | 3;
 type SortValue = "createTime" | "lastConsumeTime" | "remainTimes" | "validCardCount";
 type PopupMode = "add" | "edit";
-type MemberTabValue = "all" | "member" | "nonMember";
+type MemberTabValue = "all" | "member";
 
 interface MemberItem {
 	id: number;
@@ -389,18 +387,14 @@ const sortOptions = [
 	{ label: "有效次卡", value: "validCardCount" as SortValue },
 ];
 
-const memberTabOptions = [
-	{ label: "全部", value: "all" as MemberTabValue },
-	{ label: "会员", value: "member" as MemberTabValue },
-	{ label: "非会员", value: "nonMember" as MemberTabValue },
-];
+const memberTabOptions = [{ label: "会员", value: "member" as MemberTabValue }];
 
 const filters = reactive({
 	keyWord: "",
 	gender: -1 as GenderValue,
 	source: -1 as SourceValue,
 	order: "createTime" as SortValue,
-	memberTab: "all" as MemberTabValue,
+	memberTab: "member" as MemberTabValue,
 });
 
 const pagination = reactive({
@@ -461,9 +455,7 @@ const activeFilterPills = computed(() => {
 		pills.push(`排序: ${sortLabel}`);
 	}
 
-	if (filters.memberTab !== "all") {
-		pills.push(`档案: ${getMemberTabLabel(filters.memberTab)}`);
-	}
+	pills.push(`档案: ${getMemberTabLabel(filters.memberTab)}`);
 
 	return pills;
 });
@@ -531,7 +523,7 @@ function getSource(value?: number) {
 }
 
 function getMemberTabLabel(value: MemberTabValue) {
-	return memberTabOptions.find((item) => item.value === value)?.label || "全部";
+	return memberTabOptions.find((item) => item.value === value)?.label || "会员";
 }
 
 function createEmptyForm(): MemberFormData {
@@ -584,7 +576,7 @@ function buildParams() {
 		source: filters.source > -1 ? filters.source : undefined,
 		order: filters.order,
 		sort: "desc",
-		memberTab: filters.memberTab,
+		memberTab: "member",
 	};
 }
 
@@ -626,7 +618,7 @@ function resetFilters() {
 	filters.gender = -1;
 	filters.source = -1;
 	filters.order = "createTime";
-	filters.memberTab = "all";
+	filters.memberTab = "member";
 	syncDraftFilters();
 	reload();
 }
@@ -885,14 +877,8 @@ onReachBottom(async () => {
 	position: relative;
 	margin: 0 -34rpx;
 	padding: 96rpx 34rpx 34rpx;
+	background: url("/static/member-bg.png") top center / 100% 520rpx no-repeat;
 	overflow: hidden;
-}
-
-.member-hero__bg {
-	position: absolute;
-	inset: 0;
-	width: 100%;
-	height: 520rpx;
 }
 
 .member-hero__content {
