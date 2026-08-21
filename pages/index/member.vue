@@ -225,7 +225,7 @@
 
 						<cl-form
 							ref="Form"
-							v-model="form"
+							:model-value="form"
 							:rules="rules"
 							:disabled="saving || formLoading"
 							label-position="top"

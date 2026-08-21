@@ -137,6 +137,43 @@
 					<text>今日暂无消费记录</text>
 				</view>
 			</view>
+
+			<view class="dashboard-panel attention-panel">
+				<view class="panel-header">
+					<view class="panel-title-row">
+						<text class="panel-title">经营关注</text>
+						<text class="attention-panel__hint">今天优先处理</text>
+					</view>
+					<view class="type-total" @tap="toMemberList">
+						<text>查看会员</text>
+						<cl-icon name="arrow-right" :size="30" color="currentColor" />
+					</view>
+				</view>
+
+				<view class="attention-list" v-if="attentionItems.length">
+					<view
+						v-for="item in attentionItems"
+						:key="item.key"
+						class="attention-row"
+						:class="`is-${item.tone}`"
+						@tap="toMemberList"
+					>
+						<view class="attention-row__signal">
+							<text>{{ item.count }}</text>
+						</view>
+						<view class="attention-row__copy">
+							<text class="attention-row__title">{{ item.title }}</text>
+							<text class="attention-row__desc">{{ item.desc }}</text>
+						</view>
+						<cl-icon name="arrow-right" :size="30" color="#8a939c" />
+					</view>
+				</view>
+
+				<view class="attention-empty" v-else>
+					<view class="attention-empty__check">✓</view>
+					<text>当前没有需要优先跟进的会员</text>
+				</view>
+			</view>
 		</view>
 
 		<tabbar />
@@ -147,11 +184,13 @@
 import { onPullDownRefresh, onShow } from "@dcloudio/uni-app";
 import dayjs, { type Dayjs } from "dayjs";
 import { computed, reactive, ref } from "vue";
+import { useCool } from "/@/cool";
 import { useUi } from "/$/cool-ui";
 import MemberDashboardService, { type MemberDashboardSummary } from "../../service/member/dashboard";
 import Tabbar from "./components/tabbar.vue";
 
 const ui = useUi();
+const { router } = useCool();
 const dashboardService = new MemberDashboardService();
 const loading = ref(false);
 const loaded = ref(false);
@@ -170,6 +209,9 @@ function emptySummary(): MemberDashboardSummary {
 		yesterdayConsumeRecordCount: 0,
 		weekConsumeRecordCount: 0,
 		monthConsumeRecordCount: 0,
+		lowBalanceCardCount: 0,
+		expiringCardCount: 0,
+		inactiveMemberCount: 0,
 		todayTypeCounts: [],
 		monthlyConsumeRecordCounts: Array.from({ length: 12 }, (_, index) => ({
 			month: index + 1,
@@ -231,6 +273,34 @@ const todayTypeTotal = computed(() => {
 	return formatNumber(summary.todayTypeCounts.reduce((total, item) => total + (item.recordCount || 0), 0));
 });
 
+const attentionItems = computed(() => {
+	const items = [
+		{
+			key: "low-balance",
+			count: summary.lowBalanceCardCount || 0,
+			title: "次卡余额偏低",
+			desc: "剩余 1 至 2 次，适合提醒续卡",
+			tone: "amber",
+		},
+		{
+			key: "expiring",
+			count: summary.expiringCardCount || 0,
+			title: "次卡即将到期",
+			desc: "未来 7 天内到期，建议主动回访",
+			tone: "coral",
+		},
+		{
+			key: "inactive",
+			count: summary.inactiveMemberCount || 0,
+			title: "沉睡会员待唤醒",
+			desc: "30 天未消费，但仍有可用次卡",
+			tone: "blue",
+		},
+	];
+
+	return items.filter((item) => item.count > 0);
+});
+
 const chartTop = computed(() => {
 	const max = Math.max(...summary.monthlyConsumeRecordCounts.map((item) => item.recordCount || 0), 1);
 
@@ -252,6 +322,10 @@ const monthlyBars = computed(() => {
 
 function formatNumber(value?: number) {
 	return Number(value || 0).toLocaleString("zh-CN");
+}
+
+function toMemberList() {
+	router.push("/pages/index/member");
 }
 
 function formatDisplayDate(date: Dayjs) {
@@ -686,6 +760,104 @@ onPullDownRefresh(async () => {
 
 .type-panel {
 	min-height: 316rpx;
+}
+
+.attention-panel {
+	margin-bottom: 34rpx;
+}
+
+.attention-panel__hint {
+	margin-left: 14rpx;
+	padding: 5rpx 12rpx;
+	border-radius: 999rpx;
+	background: #f1f6f3;
+	color: #467166;
+	font-size: 20rpx;
+	font-weight: 650;
+}
+
+.attention-list {
+	display: grid;
+	gap: 8rpx;
+}
+
+.attention-row {
+	display: flex;
+	align-items: center;
+	min-height: 108rpx;
+	padding: 14rpx 2rpx;
+	border-top: 1rpx solid #e7edf0;
+}
+
+.attention-row__signal {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 56rpx;
+	height: 56rpx;
+	margin-right: 18rpx;
+	border-radius: 18rpx;
+	font-size: 28rpx;
+	font-weight: 850;
+}
+
+.attention-row.is-amber .attention-row__signal {
+	background: #fff3db;
+	color: #b86905;
+}
+
+.attention-row.is-coral .attention-row__signal {
+	background: #fff0ec;
+	color: #bf5143;
+}
+
+.attention-row.is-blue .attention-row__signal {
+	background: #eaf2ff;
+	color: #2f68aa;
+}
+
+.attention-row__copy {
+	display: flex;
+	min-width: 0;
+	flex: 1;
+	flex-direction: column;
+}
+
+.attention-row__title {
+	color: var(--home-ink);
+	font-size: 27rpx;
+	font-weight: 760;
+	line-height: 1.35;
+}
+
+.attention-row__desc {
+	margin-top: 5rpx;
+	color: var(--home-muted);
+	font-size: 22rpx;
+	line-height: 1.35;
+}
+
+.attention-empty {
+	display: flex;
+	align-items: center;
+	min-height: 106rpx;
+	padding: 4rpx 2rpx;
+	color: #55706a;
+	font-size: 24rpx;
+}
+
+.attention-empty__check {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 42rpx;
+	height: 42rpx;
+	margin-right: 16rpx;
+	border-radius: 50%;
+	background: #e9f6ed;
+	color: #278357;
+	font-size: 25rpx;
+	font-weight: 900;
 }
 
 .panel-header {

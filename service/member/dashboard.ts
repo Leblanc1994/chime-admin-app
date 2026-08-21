@@ -17,6 +17,9 @@ export type MemberDashboardSummary = {
 	yesterdayConsumeRecordCount: number;
 	weekConsumeRecordCount: number;
 	monthConsumeRecordCount: number;
+	lowBalanceCardCount: number;
+	expiringCardCount: number;
+	inactiveMemberCount: number;
 	todayTypeCounts: MemberDashboardTypeCount[];
 	monthlyConsumeRecordCounts: MemberDashboardMonthlyCount[];
 };
