@@ -4,26 +4,28 @@
 			<view class="member-hero">
 				<view class="member-hero__content">
 					<view class="member-hero__top">
-						<text class="member-hero__count">
-							共 <text class="member-hero__count-value">{{ pagination.total }}</text> 位会员
-						</text>
+						<view><text class="member-hero__title">会员</text><text class="member-hero__count">共 <text class="member-hero__count-value">{{ pagination.total }}</text> 位会员</text></view>
+						<view class="member-hero__more">•••</view>
 					</view>
 
-					<view class="member-search">
-						<cl-icon name="search" :size="42" color="#969ca7" />
-						<input
-							v-model.trim="filters.keyWord"
-							class="member-search__input"
-							placeholder="搜索姓名、手机号、微信昵称"
-							placeholder-class="member-search__placeholder"
-							confirm-type="search"
-							@confirm="reload"
-						/>
+					<view class="member-search-row">
+						<view class="member-search">
+							<cl-icon name="search" :size="42" color="#969ca7" />
+							<input
+								v-model.trim="filters.keyWord"
+								class="member-search__input"
+								placeholder="搜索姓名、手机号、微信昵称"
+								placeholder-class="member-search__placeholder"
+								confirm-type="search"
+								@confirm="reload"
+							/>
 
-						<view class="member-search__filter" @tap="openFilterPopup">
-							<view class="filter-funnel"></view>
-							<text class="member-search__badge" v-if="activeFilterCount">{{ activeFilterCount }}</text>
+							<view class="member-search__filter" @tap="openFilterPopup">
+								<view class="filter-funnel"></view>
+								<text class="member-search__badge" v-if="activeFilterCount">{{ activeFilterCount }}</text>
+							</view>
 						</view>
+						<view class="member-add-button" @tap="openUpsert('add')"><cl-icon name="plus" :size="36" color="#fff" /></view>
 					</view>
 
 					<view class="member-hero__filters">
@@ -87,14 +89,12 @@
 							</view>
 						</view>
 
-						<view class="member-card__stats">
-							<view class="member-card__remain">
-								<text class="member-card__remain-label">剩余</text>
-								<text class="member-card__remain-value">{{ item.remainTimes || 0 }}</text>
-								<text class="member-card__remain-unit">张</text>
-							</view>
-							<text class="member-card__card-count">有效次卡 {{ item.validCardCount || 0 }} 张</text>
-						</view>
+					</view>
+
+					<view class="member-card__metrics">
+						<view><text>剩余次数</text><strong>{{ item.remainTimes || 0 }}<small> 次</small></strong></view>
+						<view><text>有效次卡</text><strong>{{ item.validCardCount || 0 }}<small> 张</small></strong></view>
+						<view><text>最近消费</text><strong class="member-card__consume-time">{{ formatLastConsume(item.lastConsumeTime) }}</strong></view>
 					</view>
 
 					<view class="member-card__footer">
@@ -312,9 +312,6 @@
 				</view>
 			</cl-popup>
 
-			<view class="member-fab" @tap="openUpsert('add')">
-				<cl-icon name="plus" :size="40" color="#fff" />
-			</view>
 		</view>
 
 		<tabbar />
@@ -491,6 +488,14 @@ function getDisplayName(item: MemberItem) {
 function getInitial(item: MemberItem) {
 	const value = getDisplayName(item).trim();
 	return value.slice(0, 1).toUpperCase();
+}
+
+function formatLastConsume(value?: string) {
+	if (!value) {
+		return "暂无";
+	}
+
+	return value.slice(5, 10).replace("-", "/") || "近期";
 }
 
 function getCardTone(item: MemberItem) {
@@ -1559,6 +1564,50 @@ onReachBottom(async () => {
 	font-size: 22rpx;
 	color: #9aa0aa;
 }
+
+/* Compact member-directory treatment aligned with the supplied reference. */
+.page-member {
+	--ink: #2e293d;
+	--muted: #9892a4;
+	--accent: #724af1;
+	--accent-dark: #633af0;
+	min-height: 100%;
+	padding: 92rpx 24rpx 170rpx;
+	background: #fbfbfe;
+}
+
+.member-hero {
+	margin: 0 -24rpx;
+	padding: 0 24rpx 19rpx;
+	background: #fbfbfe;
+	overflow: visible;
+}
+
+.member-hero__top { height: 58rpx; padding: 0 6rpx; justify-content: space-between; }
+.member-hero__title { margin-right: 14rpx; color: var(--ink); font-size: 34rpx; font-weight: 850; }
+.member-hero__count { display: inline; height: auto; color: #9993a4; font-size: 19rpx; font-weight: 500; line-height: 1; }
+.member-hero__count::before { display: none; }
+.member-hero__count-value { color: var(--accent); font-size: 20rpx; font-weight: 800; }
+.member-hero__more { color: #958fa2; font-size: 25rpx; letter-spacing: 5rpx; line-height: 1; }
+
+.member-search-row { display: flex; align-items: center; gap: 16rpx; margin-top: 20rpx; }
+.member-search { flex: 1; height: 70rpx; margin: 0; gap: 12rpx; padding: 0 13rpx 0 20rpx; border: 1rpx solid #ece9f1; border-radius: 18rpx; background: #fff; box-shadow: none; }
+.member-search__input { font-size: 21rpx; }.member-search__placeholder { color: #ada8b5; font-weight: 400; }
+.member-search__filter { width: 45rpx; height: 45rpx; border-radius: 12rpx; background: #f1edff; box-shadow: none; }.filter-funnel { width: 25rpx; height: 25rpx; filter: invert(35%) sepia(69%) saturate(2682%) hue-rotate(238deg) brightness(96%); }
+.member-search__badge { top: -8rpx; right: -8rpx; min-width: 22rpx; height: 22rpx; padding: 0 4rpx; background: #f06179; font-size: 14rpx; line-height: 22rpx; }
+.member-add-button { display: flex; align-items: center; justify-content: center; width: 70rpx; height: 70rpx; border-radius: 20rpx; background: linear-gradient(145deg,#8158fc,#6841ec); box-shadow: 0 8rpx 18rpx rgba(101,61,234,.26); }
+
+.member-hero__filters { margin-top: 18rpx; }.member-tab-group { gap: 12rpx; }.member-tab-chip { height: 43rpx; padding: 0 20rpx; border-color: #e5dfff; background: #f7f4ff; color: #7a59df; font-size: 18rpx; }.member-tab-chip.is-active { background: #754bf2; border-color: #754bf2; box-shadow: none; }
+.toolbar__active-bar { gap: 12rpx; margin-top: 11rpx; }.active-pill { height: 34rpx; padding: 0 12rpx; background: #f2eff8; color: #80798d; font-size: 16rpx; }.toolbar__reset { color: #754bf2; font-size: 17rpx; }
+
+.member-list { margin-top: 4rpx; }.member-card { margin-bottom: 14rpx; padding: 20rpx 20rpx 16rpx; border: 1rpx solid #efedf3; border-radius: 19rpx; background: #fff; box-shadow: 0 6rpx 20rpx rgba(44,34,79,.045); overflow: visible; }.member-card::before { display: none; }
+.member-card, .member-card.is-violet, .member-card.is-amber, .member-card.is-blue, .member-card.is-aqua { --tone: #7b54ef; --tone-dark: #6943e6; --tone-soft: #f1edff; --tone-glow: rgba(109,68,237,.14); }
+.member-card.is-amber { --tone: #e9ad50; --tone-dark: #c98a2c; --tone-soft: #fff4df; }.member-card.is-blue { --tone: #6592ef; --tone-dark: #4873ce; --tone-soft: #ecf2ff; }.member-card.is-aqua { --tone: #50baab; --tone-dark: #32998b; --tone-soft: #e6f8f4; }
+.member-card__top { align-items: center; gap: 14rpx; }.member-card__avatar { width: 68rpx; height: 68rpx; border-radius: 50%; box-shadow: none; font-size: 29rpx; }.member-card__body { padding-top: 0; }.member-card__name-row { gap: 7rpx; }.member-card__name { max-width: 250rpx; color: #332d42; font-size: 24rpx; }.member-card__member-mark { width: 24rpx; height: 24rpx; background: #e9f7f0; }.member-card__phone { margin-top: 5rpx; color: #9690a1; font-size: 17rpx; }.member-card__tags { gap: 7rpx; margin-top: 7rpx; }.tag-chip { min-width: 45rpx; height: 27rpx; padding: 0 10rpx; font-size: 15rpx; }
+.member-card__metrics { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); margin-top: 17rpx; padding: 14rpx 0; border-top: 1rpx solid #f0eef4; border-bottom: 1rpx solid #f0eef4; }.member-card__metrics view { display: flex; align-items: center; min-width: 0; flex-direction: column; gap: 6rpx; border-right: 1rpx solid #efedf3; }.member-card__metrics view:last-child { border-right: 0; }.member-card__metrics text { color: #9b95a6; font-size: 15rpx; }.member-card__metrics strong { color: #40394f; font-size: 22rpx; line-height: 1; }.member-card__metrics small { margin-left: 2rpx; color: #9b95a6; font-size: 14rpx; font-weight: 500; }.member-card__consume-time { font-size: 17rpx !important; padding-top: 2rpx; }
+.member-card__footer { margin-top: 12rpx; gap: 16rpx; }.member-card__quick { gap: 22rpx; }.member-card__action-link { gap: 6rpx; color: #928c9c; font-size: 16rpx; }.member-card__detail { width: 112rpx; height: 39rpx; border-radius: 11rpx; color: var(--tone-dark); font-size: 16rpx; }.member-card__detail-text { font-size: 16rpx; }.member-fab { display: none; }
+
+.filter-popup, .upsert-popup { background: #fbfbfe; }.chip.is-active, .filter-popup__primary { background: linear-gradient(135deg,#8158fc,#6841ec); border-color: #6841ec; box-shadow: 0 8rpx 20rpx rgba(101,61,234,.18); }.filter-popup__secondary { background: #f0edf5; }.upsert-choice-group--source .upsert-choice.is-active { background: #7048f1; }
 
 @media screen and (max-width: 390px) {
 	.page-member {

@@ -6,48 +6,29 @@
 		</cl-sticky>
 		<!-- #endif -->
 
-		<view class="page-my">
-			<view class="profile-hero">
-				<view class="profile-hero__info">
-					<text class="profile-hero__role">{{ profileRole }}</text>
-
-					<view class="profile-hero__name-row">
-						<text class="profile-hero__name">{{ profileName }}</text>
-						<text class="verified-mark">
-							<text class="icon-check"></text>
-						</text>
+		<view class="page-my my-redesign">
+			<view class="my-profile-card">
+				<view class="my-profile-card__aurora"></view>
+				<view class="my-profile-card__main">
+					<view class="profile-avatar" @tap="user.token ? toEdit() : toLogin()">
+						<cl-avatar v-if="user.info?.avatarUrl" :src="user.info.avatarUrl" :size="114" />
+						<view v-else class="avatar-illustration"><text class="avatar-illustration__hair"></text><text class="avatar-illustration__face"></text><text class="avatar-illustration__body"></text></view>
+						<view class="avatar-edit"><cl-icon name="edit" :size="25" /></view>
 					</view>
-
-					<text class="profile-hero__id">{{ profileId }}</text>
+					<view class="my-profile-card__copy">
+						<view class="my-profile-card__name"><text>{{ profileName }}</text><text class="my-profile-card__tag">{{ profileRole }}</text></view>
+						<text>{{ profileId }}</text>
+					</view>
+					<view class="my-profile-card__status"><text></text>{{ user.token ? "营业中" : "未登录" }}</view>
 				</view>
-
-				<view class="profile-avatar" @tap="user.token ? toEdit() : toLogin()">
-					<cl-avatar v-if="user.info?.avatarUrl" :src="user.info.avatarUrl" :size="156" />
-					<view v-else class="avatar-illustration">
-						<text class="avatar-illustration__hair"></text>
-						<text class="avatar-illustration__face"></text>
-						<text class="avatar-illustration__body"></text>
-					</view>
-					<view class="avatar-edit">
-						<cl-icon name="edit" :size="30" />
-					</view>
+				<view class="my-profile-card__stats">
+					<view><text>账户资料</text><strong>{{ user.token ? "已完善" : "待登录" }}</strong></view>
+					<view><text>账号安全</text><strong>去设置</strong></view>
+					<view><text>服务支持</text><strong>帮助中心</strong></view>
 				</view>
 			</view>
 
-			<view class="quick-panel">
-				<view
-					class="quick-item"
-					v-for="item in quickActions"
-					:key="item.title"
-					@tap="handleQuickAction(item.action)"
-				>
-					<view class="quick-item__icon" :class="`is-${item.tone}`">
-						<text :class="`icon-${item.icon}`"></text>
-					</view>
-					<text class="quick-item__title">{{ item.title }}</text>
-				</view>
-			</view>
-
+			<view class="my-section-title"><text>管理与服务</text><text>常用设置</text></view>
 			<view class="settings-panel">
 				<view
 					class="settings-row"
@@ -68,12 +49,7 @@
 				</view>
 			</view>
 
-			<view class="logout-panel" @tap="user.token ? confirmLogout() : toLogin()">
-				<view class="logout-panel__icon">
-					<text class="icon-logout"></text>
-				</view>
-				<text class="logout-panel__label">{{ user.token ? "退出登录" : "前往登录" }}</text>
-			</view>
+			<view class="logout-panel" @tap="user.token ? confirmLogout() : toLogin()"><view class="logout-panel__icon"><text class="icon-logout"></text></view><text class="logout-panel__label">{{ user.token ? "退出登录" : "前往登录" }}</text></view>
 		</view>
 
 		<tabbar />
@@ -122,11 +98,13 @@ const settingsRows: Array<{
 	tone: string;
 	action: ActionType;
 }> = [
-	{ title: "个人信息", desc: "头像、昵称等", icon: "person", tone: "blue", action: "profile" },
-	{ title: "登录与安全", desc: "密码、设备管理等", icon: "lock", tone: "blue", action: "security" },
+	{ title: "店铺设置", desc: "个人资料与账户偏好", icon: "person", tone: "blue", action: "profile" },
+	{ title: "员工管理", desc: "账号、权限与安全设置", icon: "lock", tone: "green", action: "security" },
+	{ title: "预约中心", desc: "查看并处理预约安排", icon: "calendar-small", tone: "purple", action: "notice" },
+	{ title: "积分商城", desc: "会员积分和兑换服务", icon: "gift", tone: "orange", action: "help" },
+	{ title: "消息中心", desc: "系统通知与服务提醒", icon: "bell-small", tone: "coral", action: "notice" },
 	{ title: "隐私设置", desc: "隐私权限与数据管理", icon: "shield-small", tone: "blue", action: "privacy" },
-	{ title: "帮助与反馈", desc: "常见问题与联系客服", icon: "headset", tone: "blue", action: "help" },
-	{ title: "关于我们", desc: "版本信息与服务协议", icon: "info", tone: "blue", action: "about" },
+	{ title: "关于我们", desc: "版本信息与服务协议", icon: "info", tone: "sky", action: "about" },
 ];
 
 async function refresh(showMessage = false) {
@@ -920,4 +898,47 @@ onShow(() => {
 		font-size: 26rpx;
 	}
 }
+
+/* Profile screen composition follows the supplied mobile reference while keeping its original routes. */
+.my-redesign {
+	--my-ink: #28233a;
+	--my-muted: #938da1;
+	padding: 106rpx 26rpx 172rpx;
+	background: #fbfbfe;
+}
+
+.my-redesign::before { display: none; }
+.my-redesign .my-profile-card,
+.my-redesign .settings-panel,
+.my-redesign .logout-panel { position: relative; z-index: 1; box-shadow: 0 8rpx 25rpx rgba(52,38,100,.065); }
+
+.my-profile-card { position: relative; overflow: hidden; border-radius: 22rpx; background: linear-gradient(128deg, #6941ec 0%, #8155fa 62%, #9f73ff 100%); color: #fff; }
+.my-profile-card::before { content: ""; position: absolute; top: -120rpx; right: -60rpx; width: 370rpx; height: 260rpx; border: 2rpx solid rgba(255,255,255,.13); border-radius: 50%; transform: rotate(20deg); }
+.my-profile-card__aurora { position: absolute; left: -120rpx; bottom: -190rpx; width: 390rpx; height: 290rpx; border-radius: 50%; background: rgba(41,20,159,.22); filter: blur(16rpx); }
+.my-profile-card__main { position: relative; z-index: 1; display: flex; align-items: center; min-height: 152rpx; padding: 27rpx 25rpx 17rpx; box-sizing: border-box; }
+.my-redesign .profile-avatar { width: 114rpx; height: 114rpx; margin: 0 18rpx 0 0; border: 4rpx solid rgba(255,255,255,.74); background: #d9d0ff; box-shadow: 0 7rpx 20rpx rgba(39,20,128,.25); }
+.my-redesign .profile-avatar :deep(.cl-avatar), .my-redesign .profile-avatar :deep(image) { width: 114rpx !important; height: 114rpx !important; }
+.my-redesign .avatar-illustration { transform: scale(.74); }
+.my-redesign .avatar-edit { right: -4rpx; bottom: -2rpx; width: 39rpx; height: 39rpx; color: #6740e7; box-shadow: 0 5rpx 12rpx rgba(24,14,93,.2); }
+.my-profile-card__copy { display: flex; min-width: 0; flex: 1; flex-direction: column; gap: 8rpx; }
+.my-profile-card__copy > text { color: rgba(255,255,255,.76); font-size: 18rpx; }
+.my-profile-card__name { display: flex; align-items: center; gap: 10rpx; min-width: 0; }
+.my-profile-card__name > text:first-child { overflow: hidden; font-size: 29rpx; font-weight: 800; text-overflow: ellipsis; white-space: nowrap; }
+.my-profile-card__tag { flex: 0 0 auto; padding: 4rpx 9rpx; border-radius: 999rpx; background: #f7c461; color: #714619; font-size: 14rpx; font-weight: 800; }
+.my-profile-card__status { position: absolute; z-index: 2; right: 23rpx; top: 19rpx; display: flex; align-items: center; gap: 6rpx; font-size: 15rpx; color: rgba(255,255,255,.9); }
+.my-profile-card__status text { width: 9rpx; height: 9rpx; border-radius: 50%; background: #47e1a0; box-shadow: 0 0 0 4rpx rgba(71,225,160,.16); }
+.my-profile-card__stats { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); min-height: 95rpx; padding: 16rpx 13rpx; background: rgba(49,26,157,.27); }
+.my-profile-card__stats view { display: flex; align-items: center; min-width: 0; flex-direction: column; gap: 9rpx; border-right: 1rpx solid rgba(255,255,255,.18); }.my-profile-card__stats view:last-child { border: 0; }
+.my-profile-card__stats text { color: rgba(255,255,255,.69); font-size: 16rpx; }.my-profile-card__stats strong { color: #fff; font-size: 20rpx; white-space: nowrap; }
+
+.my-section-title { display: flex; align-items: center; justify-content: space-between; margin: 32rpx 2rpx 17rpx; color: #2c273d; font-size: 27rpx; font-weight: 800; }.my-section-title text:last-child { color: #9993a5; font-size: 18rpx; font-weight: 500; }
+.my-redesign .settings-panel { margin: 0; padding: 4rpx 24rpx; border: 0; border-radius: 20rpx; background: #fff; }
+.my-redesign .settings-row { min-height: 102rpx; border-color: #f0eef5; }.my-redesign .settings-row__icon { width: 53rpx; height: 53rpx; margin-right: 20rpx; border-radius: 14rpx; background: #eee9ff; color: #724af1; }.my-redesign .settings-row__icon.is-green { background:#e2f8ec; color:#33c987; }.my-redesign .settings-row__icon.is-purple { background:#eee8ff; color:#875dff; }.my-redesign .settings-row__icon.is-orange { background:#fff0db; color:#f2a337; }.my-redesign .settings-row__icon.is-coral { background:#ffe8ee; color:#f36484; }.my-redesign .settings-row__icon.is-sky { background:#e5f0ff; color:#598cf3; }
+.my-redesign .settings-row__title { color: #343044; font-size: 23rpx; font-weight: 750; }.my-redesign .settings-row__desc { margin-top: 7rpx; color: #9c97a8; font-size: 17rpx; }.my-redesign .settings-row__arrow { color:#b5b0be; font-size:43rpx; }
+.my-redesign .logout-panel { min-height: 90rpx; margin-top: 23rpx; padding: 15rpx 24rpx; border: 0; border-radius: 18rpx; background: #fff; }.my-redesign .logout-panel__icon { width: 50rpx; height: 50rpx; margin-right: 19rpx; background:#fff0f1; color:#f36a78; }.my-redesign .logout-panel__label { color:#e95c6a; font-size:23rpx; }
+
+.icon-calendar-small, .icon-gift, .icon-bell-small { position:relative; display:block; width:28rpx; height:28rpx; box-sizing:border-box; }
+.icon-calendar-small { border:3rpx solid currentColor; border-radius:5rpx; }.icon-calendar-small::before { content:""; position:absolute; top:5rpx; left:0; right:0; height:3rpx; background:currentColor; }.icon-calendar-small::after { content:""; position:absolute; top:-6rpx; left:5rpx; width:4rpx; height:8rpx; border-radius:3rpx; background:currentColor; box-shadow:10rpx 0 0 currentColor; }
+.icon-gift { border:3rpx solid currentColor; border-radius:3rpx; }.icon-gift::before { content:""; position:absolute; left:10rpx; top:-3rpx; width:3rpx; height:29rpx; background:currentColor; }.icon-gift::after { content:""; position:absolute; left:-3rpx; right:-3rpx; top:7rpx; height:3rpx; background:currentColor; }
+.icon-bell-small { border-radius:15rpx 15rpx 7rpx 7rpx; background:currentColor; transform:scale(.75); }.icon-bell-small::before { content:""; position:absolute; left:9rpx; bottom:-6rpx; width:10rpx; height:7rpx; border-radius:0 0 10rpx 10rpx; background:currentColor; }.icon-bell-small::after { content:""; position:absolute; left:11rpx; top:-5rpx; width:7rpx; height:7rpx; border-radius:7rpx 7rpx 0 0; background:currentColor; }
 </style>

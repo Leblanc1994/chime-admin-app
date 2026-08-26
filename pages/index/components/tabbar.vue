@@ -7,6 +7,7 @@
 				:key="index"
 				:class="{
 					'is-active': item.active,
+					[`tabbar-item--${index}`]: true,
 				}"
 				@tap="toLink(item.pagePath)"
 			>
@@ -16,7 +17,40 @@
 				<text class="label">{{ item.text }}</text>
 				<view class="badge" v-if="item.number > 0">{{ item.number || 0 }}</view>
 			</view>
+			<view
+				class="quick-trigger"
+				:class="{ 'is-open': quickActionsVisible }"
+				aria-label="快捷操作"
+				@tap="quickActionsVisible = true"
+			>
+				<text></text>
+				<text></text>
+			</view>
 		</view>
+
+		<cl-popup
+			v-model="quickActionsVisible"
+			direction="bottom"
+			border-radius="36rpx 36rpx 0 0"
+			:padding="0"
+		>
+			<view class="quick-sheet">
+				<view class="quick-sheet__handle"></view>
+				<view class="quick-sheet__title">快捷操作</view>
+				<view class="quick-sheet__grid">
+					<view
+						v-for="item in quickActions"
+						:key="item.label"
+						class="quick-sheet__item"
+						@tap="handleQuickAction(item.action)"
+					>
+						<view class="quick-sheet__icon" :class="`is-${item.tone}`"><text>{{ item.symbol }}</text></view>
+						<text>{{ item.label }}</text>
+					</view>
+				</view>
+				<view class="quick-sheet__cancel" @tap="quickActionsVisible = false">取消</view>
+			</view>
+		</cl-popup>
 	</cl-footer>
 </template>
 
@@ -24,10 +58,22 @@
 import { onShow } from "@dcloudio/uni-app";
 import { computed, ref } from "vue";
 import { useCool } from "/@/cool";
+import { useUi } from "/$/cool-ui";
 import { useI18n } from "vue-i18n";
 
 const { router } = useCool();
+const ui = useUi();
 const { t } = useI18n();
+const quickActionsVisible = ref(false);
+
+const quickActions = [
+	{ label: "开卡", symbol: "▣", tone: "violet", action: "member" },
+	{ label: "新增会员", symbol: "♙", tone: "blue", action: "member" },
+	{ label: "收银", symbol: "¥", tone: "green", action: "cashier" },
+	{ label: "扣次", symbol: "⌾", tone: "orange", action: "deduct" },
+	{ label: "储值充值", symbol: "▰", tone: "coral", action: "recharge" },
+	{ label: "新增预约", symbol: "✦", tone: "indigo", action: "booking" },
+];
 
 // 当前页面路径
 const currentPagePath = ref(normalizePath(router.path));
@@ -78,6 +124,23 @@ function toLink(pagePath: string) {
 	}
 }
 
+function handleQuickAction(action: string) {
+	quickActionsVisible.value = false;
+
+	if (action === "member") {
+		router.push("/pages/index/member");
+		return;
+	}
+
+	if (action === "cashier") {
+		router.push("/pages/index/consume-statistics");
+		return;
+	}
+
+	const label = quickActions.find((item) => item.action === action)?.label || "该";
+	ui.showTips(`${label}功能暂未开放`);
+}
+
 onShow(() => {
 	currentPagePath.value = normalizePath(router.path);
 });
@@ -97,7 +160,8 @@ $icon-size: 54rpx;
 }
 
 .tabbar {
-	display: flex;
+	display: grid;
+	grid-template-columns: repeat(5, minmax(0, 1fr));
 	align-items: center;
 	width: calc(100% - 68rpx);
 	height: 112rpx;
@@ -114,7 +178,6 @@ $icon-size: 54rpx;
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
-		flex: 1;
 		position: relative;
 		height: 100%;
 		border-radius: 999rpx;
@@ -167,5 +230,126 @@ $icon-size: 54rpx;
 			}
 		}
 	}
+
+	.tabbar-item--0 {
+		grid-column: 1;
+	}
+
+	.tabbar-item--1 {
+		grid-column: 2;
+	}
+
+	.tabbar-item--2 {
+		grid-column: 4;
+	}
+
+	.tabbar-item--3 {
+		grid-column: 5;
+	}
+
+	.quick-trigger {
+		display: flex;
+		grid-column: 3;
+		grid-row: 1;
+		align-items: center;
+		justify-content: center;
+		justify-self: center;
+		width: 76rpx;
+		height: 76rpx;
+		border: 6rpx solid rgba(255, 255, 255, 0.92);
+		border-radius: 50%;
+		background: linear-gradient(145deg, #7855ff, #5e39e8);
+		box-shadow: 0 10rpx 22rpx rgba(94, 57, 232, 0.36);
+		box-sizing: border-box;
+		transition: transform 0.22s ease;
+
+		text {
+			position: absolute;
+			width: 30rpx;
+			height: 4rpx;
+			border-radius: 99rpx;
+			background: #fff;
+		}
+
+		text:last-child {
+			transform: rotate(90deg);
+		}
+
+		&.is-open {
+			transform: rotate(45deg);
+		}
+	}
+}
+
+.quick-sheet {
+	padding: 18rpx 34rpx calc(30rpx + env(safe-area-inset-bottom));
+	background: #fff;
+	box-sizing: border-box;
+
+	&__handle {
+		width: 64rpx;
+		height: 8rpx;
+		margin: 0 auto 22rpx;
+		border-radius: 99rpx;
+		background: #e4e7ef;
+	}
+
+	&__title {
+		margin-bottom: 30rpx;
+		text-align: center;
+		font-size: 31rpx;
+		font-weight: 800;
+		color: #222b3d;
+	}
+
+	&__grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		row-gap: 34rpx;
+	}
+
+	&__item {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 12rpx;
+		font-size: 24rpx;
+		font-weight: 650;
+		color: #343c4d;
+	}
+
+	&__icon {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 82rpx;
+		height: 82rpx;
+		border-radius: 22rpx;
+		box-shadow: 0 9rpx 20rpx rgba(55, 70, 108, 0.14);
+		color: #fff;
+		font-size: 42rpx;
+		font-weight: 800;
+
+		&.is-violet { background: linear-gradient(145deg, #8b71ff, #653df0); }
+		&.is-blue { background: linear-gradient(145deg, #72a8ff, #3977ee); }
+		&.is-green { background: linear-gradient(145deg, #4ed79a, #17aa72); }
+		&.is-orange { background: linear-gradient(145deg, #ffc161, #f09034); }
+		&.is-coral { background: linear-gradient(145deg, #ff8eae, #f65079); }
+		&.is-indigo { background: linear-gradient(145deg, #837cff, #5a55da); }
+	}
+
+	&__cancel {
+		margin-top: 38rpx;
+		padding-top: 28rpx;
+		border-top: 1rpx solid #edf0f5;
+		text-align: center;
+		font-size: 28rpx;
+		font-weight: 650;
+		color: #596278;
+	}
+}
+
+:deep(.cl-popup__modal) {
+	background: rgba(18, 22, 39, 0.46) !important;
 }
 </style>

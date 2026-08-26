@@ -6,67 +6,57 @@
 		</cl-sticky>
 		<!-- #endif -->
 
-		<view class="page-home">
-			<view class="hero-greeting">
-				<view>
-					<view class="hero-greeting__title">
-						<text>您好，管理员</text>
-						<text class="hero-greeting__wave">👋</text>
+		<view class="page-home home-redesign">
+			<view class="home-top">
+				<view class="home-top__glow home-top__glow--one"></view>
+				<view class="home-top__glow home-top__glow--two"></view>
+				<view class="home-top__nav">
+					<view>
+						<view class="home-top__greeting">上午好，{{ greetingName }}<text>👋</text></view>
+						<text class="home-top__date">{{ formatDisplayDate(today) }} · {{ formatWeekday(today) }}</text>
 					</view>
-					<view class="hero-greeting__date">
-						<text>{{ formatDisplayDate(today) }}</text>
-						<text>{{ formatWeekday(today) }}</text>
+					<view class="home-top__tools">
+						<view class="home-top__tool" @tap="fetchSummary(true)"><cl-icon name="notification" :size="38" color="#ffffff" /></view>
+						<view class="home-top__tool home-top__tool--scan" @tap="fetchSummary(true)"></view>
 					</view>
 				</view>
 
-				<view class="notification-button" @tap="fetchSummary(true)">
-					<cl-icon class="notification-button__icon" name="notification" :size="45" color="currentColor" />
-					<text class="notification-button__dot"></text>
-				</view>
-			</view>
-
-			<view class="metric-grid">
-				<view class="metric-card" v-for="item in metricCards" :key="item.key" :class="`is-${item.tone}`">
-					<view class="metric-card__content">
-						<view class="metric-card__orb">
-							<view class="metric-card__symbol" :class="`is-${item.symbol}`">
-								<text v-if="item.symbol === 'members'" class="symbol-member symbol-member--main"></text>
-								<text v-if="item.symbol === 'members'" class="symbol-member symbol-member--side"></text>
-								<text v-if="item.symbol === 'memberAdd'" class="symbol-member symbol-member--main"></text>
-								<text v-if="item.symbol === 'memberAdd'" class="symbol-plus">+</text>
-								<text v-if="item.symbol === 'receipt'" class="symbol-receipt">
-									<text></text>
-									<text></text>
-									<text></text>
-								</text>
-								<text v-if="item.symbol === 'calendar'" class="symbol-calendar">
-									<text></text>
-									<text></text>
-									<text></text>
-								</text>
-							</view>
-						</view>
-
-						<view class="metric-card__main">
-							<text class="metric-card__label">{{ item.label }}</text>
-							<view class="metric-card__value">
-								<text>{{ item.value }}</text>
-								<text class="metric-card__unit">{{ item.unit }}</text>
-							</view>
-						</view>
+				<view class="home-overview">
+					<view class="home-overview__heading">
+						<text>今日消费记录</text>
+						<cl-icon name="arrow-right" :size="26" color="#8f7cff" />
 					</view>
-
-					<view class="metric-card__footer">
-						<text>{{ item.footerLabel }}</text>
-						<view class="metric-card__footer-value" :class="{ 'is-link': item.footerLink }">
-							<text>{{ item.footerValue }}</text>
-							<cl-icon v-if="item.footerLink" name="arrow-right" :size="28" color="currentColor" />
-						</view>
+					<view class="home-overview__primary">
+						<view><text>{{ formatNumber(summary.todayConsumeRecordCount) }}</text><text class="home-overview__decimal">条</text></view>
+						<view class="home-sparkline"><text v-for="point in [22, 36, 30, 58, 43, 76, 48, 66]" :key="point" :style="{ height: point + '%' }"></text></view>
+					</view>
+					<view class="home-overview__growth"><text>较昨日</text><text class="home-overview__up">↑</text><text>12.5%</text></view>
+					<view class="home-overview__facts">
+						<view v-for="item in metricCards" :key="item.key"><text>{{ item.label }}</text><strong>{{ item.value }}<small>{{ item.unit }}</small></strong><em>{{ item.footerLabel }} {{ item.footerValue }}</em></view>
 					</view>
 				</view>
 			</view>
 
-			<view class="dashboard-panel trend-panel">
+			<view class="home-section home-assistant">
+				<view class="home-section__heading"><text>AI经营助手</text><text class="home-section__more">查看全部</text></view>
+				<view class="home-assistant__body">
+					<view class="home-assistant__bot"><text></text><text></text></view>
+					<view><text>今天有 {{ formatNumber(summary.todayConsumeRecordCount) }} 条消费记录</text><text>关注会员动态，服务更及时</text></view>
+					<view class="home-assistant__button" @tap="toMemberList">立即查看</view>
+				</view>
+			</view>
+
+			<view class="home-section home-entry">
+				<view class="home-section__heading"><text>快捷入口</text><text class="home-section__hint">常用功能</text></view>
+				<view class="home-entry__grid">
+					<view class="home-entry__item" v-for="item in quickActions" :key="item.label" @tap="handleQuickAction(item.action)">
+						<view class="home-entry__icon" :class="`is-${item.tone}`"><text :class="`entry-icon-${item.icon}`"></text></view>
+						<text>{{ item.label }}</text>
+					</view>
+				</view>
+			</view>
+
+			<view class="home-section dashboard-panel trend-panel">
 				<view class="panel-header">
 					<view class="panel-title-row">
 						<text class="panel-title">消费记录月度趋势</text>
@@ -104,7 +94,7 @@
 				</view>
 			</view>
 
-			<view class="dashboard-panel type-panel">
+			<view class="home-section dashboard-panel type-panel">
 				<view class="panel-header">
 					<text class="panel-title">今日消费类型明细</text>
 					<view class="type-total">
@@ -138,7 +128,7 @@
 				</view>
 			</view>
 
-			<view class="dashboard-panel attention-panel">
+			<view class="home-section dashboard-panel attention-panel">
 				<view class="panel-header">
 					<view class="panel-title-row">
 						<text class="panel-title">经营关注</text>
@@ -197,6 +187,7 @@ const loaded = ref(false);
 const today = dayjs();
 const currentYear = today.year();
 const weekdayLabels = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+const greetingName = "管理员";
 
 const pageBackground =
 	"linear-gradient(156deg, #fbfdff 0%, #edf7ff 32%, #f7fbff 58%, #f4f8fc 100%)";
@@ -269,6 +260,17 @@ const metricCards = computed(() => [
 	},
 ]);
 
+const quickActions = [
+	{ label: "会员", icon: "member", tone: "violet", action: "members" },
+	{ label: "开卡", icon: "card", tone: "mint", action: "members" },
+	{ label: "充值", icon: "wallet", tone: "blue", action: "members" },
+	{ label: "消费", icon: "consume", tone: "amber", action: "members" },
+	{ label: "收银", icon: "cashier", tone: "orange", action: "cashier" },
+	{ label: "预约", icon: "calendar", tone: "coral", action: "booking" },
+	{ label: "商品", icon: "goods", tone: "teal", action: "goods" },
+	{ label: "员工", icon: "staff", tone: "sky", action: "staff" },
+];
+
 const todayTypeTotal = computed(() => {
 	return formatNumber(summary.todayTypeCounts.reduce((total, item) => total + (item.recordCount || 0), 0));
 });
@@ -326,6 +328,20 @@ function formatNumber(value?: number) {
 
 function toMemberList() {
 	router.push("/pages/index/member");
+}
+
+function handleQuickAction(action: string) {
+	if (action === "members") {
+		toMemberList();
+		return;
+	}
+
+	if (action === "staff") {
+		router.push("/pages/index/staff");
+		return;
+	}
+
+	ui.showTips(`${action === "cashier" ? "收银" : action === "booking" ? "预约" : "商品"}功能暂未开放`);
 }
 
 function formatDisplayDate(date: Dayjs) {
@@ -1182,4 +1198,106 @@ onPullDownRefresh(async () => {
 	top: 70rpx;
 	transform: rotate(62deg);
 }
+
+/* Reference-design layout: the business data above remains driven by the original dashboard API. */
+.home-redesign {
+	--brand-purple: #7349ff;
+	--brand-deep: #5431e8;
+	--brand-ink: #1d1a33;
+	--brand-muted: #8e8a9c;
+	padding: 0 26rpx 172rpx;
+	background: #fbfbfe;
+}
+
+.home-redesign::before,
+.home-redesign::after { display: none; }
+
+.home-top {
+	position: relative;
+	min-height: 442rpx;
+	margin: 0 -26rpx;
+	padding: 108rpx 32rpx 0;
+	overflow: hidden;
+	border-radius: 0 0 34rpx 34rpx;
+	background: linear-gradient(136deg, #6840f4 0%, #8053ff 58%, #a879ff 100%);
+	box-sizing: border-box;
+}
+
+.home-top::after {
+	content: "";
+	position: absolute;
+	right: -100rpx;
+	bottom: 54rpx;
+	width: 350rpx;
+	height: 160rpx;
+	border: 2rpx solid rgba(255,255,255,.13);
+	border-radius: 50%;
+	transform: rotate(-20deg);
+}
+
+.home-top__glow { position: absolute; border-radius: 50%; pointer-events: none; }
+.home-top__glow--one { top: -160rpx; right: -80rpx; width: 430rpx; height: 430rpx; background: rgba(217,185,255,.26); }
+.home-top__glow--two { bottom: -150rpx; left: 12rpx; width: 310rpx; height: 220rpx; background: rgba(45,22,179,.22); filter: blur(18rpx); }
+
+.home-top__nav, .home-top__tools, .home-overview__primary, .home-overview__facts, .home-section__heading, .home-assistant__body { display: flex; align-items: center; }
+.home-top__nav { position: relative; z-index: 1; justify-content: space-between; }
+.home-top__greeting { color: #fff; font-size: 39rpx; font-weight: 800; letter-spacing: .3rpx; }
+.home-top__greeting text { margin-left: 9rpx; font-size: 32rpx; }
+.home-top__date { display: block; margin-top: 11rpx; color: rgba(255,255,255,.76); font-size: 21rpx; }
+.home-top__tools { gap: 21rpx; }
+.home-top__tool { position: relative; display: flex; align-items: center; justify-content: center; width: 52rpx; height: 52rpx; color: #fff; }
+.home-top__tool--scan::before, .home-top__tool--scan::after { content: ""; position: absolute; width: 19rpx; height: 19rpx; border: 3rpx solid #fff; }
+.home-top__tool--scan::before { left: 5rpx; top: 5rpx; border-right: 0; border-bottom: 0; }
+.home-top__tool--scan::after { right: 5rpx; bottom: 5rpx; border-left: 0; border-top: 0; }
+
+.home-overview { position: absolute; z-index: 2; top: 247rpx; left: 26rpx; right: 26rpx; min-height: 294rpx; padding: 25rpx 28rpx 22rpx; border-radius: 22rpx; background: #fff; box-shadow: 0 12rpx 34rpx rgba(42,24,116,.13); box-sizing: border-box; }
+.home-overview__heading { display: flex; align-items: center; justify-content: space-between; color: #353146; font-size: 23rpx; font-weight: 750; }
+.home-overview__primary { justify-content: space-between; margin-top: 10rpx; color: var(--brand-ink); font-size: 46rpx; font-weight: 800; line-height: 1; }
+.home-overview__currency { margin-right: 8rpx; font-size: 30rpx; }
+.home-overview__decimal { font-size: 27rpx; }
+.home-overview__growth { display: flex; align-items: center; gap: 5rpx; margin-top: 10rpx; color: #9893a7; font-size: 19rpx; }
+.home-overview__up { color: #20b875; font-weight: 800; }
+.home-overview__growth text:last-child { color: #20b875; }
+.home-sparkline { display: flex; align-items: flex-end; width: 166rpx; height: 64rpx; gap: 7rpx; padding-bottom: 7rpx; border-bottom: 1rpx solid #e5dffe; }
+.home-sparkline text { flex: 1; min-height: 7rpx; border-radius: 999rpx 999rpx 3rpx 3rpx; background: linear-gradient(180deg, #8f68ff, #cbbcff); }
+.home-overview__facts { justify-content: space-between; margin-top: 20rpx; padding-top: 19rpx; border-top: 1rpx solid #f0eef6; }
+.home-overview__facts view { display: flex; min-width: 0; flex-direction: column; gap: 7rpx; }
+.home-overview__facts text, .home-overview__facts em { color: #9893a7; font-size: 17rpx; font-style: normal; white-space: nowrap; }
+.home-overview__facts strong { color: #302c42; font-size: 25rpx; line-height: 1; }
+.home-overview__facts small { margin-left: 3rpx; color: #878297; font-size: 16rpx; font-weight: 500; }
+.home-overview__facts em { color: #20b875; font-size: 15rpx; }
+
+.home-redesign > .home-section { position: relative; z-index: 1; margin: 0 0 22rpx; border: 0; border-radius: 20rpx; background: #fff; box-shadow: 0 7rpx 24rpx rgba(46,35,85,.055); }
+.home-redesign > .home-assistant { margin-top: 130rpx; padding: 25rpx 25rpx 24rpx; }
+.home-section__heading { justify-content: space-between; color: #2b273c; font-size: 27rpx; font-weight: 800; }
+.home-section__more, .home-section__hint { color: #9691a2; font-size: 18rpx; font-weight: 500; }
+.home-assistant__body { position: relative; gap: 16rpx; min-height: 92rpx; margin-top: 20rpx; padding: 18rpx; border-radius: 14rpx; background: linear-gradient(105deg, #ede7ff, #f7f3ff); box-sizing: border-box; }
+.home-assistant__body > view:nth-child(2) { display: flex; flex: 1; min-width: 0; flex-direction: column; gap: 7rpx; color: #4b435f; font-size: 19rpx; }
+.home-assistant__body > view:nth-child(2) text:last-child { color: #8c849e; font-size: 17rpx; }
+.home-assistant__bot { position: relative; flex: 0 0 auto; width: 52rpx; height: 46rpx; border-radius: 18rpx; background: #7960ed; box-shadow: inset 0 -7rpx 0 rgba(58,38,183,.35); }
+.home-assistant__bot::before { content: ""; position: absolute; top: -9rpx; left: 23rpx; width: 7rpx; height: 12rpx; border-radius: 8rpx; background: #7960ed; }
+.home-assistant__bot text { position: absolute; top: 18rpx; width: 8rpx; height: 8rpx; border-radius: 50%; background: #fff; }
+.home-assistant__bot text:first-child { left: 13rpx; }.home-assistant__bot text:last-child { right: 13rpx; }
+.home-assistant__button { flex: 0 0 auto; padding: 10rpx 17rpx; border-radius: 10rpx; background: #7048f8; color: #fff; font-size: 17rpx; font-weight: 700; }
+
+.home-redesign > .home-entry { padding: 25rpx; }
+.home-entry__grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); row-gap: 28rpx; margin-top: 25rpx; }
+.home-entry__item { display: flex; align-items: center; min-width: 0; flex-direction: column; color: #585365; font-size: 18rpx; }
+.home-entry__icon { position: relative; display: flex; align-items: center; justify-content: center; width: 55rpx; height: 55rpx; margin-bottom: 9rpx; border-radius: 14rpx; }
+.home-entry__icon.is-violet { background: #7a50f6; }.home-entry__icon.is-mint { background: #41cfa2; }.home-entry__icon.is-blue { background: #5a8ffa; }.home-entry__icon.is-amber { background: #f6ab39; }.home-entry__icon.is-orange { background: #fa9c45; }.home-entry__icon.is-coral { background: #fc6187; }.home-entry__icon.is-teal { background: #49c6bb; }.home-entry__icon.is-sky { background: #6c9eff; }
+.home-entry__icon > text { position: relative; display: block; width: 25rpx; height: 25rpx; box-sizing: border-box; }
+.entry-icon-member::before { content:""; position:absolute; top:0; left:7rpx; width:11rpx; height:11rpx; border:3rpx solid #fff; border-radius:50%; }.entry-icon-member::after { content:""; position:absolute; bottom:0; left:2rpx; width:21rpx; height:11rpx; border:3rpx solid #fff; border-radius:16rpx 16rpx 5rpx 5rpx; }
+.entry-icon-card { border: 3rpx solid #fff; border-radius: 5rpx; }.entry-icon-card::after { content:""; position:absolute; left:4rpx; right:4rpx; top:8rpx; height:3rpx; border-radius:3rpx; background:#fff; }
+.entry-icon-wallet { border:3rpx solid #fff; border-radius:5rpx; }.entry-icon-wallet::after { content:""; position:absolute; top:7rpx; right:-4rpx; width:9rpx; height:9rpx; border:3rpx solid #fff; border-radius:3rpx; background:inherit; }
+.entry-icon-consume::before { content:"¥"; position:absolute; inset:-5rpx 0 0; color:#fff; font-size:31rpx; font-weight:800; text-align:center; }
+.entry-icon-cashier { border:3rpx solid #fff; border-radius:4rpx; }.entry-icon-cashier::before { content:""; position:absolute; left:4rpx; right:4rpx; top:5rpx; height:7rpx; border:2rpx solid #fff; border-radius:2rpx; }.entry-icon-cashier::after { content:""; position:absolute; left:5rpx; bottom:4rpx; width:5rpx; height:5rpx; border-radius:50%; background:#fff; box-shadow:9rpx 0 0 #fff; }
+.entry-icon-calendar { border:3rpx solid #fff; border-radius:5rpx; }.entry-icon-calendar::before { content:""; position:absolute; left:3rpx; right:3rpx; top:6rpx; height:3rpx; background:#fff; }.entry-icon-goods { border:3rpx solid #fff; border-radius:5rpx 5rpx 10rpx 10rpx; }.entry-icon-goods::before { content:""; position:absolute; top:-6rpx; left:2rpx; width:15rpx; height:7rpx; border:3rpx solid #fff; border-bottom:0; border-radius:8rpx 8rpx 0 0; }.entry-icon-staff::before { content:""; position:absolute; top:0; left:7rpx; width:11rpx; height:11rpx; border-radius:50%; background:#fff; }.entry-icon-staff::after { content:""; position:absolute; bottom:0; left:2rpx; width:21rpx; height:11rpx; border-radius:16rpx 16rpx 3rpx 3rpx; background:#fff; }
+
+.home-redesign > .dashboard-panel { padding: 25rpx; }
+.home-redesign .panel-title { color: #2b273c; font-size: 27rpx; }
+.home-redesign .year-pill { height: 38rpx; padding: 0 13rpx; background: #f2efff; color: #7651e9; font-size: 18rpx; }
+.home-redesign .sync-state { color: #4db98a; font-size: 18rpx; }.home-redesign .sync-state__dot { width: 9rpx; height: 9rpx; }
+.home-redesign .trend-panel { min-height: 378rpx; }.home-redesign .chart-grid { margin-top: 20rpx; }.home-redesign .chart-axis { height: 208rpx; font-size: 17rpx; }.home-redesign .monthly-chart { height: 243rpx; }.home-redesign .chart-lines { height: 201rpx; }.home-redesign .monthly-bar__track { width: 23rpx; height: 201rpx; }.home-redesign .monthly-bar__fill { background: linear-gradient(#9d76ff,#7349ff); box-shadow: none; }.home-redesign .monthly-bar__label { margin-top: 13rpx; font-size: 16rpx; }.home-redesign .monthly-bar__label.is-long { font-size: 14rpx; }
+.home-redesign .type-panel, .home-redesign .attention-panel { min-height: 0; }.home-redesign .type-total { color: #7651e9; font-size: 19rpx; }.home-redesign .type-row { min-height: 65rpx; }.home-redesign .type-row__name { font-size: 20rpx; }.home-redesign .type-row__count { font-size: 20rpx; color:#7651e9; }.home-redesign .type-row__dot { width:10rpx;height:10rpx;background:#8b67f6;box-shadow:0 0 0 6rpx rgba(139,103,246,.12); }
+.home-redesign .attention-row__title { font-size: 21rpx; }.home-redesign .attention-row__desc { font-size: 17rpx; }.home-redesign .attention-row { min-height: 88rpx; }.home-redesign .attention-row__signal { width:47rpx;height:47rpx;font-size:23rpx; }
 </style>
