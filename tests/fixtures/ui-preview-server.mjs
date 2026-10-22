@@ -60,9 +60,44 @@ let members = [
 const guestProfiles = [
 	{ id: 5, customerType: "guest", name: "体验顾客", phone: "", remark: "偏好安静的护理环境" },
 ];
+let templates = [
+	{
+		id: 81,
+		name: "水光焕肤次卡",
+		totalTimes: 6,
+		price: "1280.00",
+		color: "purple",
+		status: 1,
+		remark: "补水修护 · 适合日常护理",
+		createTime: now,
+	},
+	{
+		id: 82,
+		name: "肩颈舒缓次卡",
+		totalTimes: 10,
+		price: "980.00",
+		color: "gold",
+		status: 1,
+		remark: "肩颈放松 · 舒缓日常疲劳",
+		createTime: now,
+	},
+	{
+		id: 83,
+		name: "玫瑰焕亮体验卡",
+		totalTimes: 3,
+		price: "399.00",
+		color: "rose",
+		status: 0,
+		remark: "活动结束，暂不售卖",
+		createTime: now,
+	},
+];
 let cards = [
 	{
 		id: 11,
+		templateId: 81,
+		color: "purple",
+		price: "1280.00",
 		memberId: 1,
 		cardName: "水光焕肤次卡",
 		totalTimes: 6,
@@ -74,6 +109,9 @@ let cards = [
 	},
 	{
 		id: 12,
+		templateId: 82,
+		color: "gold",
+		price: "980.00",
 		memberId: 1,
 		cardName: "肩颈舒缓次卡",
 		totalTimes: 4,
@@ -344,14 +382,55 @@ function api(path, b, q) {
 			return null;
 		}
 	}
+	if (group === "cardTemplate") {
+		if (action === "info") return requireRow(templates, q.id);
+		if (action === "page" || action === "list") {
+			const rows = templates.filter(
+				(t) =>
+					(b.status == null || t.status === b.status) &&
+					(!b.keyWord || t.name.includes(b.keyWord)),
+			);
+			return action === "page" ? page(rows, b) : rows;
+		}
+		if (
+			!b.name?.trim() ||
+			!Number.isInteger(b.totalTimes) ||
+			b.totalTimes <= 0 ||
+			!/^[0-9]{1,10}([.][0-9]{1,2})?$/.test(String(b.price))
+		)
+			throw Error("请填写卡项名称、总次数和售价");
+		if (action === "add") {
+			const id = nextId++;
+			templates.unshift({
+				...b,
+				color: b.color || "purple",
+				status: b.status ?? 1,
+				id,
+				createTime: now,
+			});
+			return { id };
+		}
+		if (action === "update") {
+			Object.assign(requireRow(templates, b.id), b);
+			for (const c of cards) if (c.templateId === b.id) c.color = b.color;
+			return null;
+		}
+	}
 	if (group === "cardAccount") {
 		if (action === "summary") return summary(q.memberId);
 		if (action === "list") return cards.filter((c) => c.memberId === Number(b.memberId));
 		if (action === "add") {
+			requireRow(members, b.memberId);
+			const template = requireRow(templates, b.templateId);
+			if (template.status !== 1) throw Error("该卡项已停用，请重新选择");
 			cards.push({
 				...b,
+				cardName: template.name,
+				totalTimes: template.totalTimes,
+				price: template.price,
+				color: template.color,
 				id: nextId++,
-				remainTimes: b.totalTimes,
+				remainTimes: template.totalTimes,
 				status: 1,
 				createTime: now,
 			});

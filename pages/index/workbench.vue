@@ -26,7 +26,16 @@
 			></view>
 			<text class="qm-heading">门店管理</text
 			><view class="qm-menu"
-				><button class="qm-row" @tap="router.push('/pages/index/staff')">
+				><button class="qm-row" @tap="router.push('/pages/index/card-catalog')">
+					<view class="qm-menu-icon"
+						><image src="/static/business/v53/card.svg" mode="aspectFit"
+					/></view>
+					<view class="qm-row__copy"
+						><text>会员卡维护</text><text>卡项、次数、售价与配色</text></view
+					>
+					<image class="qm-chevron" src="/static/business/v53/chevron.svg" />
+				</button>
+				<button class="qm-row" @tap="router.push('/pages/index/staff')">
 					<view class="qm-menu-icon"
 						><image src="/static/business/v53/user.svg" mode="aspectFit" /></view
 					><view class="qm-row__copy"

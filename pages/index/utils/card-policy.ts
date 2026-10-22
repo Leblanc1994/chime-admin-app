@@ -6,6 +6,9 @@ export interface CardAccount {
 	cardName?: string;
 	totalTimes?: number;
 	remark?: string;
+	templateId?: number | null;
+	price?: number | string | null;
+	color?: string | null;
 }
 export function isExpired(card: CardAccount, now = Date.now()) {
 	if (card.status === 3) return true;

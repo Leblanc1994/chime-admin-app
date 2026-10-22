@@ -1,8 +1,5 @@
 <template>
-	<qm-page title="会员档案"
-		><template #right
-			><button v-if="member" class="archive-edit" @tap="editMember">编辑</button></template
-		>
+	<qm-page title="会员档案">
 		<view v-if="loading && !member"
 			><view class="qm-skeleton" /><view class="qm-skeleton" /></view
 		><view v-if="error" class="qm-error" role="alert"
@@ -26,7 +23,10 @@
 						><text class="archive-phone">{{
 							member.phone || "未填写手机号"
 						}}</text></view
-					></view
+					><button class="archive-edit" aria-label="编辑会员资料" @tap="editMember">
+						<image src="/static/business/v53/edit-light.svg" mode="aspectFit" />
+						<text>编辑资料</text>
+					</button></view
 				>
 				<view class="archive-identity-meta"
 					><text>来源 {{ sources[member.source] || "未标记" }}</text
@@ -477,9 +477,11 @@ function markDirty(changedId?: number) {
 }
 uni.$on("chime:member-changed", markDirty);
 uni.$on("chime:members-changed", markDirty);
+uni.$on("chime:card-templates-changed", markDirty);
 onUnmounted(() => {
 	uni.$off("chime:member-changed", markDirty);
 	uni.$off("chime:members-changed", markDirty);
+	uni.$off("chime:card-templates-changed", markDirty);
 });
 onShow(() => {
 	if (initialized && dirty) load();
@@ -491,10 +493,31 @@ onLoad(async (q) => {
 });
 </script>
 <style scoped lang="scss">
-.archive-edit {
-	color: var(--qm-brand);
-	min-width: 80rpx;
-	min-height: 80rpx;
+.archive-identity .archive-edit {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	align-self: flex-start;
+	flex-shrink: 0;
+	gap: 8rpx;
+	min-height: 44px;
+	padding: 0 16rpx;
+	border-radius: 999rpx;
+	background: rgba(253, 249, 255, 0.1);
+	color: var(--qm-on-brand);
+	font-size: 22rpx;
+	white-space: nowrap;
+	image {
+		width: 26rpx;
+		height: 26rpx;
+		flex-shrink: 0;
+	}
+	&:focus-visible {
+		outline-color: var(--qm-on-brand);
+	}
+	&:active {
+		background: rgba(253, 249, 255, 0.18);
+	}
 }
 .archive-identity {
 	position: relative;

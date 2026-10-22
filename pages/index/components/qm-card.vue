@@ -1,5 +1,5 @@
 <template>
-	<view class="qm-card" :class="{ 'is-muted': state !== '可使用' }">
+	<view class="qm-card" :class="{ 'is-muted': state !== '可使用' }" :style="paletteStyle">
 		<image class="qm-card__watermark" src="/static/business/chime-mark.png" mode="aspectFit" />
 		<view class="qm-card__heading"
 			><image src="/static/business/chime-mark.png" mode="aspectFit" /><text>{{
@@ -41,19 +41,21 @@
 	</view>
 </template>
 <script setup lang="ts">
+import { cardColorStyle } from "../utils/card-template";
 import { computed } from "vue";
 import { cardStatus, type CardAccount } from "../utils/card-policy";
 const props = defineProps<{ card: CardAccount; showActions?: boolean }>();
 const emit = defineEmits<{ (event: "manage"): void; (event: "deduct"): void }>();
+const paletteStyle = computed(() => cardColorStyle(props.card.color || "gold"));
 const state = computed(() => cardStatus(props.card));
 </script>
 <style scoped lang="scss">
 .qm-card {
 	position: relative;
 	padding: 30rpx;
-	border: 1px solid #e8d4aa;
+	border: 1px solid var(--card-surface);
 	border-radius: 38rpx;
-	background: linear-gradient(145deg, #f5ede0 3%, #fffefd 55%);
+	background: linear-gradient(145deg, var(--card-surface) 3%, #fffefd 80%);
 	color: var(--qm-ink);
 	margin: 24rpx 0;
 	overflow: hidden;
@@ -107,7 +109,7 @@ const state = computed(() => cardStatus(props.card));
 	}
 	.qm-card__number {
 		font-size: 68rpx;
-		color: var(--qm-deep);
+		color: var(--card-accent);
 		font-weight: 700;
 		line-height: 1.2;
 		font-variant-numeric: tabular-nums;
@@ -161,7 +163,8 @@ const state = computed(() => cardStatus(props.card));
 	color: #8c8295 !important;
 }
 .is-muted {
-	background: var(--qm-cream);
-	border-color: #e3dbce;
+	.qm-card__watermark {
+		opacity: 0.04;
+	}
 }
 </style>

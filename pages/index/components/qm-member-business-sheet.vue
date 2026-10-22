@@ -21,6 +21,7 @@
 			<view v-if="kind === 'card'" class="business-result">
 				<text>{{ card.cardName }}</text
 				><text>{{ card.totalTimes }} 次</text>
+				<text class="qm-muted">售价 ¥ {{ cardPrice(card.price) }}</text>
 				<text class="qm-muted">{{
 					card.expireTime ? card.expireTime + " 到期" : "长期有效"
 				}}</text>
@@ -38,24 +39,52 @@
 				@focus-field="focusTarget = $event"
 			/>
 			<view v-else class="business-card-fields">
-				<view class="qm-field" id="card-field-name"
-					><text class="qm-label">次卡名称<text class="qm-required">*</text></text>
-					<cl-input
-						v-model="card.cardName"
-						@focus="focusTarget = 'card-field-name'"
-						placeholder="例如：水光焕肤次卡"
-						:maxlength="50"
-						:adjust-position="false"
-				/></view>
-				<view class="qm-field" id="card-field-times"
-					><text class="qm-label">总次数<text class="qm-required">*</text></text>
-					<cl-input
-						v-model="card.totalTimes"
-						@focus="focusTarget = 'card-field-times'"
-						type="number"
-						placeholder="请输入正整数"
-						:adjust-position="false"
-				/></view>
+				<view v-if="templatesLoading" class="qm-hint">正在加载可开卡项…</view>
+				<view v-else-if="templatesError" class="qm-error" role="alert"
+					>{{ templatesError
+					}}<button class="qm-inline" @tap="loadTemplates">重新加载</button></view
+				>
+				<view v-else-if="!templates.length" class="business-no-template">
+					<text>暂无可开通的卡项</text
+					><text class="qm-hint">请先新增或启用会员卡项，再为当前会员开卡</text>
+					<button class="qm-inline" @tap="manageTemplates">维护会员卡项</button>
+				</view>
+				<view v-else class="qm-field">
+					<text class="qm-label">选择卡项<text class="qm-required">*</text></text>
+					<view
+						class="business-template-list"
+						role="radiogroup"
+						aria-label="选择开卡卡项"
+					>
+						<button
+							v-for="item in templates"
+							:key="item.id"
+							class="business-template"
+							:class="{ 'is-selected': card.templateId === item.id }"
+							:style="cardColorStyle(item.color)"
+							role="radio"
+							tabindex="0"
+							:aria-label="
+								item.name + '，' + item.totalTimes + '次，售价' + item.price + '元'
+							"
+							:aria-checked="card.templateId === item.id"
+							@keydown.enter.prevent="card.templateId = item.id"
+							@keydown.space.prevent="card.templateId = item.id"
+							@tap="card.templateId = item.id"
+						>
+							<view
+								><text>{{ item.name }}</text
+								><text
+									>{{ item.totalTimes }} 次 / 张 · ¥
+									{{ cardPrice(item.price) }}</text
+								></view
+							>
+							<text class="business-template-check">{{
+								card.templateId === item.id ? "✓" : ""
+							}}</text>
+						</button>
+					</view>
+				</view>
 				<view class="qm-field"
 					><text class="qm-label">有效期至</text>
 					<cl-select-date
@@ -88,19 +117,26 @@
 				<qm-button @click="continueCard">继续开卡</qm-button>
 			</view>
 			<qm-button v-else-if="success" @click="visible = false">完成</qm-button>
-			<qm-button v-else :loading="saving" @click="save">{{
-				kind === "create" ? "建立会员档案" : "确认开卡"
-			}}</qm-button>
+			<qm-button
+				v-else
+				:loading="saving"
+				:disabled="
+					kind === 'card' && (templatesLoading || !!templatesError || !templates.length)
+				"
+				@click="save"
+				>{{ kind === "create" ? "建立会员档案" : "确认开卡" }}</qm-button
+			>
 		</template>
 	</qm-sheet>
 </template>
 <script setup lang="ts">
-import { ref, reactive, computed } from "vue";
+import { ref, reactive, computed, onUnmounted, watch } from "vue";
 import dayjs from "dayjs";
 import { useCool } from "/@/cool";
 import MemberService from "../../../service/member/info";
 import CardService from "../../../service/member/card-account";
-import { positiveTimes } from "../utils/card-policy";
+import TemplateService from "../../../service/member/card-template";
+import { cardColorStyle, cardPrice, type CardTemplate } from "../utils/card-template";
 import {
 	newMemberForm,
 	memberFormError,
@@ -117,7 +153,8 @@ const emit = defineEmits<{
 }>();
 const { router } = useCool();
 const members = new MemberService(),
-	cards = new CardService();
+	cards = new CardService(),
+	templatesService = new TemplateService();
 const visible = ref(false),
 	kind = ref<"create" | "card">("create"),
 	saving = ref(false),
@@ -126,8 +163,59 @@ const visible = ref(false),
 const member = ref<any>(null);
 const focusTarget = ref("");
 const form = reactive(newMemberForm());
-const blankCard = () => ({ cardName: "", totalTimes: "10", expireTime: "", remark: "" });
+const blankCard = () => ({
+	templateId: undefined as number | undefined,
+	cardName: "",
+	totalTimes: "",
+	price: "",
+	color: "purple",
+	expireTime: "",
+	remark: "",
+});
+const templates = ref<CardTemplate[]>([]),
+	templatesLoading = ref(false),
+	templatesError = ref("");
+let templateGeneration = 0;
+const selectedTemplate = computed(() => templates.value.find((row) => row.id === card.templateId));
+async function loadTemplates() {
+	const seq = ++templateGeneration;
+	templatesLoading.value = true;
+	templatesError.value = "";
+	try {
+		const result = await templatesService.list({ status: 1 });
+		if (seq !== templateGeneration) return;
+		templates.value = (result || [])
+			.filter((row: CardTemplate) => row.status === 1)
+			.map((row: CardTemplate) => ({ ...row, id: Number(row.id) }));
+		if (!templates.value.some((row) => row.id === card.templateId)) card.templateId = undefined;
+	} catch (e: any) {
+		if (seq === templateGeneration) templatesError.value = e?.message || "卡项加载失败，请重试";
+	} finally {
+		if (seq === templateGeneration) templatesLoading.value = false;
+	}
+}
+function templatesChanged() {
+	if (visible.value && kind.value === "card" && !success.value && !saving.value) loadTemplates();
+}
+uni.$on("chime:card-templates-changed", templatesChanged);
+onUnmounted(() => {
+	templateGeneration++;
+	uni.$off("chime:card-templates-changed", templatesChanged);
+});
+function manageTemplates() {
+	visible.value = false;
+	router.push("/pages/index/card-catalog");
+}
 const card = reactive(blankCard());
+watch(selectedTemplate, (row) => {
+	if (!row || success.value || saving.value) return;
+	Object.assign(card, {
+		cardName: row.name,
+		totalTimes: String(row.totalTimes),
+		price: String(row.price),
+		color: row.color,
+	});
+});
 const dateMode = ["year", "month", "date", "hour", "minute"];
 const title = computed(() => (kind.value === "create" ? "新增会员" : "为会员开卡"));
 const memberName = computed(() => member.value?.name || member.value?.nickName || "未命名会员");
@@ -150,7 +238,9 @@ function openCard(target: { id: number; name?: string; nickName?: string; phone?
 	kind.value = "card";
 	member.value = { ...target };
 	Object.assign(card, blankCard());
+	templates.value = [];
 	visible.value = true;
+	loadTemplates();
 }
 function continueCard() {
 	if (member.value?.id) openCard(member.value);
@@ -164,8 +254,8 @@ async function save() {
 	error.value = "";
 	if (kind.value === "create") error.value = memberFormError(form);
 	else if (!member.value?.id) error.value = "请先选择会员";
-	else if (!card.cardName.trim()) error.value = "请填写次卡名称";
-	else if (!positiveTimes(card.totalTimes)) error.value = "总次数需要为大于 0 的整数";
+	else if (templatesLoading.value || templatesError.value) error.value = "请先加载可开卡项";
+	else if (!selectedTemplate.value) error.value = "请选择已启用的卡项";
 	else if (
 		card.expireTime &&
 		(!dayjs(card.expireTime).isValid() || dayjs(card.expireTime).valueOf() <= Date.now())
@@ -184,8 +274,7 @@ async function save() {
 		} else {
 			await cards.add({
 				memberId: member.value.id,
-				cardName: card.cardName.trim(),
-				totalTimes: Number(card.totalTimes),
+				templateId: card.templateId,
 				expireTime: card.expireTime
 					? dayjs(card.expireTime).format("YYYY-MM-DD HH:mm:ss")
 					: null,
@@ -204,6 +293,62 @@ async function save() {
 defineExpose({ openCreate, openCard });
 </script>
 <style scoped lang="scss">
+.business-no-template {
+	display: flex;
+	flex-direction: column;
+	gap: 14rpx;
+	text-align: center;
+	padding: 22rpx 0;
+}
+.business-template-list {
+	display: flex;
+	flex-direction: column;
+	gap: 16rpx;
+}
+.business-template {
+	display: flex;
+	width: 100%;
+	align-items: center;
+	gap: 16rpx;
+	padding: 22rpx !important;
+	border: 1px solid transparent;
+	background: var(--card-surface) !important;
+	border-radius: 24rpx !important;
+	box-sizing: border-box;
+	text-align: left;
+	> view {
+		flex: 1;
+		min-width: 0;
+		text {
+			display: block;
+			overflow-wrap: anywhere;
+			font-size: 28rpx;
+			font-weight: 500;
+			color: var(--qm-ink);
+		}
+		text + text {
+			font-size: 24rpx;
+			color: var(--card-accent);
+			font-weight: 400;
+			margin-top: 8rpx;
+		}
+	}
+}
+.business-template.is-selected {
+	border-color: var(--card-accent);
+}
+.business-template-check {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 36rpx;
+	height: 36rpx;
+	border-radius: 50%;
+	border: 1px solid var(--card-accent);
+	flex-shrink: 0;
+	font-size: 24rpx;
+	color: var(--card-accent);
+}
 .business-eyebrow {
 	display: block;
 	color: var(--qm-muted);

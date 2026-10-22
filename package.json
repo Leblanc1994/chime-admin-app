@@ -2,6 +2,9 @@
 	"name": "cool-uni",
 	"version": "8.0.0",
 	"license": "MIT",
+	"scripts": {
+		"build:mp-weixin": "node build/mp-weixin.mjs"
+	},
 	"dependencies": {
 		"@dcloudio/uni-app": "3.0.0-3081220230817001",
 		"@hyoga/uni-socket.io": "^3.0.4",

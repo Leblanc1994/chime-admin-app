@@ -93,6 +93,10 @@
 			}
 		},
 		{
+			"path": "pages/index/card-catalog",
+			"style": { "navigationStyle": "custom", "enablePullDownRefresh": true }
+		},
+		{
 			"path": "pages/index/card-manage",
 			"style": {
 				"navigationStyle": "custom"

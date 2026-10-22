@@ -87,6 +87,11 @@
 				><view class="qm-kv"
 					><text>卡号</text><text>{{ card.id }}</text></view
 				><view class="qm-kv"
+					><text>开卡售价</text
+					><text>{{
+						card.price == null ? "未记录" : "¥ " + cardPrice(card.price)
+					}}</text></view
+				><view class="qm-kv"
 					><text>开卡时间</text
 					><text>{{ card.createTime?.slice(0, 16) || "未记录" }}</text></view
 				><view class="qm-kv"
@@ -147,6 +152,7 @@
 	</qm-page>
 </template>
 <script setup lang="ts">
+import { cardPrice } from "./utils/card-template";
 import { ref, computed } from "vue";
 import { onLoad, onShow } from "@dcloudio/uni-app";
 import { useCool } from "/@/cool";
