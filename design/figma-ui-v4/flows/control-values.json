@@ -1,0 +1,315 @@
+[
+  {
+    "controls": [],
+    "id": "login"
+  },
+  {
+    "controls": [],
+    "id": "member-new"
+  },
+  {
+    "controls": [],
+    "id": "member-edit"
+  },
+  {
+    "controls": [],
+    "id": "member-records"
+  },
+  {
+    "controls": [],
+    "id": "member-flows"
+  },
+  {
+    "controls": [],
+    "id": "member-sms"
+  },
+  {
+    "controls": [
+      {
+        "label": "有效期至",
+        "type": "datetime-local",
+        "value": "2027-01-19T22:00"
+      }
+    ],
+    "id": "open-card"
+  },
+  {
+    "controls": [
+      {
+        "label": "消费时间",
+        "type": "datetime-local",
+        "value": "2026-10-20T15:00"
+      }
+    ],
+    "id": "deduct"
+  },
+  {
+    "controls": [
+      {
+        "label": "消费时间",
+        "type": "datetime-local",
+        "value": "2026-10-20T14:32"
+      }
+    ],
+    "id": "deduct-edit"
+  },
+  {
+    "controls": [
+      {
+        "label": "消费时间",
+        "type": "datetime-local",
+        "value": "2026-10-20T15:00"
+      }
+    ],
+    "id": "deduct-confirm"
+  },
+  {
+    "controls": [],
+    "id": "deduct-success"
+  },
+  {
+    "controls": [],
+    "id": "member-success"
+  },
+  {
+    "controls": [],
+    "id": "card-success"
+  },
+  {
+    "controls": [],
+    "id": "card-manage"
+  },
+  {
+    "controls": [],
+    "id": "card-plus"
+  },
+  {
+    "controls": [],
+    "id": "card-set"
+  },
+  {
+    "controls": [],
+    "id": "card-stop"
+  },
+  {
+    "controls": [],
+    "id": "card-enable"
+  },
+  {
+    "controls": [],
+    "id": "card-discard"
+  },
+  {
+    "controls": [],
+    "id": "member-delete"
+  },
+  {
+    "controls": [],
+    "id": "member-delete-blocked"
+  },
+  {
+    "controls": [],
+    "id": "records"
+  },
+  {
+    "controls": [
+      {
+        "label": "开始日期",
+        "type": "date",
+        "value": "2026-10-01"
+      },
+      {
+        "label": "结束日期",
+        "type": "date",
+        "value": "2026-10-31"
+      }
+    ],
+    "id": "date-filter"
+  },
+  {
+    "controls": [],
+    "id": "record-card"
+  },
+  {
+    "controls": [],
+    "id": "record-guest"
+  },
+  {
+    "controls": [
+      {
+        "label": "消费时间",
+        "type": "datetime-local",
+        "value": "2026-10-20T15:00"
+      }
+    ],
+    "id": "consume-guest"
+  },
+  {
+    "controls": [
+      {
+        "label": "消费时间",
+        "type": "datetime-local",
+        "value": "2026-10-20T15:00"
+      }
+    ],
+    "id": "consume-member"
+  },
+  {
+    "controls": [
+      {
+        "label": "消费时间",
+        "type": "datetime-local",
+        "value": "2026-10-20T10:30"
+      }
+    ],
+    "id": "consume-edit"
+  },
+  {
+    "controls": [],
+    "id": "record-delete"
+  },
+  {
+    "controls": [],
+    "id": "record-delete-guest"
+  },
+  {
+    "controls": [],
+    "id": "consume-success"
+  },
+  {
+    "controls": [],
+    "id": "staff"
+  },
+  {
+    "controls": [],
+    "id": "staff-new"
+  },
+  {
+    "controls": [],
+    "id": "staff-edit"
+  },
+  {
+    "controls": [],
+    "id": "staff-password"
+  },
+  {
+    "controls": [],
+    "id": "staff-stop"
+  },
+  {
+    "controls": [],
+    "id": "staff-enable"
+  },
+  {
+    "controls": [],
+    "id": "profile"
+  },
+  {
+    "controls": [],
+    "id": "account"
+  },
+  {
+    "controls": [],
+    "id": "about"
+  },
+  {
+    "controls": [],
+    "id": "agreement"
+  },
+  {
+    "controls": [],
+    "id": "privacy"
+  },
+  {
+    "controls": [],
+    "id": "logout"
+  },
+  {
+    "controls": [],
+    "id": "staff-success"
+  },
+  {
+    "controls": [],
+    "id": "loading"
+  },
+  {
+    "controls": [],
+    "id": "members-empty"
+  },
+  {
+    "controls": [],
+    "id": "records-empty"
+  },
+  {
+    "controls": [],
+    "id": "load-error"
+  },
+  {
+    "controls": [
+      {
+        "label": "有效期至",
+        "type": "datetime-local",
+        "value": "2027-01-19T22:00"
+      }
+    ],
+    "id": "submit-error"
+  },
+  {
+    "controls": [],
+    "id": "validation"
+  },
+  {
+    "controls": [],
+    "id": "no-card"
+  },
+  {
+    "controls": [],
+    "id": "no-usable-card"
+  },
+  {
+    "controls": [],
+    "id": "card-expired"
+  },
+  {
+    "controls": [],
+    "id": "card-stopped"
+  },
+  {
+    "controls": [],
+    "id": "card-discarded"
+  },
+  {
+    "controls": [],
+    "id": "sms-sending"
+  },
+  {
+    "controls": [],
+    "id": "sms-failed"
+  },
+  {
+    "controls": [
+      {
+        "label": "消费时间",
+        "type": "datetime-local",
+        "value": "2026-10-20T15:00"
+      }
+    ],
+    "id": "submitting"
+  },
+  {
+    "controls": [],
+    "id": "operations"
+  },
+  {
+    "controls": [],
+    "id": "stores"
+  },
+  {
+    "controls": [],
+    "id": "schemes"
+  },
+  {
+    "controls": [],
+    "id": "brand"
+  }
+]

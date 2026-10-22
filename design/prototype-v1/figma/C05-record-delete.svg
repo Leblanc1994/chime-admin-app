@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="390" height="844" viewBox="0 0 390 844"><title>C05 删除消费确认</title><rect width="390" height="844" fill="#fdfdfd"/>
+<path d="M0.0 55.0L390.0 55.0" stroke="rgb(225, 226, 229)" stroke-width="1"/>
+<svg x="31.5" y="16.5" width="21.0" height="21.0" viewBox="0 0 24 24" fill="none" stroke="rgb(37, 38, 42)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5-7 7 7 7"></path></svg>
+<text x="147.0" y="32.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="16" font-weight="650" fill="rgb(37, 38, 42)">删除消费确认</text>
+<text x="20.0" y="102.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="24" font-weight="700" fill="rgb(37, 38, 42)">删除这笔消费？</text>
+<path d="M20.0 127.6L370.0 127.6" stroke="rgb(225, 226, 229)" stroke-width="1"/>
+<path d="M20.0 321.2L370.0 321.2" stroke="rgb(225, 226, 229)" stroke-width="1"/>
+<path d="M20.0 127.6L20.0 321.2" stroke="rgb(225, 226, 229)" stroke-width="1"/>
+<path d="M370.0 127.6L370.0 321.2" stroke="rgb(225, 226, 229)" stroke-width="1"/>
+<text x="36.0" y="166.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">顾客</text>
+<text x="318.0" y="166.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">李晓妍</text>
+<text x="36.0" y="206.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">消费类型</text>
+<text x="306.0" y="206.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">会员次卡</text>
+<text x="36.0" y="247.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">消费时间</text>
+<text x="249.3" y="247.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">2026-10-19 14:32</text>
+<text x="36.0" y="287.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">关联次卡</text>
+<text x="282.0" y="287.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">水光焕肤次卡</text>
+<rect x="20.0" y="336.2" width="350.0" height="42.7" rx="5" fill="rgb(247, 247, 249)"/>
+<path d="M20.0 336.2L370.0 336.2" stroke="rgb(197, 199, 206)" stroke-width="1"/>
+<path d="M20.0 378.8L370.0 378.8" stroke="rgb(197, 199, 206)" stroke-width="1"/>
+<path d="M20.0 336.2L20.0 378.8" stroke="rgb(197, 199, 206)" stroke-width="1"/>
+<path d="M370.0 336.2L370.0 378.8" stroke="rgb(197, 199, 206)" stroke-width="1"/>
+<text x="33.0" y="360.1" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(104, 107, 117)">删除后将重算关联次卡余额和流水。本地演示回补原扣次数。</text>
+<rect x="0.0" y="710.0" width="390.0" height="134.0" rx="0" fill="rgb(253, 253, 253)"/>
+<path d="M0.0 710.0L390.0 710.0" stroke="rgb(225, 226, 229)" stroke-width="1"/>
+<rect x="20.0" y="723.0" width="350.0" height="46.0" rx="6" fill="rgb(253, 253, 253)"/>
+<path d="M20.0 723.0L370.0 723.0" stroke="rgb(153, 156, 165)" stroke-width="1"/>
+<path d="M20.0 769.0L370.0 769.0" stroke="rgb(153, 156, 165)" stroke-width="1"/>
+<path d="M20.0 723.0L20.0 769.0" stroke="rgb(153, 156, 165)" stroke-width="1"/>
+<path d="M370.0 723.0L370.0 769.0" stroke="rgb(153, 156, 165)" stroke-width="1"/>
+<text x="156.0" y="749.7" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" font-weight="550" fill="rgb(37, 38, 42)">确认删除记录</text>
+<rect x="20.0" y="779.0" width="350.0" height="46.0" rx="6" fill="rgb(253, 253, 253)"/>
+<path d="M20.0 779.0L370.0 779.0" stroke="rgb(201, 203, 209)" stroke-width="1"/>
+<path d="M20.0 825.0L370.0 825.0" stroke="rgb(201, 203, 209)" stroke-width="1"/>
+<path d="M20.0 779.0L20.0 825.0" stroke="rgb(201, 203, 209)" stroke-width="1"/>
+<path d="M370.0 779.0L370.0 825.0" stroke="rgb(201, 203, 209)" stroke-width="1"/>
+<text x="182.0" y="805.7" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" font-weight="550" fill="rgb(37, 38, 42)">取消</text>
+</svg>

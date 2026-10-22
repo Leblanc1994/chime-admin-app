@@ -145,3 +145,17 @@ RELOAD_NGINX=1 bash deploy/deploy-frontend.sh
 ```
 
 如果服务器当前已经有 `pc` 端默认站点占用了域名首页，可以把 H5 应用挂到同一站点的 `/admin-app/` 子路径。
+
+## 正式接口与 HTTPS
+
+小程序正式接口为 `https://www.chime.pink/api`，统一在 `config/prod.ts` 配置。
+
+服务器已于 2026-10-21 开通 HTTPS，线上配置保存在 `/etc/nginx/conf.d/chime-admin.conf`，仓库快照为 `deploy/nginx.chime-https.conf`。该配置保留 PC、H5、接口、上传和 WebSocket 的现有路径。
+
+- 证书：`/etc/letsencrypt/live/www.chime.pink/fullchain.pem`
+- 私钥：`/etc/letsencrypt/live/www.chime.pink/privkey.pem`，仅保存在服务器。
+- 自动续期：`certbot-renew.timer`；续期后通过 `/etc/letsencrypt/renewal-hooks/deploy/reload-nginx` 检查并重载 Nginx。
+- HTTP 验证目录：`/var/www/letsencrypt`，80 端口的 ACME 验证路径需保留。
+- 修改前的 Nginx 配置备份：`/var/backups/chime-https-20261021-061826`。
+
+微信小程序后台需将 `https://www.chime.pink` 添加为 request、uploadFile、downloadFile 合法域名；使用 WebSocket 时添加 `wss://www.chime.pink`。

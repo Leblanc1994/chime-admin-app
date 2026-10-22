@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CHIME · 产品原型 v0.1</title><link rel="stylesheet" href="styles.css"><script defer src="app.js"></script></head>
+<body>
+<header class="review-header"><a class="brand" href="#home">CHIME <span>产品原型</span></a><span class="version">v0.1 · 结构与流程评审</span><div class="header-right"><span class="sample-label">全部为演示数据</span><button id="reset" class="review-button">重置演示</button><a class="review-button" href="FIGMA-HANDOFF.md" target="_blank">Figma 交接说明 ↗</a></div></header>
+<div class="review-layout">
+<aside class="sitemap"><div class="sidebar-intro"><span class="eyebrow">01 / PAGE INDEX</span><h1>先把业务走通。</h1><p>灰度线框用于确认内容、层级和操作，视觉风格留到 Figma 阶段。</p></div><nav id="page-index" aria-label="原型页面目录"></nav></aside>
+<main class="stage"><div class="stage-toolbar"><label for="scenario">查看状态</label><select id="scenario"><option value="normal">正常</option><option value="loading">加载中</option><option value="empty">暂无数据</option><option value="error">加载失败</option></select><button class="review-button" id="annotations" aria-pressed="true">说明已显示</button></div><div class="device-wrap"><div class="phone" id="phone"><div id="app"></div></div></div><p class="stage-caption">390 × 844 · 手机端结构原型 · 操作仅在本页演示</p></main>
+<aside class="inspector" id="inspector" aria-label="页面评审说明"></aside>
+</div>
+<div class="review-toast" id="toast" role="status" aria-live="polite"></div>
+</body></html>

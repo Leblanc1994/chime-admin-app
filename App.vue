@@ -28,4 +28,6 @@ onHide(() => {
 <style lang="scss">
 @import "/$/cool-ui/index.scss";
 @import "/@/static/css/index.scss";
+@import "/@/static/css/design-font.scss";
+@import "/@/static/css/business.scss";
 </style>

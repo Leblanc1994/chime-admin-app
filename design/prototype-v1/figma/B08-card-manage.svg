@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="390" height="844" viewBox="0 0 390 844"><title>B08 次卡管理</title><rect width="390" height="844" fill="#fdfdfd"/>
+<path d="M0.0 55.0L390.0 55.0" stroke="rgb(225, 226, 229)" stroke-width="1"/>
+<svg x="31.5" y="16.5" width="21.0" height="21.0" viewBox="0 0 24 24" fill="none" stroke="rgb(37, 38, 42)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5-7 7 7 7"></path></svg>
+<text x="163.0" y="32.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="16" font-weight="650" fill="rgb(37, 38, 42)">次卡管理</text>
+<path d="M20.0 146.0L370.0 146.0" stroke="rgb(225, 226, 229)" stroke-width="1"/>
+<rect x="20.0" y="79.5" width="46.0" height="46.0" rx="50" fill="rgb(236, 236, 239)"/>
+<path d="M20.0 79.5L66.0 79.5" stroke="rgb(225, 226, 229)" stroke-width="1"/>
+<path d="M20.0 125.5L66.0 125.5" stroke="rgb(225, 226, 229)" stroke-width="1"/>
+<path d="M20.0 79.5L20.0 125.5" stroke="rgb(225, 226, 229)" stroke-width="1"/>
+<path d="M66.0 79.5L66.0 125.5" stroke="rgb(225, 226, 229)" stroke-width="1"/>
+<text x="34.5" y="107.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="17" font-weight="400" fill="rgb(37, 38, 42)">李</text>
+<text x="78.0" y="97.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="18" font-weight="700" fill="rgb(37, 38, 42)">李晓妍</text>
+<text x="78.0" y="120.9" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(115, 117, 124)">13800000001 · 朋友介绍</text>
+<path d="M20.0 161.0L370.0 161.0" stroke="rgb(225, 226, 229)" stroke-width="1"/>
+<path d="M20.0 334.2L370.0 334.2" stroke="rgb(225, 226, 229)" stroke-width="1"/>
+<path d="M20.0 161.0L20.0 334.2" stroke="rgb(225, 226, 229)" stroke-width="1"/>
+<path d="M370.0 161.0L370.0 334.2" stroke="rgb(225, 226, 229)" stroke-width="1"/>
+<text x="36.0" y="190.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="600" fill="rgb(37, 38, 42)">水光焕肤次卡</text>
+<text x="36.0" y="219.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">状态</text>
+<text x="330.0" y="219.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">正常</text>
+<text x="36.0" y="260.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">剩余 / 总次数</text>
+<text x="312.7" y="260.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">4 / 6 次</text>
+<text x="36.0" y="300.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">有效期至</text>
+<text x="285.9" y="300.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">2027-01-19</text>
+<path d="M20.0 418.8L370.0 418.8" stroke="rgb(225, 226, 229)" stroke-width="1"/>
+<text x="20.0" y="376.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="550" fill="rgb(37, 38, 42)">补次</text>
+<text x="20.0" y="399.1" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(115, 117, 124)">在现有余额上增加次数</text>
+<svg x="354.0" y="375.5" width="16.0" height="16.0" viewBox="0 0 24 24" fill="none" stroke="rgb(144, 146, 154)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7"></path></svg>
+<path d="M20.0 488.4L370.0 488.4" stroke="rgb(225, 226, 229)" stroke-width="1"/>
+<text x="20.0" y="446.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="550" fill="rgb(37, 38, 42)">手工调整</text>
+<text x="20.0" y="468.7" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(115, 117, 124)">直接设置调整后的余次</text>
+<svg x="354.0" y="445.1" width="16.0" height="16.0" viewBox="0 0 24 24" fill="none" stroke="rgb(144, 146, 154)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7"></path></svg>
+<path d="M20.0 558.0L370.0 558.0" stroke="rgb(225, 226, 229)" stroke-width="1"/>
+<text x="20.0" y="516.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="550" fill="rgb(37, 38, 42)">停用次卡</text>
+<text x="20.0" y="538.3" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(115, 117, 124)">保留次卡和历史流水</text>
+<svg x="354.0" y="514.7" width="16.0" height="16.0" viewBox="0 0 24 24" fill="none" stroke="rgb(144, 146, 154)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7"></path></svg>
+<path d="M20.0 627.5L370.0 627.5" stroke="rgb(225, 226, 229)" stroke-width="1"/>
+<text x="20.0" y="585.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="550" fill="rgb(37, 38, 42)">作废次卡</text>
+<text x="20.0" y="607.9" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(115, 117, 124)">作废后不能继续使用或恢复</text>
+<svg x="354.0" y="584.3" width="16.0" height="16.0" viewBox="0 0 24 24" fill="none" stroke="rgb(144, 146, 154)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7"></path></svg>
+</svg>

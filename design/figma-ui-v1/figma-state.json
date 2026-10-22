@@ -1,0 +1,505 @@
+{
+  "fileKey": "DdJzWUCAaR8FscwCjLzYz9",
+  "url": "https://www.figma.com/design/DdJzWUCAaR8FscwCjLzYz9",
+  "pages": {
+    "cover": "0:1",
+    "foundations": "2:51",
+    "buttons": "2:52",
+    "fields": "2:53",
+    "rows": "2:54",
+    "cards": "2:55",
+    "nav": "2:56",
+    "screens": "2:57",
+    "states": "2:58",
+    "handoff": "2:59",
+    "platform": "15:718"
+  },
+  "screens": {
+    "home": {
+      "root": "8:20",
+      "header": "8:21",
+      "scroll": "8:27",
+      "body": "8:28",
+      "footer": "8:29"
+    },
+    "members": {
+      "root": "8:52",
+      "header": "8:53",
+      "scroll": "8:59",
+      "body": "8:60",
+      "footer": "8:61"
+    },
+    "member": {
+      "root": "8:84",
+      "header": "8:85",
+      "scroll": "8:91",
+      "body": "8:92",
+      "footer": "8:93"
+    },
+    "deduct": {
+      "root": "8:94",
+      "header": "8:95",
+      "scroll": "8:101",
+      "body": "8:102",
+      "footer": "8:103"
+    },
+    "confirm": {
+      "root": "8:104",
+      "header": "8:105",
+      "scroll": "8:111",
+      "body": "8:112",
+      "footer": "8:113"
+    },
+    "result": {
+      "root": "8:114",
+      "header": "8:115",
+      "scroll": "8:121",
+      "body": "8:122",
+      "footer": "8:123"
+    },
+    "workbench": {
+      "root": "8:124",
+      "header": "8:125",
+      "scroll": "8:131",
+      "body": "8:132",
+      "footer": "8:133"
+    },
+    "my": {
+      "root": "8:156",
+      "header": "8:157",
+      "scroll": "8:163",
+      "body": "8:164",
+      "footer": "8:165"
+    },
+    "login": {
+      "root": "13:294",
+      "header": "13:295",
+      "scroll": "13:301",
+      "body": "13:302",
+      "footer": "13:303"
+    },
+    "member-form": {
+      "root": "13:310",
+      "header": "13:311",
+      "scroll": "13:317",
+      "body": "13:318",
+      "footer": "13:319"
+    },
+    "open-card": {
+      "root": "13:320",
+      "header": "13:321",
+      "scroll": "13:327",
+      "body": "13:328",
+      "footer": "13:329"
+    },
+    "card-adjust": {
+      "root": "13:332",
+      "header": "13:333",
+      "scroll": "13:339",
+      "body": "13:340",
+      "footer": "13:341"
+    },
+    "consume-form": {
+      "root": "13:344",
+      "header": "13:345",
+      "scroll": "13:351",
+      "body": "13:352",
+      "footer": "13:353"
+    },
+    "staff-form": {
+      "root": "13:354",
+      "header": "13:355",
+      "scroll": "13:361",
+      "body": "13:362",
+      "footer": "13:363"
+    },
+    "staff-password": {
+      "root": "13:364",
+      "header": "13:365",
+      "scroll": "13:371",
+      "body": "13:372",
+      "footer": "13:373"
+    },
+    "profile": {
+      "root": "13:376",
+      "header": "13:377",
+      "scroll": "13:383",
+      "body": "13:384",
+      "footer": "13:385"
+    },
+    "card-confirm": {
+      "root": "14:444",
+      "header": "14:445",
+      "scroll": "14:451",
+      "body": "14:452",
+      "footer": "14:453"
+    },
+    "member-delete": {
+      "root": "14:463",
+      "header": "14:464",
+      "scroll": "14:470",
+      "body": "14:471",
+      "footer": "14:472"
+    },
+    "record-delete": {
+      "root": "14:482",
+      "header": "14:483",
+      "scroll": "14:489",
+      "body": "14:490",
+      "footer": "14:491"
+    },
+    "staff-confirm": {
+      "root": "14:501",
+      "header": "14:502",
+      "scroll": "14:508",
+      "body": "14:509",
+      "footer": "14:510"
+    },
+    "logout": {
+      "root": "14:520",
+      "header": "14:521",
+      "scroll": "14:527",
+      "body": "14:528",
+      "footer": "14:529"
+    },
+    "card-manage": {
+      "root": "14:539",
+      "header": "14:540",
+      "scroll": "14:546",
+      "body": "14:547",
+      "footer": "14:548"
+    },
+    "records": {
+      "root": "14:553",
+      "header": "14:554",
+      "scroll": "14:560",
+      "body": "14:561",
+      "footer": "14:562"
+    },
+    "record": {
+      "root": "14:563",
+      "header": "14:564",
+      "scroll": "14:570",
+      "body": "14:571",
+      "footer": "14:572"
+    },
+    "staff": {
+      "root": "14:573",
+      "header": "14:574",
+      "scroll": "14:580",
+      "body": "14:581",
+      "footer": "14:582"
+    },
+    "account": {
+      "root": "14:583",
+      "header": "14:584",
+      "scroll": "14:590",
+      "body": "14:591",
+      "footer": "14:592"
+    },
+    "document": {
+      "root": "14:593",
+      "header": "14:594",
+      "scroll": "14:600",
+      "body": "14:601",
+      "footer": "14:602"
+    },
+    "operations": {
+      "root": "15:719",
+      "header": "15:720",
+      "scroll": "15:726",
+      "body": "15:727",
+      "footer": "15:728"
+    },
+    "stores": {
+      "root": "15:748",
+      "header": "15:749",
+      "scroll": "15:755",
+      "body": "15:756",
+      "footer": "15:757"
+    },
+    "schemes": {
+      "root": "15:777",
+      "header": "15:778",
+      "scroll": "15:784",
+      "body": "15:785",
+      "footer": "15:786"
+    },
+    "brand": {
+      "root": "15:806",
+      "header": "15:807",
+      "scroll": "15:813",
+      "body": "15:814",
+      "footer": "15:815"
+    },
+    "after": {
+      "root": "17:803",
+      "card": "17:816"
+    },
+    "adjust-set": {
+      "root": "17:852",
+      "header": "17:853",
+      "scroll": "17:854",
+      "body": "17:855",
+      "footer": "17:860"
+    },
+    "discard": {
+      "root": "17:874",
+      "header": "17:875",
+      "scroll": "17:876",
+      "body": "17:877",
+      "footer": "17:881"
+    },
+    "staff-edit": {
+      "root": "17:893",
+      "header": "17:894",
+      "scroll": "17:895",
+      "body": "17:896",
+      "footer": "17:904"
+    },
+    "sms-failed": {
+      "root": "17:930",
+      "header": "17:931",
+      "scroll": "17:932",
+      "body": "17:933",
+      "footer": "17:945"
+    },
+    "member-records": {
+      "root": "21:962",
+      "header": "21:963",
+      "scroll": "21:969",
+      "body": "21:970",
+      "footer": "21:971"
+    },
+    "member-flows": {
+      "root": "21:1006",
+      "header": "21:1007",
+      "scroll": "21:1013",
+      "body": "21:1014",
+      "footer": "21:1015"
+    },
+    "member-sms": {
+      "root": "21:1050",
+      "header": "21:1051",
+      "scroll": "21:1057",
+      "body": "21:1058",
+      "footer": "21:1059"
+    },
+    "member-edit": {
+      "root": "26:834",
+      "header": "26:835",
+      "scroll": "26:836",
+      "body": "26:837",
+      "footer": "26:846"
+    },
+    "member-consume": {
+      "root": "26:877",
+      "header": "26:878",
+      "scroll": "26:879",
+      "body": "26:880",
+      "footer": "26:887"
+    },
+    "record-edit": {
+      "root": "26:913",
+      "header": "26:914",
+      "scroll": "26:915",
+      "body": "26:916",
+      "footer": "26:932"
+    }
+  },
+  "states": {
+    "empty": {
+      "root": "20:2",
+      "header": "20:3",
+      "scroll": "20:9",
+      "body": "20:10",
+      "footer": "20:11"
+    },
+    "loading": {
+      "root": "20:20",
+      "header": "20:21",
+      "scroll": "20:27",
+      "body": "20:28",
+      "footer": "20:29"
+    },
+    "error": {
+      "root": "20:36",
+      "header": "20:37",
+      "scroll": "20:43",
+      "body": "20:44",
+      "footer": "20:45"
+    },
+    "no-card": {
+      "root": "20:54",
+      "header": "20:55",
+      "scroll": "20:61",
+      "body": "20:62",
+      "footer": "20:63"
+    },
+    "sms-unconfigured": {
+      "root": "20:72",
+      "header": "20:73",
+      "scroll": "20:79",
+      "body": "20:80",
+      "footer": "20:81"
+    },
+    "sms-off": {
+      "root": "20:90",
+      "header": "20:91",
+      "scroll": "20:97",
+      "body": "20:98",
+      "footer": "20:99"
+    },
+    "permission": {
+      "root": "20:108",
+      "header": "20:109",
+      "scroll": "20:115",
+      "body": "20:116",
+      "footer": "20:117"
+    },
+    "conflict": {
+      "root": "20:126",
+      "header": "20:127",
+      "scroll": "20:133",
+      "body": "20:134",
+      "footer": "20:135"
+    },
+    "member-filter": {
+      "root": "21:49",
+      "header": "21:50",
+      "scroll": "21:56",
+      "body": "21:57",
+      "footer": "21:58"
+    },
+    "record-date": {
+      "root": "21:894",
+      "header": "21:895",
+      "scroll": "21:901",
+      "body": "21:902",
+      "footer": "21:903"
+    },
+    "flow-filter": {
+      "root": "21:918",
+      "header": "21:919",
+      "scroll": "21:925",
+      "body": "21:926",
+      "footer": "21:927"
+    },
+    "sms-filter": {
+      "root": "21:942",
+      "header": "21:943",
+      "scroll": "21:949",
+      "body": "21:950",
+      "footer": "21:951"
+    },
+    "pagination": {
+      "root": "40:1201",
+      "header": "40:1202",
+      "body": "40:1204",
+      "footer": "40:1219"
+    },
+    "validation": {
+      "root": "40:1276",
+      "header": "40:1277",
+      "body": "40:1279",
+      "footer": "40:1287"
+    },
+    "submitting": {
+      "root": "40:1316",
+      "header": "40:1317",
+      "body": "40:1319",
+      "footer": "40:1334"
+    },
+    "staff-created": {
+      "root": "40:1364"
+    }
+  },
+  "components": {
+    "button": {
+      "set": "4:19",
+      "primary": "4:5",
+      "secondary": "4:13",
+      "text": "4:15",
+      "danger": "4:17"
+    },
+    "field": {
+      "set": "4:40",
+      "filled": "4:20",
+      "empty": "4:24",
+      "focus": "4:28",
+      "error": "4:32",
+      "readonly": "4:36"
+    },
+    "member": {
+      "member": "5:2"
+    },
+    "kv": {
+      "kv": "5:9"
+    },
+    "menu": {
+      "menu": "5:12"
+    },
+    "card": {
+      "set": "6:65",
+      "normal": "6:2",
+      "low": "6:14",
+      "expired": "6:26",
+      "stopped": "6:39",
+      "voided": "6:52"
+    },
+    "top": {
+      "top": "7:2"
+    },
+    "tabs": {
+      "set": "7:105",
+      "home": "7:13",
+      "members": "7:36",
+      "workbench": "7:59",
+      "my": "7:82"
+    },
+    "search": {
+      "search": "8:2"
+    },
+    "segment": {
+      "set": "8:16",
+      "off": "8:12",
+      "on": "8:14"
+    },
+    "notice": {
+      "notice": "8:17"
+    }
+  },
+  "responsive": [
+    "27:1083",
+    "27:1158"
+  ],
+  "validation": {
+    "name": "交付最终统计",
+    "mainScreens": 38,
+    "issues": [],
+    "links": 63,
+    "collections": [
+      {
+        "name": "QM Primitives",
+        "count": 15
+      },
+      {
+        "name": "QM Color",
+        "count": 16
+      },
+      {
+        "name": "QM Layout",
+        "count": 8
+      }
+    ],
+    "styles": [
+      "QM/Display",
+      "QM/Title",
+      "QM/Heading",
+      "QM/Body",
+      "QM/Label",
+      "QM/Caption",
+      "QM/Micro"
+    ]
+  }
+}

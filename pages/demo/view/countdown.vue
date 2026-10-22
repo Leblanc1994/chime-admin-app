@@ -17,7 +17,7 @@
 				:hour="5"
 				:font-size="40"
 				:number-style="{
-					backgroundColor: '#f56c6c',
+					backgroundColor: '#f06179',
 					color: '#fff',
 					borderRadius: '8rpx',
 					padding: '6rpx',

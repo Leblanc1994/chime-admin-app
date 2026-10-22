@@ -1,0 +1,1010 @@
+{
+  "version": "V4-business-supplement",
+  "updatedAt": "2026-10-20",
+  "fileKey": "DdJzWUCAaR8FscwCjLzYz9",
+  "acceptedBaseline": {
+    "pageId": "64:2",
+    "frames": [
+      "69:4",
+      "69:229",
+      "69:395",
+      "69:525",
+      "69:658"
+    ]
+  },
+  "supplement": {
+    "frames": 62,
+    "componentInstances": 156,
+    "prototypeConnections": 54,
+    "nativeFont": "Noto Sans SC",
+    "pages": [
+      {
+        "group": "members",
+        "pageId": "80:2",
+        "frames": [
+          {
+            "id": "83:2",
+            "label": "B02a · 新增会员",
+            "key": "member-new",
+            "kind": "page",
+            "w": 390,
+            "h": 1095
+          },
+          {
+            "id": "83:85",
+            "label": "B02b · 编辑会员",
+            "key": "member-edit",
+            "kind": "page",
+            "w": 390,
+            "h": 1148
+          },
+          {
+            "id": "83:173",
+            "label": "B03b · 会员消费记录",
+            "key": "member-records",
+            "kind": "page",
+            "w": 390,
+            "h": 846
+          },
+          {
+            "id": "83:252",
+            "label": "B03c · 次卡流水",
+            "key": "member-flows",
+            "kind": "page",
+            "w": 390,
+            "h": 846
+          },
+          {
+            "id": "83:324",
+            "label": "B03d · 短信日志",
+            "key": "member-sms",
+            "kind": "page",
+            "w": 390,
+            "h": 846
+          },
+          {
+            "id": "83:397",
+            "label": "B04 · 为会员开卡",
+            "key": "open-card",
+            "kind": "page",
+            "w": 390,
+            "h": 875
+          },
+          {
+            "id": "83:462",
+            "label": "B05a · 填写扣次",
+            "key": "deduct",
+            "kind": "page",
+            "w": 390,
+            "h": 983
+          },
+          {
+            "id": "83:543",
+            "label": "B05b · 编辑次卡消费",
+            "key": "deduct-edit",
+            "kind": "page",
+            "w": 390,
+            "h": 956
+          },
+          {
+            "id": "83:617",
+            "label": "B06 · 核对扣次",
+            "key": "deduct-confirm",
+            "kind": "sheet",
+            "w": 390,
+            "h": 844
+          },
+          {
+            "id": "83:765",
+            "label": "B07a · 扣次成功",
+            "key": "deduct-success",
+            "kind": "page",
+            "w": 390,
+            "h": 862
+          },
+          {
+            "id": "83:829",
+            "label": "B07b · 建档成功",
+            "key": "member-success",
+            "kind": "page",
+            "w": 390,
+            "h": 846
+          },
+          {
+            "id": "83:880",
+            "label": "B07c · 开卡成功",
+            "key": "card-success",
+            "kind": "page",
+            "w": 390,
+            "h": 846
+          }
+        ],
+        "url": "https://www.figma.com/design/DdJzWUCAaR8FscwCjLzYz9?node-id=80-2"
+      },
+      {
+        "group": "cards",
+        "pageId": "80:5",
+        "frames": [
+          {
+            "id": "87:2",
+            "label": "B08a · 次卡管理",
+            "key": "card-manage",
+            "kind": "page",
+            "w": 390,
+            "h": 846
+          },
+          {
+            "id": "87:94",
+            "label": "B09a · 补次",
+            "key": "card-plus",
+            "kind": "sheet",
+            "w": 390,
+            "h": 844
+          },
+          {
+            "id": "87:239",
+            "label": "B09b · 调整余次",
+            "key": "card-set",
+            "kind": "sheet",
+            "w": 390,
+            "h": 844
+          },
+          {
+            "id": "87:384",
+            "label": "B10a · 停用次卡",
+            "key": "card-stop",
+            "kind": "dialog",
+            "w": 390,
+            "h": 844
+          },
+          {
+            "id": "87:523",
+            "label": "B10b · 启用次卡",
+            "key": "card-enable",
+            "kind": "dialog",
+            "w": 390,
+            "h": 844
+          },
+          {
+            "id": "87:661",
+            "label": "B10c · 作废次卡",
+            "key": "card-discard",
+            "kind": "dialog",
+            "w": 390,
+            "h": 844
+          },
+          {
+            "id": "87:800",
+            "label": "B11a · 删除未关联会员",
+            "key": "member-delete",
+            "kind": "dialog",
+            "w": 390,
+            "h": 844
+          },
+          {
+            "id": "87:922",
+            "label": "B11b · 关联业务阻止删除",
+            "key": "member-delete-blocked",
+            "kind": "dialog",
+            "w": 390,
+            "h": 844
+          }
+        ],
+        "url": "https://www.figma.com/design/DdJzWUCAaR8FscwCjLzYz9?node-id=80-5"
+      },
+      {
+        "group": "records",
+        "pageId": "80:8",
+        "frames": [
+          {
+            "id": "87:1040",
+            "label": "C02 · 消费查询",
+            "key": "records",
+            "kind": "page",
+            "w": 390,
+            "h": 846
+          },
+          {
+            "id": "87:1172",
+            "label": "C06 · 自定义日期",
+            "key": "date-filter",
+            "kind": "sheet",
+            "w": 390,
+            "h": 844
+          },
+          {
+            "id": "87:1343",
+            "label": "C03a · 次卡消费详情",
+            "key": "record-card",
+            "kind": "page",
+            "w": 390,
+            "h": 932
+          },
+          {
+            "id": "87:1426",
+            "label": "C03b · 散客消费详情",
+            "key": "record-guest",
+            "kind": "page",
+            "w": 390,
+            "h": 846
+          },
+          {
+            "id": "87:1490",
+            "label": "C04a · 登记散客消费",
+            "key": "consume-guest",
+            "kind": "page",
+            "w": 390,
+            "h": 997
+          },
+          {
+            "id": "87:1556",
+            "label": "C04b · 登记会员其他消费",
+            "key": "consume-member",
+            "kind": "page",
+            "w": 390,
+            "h": 846
+          },
+          {
+            "id": "87:1607",
+            "label": "C04c · 编辑散客消费",
+            "key": "consume-edit",
+            "kind": "page",
+            "w": 390,
+            "h": 997
+          },
+          {
+            "id": "87:1673",
+            "label": "C05a · 删除次卡消费",
+            "key": "record-delete",
+            "kind": "dialog",
+            "w": 390,
+            "h": 844
+          },
+          {
+            "id": "87:1808",
+            "label": "C05b · 删除散客消费",
+            "key": "record-delete-guest",
+            "kind": "dialog",
+            "w": 390,
+            "h": 844
+          },
+          {
+            "id": "87:1912",
+            "label": "C07 · 消费保存成功",
+            "key": "consume-success",
+            "kind": "page",
+            "w": 390,
+            "h": 846
+          }
+        ],
+        "url": "https://www.figma.com/design/DdJzWUCAaR8FscwCjLzYz9?node-id=80-8"
+      },
+      {
+        "group": "account",
+        "pageId": "80:11",
+        "frames": [
+          {
+            "id": "87:1963",
+            "label": "A01 · 门店登录",
+            "key": "login",
+            "kind": "page",
+            "w": 390,
+            "h": 846
+          },
+          {
+            "id": "87:2029",
+            "label": "D01 · 员工管理",
+            "key": "staff",
+            "kind": "page",
+            "w": 390,
+            "h": 846
+          },
+          {
+            "id": "87:2105",
+            "label": "D02a · 新增员工",
+            "key": "staff-new",
+            "kind": "page",
+            "w": 390,
+            "h": 959
+          },
+          {
+            "id": "87:2178",
+            "label": "D02b · 编辑员工",
+            "key": "staff-edit",
+            "kind": "page",
+            "w": 390,
+            "h": 991
+          },
+          {
+            "id": "87:2262",
+            "label": "D03 · 重置员工密码",
+            "key": "staff-password",
+            "kind": "sheet",
+            "w": 390,
+            "h": 844
+          },
+          {
+            "id": "87:2388",
+            "label": "D04a · 停用员工",
+            "key": "staff-stop",
+            "kind": "dialog",
+            "w": 390,
+            "h": 844
+          },
+          {
+            "id": "87:2519",
+            "label": "D04b · 启用员工",
+            "key": "staff-enable",
+            "kind": "dialog",
+            "w": 390,
+            "h": 844
+          },
+          {
+            "id": "87:2649",
+            "label": "D06 · 个人资料",
+            "key": "profile",
+            "kind": "page",
+            "w": 390,
+            "h": 846
+          },
+          {
+            "id": "87:2706",
+            "label": "D07 · 账号与关于",
+            "key": "account",
+            "kind": "page",
+            "w": 390,
+            "h": 934
+          },
+          {
+            "id": "87:2791",
+            "label": "D08a · 关于千绵美学",
+            "key": "about",
+            "kind": "page",
+            "w": 390,
+            "h": 846
+          },
+          {
+            "id": "87:2834",
+            "label": "D08b · 用户协议版式",
+            "key": "agreement",
+            "kind": "page",
+            "w": 390,
+            "h": 846
+          },
+          {
+            "id": "87:2892",
+            "label": "D08c · 隐私政策版式",
+            "key": "privacy",
+            "kind": "page",
+            "w": 390,
+            "h": 846
+          },
+          {
+            "id": "87:2950",
+            "label": "D09 · 退出登录",
+            "key": "logout",
+            "kind": "dialog",
+            "w": 390,
+            "h": 844
+          },
+          {
+            "id": "87:3069",
+            "label": "D10 · 员工创建成功",
+            "key": "staff-success",
+            "kind": "page",
+            "w": 390,
+            "h": 846
+          }
+        ],
+        "url": "https://www.figma.com/design/DdJzWUCAaR8FscwCjLzYz9?node-id=80-11"
+      },
+      {
+        "group": "states",
+        "pageId": "80:14",
+        "frames": [
+          {
+            "id": "87:3125",
+            "label": "S01 · 列表加载",
+            "key": "loading",
+            "kind": "page",
+            "w": 390,
+            "h": 846
+          },
+          {
+            "id": "87:3199",
+            "label": "S02 · 暂无会员",
+            "key": "members-empty",
+            "kind": "page",
+            "w": 390,
+            "h": 846
+          },
+          {
+            "id": "87:3260",
+            "label": "S03 · 无查询结果",
+            "key": "records-empty",
+            "kind": "page",
+            "w": 390,
+            "h": 846
+          },
+          {
+            "id": "87:3293",
+            "label": "S04 · 加载失败",
+            "key": "load-error",
+            "kind": "page",
+            "w": 390,
+            "h": 846
+          },
+          {
+            "id": "87:3326",
+            "label": "S05 · 提交失败并保留输入",
+            "key": "submit-error",
+            "kind": "page",
+            "w": 390,
+            "h": 941
+          },
+          {
+            "id": "87:3394",
+            "label": "S06 · 表单校验",
+            "key": "validation",
+            "kind": "sheet",
+            "w": 390,
+            "h": 844
+          },
+          {
+            "id": "87:3523",
+            "label": "S07 · 会员尚未开卡",
+            "key": "no-card",
+            "kind": "page",
+            "w": 390,
+            "h": 846
+          },
+          {
+            "id": "87:3595",
+            "label": "S08 · 无可扣次卡项",
+            "key": "no-usable-card",
+            "kind": "page",
+            "w": 390,
+            "h": 846
+          },
+          {
+            "id": "87:3641",
+            "label": "S09 · 次卡已过期",
+            "key": "card-expired",
+            "kind": "page",
+            "w": 390,
+            "h": 846
+          },
+          {
+            "id": "87:3733",
+            "label": "S10 · 次卡已停用",
+            "key": "card-stopped",
+            "kind": "page",
+            "w": 390,
+            "h": 846
+          },
+          {
+            "id": "87:3825",
+            "label": "S11 · 次卡已作废",
+            "key": "card-discarded",
+            "kind": "page",
+            "w": 390,
+            "h": 846
+          },
+          {
+            "id": "87:3878",
+            "label": "S12 · 短信发送中",
+            "key": "sms-sending",
+            "kind": "page",
+            "w": 390,
+            "h": 846
+          },
+          {
+            "id": "87:3951",
+            "label": "S13 · 短信发送失败",
+            "key": "sms-failed",
+            "kind": "page",
+            "w": 390,
+            "h": 846
+          },
+          {
+            "id": "87:4026",
+            "label": "S14 · 提交中防止重复操作",
+            "key": "submitting",
+            "kind": "sheet",
+            "w": 390,
+            "h": 844
+          }
+        ],
+        "url": "https://www.figma.com/design/DdJzWUCAaR8FscwCjLzYz9?node-id=80-14"
+      },
+      {
+        "group": "platform",
+        "pageId": "80:17",
+        "frames": [
+          {
+            "id": "87:4174",
+            "label": "E01 · 平台运营范围",
+            "key": "operations",
+            "kind": "page",
+            "w": 390,
+            "h": 846
+          },
+          {
+            "id": "87:4234",
+            "label": "E02 · 门店管理结构",
+            "key": "stores",
+            "kind": "page",
+            "w": 390,
+            "h": 846
+          },
+          {
+            "id": "87:4308",
+            "label": "E03 · 服务方案结构",
+            "key": "schemes",
+            "kind": "page",
+            "w": 390,
+            "h": 856
+          },
+          {
+            "id": "87:4398",
+            "label": "E04 · 门店品牌结构",
+            "key": "brand",
+            "kind": "page",
+            "w": 390,
+            "h": 1167
+          }
+        ],
+        "url": "https://www.figma.com/design/DdJzWUCAaR8FscwCjLzYz9?node-id=80-17"
+      }
+    ]
+  },
+  "tokens": {
+    "collection": "VariableCollectionId:80:20",
+    "name": "千绵 V4 / 业务补页",
+    "scrim": "VariableID:80:41"
+  },
+  "scope": {
+    "dailyAndStates": 58,
+    "platformPending": 4,
+    "productionChanged": false,
+    "figmaPrototype": "分组内关键入口与关闭交互；跨组业务在本地交互样例中演示"
+  },
+  "qa": [
+    {
+      "group": "members",
+      "frames": 12,
+      "instances": 30,
+      "fontFamilies": [
+        "Noto Sans SC"
+      ],
+      "reactions": 7,
+      "overlays": [
+        {
+          "id": "83:540",
+          "reactions": [
+            {
+              "action": {
+                "type": "NODE",
+                "destinationId": "83:617",
+                "navigation": "OVERLAY",
+                "transition": null,
+                "resetVideoPosition": false,
+                "resetScrollPosition": true
+              },
+              "actions": [
+                {
+                  "type": "NODE",
+                  "destinationId": "83:617",
+                  "navigation": "OVERLAY",
+                  "transition": null,
+                  "resetVideoPosition": false,
+                  "resetScrollPosition": true
+                }
+              ],
+              "trigger": {
+                "type": "ON_CLICK"
+              }
+            }
+          ]
+        },
+        {
+          "id": "83:614",
+          "reactions": [
+            {
+              "action": {
+                "type": "NODE",
+                "destinationId": "83:617",
+                "navigation": "OVERLAY",
+                "transition": null,
+                "resetVideoPosition": false,
+                "resetScrollPosition": true
+              },
+              "actions": [
+                {
+                  "type": "NODE",
+                  "destinationId": "83:617",
+                  "navigation": "OVERLAY",
+                  "transition": null,
+                  "resetVideoPosition": false,
+                  "resetScrollPosition": true
+                }
+              ],
+              "trigger": {
+                "type": "ON_CLICK"
+              }
+            }
+          ]
+        }
+      ],
+      "flowStartingPoints": [
+        {
+          "nodeId": "83:2",
+          "name": "31 · 会员建档与扣次"
+        }
+      ]
+    },
+    {
+      "group": "cards",
+      "frames": 8,
+      "instances": 21,
+      "fontFamilies": [
+        "Noto Sans SC"
+      ],
+      "reactions": 10,
+      "overlays": [
+        {
+          "id": "87:56",
+          "reactions": [
+            {
+              "action": {
+                "type": "NODE",
+                "destinationId": "87:94",
+                "navigation": "OVERLAY",
+                "transition": null,
+                "resetVideoPosition": false,
+                "resetScrollPosition": true
+              },
+              "actions": [
+                {
+                  "type": "NODE",
+                  "destinationId": "87:94",
+                  "navigation": "OVERLAY",
+                  "transition": null,
+                  "resetVideoPosition": false,
+                  "resetScrollPosition": true
+                }
+              ],
+              "trigger": {
+                "type": "ON_CLICK"
+              }
+            }
+          ]
+        },
+        {
+          "id": "87:64",
+          "reactions": [
+            {
+              "action": {
+                "type": "NODE",
+                "destinationId": "87:239",
+                "navigation": "OVERLAY",
+                "transition": null,
+                "resetVideoPosition": false,
+                "resetScrollPosition": true
+              },
+              "actions": [
+                {
+                  "type": "NODE",
+                  "destinationId": "87:239",
+                  "navigation": "OVERLAY",
+                  "transition": null,
+                  "resetVideoPosition": false,
+                  "resetScrollPosition": true
+                }
+              ],
+              "trigger": {
+                "type": "ON_CLICK"
+              }
+            }
+          ]
+        },
+        {
+          "id": "87:77",
+          "reactions": [
+            {
+              "action": {
+                "type": "NODE",
+                "destinationId": "87:384",
+                "navigation": "OVERLAY",
+                "transition": null,
+                "resetVideoPosition": false,
+                "resetScrollPosition": true
+              },
+              "actions": [
+                {
+                  "type": "NODE",
+                  "destinationId": "87:384",
+                  "navigation": "OVERLAY",
+                  "transition": null,
+                  "resetVideoPosition": false,
+                  "resetScrollPosition": true
+                }
+              ],
+              "trigger": {
+                "type": "ON_CLICK"
+              }
+            }
+          ]
+        },
+        {
+          "id": "87:85",
+          "reactions": [
+            {
+              "action": {
+                "type": "NODE",
+                "destinationId": "87:661",
+                "navigation": "OVERLAY",
+                "transition": null,
+                "resetVideoPosition": false,
+                "resetScrollPosition": true
+              },
+              "actions": [
+                {
+                  "type": "NODE",
+                  "destinationId": "87:661",
+                  "navigation": "OVERLAY",
+                  "transition": null,
+                  "resetVideoPosition": false,
+                  "resetScrollPosition": true
+                }
+              ],
+              "trigger": {
+                "type": "ON_CLICK"
+              }
+            }
+          ]
+        }
+      ],
+      "flowStartingPoints": [
+        {
+          "nodeId": "87:2",
+          "name": "32 · 次卡管理"
+        }
+      ]
+    },
+    {
+      "group": "records",
+      "frames": 10,
+      "instances": 22,
+      "fontFamilies": [
+        "Noto Sans SC"
+      ],
+      "reactions": 15,
+      "overlays": [
+        {
+          "id": "87:1073",
+          "reactions": [
+            {
+              "action": {
+                "type": "NODE",
+                "destinationId": "87:1172",
+                "navigation": "OVERLAY",
+                "transition": null,
+                "resetVideoPosition": false,
+                "resetScrollPosition": true
+              },
+              "actions": [
+                {
+                  "type": "NODE",
+                  "destinationId": "87:1172",
+                  "navigation": "OVERLAY",
+                  "transition": null,
+                  "resetVideoPosition": false,
+                  "resetScrollPosition": true
+                }
+              ],
+              "trigger": {
+                "type": "ON_CLICK"
+              }
+            }
+          ]
+        },
+        {
+          "id": "87:1423",
+          "reactions": [
+            {
+              "action": {
+                "type": "NODE",
+                "destinationId": "87:1673",
+                "navigation": "OVERLAY",
+                "transition": null,
+                "resetVideoPosition": false,
+                "resetScrollPosition": true
+              },
+              "actions": [
+                {
+                  "type": "NODE",
+                  "destinationId": "87:1673",
+                  "navigation": "OVERLAY",
+                  "transition": null,
+                  "resetVideoPosition": false,
+                  "resetScrollPosition": true
+                }
+              ],
+              "trigger": {
+                "type": "ON_CLICK"
+              }
+            }
+          ]
+        },
+        {
+          "id": "87:1487",
+          "reactions": [
+            {
+              "action": {
+                "type": "NODE",
+                "destinationId": "87:1808",
+                "navigation": "OVERLAY",
+                "transition": null,
+                "resetVideoPosition": false,
+                "resetScrollPosition": true
+              },
+              "actions": [
+                {
+                  "type": "NODE",
+                  "destinationId": "87:1808",
+                  "navigation": "OVERLAY",
+                  "transition": null,
+                  "resetVideoPosition": false,
+                  "resetScrollPosition": true
+                }
+              ],
+              "trigger": {
+                "type": "ON_CLICK"
+              }
+            }
+          ]
+        }
+      ],
+      "flowStartingPoints": [
+        {
+          "nodeId": "87:1040",
+          "name": "33 · 消费记录与查询"
+        }
+      ]
+    },
+    {
+      "group": "account",
+      "frames": 14,
+      "instances": 39,
+      "fontFamilies": [
+        "Noto Sans SC"
+      ],
+      "reactions": 17,
+      "overlays": [
+        {
+          "id": "87:2232",
+          "reactions": [
+            {
+              "action": {
+                "type": "NODE",
+                "destinationId": "87:2262",
+                "navigation": "OVERLAY",
+                "transition": null,
+                "resetVideoPosition": false,
+                "resetScrollPosition": true
+              },
+              "actions": [
+                {
+                  "type": "NODE",
+                  "destinationId": "87:2262",
+                  "navigation": "OVERLAY",
+                  "transition": null,
+                  "resetVideoPosition": false,
+                  "resetScrollPosition": true
+                }
+              ],
+              "trigger": {
+                "type": "ON_CLICK"
+              }
+            }
+          ]
+        },
+        {
+          "id": "87:2240",
+          "reactions": [
+            {
+              "action": {
+                "type": "NODE",
+                "destinationId": "87:2388",
+                "navigation": "OVERLAY",
+                "transition": null,
+                "resetVideoPosition": false,
+                "resetScrollPosition": true
+              },
+              "actions": [
+                {
+                  "type": "NODE",
+                  "destinationId": "87:2388",
+                  "navigation": "OVERLAY",
+                  "transition": null,
+                  "resetVideoPosition": false,
+                  "resetScrollPosition": true
+                }
+              ],
+              "trigger": {
+                "type": "ON_CLICK"
+              }
+            }
+          ]
+        },
+        {
+          "id": "87:2788",
+          "reactions": [
+            {
+              "action": {
+                "type": "NODE",
+                "destinationId": "87:2950",
+                "navigation": "OVERLAY",
+                "transition": null,
+                "resetVideoPosition": false,
+                "resetScrollPosition": true
+              },
+              "actions": [
+                {
+                  "type": "NODE",
+                  "destinationId": "87:2950",
+                  "navigation": "OVERLAY",
+                  "transition": null,
+                  "resetVideoPosition": false,
+                  "resetScrollPosition": true
+                }
+              ],
+              "trigger": {
+                "type": "ON_CLICK"
+              }
+            }
+          ]
+        }
+      ],
+      "flowStartingPoints": [
+        {
+          "nodeId": "87:1963",
+          "name": "34 · 员工与账号"
+        }
+      ]
+    },
+    {
+      "group": "states",
+      "frames": 14,
+      "instances": 29,
+      "fontFamilies": [
+        "Noto Sans SC"
+      ],
+      "reactions": 2,
+      "overlays": [],
+      "flowStartingPoints": [
+        {
+          "nodeId": "87:3125",
+          "name": "35 · 状态与异常"
+        }
+      ]
+    },
+    {
+      "group": "platform",
+      "frames": 4,
+      "instances": 15,
+      "fontFamilies": [
+        "Noto Sans SC"
+      ],
+      "reactions": 3,
+      "overlays": [],
+      "flowStartingPoints": [
+        {
+          "nodeId": "87:4174",
+          "name": "91 · 平台运营补充（待接入）"
+        }
+      ]
+    }
+  ]
+}

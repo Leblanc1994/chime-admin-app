@@ -1,0 +1,1529 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="2636" height="5902" viewBox="0 0 2636 5902"><rect width="2636" height="100%" fill="#ededf0" /><text x="28" y="42" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="25" font-weight="600" fill="#303138">CHIME / 店长日常业务 · 灰度原型 v0.1</text><text x="28" y="71" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="14" font-weight="400" fill="#73757c">2026-10-19 · 按现有实现梳理；全部演示数据；平台运营单独标注；SVG 不包含原型交互</text><text x="28" y="132" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="14" font-weight="600" fill="#303138">A01 登录</text><svg width="390" height="844" viewBox="0 0 390 844" x="28" y="150"><title>A01 登录</title><rect width="390" height="844" fill="#fdfdfd" />
+<text x="20.0" y="78.3" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="27" font-weight="650" fill="rgb(37, 38, 42)">CHIME</text>
+<text x="20.0" y="104.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">门店管理</text>
+<text x="20.0" y="175.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="24" font-weight="700" fill="rgb(37, 38, 42)">欢迎回来</text>
+<text x="20.0" y="207.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">使用管理员账号进入门店。</text>
+<text x="20.0" y="254.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">用户名 *</text>
+<rect x="20.0" y="267.4" width="350.0" height="44.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 267.4L370.0 267.4" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 311.4L370.0 311.4" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 267.4L20.0 311.4" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M370.0 267.4L370.0 311.4" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<text x="32.0" y="294.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" fill="rgb(37, 38, 42)">demo_admin</text>
+<text x="20.0" y="328.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="400" fill="rgb(115, 117, 124)">演示账号，不会连接服务</text>
+<text x="20.0" y="363.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">密码 *</text>
+<rect x="20.0" y="376.4" width="350.0" height="44.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 376.4L370.0 376.4" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 420.4L370.0 420.4" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 376.4L20.0 420.4" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M370.0 376.4L370.0 420.4" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<text x="32.0" y="403.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" fill="rgb(37, 38, 42)">••••••</text>
+<text x="20.0" y="437.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="400" fill="rgb(115, 117, 124)">仅用于演示，不要输入真实密码</text>
+<text x="20.0" y="472.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">图形验证码 *</text>
+<rect x="20.0" y="485.4" width="350.0" height="44.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 485.4L370.0 485.4" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 529.4L370.0 529.4" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 485.4L20.0 529.4" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M370.0 485.4L370.0 529.4" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<text x="32.0" y="512.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" fill="rgb(37, 38, 42)">2468</text>
+<text x="20.0" y="546.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="400" fill="rgb(115, 117, 124)">演示验证码 2468</text>
+<text x="26.0" y="592.7" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(37, 38, 42)">刷新验证码</text>
+<rect x="0.0" y="741.5" width="390.0" height="102.5" rx="0" fill="rgb(253, 253, 253)" />
+<path d="M0.0 741.5L390.0 741.5" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<rect x="20.0" y="754.5" width="350.0" height="46.0" rx="6" fill="rgb(48, 49, 56)" />
+<path d="M20.0 754.5L370.0 754.5" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<path d="M20.0 800.5L370.0 800.5" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<path d="M20.0 754.5L20.0 800.5" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<path d="M370.0 754.5L370.0 800.5" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<text x="182.0" y="781.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" font-weight="550" fill="rgb(247, 247, 249)">登录</text>
+<text x="135.0" y="819.5" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="400" fill="rgb(115, 117, 124)">演示原型，不验证真实账号</text>
+</svg><text x="460" y="132" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="14" font-weight="600" fill="#303138">A02 首页</text><svg width="390" height="951" viewBox="0 0 390 951" x="460" y="150"><title>A02 首页</title><rect width="390" height="951" fill="#fdfdfd" />
+<path d="M0.0 55.0L390.0 55.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="163.0" y="32.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="16" font-weight="650" fill="rgb(37, 38, 42)">千绵美学</text>
+<text x="20.0" y="85.9" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(115, 117, 124)">2026年10月19日 · 演示营业日</text>
+<text x="20.0" y="118.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="24" font-weight="700" fill="rgb(37, 38, 42)">下午好，栗子</text>
+<path d="M20.0 145.6L370.0 145.6" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M20.0 318.6L370.0 318.6" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M20.0 232.6L195.0 232.6" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="20.0" y="173.5" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(115, 117, 124)">今日消费</text>
+<text x="20.0" y="209.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="26" font-weight="600" fill="rgb(37, 38, 42)">2</text>
+<text x="40.1" y="209.5" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(115, 117, 124)">笔</text>
+<path d="M195.0 232.6L370.0 232.6" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="215.0" y="173.5" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(115, 117, 124)">本周消费</text>
+<text x="215.0" y="209.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="26" font-weight="600" fill="rgb(37, 38, 42)">3</text>
+<text x="235.1" y="209.5" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(115, 117, 124)">笔</text>
+<text x="20.0" y="259.5" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(115, 117, 124)">已开卡会员</text>
+<text x="20.0" y="295.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="26" font-weight="600" fill="rgb(37, 38, 42)">3</text>
+<text x="40.1" y="295.5" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(115, 117, 124)">人</text>
+<text x="215.0" y="259.5" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(115, 117, 124)">今日新会员</text>
+<text x="215.0" y="295.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="26" font-weight="600" fill="rgb(37, 38, 42)">0</text>
+<text x="235.1" y="295.5" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(115, 117, 124)">人</text>
+<text x="20.0" y="354.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="650" fill="rgb(37, 38, 42)">常用操作</text>
+<path d="M20.0 376.6L131.3 376.6" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M20.0 440.6L131.3 440.6" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M20.0 376.6L20.0 440.6" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M131.3 376.6L131.3 440.6" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<svg x="65.2" y="386.6" width="21.0" height="21.0" viewBox="0 0 24 24" fill="none" stroke="rgb(37, 38, 42)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 6" /></svg>
+<text x="64.7" y="425.5" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(37, 38, 42)">扣次</text>
+<path d="M139.3 376.6L250.7 376.6" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M139.3 440.6L250.7 440.6" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M139.3 376.6L139.3 440.6" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M250.7 376.6L250.7 440.6" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<svg x="184.5" y="386.6" width="21.0" height="21.0" viewBox="0 0 24 24" fill="none" stroke="rgb(37, 38, 42)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="15" rx="2" /><path d="M2 10h20M6 15h5" /></svg>
+<text x="184.0" y="425.5" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(37, 38, 42)">开卡</text>
+<path d="M258.7 376.6L370.0 376.6" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M258.7 440.6L370.0 440.6" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M258.7 376.6L258.7 440.6" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M370.0 376.6L370.0 440.6" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<svg x="303.8" y="386.6" width="21.0" height="21.0" viewBox="0 0 24 24" fill="none" stroke="rgb(37, 38, 42)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3h14v18l-3-2-4 2-4-2-3 2Z" /><path d="M8 7h8M8 11h8M8 15h4" /></svg>
+<text x="281.3" y="425.5" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(37, 38, 42)">登记散客消费</text>
+<text x="20.0" y="478.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="650" fill="rgb(37, 38, 42)">会员提醒</text>
+<path d="M20.0 566.2L370.0 566.2" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="20.0" y="524.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="550" fill="rgb(37, 38, 42)">低余次、到期与未到店提醒</text>
+<text x="20.0" y="546.5" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(115, 117, 124)">仅展示汇总，具体名单筛选待接口确认</text>
+<text x="318.0" y="534.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(37, 38, 42)">查看</text>
+<svg x="354.0" y="522.9" width="16.0" height="16.0" viewBox="0 0 24 24" fill="none" stroke="rgb(144, 146, 154)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7" /></svg>
+<text x="20.0" y="603.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="650" fill="rgb(37, 38, 42)">消费概况</text>
+<path d="M20.0 742.2L370.0 742.2" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<rect x="28.0" y="719.2" width="36.6" height="22.0" rx="0" fill="rgb(179, 182, 192)" />
+<rect x="77.6" y="697.2" width="36.6" height="44.0" rx="0" fill="rgb(179, 182, 192)" />
+<rect x="127.1" y="708.2" width="36.6" height="33.0" rx="0" fill="rgb(179, 182, 192)" />
+<rect x="176.7" y="675.2" width="36.6" height="66.0" rx="0" fill="rgb(179, 182, 192)" />
+<rect x="226.3" y="697.2" width="36.6" height="44.0" rx="0" fill="rgb(179, 182, 192)" />
+<rect x="275.8" y="664.2" width="36.6" height="77.0" rx="0" fill="rgb(179, 182, 192)" />
+<rect x="325.4" y="686.2" width="36.6" height="55.0" rx="0" fill="rgb(179, 182, 192)" />
+<text x="52.2" y="758.3" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="9" font-weight="400" fill="rgb(115, 117, 124)">10/13</text>
+<text x="139.8" y="758.3" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="9" font-weight="400" fill="rgb(115, 117, 124)">10/15</text>
+<text x="227.4" y="758.3" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="9" font-weight="400" fill="rgb(115, 117, 124)">10/17</text>
+<text x="314.5" y="758.3" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="9" font-weight="400" fill="rgb(115, 117, 124)">10/19</text>
+<text x="20.0" y="781.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="400" fill="rgb(115, 117, 124)">趋势布局示意，图形不作为真实统计依据</text>
+<path d="M20.0 849.2L370.0 849.2" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="20.0" y="820.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="550" fill="rgb(37, 38, 42)">查看消费明细</text>
+<svg x="354.0" y="808.7" width="16.0" height="16.0" viewBox="0 0 24 24" fill="none" stroke="rgb(144, 146, 154)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7" /></svg>
+<rect x="0.0" y="877.2" width="390.0" height="73.0" rx="0" fill="rgb(253, 253, 253)" />
+<path d="M0.0 877.2L390.0 877.2" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<svg x="46.3" y="891.7" width="20.0" height="20.0" viewBox="0 0 24 24" fill="none" stroke="rgb(37, 38, 42)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m3 10 9-7 9 7v10H3Z" /><path d="M9 20v-7h6v7" /></svg>
+<text x="46.3" y="925.7" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="650" fill="rgb(37, 38, 42)">首页</text>
+<svg x="138.8" y="891.7" width="20.0" height="20.0" viewBox="0 0 24 24" fill="none" stroke="rgb(136, 139, 148)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3" /><path d="M3 21v-3a6 6 0 0 1 12 0v3M16 5a3 3 0 0 1 0 6m2 4a5 5 0 0 1 3 4v2" /></svg>
+<text x="138.8" y="925.7" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="400" fill="rgb(136, 139, 148)">会员</text>
+<svg x="231.3" y="891.7" width="20.0" height="20.0" viewBox="0 0 24 24" fill="none" stroke="rgb(136, 139, 148)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" /></svg>
+<text x="226.3" y="925.7" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="400" fill="rgb(136, 139, 148)">工作台</text>
+<svg x="323.8" y="891.7" width="20.0" height="20.0" viewBox="0 0 24 24" fill="none" stroke="rgb(136, 139, 148)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4" /><path d="M4 21a8 8 0 0 1 16 0" /></svg>
+<text x="323.8" y="925.7" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="400" fill="rgb(136, 139, 148)">我的</text>
+</svg><text x="892" y="132" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="14" font-weight="600" fill="#303138">B01 会员列表</text><svg width="390" height="844" viewBox="0 0 390 844" x="892" y="150"><title>B01 会员列表</title><rect width="390" height="844" fill="#fdfdfd" />
+<path d="M0.0 55.0L390.0 55.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="179.0" y="32.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="16" font-weight="650" fill="rgb(37, 38, 42)">会员</text>
+<text x="336.0" y="30.3" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="650" fill="rgb(37, 38, 42)">新增</text>
+<svg x="32.0" y="88.0" width="17.0" height="17.0" viewBox="0 0 24 24" fill="none" stroke="rgb(115, 117, 124)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="6" /><path d="m15 15 6 6" /></svg>
+<rect x="20.0" y="75.0" width="350.0" height="44.0" rx="6" fill="rgb(247, 247, 249)" />
+<path d="M20.0 75.0L370.0 75.0" stroke="rgb(215, 216, 221)" stroke-width="1" />
+<path d="M20.0 119.0L370.0 119.0" stroke="rgb(215, 216, 221)" stroke-width="1" />
+<path d="M20.0 75.0L20.0 119.0" stroke="rgb(215, 216, 221)" stroke-width="1" />
+<path d="M370.0 75.0L370.0 119.0" stroke="rgb(215, 216, 221)" stroke-width="1" />
+<text x="32.0" y="102.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" fill="rgb(37, 38, 42)">搜索姓名 / 手机号</text>
+<rect x="20.0" y="133.0" width="48.0" height="34.0" rx="5" fill="rgb(233, 234, 238)" />
+<path d="M20.0 133.0L68.0 133.0" stroke="rgb(185, 187, 196)" stroke-width="1" />
+<path d="M20.0 167.0L68.0 167.0" stroke="rgb(185, 187, 196)" stroke-width="1" />
+<path d="M20.0 133.0L20.0 167.0" stroke="rgb(185, 187, 196)" stroke-width="1" />
+<path d="M68.0 133.0L68.0 167.0" stroke="rgb(185, 187, 196)" stroke-width="1" />
+<text x="33.0" y="152.9" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="600" fill="rgb(37, 38, 42)">全部</text>
+<path d="M74.0 133.0L122.0 133.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M74.0 167.0L122.0 167.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M74.0 133.0L74.0 167.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M122.0 133.0L122.0 167.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="87.0" y="152.9" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(37, 38, 42)">会员</text>
+<path d="M128.0 133.0L187.0 133.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M128.0 167.0L187.0 167.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M128.0 133.0L128.0 167.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M187.0 133.0L187.0 167.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="141.0" y="152.9" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(37, 38, 42)">非会员</text>
+<path d="M20.0 276.2L370.0 276.2" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<rect x="20.0" y="211.1" width="38.0" height="38.0" rx="50" fill="rgb(236, 236, 239)" />
+<path d="M20.0 211.1L58.0 211.1" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M20.0 249.1L58.0 249.1" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M20.0 211.1L20.0 249.1" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M58.0 211.1L58.0 249.1" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="32.0" y="233.7" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="400" fill="rgb(37, 38, 42)">李</text>
+<text x="70.0" y="212.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="550" fill="rgb(37, 38, 42)">李晓妍</text>
+<text x="70.0" y="234.9" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(115, 117, 124)">13800000001</text>
+<text x="70.0" y="256.5" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(115, 117, 124)">2 张有效次卡</text>
+<text x="319.0" y="223.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(37, 38, 42)">6 次</text>
+<text x="302.0" y="243.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="400" fill="rgb(115, 117, 124)">剩余次数</text>
+<svg x="354.0" y="222.1" width="16.0" height="16.0" viewBox="0 0 24 24" fill="none" stroke="rgb(144, 146, 154)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7" /></svg>
+<path d="M20.0 367.4L370.0 367.4" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<rect x="20.0" y="302.3" width="38.0" height="38.0" rx="50" fill="rgb(236, 236, 239)" />
+<path d="M20.0 302.3L58.0 302.3" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M20.0 340.3L58.0 340.3" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M20.0 302.3L20.0 340.3" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M58.0 302.3L58.0 340.3" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="32.0" y="324.9" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="400" fill="rgb(37, 38, 42)">王</text>
+<text x="70.0" y="303.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="550" fill="rgb(37, 38, 42)">王琳</text>
+<text x="70.0" y="326.1" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(115, 117, 124)">13800000002</text>
+<text x="70.0" y="347.7" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(115, 117, 124)">1 张有效次卡</text>
+<text x="321.0" y="314.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(37, 38, 42)">1 次</text>
+<text x="302.0" y="334.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="400" fill="rgb(115, 117, 124)">剩余次数</text>
+<svg x="354.0" y="313.3" width="16.0" height="16.0" viewBox="0 0 24 24" fill="none" stroke="rgb(144, 146, 154)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7" /></svg>
+<path d="M20.0 458.6L370.0 458.6" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<rect x="20.0" y="393.5" width="38.0" height="38.0" rx="50" fill="rgb(236, 236, 239)" />
+<path d="M20.0 393.5L58.0 393.5" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M20.0 431.5L58.0 431.5" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M20.0 393.5L20.0 431.5" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M58.0 393.5L58.0 431.5" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="32.0" y="416.1" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="400" fill="rgb(37, 38, 42)">陈</text>
+<text x="70.0" y="395.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="550" fill="rgb(37, 38, 42)">陈晨</text>
+<text x="70.0" y="417.3" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(115, 117, 124)">13800000003</text>
+<text x="70.0" y="438.9" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(115, 117, 124)">0 张有效次卡</text>
+<text x="319.1" y="405.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(37, 38, 42)">0 次</text>
+<text x="302.0" y="426.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="400" fill="rgb(115, 117, 124)">剩余次数</text>
+<svg x="354.0" y="404.5" width="16.0" height="16.0" viewBox="0 0 24 24" fill="none" stroke="rgb(144, 146, 154)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7" /></svg>
+<path d="M20.0 549.8L370.0 549.8" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<rect x="20.0" y="484.7" width="38.0" height="38.0" rx="50" fill="rgb(236, 236, 239)" />
+<path d="M20.0 484.7L58.0 484.7" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M20.0 522.7L58.0 522.7" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M20.0 484.7L20.0 522.7" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M58.0 484.7L58.0 522.7" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="32.0" y="507.3" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="400" fill="rgb(37, 38, 42)">张</text>
+<text x="70.0" y="486.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="550" fill="rgb(37, 38, 42)">张敏</text>
+<text x="70.0" y="508.5" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(115, 117, 124)">13800000004</text>
+<text x="70.0" y="530.1" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(115, 117, 124)">0 张有效次卡</text>
+<text x="319.1" y="497.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(37, 38, 42)">0 次</text>
+<text x="302.0" y="517.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="400" fill="rgb(115, 117, 124)">剩余次数</text>
+<svg x="354.0" y="495.7" width="16.0" height="16.0" viewBox="0 0 24 24" fill="none" stroke="rgb(144, 146, 154)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7" /></svg>
+<rect x="0.0" y="771.0" width="390.0" height="73.0" rx="0" fill="rgb(253, 253, 253)" />
+<path d="M0.0 771.0L390.0 771.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<svg x="46.3" y="785.5" width="20.0" height="20.0" viewBox="0 0 24 24" fill="none" stroke="rgb(136, 139, 148)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m3 10 9-7 9 7v10H3Z" /><path d="M9 20v-7h6v7" /></svg>
+<text x="46.3" y="819.5" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="400" fill="rgb(136, 139, 148)">首页</text>
+<svg x="138.8" y="785.5" width="20.0" height="20.0" viewBox="0 0 24 24" fill="none" stroke="rgb(37, 38, 42)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3" /><path d="M3 21v-3a6 6 0 0 1 12 0v3M16 5a3 3 0 0 1 0 6m2 4a5 5 0 0 1 3 4v2" /></svg>
+<text x="138.8" y="819.5" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="650" fill="rgb(37, 38, 42)">会员</text>
+<svg x="231.3" y="785.5" width="20.0" height="20.0" viewBox="0 0 24 24" fill="none" stroke="rgb(136, 139, 148)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" /></svg>
+<text x="226.3" y="819.5" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="400" fill="rgb(136, 139, 148)">工作台</text>
+<svg x="323.8" y="785.5" width="20.0" height="20.0" viewBox="0 0 24 24" fill="none" stroke="rgb(136, 139, 148)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4" /><path d="M4 21a8 8 0 0 1 16 0" /></svg>
+<text x="323.8" y="819.5" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="400" fill="rgb(136, 139, 148)">我的</text>
+</svg><text x="1324" y="132" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="14" font-weight="600" fill="#303138">B02 新增 / 编辑会员</text><svg width="390" height="907" viewBox="0 0 390 907" x="1324" y="150"><title>B02 新增 / 编辑会员</title><rect width="390" height="907" fill="#fdfdfd" />
+<path d="M0.0 55.0L390.0 55.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<svg x="31.5" y="16.5" width="21.0" height="21.0" viewBox="0 0 24 24" fill="none" stroke="rgb(37, 38, 42)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5-7 7 7 7" /></svg>
+<text x="163.0" y="32.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="16" font-weight="650" fill="rgb(37, 38, 42)">新增会员</text>
+<text x="20.0" y="86.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">姓名</text>
+<rect x="20.0" y="100.0" width="350.0" height="44.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 100.0L370.0 100.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 144.0L370.0 144.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 100.0L20.0 144.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M370.0 100.0L370.0 144.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<text x="20.0" y="161.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="400" fill="rgb(115, 117, 124)">选填，便于门店识别</text>
+<text x="20.0" y="195.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">手机号</text>
+<rect x="20.0" y="209.0" width="350.0" height="44.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 209.0L370.0 209.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 253.0L370.0 253.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 209.0L20.0 253.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M370.0 209.0L370.0 253.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<text x="20.0" y="270.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="400" fill="rgb(115, 117, 124)">选填，原系统允许未填写</text>
+<text x="20.0" y="304.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">微信昵称 *</text>
+<rect x="20.0" y="318.0" width="350.0" height="44.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 318.0L370.0 318.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 362.0L370.0 362.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 318.0L20.0 362.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M370.0 318.0L370.0 362.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<text x="20.0" y="379.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="400" fill="rgb(115, 117, 124)">沿用现有必填规则</text>
+<text x="20.0" y="413.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">微信号 *</text>
+<rect x="20.0" y="427.0" width="350.0" height="44.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 427.0L370.0 427.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 471.0L370.0 471.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 427.0L20.0 471.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M370.0 427.0L370.0 471.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<text x="20.0" y="488.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="400" fill="rgb(115, 117, 124)">沿用现有必填规则</text>
+<text x="20.0" y="522.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">性别</text>
+<rect x="20.0" y="536.0" width="350.0" height="44.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 536.0L370.0 536.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 580.0L370.0 580.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 536.0L20.0 580.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M370.0 536.0L370.0 580.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<text x="32.0" y="563.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" fill="rgb(37, 38, 42)">未知</text>
+<text x="20.0" y="609.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">来源 *</text>
+<rect x="20.0" y="623.0" width="350.0" height="44.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 623.0L370.0 623.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 667.0L370.0 667.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 623.0L20.0 667.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M370.0 623.0L370.0 667.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<text x="20.0" y="696.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">备注</text>
+<rect x="20.0" y="710.0" width="350.0" height="70.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 710.0L370.0 710.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 780.0L370.0 780.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 710.0L20.0 780.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M370.0 710.0L370.0 780.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<rect x="0.0" y="829.0" width="390.0" height="78.0" rx="0" fill="rgb(253, 253, 253)" />
+<path d="M0.0 829.0L390.0 829.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<rect x="20.0" y="842.0" width="350.0" height="46.0" rx="6" fill="rgb(48, 49, 56)" />
+<path d="M20.0 842.0L370.0 842.0" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<path d="M20.0 888.0L370.0 888.0" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<path d="M20.0 842.0L20.0 888.0" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<path d="M370.0 842.0L370.0 888.0" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<text x="169.0" y="868.7" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" font-weight="550" fill="rgb(247, 247, 249)">建立档案</text>
+</svg><text x="1756" y="132" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="14" font-weight="600" fill="#303138">B03 会员档案</text><svg width="390" height="844" viewBox="0 0 390 844" x="1756" y="150"><title>B03 会员档案</title><rect width="390" height="844" fill="#fdfdfd" />
+<path d="M0.0 55.0L390.0 55.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<svg x="31.5" y="16.5" width="21.0" height="21.0" viewBox="0 0 24 24" fill="none" stroke="rgb(37, 38, 42)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5-7 7 7 7" /></svg>
+<text x="163.0" y="32.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="16" font-weight="650" fill="rgb(37, 38, 42)">会员档案</text>
+<text x="336.0" y="30.3" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(37, 38, 42)">编辑</text>
+<path d="M20.0 146.0L370.0 146.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<rect x="20.0" y="79.5" width="46.0" height="46.0" rx="50" fill="rgb(236, 236, 239)" />
+<path d="M20.0 79.5L66.0 79.5" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M20.0 125.5L66.0 125.5" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M20.0 79.5L20.0 125.5" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M66.0 79.5L66.0 125.5" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="34.5" y="107.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="17" font-weight="400" fill="rgb(37, 38, 42)">李</text>
+<text x="78.0" y="97.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="18" font-weight="700" fill="rgb(37, 38, 42)">李晓妍</text>
+<text x="78.0" y="120.9" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(115, 117, 124)">13800000001 · 朋友介绍</text>
+<path d="M20.0 223.0L370.0 223.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="20.0" y="172.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="400" fill="rgb(115, 117, 124)">剩余次数</text>
+<text x="20.0" y="199.3" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="17" font-weight="600" fill="rgb(37, 38, 42)">6 次</text>
+<text x="140.7" y="172.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="400" fill="rgb(115, 117, 124)">有效次卡</text>
+<text x="140.7" y="199.3" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="17" font-weight="600" fill="rgb(37, 38, 42)">2 张</text>
+<text x="261.3" y="172.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="400" fill="rgb(115, 117, 124)">最近消费</text>
+<text x="261.3" y="197.3" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="17" font-weight="600" fill="rgb(37, 38, 42)">10-19</text>
+<path d="M20.0 286.0L370.0 286.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M20.0 285.0L68.0 285.0" stroke="rgb(37, 38, 42)" stroke-width="1" />
+<text x="20.0" y="260.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="600" fill="rgb(37, 38, 42)">次卡账户</text>
+<text x="84.0" y="261.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">消费记录</text>
+<text x="148.0" y="261.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">次卡流水</text>
+<text x="212.0" y="261.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">短信日志</text>
+<path d="M20.0 301.0L370.0 301.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M20.0 435.8L370.0 435.8" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M20.0 301.0L20.0 435.8" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M370.0 301.0L370.0 435.8" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="36.0" y="332.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="600" fill="rgb(37, 38, 42)">水光焕肤次卡</text>
+<path d="M318.0 317.0L354.0 317.0" stroke="rgb(203, 206, 213)" stroke-width="1" />
+<path d="M318.0 341.0L354.0 341.0" stroke="rgb(203, 206, 213)" stroke-width="1" />
+<path d="M318.0 317.0L318.0 341.0" stroke="rgb(203, 206, 213)" stroke-width="1" />
+<path d="M354.0 317.0L354.0 341.0" stroke="rgb(203, 206, 213)" stroke-width="1" />
+<text x="326.0" y="332.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="600" fill="rgb(37, 38, 42)">正常</text>
+<text x="36.0" y="362.9" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(115, 117, 124)">剩余 4 / 6 次 · 有效期至 2027-01-19</text>
+<rect x="36.0" y="383.8" width="155.0" height="36.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M36.0 383.8L191.0 383.8" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M36.0 419.8L191.0 419.8" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M36.0 383.8L36.0 419.8" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M191.0 383.8L191.0 419.8" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<text x="91.5" y="404.7" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="550" fill="rgb(37, 38, 42)">管理次卡</text>
+<rect x="199.0" y="383.8" width="155.0" height="36.0" rx="6" fill="rgb(48, 49, 56)" />
+<path d="M199.0 383.8L354.0 383.8" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<path d="M199.0 419.8L354.0 419.8" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<path d="M199.0 383.8L199.0 419.8" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<path d="M354.0 383.8L354.0 419.8" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<text x="265.5" y="404.7" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="550" fill="rgb(247, 247, 249)">扣次</text>
+<path d="M20.0 450.8L370.0 450.8" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M20.0 585.6L370.0 585.6" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M20.0 450.8L20.0 585.6" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M370.0 450.8L370.0 585.6" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="36.0" y="482.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="600" fill="rgb(37, 38, 42)">肩颈舒缓次卡</text>
+<path d="M318.0 466.8L354.0 466.8" stroke="rgb(203, 206, 213)" stroke-width="1" />
+<path d="M318.0 490.8L354.0 490.8" stroke="rgb(203, 206, 213)" stroke-width="1" />
+<path d="M318.0 466.8L318.0 490.8" stroke="rgb(203, 206, 213)" stroke-width="1" />
+<path d="M354.0 466.8L354.0 490.8" stroke="rgb(203, 206, 213)" stroke-width="1" />
+<text x="326.0" y="481.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="600" fill="rgb(37, 38, 42)">正常</text>
+<text x="36.0" y="512.7" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(115, 117, 124)">剩余 2 / 4 次 · 有效期至 2026-12-19</text>
+<rect x="36.0" y="533.6" width="155.0" height="36.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M36.0 533.6L191.0 533.6" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M36.0 569.6L191.0 569.6" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M36.0 533.6L36.0 569.6" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M191.0 533.6L191.0 569.6" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<text x="91.5" y="554.5" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="550" fill="rgb(37, 38, 42)">管理次卡</text>
+<rect x="199.0" y="533.6" width="155.0" height="36.0" rx="6" fill="rgb(48, 49, 56)" />
+<path d="M199.0 533.6L354.0 533.6" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<path d="M199.0 569.6L354.0 569.6" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<path d="M199.0 533.6L199.0 569.6" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<path d="M354.0 533.6L354.0 569.6" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<text x="265.5" y="554.5" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="550" fill="rgb(247, 247, 249)">扣次</text>
+<rect x="0.0" y="730.0" width="390.0" height="114.0" rx="0" fill="rgb(253, 253, 253)" />
+<path d="M0.0 730.0L390.0 730.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<rect x="20.0" y="743.0" width="170.0" height="46.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 743.0L190.0 743.0" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M20.0 789.0L190.0 789.0" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M20.0 743.0L20.0 789.0" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M190.0 743.0L190.0 789.0" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<text x="92.0" y="769.7" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" font-weight="550" fill="rgb(37, 38, 42)">开卡</text>
+<rect x="200.0" y="743.0" width="170.0" height="46.0" rx="6" fill="rgb(48, 49, 56)" />
+<path d="M200.0 743.0L370.0 743.0" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<path d="M200.0 789.0L370.0 789.0" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<path d="M200.0 743.0L200.0 789.0" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<path d="M370.0 743.0L370.0 789.0" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<text x="272.0" y="769.7" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" font-weight="550" fill="rgb(247, 247, 249)">扣次</text>
+<rect x="20.0" y="789.0" width="350.0" height="36.0" rx="6" fill="rgb(243, 243, 245)" />
+<path d="M20.0 789.0L370.0 789.0" stroke="rgb(243, 243, 245)" stroke-width="1" />
+<path d="M20.0 825.0L370.0 825.0" stroke="rgb(243, 243, 245)" stroke-width="1" />
+<path d="M20.0 789.0L20.0 825.0" stroke="rgb(243, 243, 245)" stroke-width="1" />
+<path d="M370.0 789.0L370.0 825.0" stroke="rgb(243, 243, 245)" stroke-width="1" />
+<text x="162.0" y="809.9" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="550" fill="rgb(92, 95, 103)">登记其他消费</text>
+</svg><text x="2188" y="132" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="14" font-weight="600" fill="#303138">B04 开卡</text><svg width="390" height="844" viewBox="0 0 390 844" x="2188" y="150"><title>B04 开卡</title><rect width="390" height="844" fill="#fdfdfd" />
+<path d="M0.0 55.0L390.0 55.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<svg x="31.5" y="16.5" width="21.0" height="21.0" viewBox="0 0 24 24" fill="none" stroke="rgb(37, 38, 42)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5-7 7 7 7" /></svg>
+<text x="179.0" y="32.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="16" font-weight="650" fill="rgb(37, 38, 42)">开卡</text>
+<path d="M20.0 146.0L370.0 146.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<rect x="20.0" y="79.5" width="46.0" height="46.0" rx="50" fill="rgb(236, 236, 239)" />
+<path d="M20.0 79.5L66.0 79.5" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M20.0 125.5L66.0 125.5" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M20.0 79.5L20.0 125.5" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M66.0 79.5L66.0 125.5" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="34.5" y="107.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="17" font-weight="400" fill="rgb(37, 38, 42)">李</text>
+<text x="78.0" y="97.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="18" font-weight="700" fill="rgb(37, 38, 42)">李晓妍</text>
+<text x="78.0" y="120.9" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(115, 117, 124)">13800000001 · 朋友介绍</text>
+<text x="20.0" y="183.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="650" fill="rgb(37, 38, 42)">次卡信息</text>
+<text x="20.0" y="213.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">次卡名称 *</text>
+<rect x="20.0" y="227.0" width="350.0" height="44.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 227.0L370.0 227.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 271.0L370.0 271.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 227.0L20.0 271.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M370.0 227.0L370.0 271.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<text x="20.0" y="288.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="400" fill="rgb(115, 117, 124)">例如：水光焕肤次卡</text>
+<text x="20.0" y="322.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">总次数 *</text>
+<rect x="20.0" y="336.0" width="350.0" height="44.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 336.0L370.0 336.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 380.0L370.0 380.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 336.0L20.0 380.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M370.0 336.0L370.0 380.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<text x="32.0" y="363.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" fill="rgb(37, 38, 42)">4</text>
+<text x="20.0" y="397.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="400" fill="rgb(115, 117, 124)">1–9999 次</text>
+<text x="20.0" y="431.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">过期时间</text>
+<rect x="20.0" y="445.0" width="350.0" height="45.5" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 445.0L370.0 445.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 490.5L370.0 490.5" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 445.0L20.0 490.5" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M370.0 445.0L370.0 490.5" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<text x="32.0" y="472.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" fill="rgb(37, 38, 42)">2027-01-19T22:00</text>
+<text x="20.0" y="507.5" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="400" fill="rgb(115, 117, 124)">可不设有效期</text>
+<text x="20.0" y="542.3" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">备注</text>
+<rect x="20.0" y="555.5" width="350.0" height="70.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 555.5L370.0 555.5" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 625.5L370.0 625.5" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 555.5L20.0 625.5" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M370.0 555.5L370.0 625.5" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<text x="20.0" y="659.3" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">当前开卡采用手填信息，尚不依赖服务方案。</text>
+<rect x="0.0" y="766.0" width="390.0" height="78.0" rx="0" fill="rgb(253, 253, 253)" />
+<path d="M0.0 766.0L390.0 766.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<rect x="20.0" y="779.0" width="350.0" height="46.0" rx="6" fill="rgb(48, 49, 56)" />
+<path d="M20.0 779.0L370.0 779.0" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<path d="M20.0 825.0L370.0 825.0" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<path d="M20.0 779.0L20.0 825.0" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<path d="M370.0 779.0L370.0 825.0" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<text x="169.0" y="805.7" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" font-weight="550" fill="rgb(247, 247, 249)">确认开卡</text>
+</svg><text x="28" y="1168.0" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="14" font-weight="600" fill="#303138">B05 扣次</text><svg width="390" height="863" viewBox="0 0 390 863" x="28" y="1186.0"><title>B05 扣次</title><rect width="390" height="863" fill="#fdfdfd" />
+<path d="M0.0 55.0L390.0 55.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<svg x="31.5" y="16.5" width="21.0" height="21.0" viewBox="0 0 24 24" fill="none" stroke="rgb(37, 38, 42)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5-7 7 7 7" /></svg>
+<text x="179.0" y="32.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="16" font-weight="650" fill="rgb(37, 38, 42)">扣次</text>
+<path d="M20.0 146.0L370.0 146.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<rect x="20.0" y="79.5" width="46.0" height="46.0" rx="50" fill="rgb(236, 236, 239)" />
+<path d="M20.0 79.5L66.0 79.5" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M20.0 125.5L66.0 125.5" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M20.0 79.5L20.0 125.5" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M66.0 79.5L66.0 125.5" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="34.5" y="107.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="17" font-weight="400" fill="rgb(37, 38, 42)">李</text>
+<text x="78.0" y="97.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="18" font-weight="700" fill="rgb(37, 38, 42)">李晓妍</text>
+<text x="78.0" y="120.9" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(115, 117, 124)">13800000001 · 朋友介绍</text>
+<text x="20.0" y="178.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">01 填写扣次 → 02 核对提交</text>
+<text x="20.0" y="205.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">选择次卡 *</text>
+<rect x="20.0" y="218.8" width="350.0" height="44.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 218.8L370.0 218.8" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 262.8L370.0 262.8" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 218.8L20.0 262.8" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M370.0 218.8L370.0 262.8" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<text x="32.0" y="245.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" fill="rgb(37, 38, 42)">水光焕肤次卡 · 剩余 4 次</text>
+<text x="20.0" y="279.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="400" fill="rgb(115, 117, 124)">仅列出可用卡项</text>
+<text x="20.0" y="314.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">扣减次数 *</text>
+<rect x="20.0" y="327.8" width="350.0" height="44.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 327.8L370.0 327.8" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 371.8L370.0 371.8" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 327.8L20.0 371.8" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M370.0 327.8L370.0 371.8" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<text x="32.0" y="354.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" fill="rgb(37, 38, 42)">1</text>
+<text x="20.0" y="388.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="400" fill="rgb(115, 117, 124)">必须为正整数且不得超过可用余次</text>
+<rect x="20.0" y="411.8" width="350.0" height="42.7" rx="5" fill="rgb(247, 247, 249)" />
+<path d="M20.0 411.8L370.0 411.8" stroke="rgb(197, 199, 206)" stroke-width="1" />
+<path d="M20.0 454.5L370.0 454.5" stroke="rgb(197, 199, 206)" stroke-width="1" />
+<path d="M20.0 411.8L20.0 454.5" stroke="rgb(197, 199, 206)" stroke-width="1" />
+<path d="M370.0 411.8L370.0 454.5" stroke="rgb(197, 199, 206)" stroke-width="1" />
+<text x="33.0" y="435.7" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(104, 107, 117)">当前卡余 4 次</text>
+<text x="20.0" y="484.3" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">消费时间 *</text>
+<rect x="20.0" y="497.5" width="350.0" height="45.5" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 497.5L370.0 497.5" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 543.0L370.0 543.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 497.5L20.0 543.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M370.0 497.5L370.0 543.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<text x="32.0" y="525.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" fill="rgb(37, 38, 42)">2026-10-19T15:00</text>
+<text x="20.0" y="560.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="400" fill="rgb(115, 117, 124)">演示营业日固定为 2026-10-19</text>
+<text x="20.0" y="594.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">消费备注</text>
+<rect x="20.0" y="608.0" width="350.0" height="70.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 608.0L370.0 608.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 678.0L370.0 678.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 608.0L20.0 678.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M370.0 608.0L370.0 678.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<text x="20.0" y="713.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(37, 38, 42)">扣次后发送短信</text>
+<text x="20.0" y="731.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="400" fill="rgb(115, 117, 124)">演示已配置；发送结果在短信日志查看</text>
+<rect x="0.0" y="784.2" width="390.0" height="78.0" rx="0" fill="rgb(253, 253, 253)" />
+<path d="M0.0 784.2L390.0 784.2" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<rect x="20.0" y="797.2" width="350.0" height="46.0" rx="6" fill="rgb(48, 49, 56)" />
+<path d="M20.0 797.2L370.0 797.2" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<path d="M20.0 843.2L370.0 843.2" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<path d="M20.0 797.2L20.0 843.2" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<path d="M370.0 797.2L370.0 843.2" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<text x="157.0" y="823.9" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" font-weight="550" fill="rgb(247, 247, 249)">下一步 · 核对</text>
+</svg><text x="460" y="1168.0" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="14" font-weight="600" fill="#303138">B06 扣次核对</text><svg width="390" height="844" viewBox="0 0 390 844" x="460" y="1186.0"><title>B06 扣次核对</title><rect width="390" height="844" fill="#fdfdfd" />
+<path d="M0.0 55.0L390.0 55.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<svg x="31.5" y="16.5" width="21.0" height="21.0" viewBox="0 0 24 24" fill="none" stroke="rgb(37, 38, 42)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5-7 7 7 7" /></svg>
+<text x="163.0" y="32.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="16" font-weight="650" fill="rgb(37, 38, 42)">核对扣次</text>
+<text x="20.0" y="95.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">01 填写扣次 → 02 核对提交</text>
+<text x="20.0" y="134.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="24" font-weight="700" fill="rgb(37, 38, 42)">确认本次扣减</text>
+<text x="20.0" y="166.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">提交前核对会员、卡项与扣减次数。</text>
+<path d="M20.0 188.2L370.0 188.2" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M20.0 482.6L370.0 482.6" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M20.0 188.2L20.0 482.6" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M370.0 188.2L370.0 482.6" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="36.0" y="227.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">会员</text>
+<text x="318.0" y="227.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">李晓妍</text>
+<text x="36.0" y="267.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">手机</text>
+<text x="272.5" y="267.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">13800000001</text>
+<text x="36.0" y="307.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">次卡</text>
+<text x="282.0" y="307.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">水光焕肤次卡</text>
+<text x="36.0" y="348.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">可用次数</text>
+<text x="330.8" y="348.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">4 次</text>
+<text x="36.0" y="388.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">本次扣减</text>
+<text x="333.0" y="388.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">1 次</text>
+<path d="M36.0 414.1L354.0 414.1" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="36.0" y="447.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="15" font-weight="400" fill="rgb(115, 117, 124)">扣后剩余</text>
+<text x="325.8" y="447.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="15" font-weight="500" fill="rgb(37, 38, 42)">3 次</text>
+<text x="20.0" y="520.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">消费时间</text>
+<text x="265.1" y="520.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">2026-10-19 15:00</text>
+<text x="20.0" y="560.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">短信通知</text>
+<text x="334.0" y="560.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">不发送</text>
+<text x="20.0" y="599.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">如短信发送失败，扣次结果仍然有效。</text>
+<rect x="0.0" y="710.0" width="390.0" height="134.0" rx="0" fill="rgb(253, 253, 253)" />
+<path d="M0.0 710.0L390.0 710.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<rect x="20.0" y="723.0" width="350.0" height="46.0" rx="6" fill="rgb(48, 49, 56)" />
+<path d="M20.0 723.0L370.0 723.0" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<path d="M20.0 769.0L370.0 769.0" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<path d="M20.0 723.0L20.0 769.0" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<path d="M370.0 723.0L370.0 769.0" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<text x="169.0" y="749.7" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" font-weight="550" fill="rgb(247, 247, 249)">确认扣次</text>
+<rect x="20.0" y="779.0" width="350.0" height="46.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 779.0L370.0 779.0" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M20.0 825.0L370.0 825.0" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M20.0 779.0L20.0 825.0" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M370.0 779.0L370.0 825.0" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<text x="169.0" y="805.7" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" font-weight="550" fill="rgb(37, 38, 42)">返回修改</text>
+</svg><text x="892" y="1168.0" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="14" font-weight="600" fill="#303138">B07 操作结果</text><svg width="390" height="844" viewBox="0 0 390 844" x="892" y="1186.0"><title>B07 操作结果</title><rect width="390" height="844" fill="#fdfdfd" />
+<path d="M0.0 55.0L390.0 55.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<svg x="31.5" y="16.5" width="21.0" height="21.0" viewBox="0 0 24 24" fill="none" stroke="rgb(37, 38, 42)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5-7 7 7 7" /></svg>
+<text x="163.0" y="32.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="16" font-weight="650" fill="rgb(37, 38, 42)">操作结果</text>
+<path d="M169.0 105.0L221.0 105.0" stroke="rgb(166, 169, 178)" stroke-width="1" />
+<path d="M169.0 157.0L221.0 157.0" stroke="rgb(166, 169, 178)" stroke-width="1" />
+<path d="M169.0 105.0L169.0 157.0" stroke="rgb(166, 169, 178)" stroke-width="1" />
+<path d="M221.0 105.0L221.0 157.0" stroke="rgb(166, 169, 178)" stroke-width="1" />
+<svg x="184.5" y="120.5" width="21.0" height="21.0" viewBox="0 0 24 24" fill="none" stroke="rgb(37, 38, 42)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 6" /></svg>
+<text x="141.3" y="196.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="22" font-weight="700" fill="rgb(37, 38, 42)">操作已完成</text>
+<text x="135.0" y="227.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">这是结果页结构示例。</text>
+<rect x="0.0" y="710.0" width="390.0" height="134.0" rx="0" fill="rgb(253, 253, 253)" />
+<path d="M0.0 710.0L390.0 710.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<rect x="20.0" y="723.0" width="350.0" height="46.0" rx="6" fill="rgb(48, 49, 56)" />
+<path d="M20.0 723.0L370.0 723.0" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<path d="M20.0 769.0L370.0 769.0" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<path d="M20.0 723.0L20.0 769.0" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<path d="M370.0 723.0L370.0 769.0" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<text x="156.0" y="749.7" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" font-weight="550" fill="rgb(247, 247, 249)">返回会员档案</text>
+<rect x="20.0" y="779.0" width="350.0" height="46.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 779.0L370.0 779.0" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M20.0 825.0L370.0 825.0" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M20.0 779.0L20.0 825.0" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M370.0 779.0L370.0 825.0" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<text x="169.0" y="805.7" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" font-weight="550" fill="rgb(37, 38, 42)">返回首页</text>
+</svg><text x="1324" y="1168.0" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="14" font-weight="600" fill="#303138">B08 次卡管理</text><svg width="390" height="844" viewBox="0 0 390 844" x="1324" y="1186.0"><title>B08 次卡管理</title><rect width="390" height="844" fill="#fdfdfd" />
+<path d="M0.0 55.0L390.0 55.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<svg x="31.5" y="16.5" width="21.0" height="21.0" viewBox="0 0 24 24" fill="none" stroke="rgb(37, 38, 42)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5-7 7 7 7" /></svg>
+<text x="163.0" y="32.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="16" font-weight="650" fill="rgb(37, 38, 42)">次卡管理</text>
+<path d="M20.0 146.0L370.0 146.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<rect x="20.0" y="79.5" width="46.0" height="46.0" rx="50" fill="rgb(236, 236, 239)" />
+<path d="M20.0 79.5L66.0 79.5" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M20.0 125.5L66.0 125.5" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M20.0 79.5L20.0 125.5" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M66.0 79.5L66.0 125.5" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="34.5" y="107.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="17" font-weight="400" fill="rgb(37, 38, 42)">李</text>
+<text x="78.0" y="97.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="18" font-weight="700" fill="rgb(37, 38, 42)">李晓妍</text>
+<text x="78.0" y="120.9" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(115, 117, 124)">13800000001 · 朋友介绍</text>
+<path d="M20.0 161.0L370.0 161.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M20.0 334.2L370.0 334.2" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M20.0 161.0L20.0 334.2" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M370.0 161.0L370.0 334.2" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="36.0" y="190.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="600" fill="rgb(37, 38, 42)">水光焕肤次卡</text>
+<text x="36.0" y="219.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">状态</text>
+<text x="330.0" y="219.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">正常</text>
+<text x="36.0" y="260.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">剩余 / 总次数</text>
+<text x="312.7" y="260.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">4 / 6 次</text>
+<text x="36.0" y="300.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">有效期至</text>
+<text x="285.9" y="300.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">2027-01-19</text>
+<path d="M20.0 418.8L370.0 418.8" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="20.0" y="376.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="550" fill="rgb(37, 38, 42)">补次</text>
+<text x="20.0" y="399.1" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(115, 117, 124)">在现有余额上增加次数</text>
+<svg x="354.0" y="375.5" width="16.0" height="16.0" viewBox="0 0 24 24" fill="none" stroke="rgb(144, 146, 154)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7" /></svg>
+<path d="M20.0 488.4L370.0 488.4" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="20.0" y="446.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="550" fill="rgb(37, 38, 42)">手工调整</text>
+<text x="20.0" y="468.7" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(115, 117, 124)">直接设置调整后的余次</text>
+<svg x="354.0" y="445.1" width="16.0" height="16.0" viewBox="0 0 24 24" fill="none" stroke="rgb(144, 146, 154)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7" /></svg>
+<path d="M20.0 558.0L370.0 558.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="20.0" y="516.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="550" fill="rgb(37, 38, 42)">停用次卡</text>
+<text x="20.0" y="538.3" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(115, 117, 124)">保留次卡和历史流水</text>
+<svg x="354.0" y="514.7" width="16.0" height="16.0" viewBox="0 0 24 24" fill="none" stroke="rgb(144, 146, 154)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7" /></svg>
+<path d="M20.0 627.5L370.0 627.5" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="20.0" y="585.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="550" fill="rgb(37, 38, 42)">作废次卡</text>
+<text x="20.0" y="607.9" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(115, 117, 124)">作废后不能继续使用或恢复</text>
+<svg x="354.0" y="584.3" width="16.0" height="16.0" viewBox="0 0 24 24" fill="none" stroke="rgb(144, 146, 154)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7" /></svg>
+</svg><text x="1756" y="1168.0" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="14" font-weight="600" fill="#303138">B09 补次 / 调整余次</text><svg width="390" height="844" viewBox="0 0 390 844" x="1756" y="1186.0"><title>B09 补次 / 调整余次</title><rect width="390" height="844" fill="#fdfdfd" />
+<path d="M0.0 55.0L390.0 55.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<svg x="31.5" y="16.5" width="21.0" height="21.0" viewBox="0 0 24 24" fill="none" stroke="rgb(37, 38, 42)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5-7 7 7 7" /></svg>
+<text x="179.0" y="32.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="16" font-weight="650" fill="rgb(37, 38, 42)">补次</text>
+<path d="M20.0 146.0L370.0 146.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<rect x="20.0" y="79.5" width="46.0" height="46.0" rx="50" fill="rgb(236, 236, 239)" />
+<path d="M20.0 79.5L66.0 79.5" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M20.0 125.5L66.0 125.5" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M20.0 79.5L20.0 125.5" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M66.0 79.5L66.0 125.5" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="34.5" y="107.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="17" font-weight="400" fill="rgb(37, 38, 42)">李</text>
+<text x="78.0" y="97.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="18" font-weight="700" fill="rgb(37, 38, 42)">李晓妍</text>
+<text x="78.0" y="120.9" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(115, 117, 124)">13800000001 · 朋友介绍</text>
+<path d="M20.0 161.0L370.0 161.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M20.0 273.8L370.0 273.8" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M20.0 161.0L20.0 273.8" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M370.0 161.0L370.0 273.8" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="36.0" y="199.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">次卡</text>
+<text x="282.0" y="199.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">水光焕肤次卡</text>
+<text x="36.0" y="240.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">当前剩余</text>
+<text x="330.8" y="240.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">4 次</text>
+<text x="20.0" y="300.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">补充次数 *</text>
+<rect x="20.0" y="313.8" width="350.0" height="44.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 313.8L370.0 313.8" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 357.8L370.0 357.8" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 313.8L20.0 357.8" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M370.0 313.8L370.0 357.8" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<text x="32.0" y="340.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" fill="rgb(37, 38, 42)">1</text>
+<text x="20.0" y="374.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="400" fill="rgb(115, 117, 124)">1–9999 次</text>
+<text x="20.0" y="409.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">调整原因 *</text>
+<rect x="20.0" y="422.8" width="350.0" height="70.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 422.8L370.0 422.8" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 492.8L370.0 492.8" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 422.8L20.0 492.8" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M370.0 422.8L370.0 492.8" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<text x="20.0" y="512.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="400" fill="rgb(115, 117, 124)">本版建议必填，便于后续追溯</text>
+<rect x="0.0" y="766.0" width="390.0" height="78.0" rx="0" fill="rgb(253, 253, 253)" />
+<path d="M0.0 766.0L390.0 766.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<rect x="20.0" y="779.0" width="350.0" height="46.0" rx="6" fill="rgb(48, 49, 56)" />
+<path d="M20.0 779.0L370.0 779.0" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<path d="M20.0 825.0L370.0 825.0" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<path d="M20.0 779.0L20.0 825.0" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<path d="M370.0 779.0L370.0 825.0" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<text x="169.0" y="805.7" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" font-weight="550" fill="rgb(247, 247, 249)">确认补次</text>
+</svg><text x="2188" y="1168.0" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="14" font-weight="600" fill="#303138">B10 次卡状态确认</text><svg width="390" height="844" viewBox="0 0 390 844" x="2188" y="1186.0"><title>B10 次卡状态确认</title><rect width="390" height="844" fill="#fdfdfd" />
+<path d="M0.0 55.0L390.0 55.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<svg x="31.5" y="16.5" width="21.0" height="21.0" viewBox="0 0 24 24" fill="none" stroke="rgb(37, 38, 42)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5-7 7 7 7" /></svg>
+<text x="163.0" y="32.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="16" font-weight="650" fill="rgb(37, 38, 42)">停用次卡</text>
+<text x="20.0" y="102.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="24" font-weight="700" fill="rgb(37, 38, 42)">确认停用这张次卡？</text>
+<path d="M20.0 127.6L370.0 127.6" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M20.0 280.8L370.0 280.8" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M20.0 127.6L20.0 280.8" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M370.0 127.6L370.0 280.8" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="36.0" y="166.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">会员</text>
+<text x="318.0" y="166.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">李晓妍</text>
+<text x="36.0" y="206.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">次卡</text>
+<text x="282.0" y="206.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">水光焕肤次卡</text>
+<text x="36.0" y="247.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">当前剩余</text>
+<text x="330.8" y="247.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">4 次</text>
+<rect x="20.0" y="295.8" width="350.0" height="42.7" rx="5" fill="rgb(247, 247, 249)" />
+<path d="M20.0 295.8L370.0 295.8" stroke="rgb(197, 199, 206)" stroke-width="1" />
+<path d="M20.0 338.5L370.0 338.5" stroke="rgb(197, 199, 206)" stroke-width="1" />
+<path d="M20.0 295.8L20.0 338.5" stroke="rgb(197, 199, 206)" stroke-width="1" />
+<path d="M370.0 295.8L370.0 338.5" stroke="rgb(197, 199, 206)" stroke-width="1" />
+<text x="33.0" y="319.7" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(104, 107, 117)">停用后将不能扣次；历史记录保留，之后可以重新启用。</text>
+<rect x="0.0" y="710.0" width="390.0" height="134.0" rx="0" fill="rgb(253, 253, 253)" />
+<path d="M0.0 710.0L390.0 710.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<rect x="20.0" y="723.0" width="350.0" height="46.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 723.0L370.0 723.0" stroke="rgb(153, 156, 165)" stroke-width="1" />
+<path d="M20.0 769.0L370.0 769.0" stroke="rgb(153, 156, 165)" stroke-width="1" />
+<path d="M20.0 723.0L20.0 769.0" stroke="rgb(153, 156, 165)" stroke-width="1" />
+<path d="M370.0 723.0L370.0 769.0" stroke="rgb(153, 156, 165)" stroke-width="1" />
+<text x="169.0" y="749.7" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" font-weight="550" fill="rgb(37, 38, 42)">确认停用</text>
+<rect x="20.0" y="779.0" width="350.0" height="46.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 779.0L370.0 779.0" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M20.0 825.0L370.0 825.0" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M20.0 779.0L20.0 825.0" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M370.0 779.0L370.0 825.0" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<text x="182.0" y="805.7" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" font-weight="550" fill="rgb(37, 38, 42)">取消</text>
+</svg><text x="28" y="2116.0" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="14" font-weight="600" fill="#303138">B11 删除会员确认</text><svg width="390" height="844" viewBox="0 0 390 844" x="28" y="2134.0"><title>B11 删除会员确认</title><rect width="390" height="844" fill="#fdfdfd" />
+<path d="M0.0 55.0L390.0 55.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<svg x="31.5" y="16.5" width="21.0" height="21.0" viewBox="0 0 24 24" fill="none" stroke="rgb(37, 38, 42)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5-7 7 7 7" /></svg>
+<text x="147.0" y="32.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="16" font-weight="650" fill="rgb(37, 38, 42)">删除会员确认</text>
+<text x="20.0" y="102.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="24" font-weight="700" fill="rgb(37, 38, 42)">删除 李晓妍？</text>
+<text x="20.0" y="134.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">请先核对会员，删除关联数据的规则以服务端为准。</text>
+<rect x="20.0" y="149.4" width="350.0" height="42.7" rx="5" fill="rgb(247, 247, 249)" />
+<path d="M20.0 149.4L370.0 149.4" stroke="rgb(197, 199, 206)" stroke-width="1" />
+<path d="M20.0 192.1L370.0 192.1" stroke="rgb(197, 199, 206)" stroke-width="1" />
+<path d="M20.0 149.4L20.0 192.1" stroke="rgb(197, 199, 206)" stroke-width="1" />
+<path d="M370.0 149.4L370.0 192.1" stroke="rgb(197, 199, 206)" stroke-width="1" />
+<text x="33.0" y="173.3" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(104, 107, 117)">当前会员有关联卡项或消费记录，本地演示阻止删除。</text>
+<rect x="0.0" y="710.0" width="390.0" height="134.0" rx="0" fill="rgb(253, 253, 253)" />
+<path d="M0.0 710.0L390.0 710.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<rect x="20.0" y="723.0" width="350.0" height="46.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 723.0L370.0 723.0" stroke="rgb(153, 156, 165)" stroke-width="1" />
+<path d="M20.0 769.0L370.0 769.0" stroke="rgb(153, 156, 165)" stroke-width="1" />
+<path d="M20.0 723.0L20.0 769.0" stroke="rgb(153, 156, 165)" stroke-width="1" />
+<path d="M370.0 723.0L370.0 769.0" stroke="rgb(153, 156, 165)" stroke-width="1" />
+<text x="169.0" y="749.7" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" font-weight="550" fill="rgb(37, 38, 42)">确认删除</text>
+<rect x="20.0" y="779.0" width="350.0" height="46.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 779.0L370.0 779.0" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M20.0 825.0L370.0 825.0" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M20.0 779.0L20.0 825.0" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M370.0 779.0L370.0 825.0" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<text x="182.0" y="805.7" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" font-weight="550" fill="rgb(37, 38, 42)">取消</text>
+</svg><text x="460" y="2116.0" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="14" font-weight="600" fill="#303138">C01 工作台</text><svg width="390" height="844" viewBox="0 0 390 844" x="460" y="2134.0"><title>C01 工作台</title><rect width="390" height="844" fill="#fdfdfd" />
+<path d="M0.0 55.0L390.0 55.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="171.0" y="32.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="16" font-weight="650" fill="rgb(37, 38, 42)">工作台</text>
+<text x="20.0" y="85.9" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(115, 117, 124)">当前门店</text>
+<text x="20.0" y="118.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="24" font-weight="700" fill="rgb(37, 38, 42)">千绵美学</text>
+<text x="20.0" y="150.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">栗子 · 店长</text>
+<text x="20.0" y="195.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="650" fill="rgb(37, 38, 42)">经营查询</text>
+<path d="M20.0 283.0L370.0 283.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="20.0" y="241.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="550" fill="rgb(37, 38, 42)">消费查询</text>
+<text x="20.0" y="263.3" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(115, 117, 124)">会员与散客消费，按日期和类型查询</text>
+<svg x="354.0" y="239.7" width="16.0" height="16.0" viewBox="0 0 24 24" fill="none" stroke="rgb(144, 146, 154)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7" /></svg>
+<text x="20.0" y="320.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="650" fill="rgb(37, 38, 42)">门店管理</text>
+<path d="M20.0 408.6L370.0 408.6" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="20.0" y="366.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="550" fill="rgb(37, 38, 42)">员工管理</text>
+<text x="20.0" y="388.9" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(115, 117, 124)">店员账号、在职状态、密码重置</text>
+<svg x="354.0" y="365.3" width="16.0" height="16.0" viewBox="0 0 24 24" fill="none" stroke="rgb(144, 146, 154)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7" /></svg>
+<text x="20.0" y="446.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="650" fill="rgb(37, 38, 42)">其他范围</text>
+<path d="M20.0 534.2L370.0 534.2" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="20.0" y="492.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="550" fill="rgb(37, 38, 42)">平台运营</text>
+<text x="20.0" y="514.5" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(115, 117, 124)">门店、服务方案、品牌；演示 / 待接入</text>
+<text x="294.0" y="502.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(37, 38, 42)">范围说明</text>
+<svg x="354.0" y="490.9" width="16.0" height="16.0" viewBox="0 0 24 24" fill="none" stroke="rgb(144, 146, 154)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7" /></svg>
+<rect x="20.0" y="534.2" width="350.0" height="61.4" rx="5" fill="rgb(247, 247, 249)" />
+<path d="M20.0 534.2L370.0 534.2" stroke="rgb(197, 199, 206)" stroke-width="1" />
+<path d="M20.0 595.5L370.0 595.5" stroke="rgb(197, 199, 206)" stroke-width="1" />
+<path d="M20.0 534.2L20.0 595.5" stroke="rgb(197, 199, 206)" stroke-width="1" />
+<path d="M370.0 534.2L370.0 595.5" stroke="rgb(197, 199, 206)" stroke-width="1" />
+<text x="33.0" y="558.1" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(104, 107, 117)">充值、预约、商品、收款码未完成业务实现，不列入本期高频入</text>
+<text x="33.0" y="576.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(104, 107, 117)">口。</text>
+<rect x="0.0" y="771.0" width="390.0" height="73.0" rx="0" fill="rgb(253, 253, 253)" />
+<path d="M0.0 771.0L390.0 771.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<svg x="46.3" y="785.5" width="20.0" height="20.0" viewBox="0 0 24 24" fill="none" stroke="rgb(136, 139, 148)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m3 10 9-7 9 7v10H3Z" /><path d="M9 20v-7h6v7" /></svg>
+<text x="46.3" y="819.5" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="400" fill="rgb(136, 139, 148)">首页</text>
+<svg x="138.8" y="785.5" width="20.0" height="20.0" viewBox="0 0 24 24" fill="none" stroke="rgb(136, 139, 148)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3" /><path d="M3 21v-3a6 6 0 0 1 12 0v3M16 5a3 3 0 0 1 0 6m2 4a5 5 0 0 1 3 4v2" /></svg>
+<text x="138.8" y="819.5" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="400" fill="rgb(136, 139, 148)">会员</text>
+<svg x="231.3" y="785.5" width="20.0" height="20.0" viewBox="0 0 24 24" fill="none" stroke="rgb(37, 38, 42)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" /></svg>
+<text x="226.3" y="819.5" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="650" fill="rgb(37, 38, 42)">工作台</text>
+<svg x="323.8" y="785.5" width="20.0" height="20.0" viewBox="0 0 24 24" fill="none" stroke="rgb(136, 139, 148)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4" /><path d="M4 21a8 8 0 0 1 16 0" /></svg>
+<text x="323.8" y="819.5" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="400" fill="rgb(136, 139, 148)">我的</text>
+</svg><text x="892" y="2116.0" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="14" font-weight="600" fill="#303138">C02 消费查询</text><svg width="390" height="844" viewBox="0 0 390 844" x="892" y="2134.0"><title>C02 消费查询</title><rect width="390" height="844" fill="#fdfdfd" />
+<path d="M0.0 55.0L390.0 55.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<svg x="31.5" y="16.5" width="21.0" height="21.0" viewBox="0 0 24 24" fill="none" stroke="rgb(37, 38, 42)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5-7 7 7 7" /></svg>
+<text x="163.0" y="32.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="16" font-weight="650" fill="rgb(37, 38, 42)">消费查询</text>
+<text x="336.0" y="30.3" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="650" fill="rgb(37, 38, 42)">新增</text>
+<svg x="32.0" y="88.0" width="17.0" height="17.0" viewBox="0 0 24 24" fill="none" stroke="rgb(115, 117, 124)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="6" /><path d="m15 15 6 6" /></svg>
+<rect x="20.0" y="75.0" width="350.0" height="44.0" rx="6" fill="rgb(247, 247, 249)" />
+<path d="M20.0 75.0L370.0 75.0" stroke="rgb(215, 216, 221)" stroke-width="1" />
+<path d="M20.0 119.0L370.0 119.0" stroke="rgb(215, 216, 221)" stroke-width="1" />
+<path d="M20.0 75.0L20.0 119.0" stroke="rgb(215, 216, 221)" stroke-width="1" />
+<path d="M370.0 75.0L370.0 119.0" stroke="rgb(215, 216, 221)" stroke-width="1" />
+<text x="32.0" y="102.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" fill="rgb(37, 38, 42)">搜索会员或散客姓名 / 手机号</text>
+<path d="M20.0 133.0L68.0 133.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M20.0 167.0L68.0 167.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M20.0 133.0L20.0 167.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M68.0 133.0L68.0 167.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="33.0" y="152.9" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(37, 38, 42)">今日</text>
+<path d="M74.0 133.0L122.0 133.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M74.0 167.0L122.0 167.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M74.0 133.0L74.0 167.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M122.0 133.0L122.0 167.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="87.0" y="152.9" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(37, 38, 42)">本周</text>
+<rect x="128.0" y="133.0" width="48.0" height="34.0" rx="5" fill="rgb(233, 234, 238)" />
+<path d="M128.0 133.0L176.0 133.0" stroke="rgb(185, 187, 196)" stroke-width="1" />
+<path d="M128.0 167.0L176.0 167.0" stroke="rgb(185, 187, 196)" stroke-width="1" />
+<path d="M128.0 133.0L128.0 167.0" stroke="rgb(185, 187, 196)" stroke-width="1" />
+<path d="M176.0 133.0L176.0 167.0" stroke="rgb(185, 187, 196)" stroke-width="1" />
+<text x="141.0" y="152.9" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="600" fill="rgb(37, 38, 42)">本月</text>
+<path d="M182.0 133.0L241.0 133.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M182.0 167.0L241.0 167.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M182.0 133.0L182.0 167.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M241.0 133.0L241.0 167.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="195.0" y="152.9" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(37, 38, 42)">自定义</text>
+<text x="20.0" y="196.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">开始日期</text>
+<rect x="20.0" y="210.0" width="350.0" height="45.5" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 210.0L370.0 210.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 255.5L370.0 255.5" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 210.0L20.0 255.5" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M370.0 210.0L370.0 255.5" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<text x="32.0" y="237.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" fill="rgb(37, 38, 42)">2026-10-01</text>
+<text x="20.0" y="285.3" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">结束日期</text>
+<rect x="20.0" y="298.5" width="350.0" height="45.5" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 298.5L370.0 298.5" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 344.0L370.0 344.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 298.5L20.0 344.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M370.0 298.5L370.0 344.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<text x="32.0" y="326.3" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" fill="rgb(37, 38, 42)">2026-10-31</text>
+<rect x="20.0" y="362.0" width="350.0" height="36.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 362.0L370.0 362.0" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M20.0 398.0L370.0 398.0" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M20.0 362.0L20.0 398.0" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M370.0 362.0L370.0 398.0" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<text x="173.0" y="382.9" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="550" fill="rgb(37, 38, 42)">应用日期</text>
+<rect x="20.0" y="410.0" width="48.0" height="34.0" rx="5" fill="rgb(233, 234, 238)" />
+<path d="M20.0 410.0L68.0 410.0" stroke="rgb(185, 187, 196)" stroke-width="1" />
+<path d="M20.0 444.0L68.0 444.0" stroke="rgb(185, 187, 196)" stroke-width="1" />
+<path d="M20.0 410.0L20.0 444.0" stroke="rgb(185, 187, 196)" stroke-width="1" />
+<path d="M68.0 410.0L68.0 444.0" stroke="rgb(185, 187, 196)" stroke-width="1" />
+<text x="33.0" y="429.9" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="600" fill="rgb(37, 38, 42)">全部</text>
+<path d="M74.0 410.0L144.0 410.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M74.0 444.0L144.0 444.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M74.0 410.0L74.0 444.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M144.0 410.0L144.0 444.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="87.0" y="429.9" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(37, 38, 42)">会员次卡</text>
+<path d="M150.0 410.0L220.0 410.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M150.0 444.0L220.0 444.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M150.0 410.0L150.0 444.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M220.0 410.0L220.0 444.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="163.0" y="429.9" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(37, 38, 42)">美团团购</text>
+<path d="M226.0 410.0L318.0 410.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M226.0 444.0L318.0 444.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M226.0 410.0L226.0 444.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M318.0 410.0L318.0 444.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="239.0" y="429.9" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(37, 38, 42)">抖音新客福利</text>
+<path d="M20.0 450.0L68.0 450.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M20.0 484.0L68.0 484.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M20.0 450.0L20.0 484.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M68.0 450.0L68.0 484.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="33.0" y="469.9" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(37, 38, 42)">纹绣</text>
+<path d="M74.0 450.0L122.0 450.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M74.0 484.0L122.0 484.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M74.0 450.0L74.0 484.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M122.0 450.0L122.0 484.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="87.0" y="469.9" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(37, 38, 42)">眼线</text>
+<path d="M20.0 579.0L370.0 579.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="20.0" y="528.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="400" fill="rgb(115, 117, 124)">消费笔数</text>
+<text x="20.0" y="555.3" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="17" font-weight="600" fill="rgb(37, 38, 42)">3 笔</text>
+<text x="201.0" y="528.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="400" fill="rgb(115, 117, 124)">次卡扣减</text>
+<text x="201.0" y="555.3" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="17" font-weight="600" fill="rgb(37, 38, 42)">2 次</text>
+<path d="M20.0 648.6L370.0 648.6" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="20.0" y="606.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="550" fill="rgb(37, 38, 42)">李晓妍</text>
+<text x="20.0" y="628.9" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(115, 117, 124)">会员次卡 · 10-19 14:32</text>
+<text x="305.7" y="616.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(37, 38, 42)">扣 1 次</text>
+<svg x="354.0" y="605.3" width="16.0" height="16.0" viewBox="0 0 24 24" fill="none" stroke="rgb(144, 146, 154)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7" /></svg>
+<path d="M20.0 718.2L370.0 718.2" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="20.0" y="676.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="550" fill="rgb(37, 38, 42)">王琳</text>
+<text x="20.0" y="698.5" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(115, 117, 124)">会员次卡 · 10-18 11:08</text>
+<text x="305.7" y="686.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(37, 38, 42)">扣 1 次</text>
+<svg x="354.0" y="674.9" width="16.0" height="16.0" viewBox="0 0 24 24" fill="none" stroke="rgb(144, 146, 154)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7" /></svg>
+<path d="M20.0 787.8L370.0 787.8" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="20.0" y="745.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="550" fill="rgb(37, 38, 42)">体验顾客</text>
+<text x="20.0" y="768.1" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(115, 117, 124)">美团团购 · 10-19 10:30</text>
+<text x="282.0" y="755.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(37, 38, 42)">非次卡消费</text>
+<svg x="354.0" y="744.5" width="16.0" height="16.0" viewBox="0 0 24 24" fill="none" stroke="rgb(144, 146, 154)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7" /></svg>
+</svg><text x="1324" y="2116.0" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="14" font-weight="600" fill="#303138">C03 消费详情</text><svg width="390" height="844" viewBox="0 0 390 844" x="1324" y="2134.0"><title>C03 消费详情</title><rect width="390" height="844" fill="#fdfdfd" />
+<path d="M0.0 55.0L390.0 55.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<svg x="31.5" y="16.5" width="21.0" height="21.0" viewBox="0 0 24 24" fill="none" stroke="rgb(37, 38, 42)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5-7 7 7 7" /></svg>
+<text x="163.0" y="32.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="16" font-weight="650" fill="rgb(37, 38, 42)">消费详情</text>
+<text x="20.0" y="102.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="24" font-weight="700" fill="rgb(37, 38, 42)">李晓妍</text>
+<text x="20.0" y="134.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">会员次卡</text>
+<path d="M20.0 156.4L370.0 156.4" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M20.0 430.7L370.0 430.7" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M20.0 156.4L20.0 430.7" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M370.0 156.4L370.0 430.7" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="36.0" y="195.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">消费时间</text>
+<text x="249.3" y="195.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">2026-10-19 14:32</text>
+<text x="36.0" y="235.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">会员身份</text>
+<text x="270.0" y="235.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">会员档案内消费</text>
+<text x="36.0" y="276.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">次卡</text>
+<text x="282.0" y="276.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">水光焕肤次卡</text>
+<text x="36.0" y="316.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">扣减次数</text>
+<text x="333.0" y="316.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">1 次</text>
+<text x="36.0" y="356.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">扣后剩余</text>
+<text x="330.8" y="356.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">4 次</text>
+<text x="36.0" y="397.1" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">消费备注</text>
+<text x="306.0" y="397.1" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">水光护理</text>
+<rect x="20.0" y="445.7" width="350.0" height="46.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 445.7L370.0 445.7" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M20.0 491.7L370.0 491.7" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M20.0 445.7L20.0 491.7" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M370.0 445.7L370.0 491.7" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<text x="156.0" y="472.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" font-weight="550" fill="rgb(37, 38, 42)">查看会员档案</text>
+<rect x="20.0" y="491.7" width="350.0" height="42.7" rx="5" fill="rgb(247, 247, 249)" />
+<path d="M20.0 491.7L370.0 491.7" stroke="rgb(197, 199, 206)" stroke-width="1" />
+<path d="M20.0 534.4L370.0 534.4" stroke="rgb(197, 199, 206)" stroke-width="1" />
+<path d="M20.0 491.7L20.0 534.4" stroke="rgb(197, 199, 206)" stroke-width="1" />
+<path d="M370.0 491.7L370.0 534.4" stroke="rgb(197, 199, 206)" stroke-width="1" />
+<text x="33.0" y="515.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(104, 107, 117)">独立消费详情是结构建议，字段来自现有记录。</text>
+<rect x="0.0" y="710.0" width="390.0" height="134.0" rx="0" fill="rgb(253, 253, 253)" />
+<path d="M0.0 710.0L390.0 710.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<rect x="20.0" y="723.0" width="350.0" height="46.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 723.0L370.0 723.0" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M20.0 769.0L370.0 769.0" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M20.0 723.0L20.0 769.0" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M370.0 723.0L370.0 769.0" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<text x="169.0" y="749.7" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" font-weight="550" fill="rgb(37, 38, 42)">编辑消费</text>
+<rect x="20.0" y="779.0" width="350.0" height="46.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 779.0L370.0 779.0" stroke="rgb(153, 156, 165)" stroke-width="1" />
+<path d="M20.0 825.0L370.0 825.0" stroke="rgb(153, 156, 165)" stroke-width="1" />
+<path d="M20.0 779.0L20.0 825.0" stroke="rgb(153, 156, 165)" stroke-width="1" />
+<path d="M370.0 779.0L370.0 825.0" stroke="rgb(153, 156, 165)" stroke-width="1" />
+<text x="156.0" y="805.7" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" font-weight="550" fill="rgb(37, 38, 42)">删除消费记录</text>
+</svg><text x="1756" y="2116.0" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="14" font-weight="600" fill="#303138">C04 新增 / 编辑消费</text><svg width="390" height="857" viewBox="0 0 390 857" x="1756" y="2134.0"><title>C04 新增 / 编辑消费</title><rect width="390" height="857" fill="#fdfdfd" />
+<path d="M0.0 55.0L390.0 55.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<svg x="31.5" y="16.5" width="21.0" height="21.0" viewBox="0 0 24 24" fill="none" stroke="rgb(37, 38, 42)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5-7 7 7 7" /></svg>
+<text x="147.0" y="32.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="16" font-weight="650" fill="rgb(37, 38, 42)">登记散客消费</text>
+<text x="20.0" y="86.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">顾客姓名 *</text>
+<rect x="20.0" y="100.0" width="350.0" height="44.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 100.0L370.0 100.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 144.0L370.0 144.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 100.0L20.0 144.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M370.0 100.0L370.0 144.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<text x="20.0" y="161.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="400" fill="rgb(115, 117, 124)">散客名称按现有规则必填</text>
+<text x="20.0" y="195.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">手机号</text>
+<rect x="20.0" y="209.0" width="350.0" height="44.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 209.0L370.0 209.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 253.0L370.0 253.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 209.0L20.0 253.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M370.0 209.0L370.0 253.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<text x="20.0" y="270.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="400" fill="rgb(115, 117, 124)">选填</text>
+<text x="20.0" y="304.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">消费类型 *</text>
+<rect x="20.0" y="318.0" width="350.0" height="44.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 318.0L370.0 318.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 362.0L370.0 362.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 318.0L20.0 362.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M370.0 318.0L370.0 362.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<text x="32.0" y="345.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" fill="rgb(37, 38, 42)">美团团购</text>
+<text x="20.0" y="379.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="400" fill="rgb(115, 117, 124)">次卡消费请使用扣次流程</text>
+<text x="20.0" y="413.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">消费时间 *</text>
+<rect x="20.0" y="427.0" width="350.0" height="45.5" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 427.0L370.0 427.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 472.5L370.0 472.5" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 427.0L20.0 472.5" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M370.0 427.0L370.0 472.5" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<text x="32.0" y="454.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" fill="rgb(37, 38, 42)">2026-10-19T15:00</text>
+<text x="20.0" y="502.3" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">顾客备注</text>
+<rect x="20.0" y="515.5" width="350.0" height="70.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 515.5L370.0 515.5" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 585.5L370.0 585.5" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 515.5L20.0 585.5" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M370.0 515.5L370.0 585.5" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<text x="20.0" y="618.3" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">消费备注</text>
+<rect x="20.0" y="631.5" width="350.0" height="70.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 631.5L370.0 631.5" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 701.5L370.0 701.5" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 631.5L20.0 701.5" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M370.0 631.5L370.0 701.5" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<text x="20.0" y="735.3" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">当前系统记录消费，不包含支付、到账或退款。</text>
+<rect x="0.0" y="778.3" width="390.0" height="78.0" rx="0" fill="rgb(253, 253, 253)" />
+<path d="M0.0 778.3L390.0 778.3" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<rect x="20.0" y="791.3" width="350.0" height="46.0" rx="6" fill="rgb(48, 49, 56)" />
+<path d="M20.0 791.3L370.0 791.3" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<path d="M20.0 837.3L370.0 837.3" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<path d="M20.0 791.3L20.0 837.3" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<path d="M370.0 791.3L370.0 837.3" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<text x="156.0" y="818.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" font-weight="550" fill="rgb(247, 247, 249)">保存消费记录</text>
+</svg><text x="2188" y="2116.0" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="14" font-weight="600" fill="#303138">C05 删除消费确认</text><svg width="390" height="844" viewBox="0 0 390 844" x="2188" y="2134.0"><title>C05 删除消费确认</title><rect width="390" height="844" fill="#fdfdfd" />
+<path d="M0.0 55.0L390.0 55.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<svg x="31.5" y="16.5" width="21.0" height="21.0" viewBox="0 0 24 24" fill="none" stroke="rgb(37, 38, 42)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5-7 7 7 7" /></svg>
+<text x="147.0" y="32.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="16" font-weight="650" fill="rgb(37, 38, 42)">删除消费确认</text>
+<text x="20.0" y="102.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="24" font-weight="700" fill="rgb(37, 38, 42)">删除这笔消费？</text>
+<path d="M20.0 127.6L370.0 127.6" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M20.0 321.2L370.0 321.2" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M20.0 127.6L20.0 321.2" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M370.0 127.6L370.0 321.2" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="36.0" y="166.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">顾客</text>
+<text x="318.0" y="166.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">李晓妍</text>
+<text x="36.0" y="206.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">消费类型</text>
+<text x="306.0" y="206.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">会员次卡</text>
+<text x="36.0" y="247.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">消费时间</text>
+<text x="249.3" y="247.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">2026-10-19 14:32</text>
+<text x="36.0" y="287.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">关联次卡</text>
+<text x="282.0" y="287.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">水光焕肤次卡</text>
+<rect x="20.0" y="336.2" width="350.0" height="42.7" rx="5" fill="rgb(247, 247, 249)" />
+<path d="M20.0 336.2L370.0 336.2" stroke="rgb(197, 199, 206)" stroke-width="1" />
+<path d="M20.0 378.8L370.0 378.8" stroke="rgb(197, 199, 206)" stroke-width="1" />
+<path d="M20.0 336.2L20.0 378.8" stroke="rgb(197, 199, 206)" stroke-width="1" />
+<path d="M370.0 336.2L370.0 378.8" stroke="rgb(197, 199, 206)" stroke-width="1" />
+<text x="33.0" y="360.1" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(104, 107, 117)">删除后将重算关联次卡余额和流水。本地演示回补原扣次数。</text>
+<rect x="0.0" y="710.0" width="390.0" height="134.0" rx="0" fill="rgb(253, 253, 253)" />
+<path d="M0.0 710.0L390.0 710.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<rect x="20.0" y="723.0" width="350.0" height="46.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 723.0L370.0 723.0" stroke="rgb(153, 156, 165)" stroke-width="1" />
+<path d="M20.0 769.0L370.0 769.0" stroke="rgb(153, 156, 165)" stroke-width="1" />
+<path d="M20.0 723.0L20.0 769.0" stroke="rgb(153, 156, 165)" stroke-width="1" />
+<path d="M370.0 723.0L370.0 769.0" stroke="rgb(153, 156, 165)" stroke-width="1" />
+<text x="156.0" y="749.7" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" font-weight="550" fill="rgb(37, 38, 42)">确认删除记录</text>
+<rect x="20.0" y="779.0" width="350.0" height="46.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 779.0L370.0 779.0" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M20.0 825.0L370.0 825.0" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M20.0 779.0L20.0 825.0" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M370.0 779.0L370.0 825.0" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<text x="182.0" y="805.7" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" font-weight="550" fill="rgb(37, 38, 42)">取消</text>
+</svg><text x="28" y="3058.0" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="14" font-weight="600" fill="#303138">D01 员工管理</text><svg width="390" height="844" viewBox="0 0 390 844" x="28" y="3076.0"><title>D01 员工管理</title><rect width="390" height="844" fill="#fdfdfd" />
+<path d="M0.0 55.0L390.0 55.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<svg x="31.5" y="16.5" width="21.0" height="21.0" viewBox="0 0 24 24" fill="none" stroke="rgb(37, 38, 42)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5-7 7 7 7" /></svg>
+<text x="163.0" y="32.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="16" font-weight="650" fill="rgb(37, 38, 42)">员工管理</text>
+<text x="336.0" y="30.3" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="650" fill="rgb(37, 38, 42)">新增</text>
+<svg x="32.0" y="88.0" width="17.0" height="17.0" viewBox="0 0 24 24" fill="none" stroke="rgb(115, 117, 124)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="6" /><path d="m15 15 6 6" /></svg>
+<rect x="20.0" y="75.0" width="350.0" height="44.0" rx="6" fill="rgb(247, 247, 249)" />
+<path d="M20.0 75.0L370.0 75.0" stroke="rgb(215, 216, 221)" stroke-width="1" />
+<path d="M20.0 119.0L370.0 119.0" stroke="rgb(215, 216, 221)" stroke-width="1" />
+<path d="M20.0 75.0L20.0 119.0" stroke="rgb(215, 216, 221)" stroke-width="1" />
+<path d="M370.0 75.0L370.0 119.0" stroke="rgb(215, 216, 221)" stroke-width="1" />
+<text x="32.0" y="102.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" fill="rgb(37, 38, 42)">搜索员工姓名 / 账号 / 手机号</text>
+<rect x="20.0" y="133.0" width="48.0" height="34.0" rx="5" fill="rgb(233, 234, 238)" />
+<path d="M20.0 133.0L68.0 133.0" stroke="rgb(185, 187, 196)" stroke-width="1" />
+<path d="M20.0 167.0L68.0 167.0" stroke="rgb(185, 187, 196)" stroke-width="1" />
+<path d="M20.0 133.0L20.0 167.0" stroke="rgb(185, 187, 196)" stroke-width="1" />
+<path d="M68.0 133.0L68.0 167.0" stroke="rgb(185, 187, 196)" stroke-width="1" />
+<text x="33.0" y="152.9" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="600" fill="rgb(37, 38, 42)">全部</text>
+<path d="M74.0 133.0L122.0 133.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M74.0 167.0L122.0 167.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M74.0 133.0L74.0 167.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M122.0 133.0L122.0 167.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="87.0" y="152.9" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(37, 38, 42)">在职</text>
+<path d="M128.0 133.0L187.0 133.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M128.0 167.0L187.0 167.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M128.0 133.0L128.0 167.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M187.0 133.0L187.0 167.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="141.0" y="152.9" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(37, 38, 42)">已停用</text>
+<text x="20.0" y="197.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">店长仅管理当前门店店员</text>
+<path d="M20.0 282.4L370.0 282.4" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="20.0" y="240.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="550" fill="rgb(37, 38, 42)">栗子</text>
+<text x="20.0" y="262.7" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(115, 117, 124)">lizi_demo · 13900000001</text>
+<text x="318.0" y="250.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(37, 38, 42)">在职</text>
+<svg x="354.0" y="239.1" width="16.0" height="16.0" viewBox="0 0 24 24" fill="none" stroke="rgb(144, 146, 154)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7" /></svg>
+<path d="M20.0 352.0L370.0 352.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="20.0" y="310.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="550" fill="rgb(37, 38, 42)">小柯</text>
+<text x="20.0" y="332.3" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(115, 117, 124)">xiaoke_demo · 13900000002</text>
+<text x="318.0" y="320.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(37, 38, 42)">在职</text>
+<svg x="354.0" y="308.7" width="16.0" height="16.0" viewBox="0 0 24 24" fill="none" stroke="rgb(144, 146, 154)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7" /></svg>
+<path d="M20.0 421.6L370.0 421.6" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="20.0" y="379.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="550" fill="rgb(37, 38, 42)">小周</text>
+<text x="20.0" y="401.9" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(115, 117, 124)">xiaozhou_demo · 13900000003</text>
+<text x="306.0" y="389.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(37, 38, 42)">已停用</text>
+<svg x="354.0" y="378.3" width="16.0" height="16.0" viewBox="0 0 24 24" fill="none" stroke="rgb(144, 146, 154)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7" /></svg>
+</svg><text x="460" y="3058.0" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="14" font-weight="600" fill="#303138">D02 新增 / 编辑员工</text><svg width="390" height="844" viewBox="0 0 390 844" x="460" y="3076.0"><title>D02 新增 / 编辑员工</title><rect width="390" height="844" fill="#fdfdfd" />
+<path d="M0.0 55.0L390.0 55.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<svg x="31.5" y="16.5" width="21.0" height="21.0" viewBox="0 0 24 24" fill="none" stroke="rgb(37, 38, 42)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5-7 7 7 7" /></svg>
+<text x="163.0" y="32.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="16" font-weight="650" fill="rgb(37, 38, 42)">编辑员工</text>
+<text x="20.0" y="86.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">员工姓名 *</text>
+<rect x="20.0" y="100.0" width="350.0" height="44.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 100.0L370.0 100.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 144.0L370.0 144.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 100.0L20.0 144.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M370.0 100.0L370.0 144.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<text x="32.0" y="127.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" fill="rgb(37, 38, 42)">栗子</text>
+<text x="20.0" y="173.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">手机号</text>
+<rect x="20.0" y="187.0" width="350.0" height="44.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 187.0L370.0 187.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 231.0L370.0 231.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 187.0L20.0 231.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M370.0 187.0L370.0 231.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<text x="32.0" y="214.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" fill="rgb(37, 38, 42)">13900000001</text>
+<text x="20.0" y="248.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="400" fill="rgb(115, 117, 124)">选填</text>
+<text x="20.0" y="282.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">登录账号 *</text>
+<rect x="20.0" y="296.0" width="350.0" height="44.0" rx="6" fill="rgb(243, 243, 245)" />
+<path d="M20.0 296.0L370.0 296.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 340.0L370.0 340.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 296.0L20.0 340.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M370.0 296.0L370.0 340.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<text x="32.0" y="323.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" fill="rgb(37, 38, 42)">lizi_demo</text>
+<text x="20.0" y="357.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="400" fill="rgb(115, 117, 124)">3–32 位，以字母开头，允许数字、_、-</text>
+<text x="20.0" y="402.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">岗位</text>
+<text x="298.0" y="402.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">店员（固定）</text>
+<text x="20.0" y="432.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">备注</text>
+<rect x="20.0" y="445.4" width="350.0" height="70.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 445.4L370.0 445.4" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 515.4L370.0 515.4" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 445.4L20.0 515.4" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M370.0 445.4L370.0 515.4" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<text x="20.0" y="556.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="650" fill="rgb(37, 38, 42)">账号操作</text>
+<rect x="20.0" y="574.4" width="350.0" height="46.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 574.4L370.0 574.4" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M20.0 620.4L370.0 620.4" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M20.0 574.4L20.0 620.4" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M370.0 574.4L370.0 620.4" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<text x="169.0" y="601.1" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" font-weight="550" fill="rgb(37, 38, 42)">重置密码</text>
+<rect x="20.0" y="630.4" width="350.0" height="46.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 630.4L370.0 630.4" stroke="rgb(153, 156, 165)" stroke-width="1" />
+<path d="M20.0 676.4L370.0 676.4" stroke="rgb(153, 156, 165)" stroke-width="1" />
+<path d="M20.0 630.4L20.0 676.4" stroke="rgb(153, 156, 165)" stroke-width="1" />
+<path d="M370.0 630.4L370.0 676.4" stroke="rgb(153, 156, 165)" stroke-width="1" />
+<text x="169.0" y="657.1" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" font-weight="550" fill="rgb(37, 38, 42)">停用员工</text>
+<rect x="0.0" y="766.0" width="390.0" height="78.0" rx="0" fill="rgb(253, 253, 253)" />
+<path d="M0.0 766.0L390.0 766.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<rect x="20.0" y="779.0" width="350.0" height="46.0" rx="6" fill="rgb(48, 49, 56)" />
+<path d="M20.0 779.0L370.0 779.0" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<path d="M20.0 825.0L370.0 825.0" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<path d="M20.0 779.0L20.0 825.0" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<path d="M370.0 779.0L370.0 825.0" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<text x="156.0" y="805.7" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" font-weight="550" fill="rgb(247, 247, 249)">保存员工资料</text>
+</svg><text x="892" y="3058.0" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="14" font-weight="600" fill="#303138">D03 重置员工密码</text><svg width="390" height="844" viewBox="0 0 390 844" x="892" y="3076.0"><title>D03 重置员工密码</title><rect width="390" height="844" fill="#fdfdfd" />
+<path d="M0.0 55.0L390.0 55.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<svg x="31.5" y="16.5" width="21.0" height="21.0" viewBox="0 0 24 24" fill="none" stroke="rgb(37, 38, 42)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5-7 7 7 7" /></svg>
+<text x="147.0" y="32.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="16" font-weight="650" fill="rgb(37, 38, 42)">重置员工密码</text>
+<text x="20.0" y="102.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="24" font-weight="700" fill="rgb(37, 38, 42)">栗子</text>
+<text x="20.0" y="134.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">lizi_demo</text>
+<rect x="20.0" y="149.4" width="350.0" height="42.7" rx="5" fill="rgb(247, 247, 249)" />
+<path d="M20.0 149.4L370.0 149.4" stroke="rgb(197, 199, 206)" stroke-width="1" />
+<path d="M20.0 192.1L370.0 192.1" stroke="rgb(197, 199, 206)" stroke-width="1" />
+<path d="M20.0 149.4L20.0 192.1" stroke="rgb(197, 199, 206)" stroke-width="1" />
+<path d="M370.0 149.4L370.0 192.1" stroke="rgb(197, 199, 206)" stroke-width="1" />
+<text x="33.0" y="173.3" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(104, 107, 117)">重置后原登录状态失效，员工需使用新密码重新登录。</text>
+<text x="20.0" y="221.9" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">新密码 *</text>
+<rect x="20.0" y="235.1" width="350.0" height="44.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 235.1L370.0 235.1" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 279.1L370.0 279.1" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 235.1L20.0 279.1" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M370.0 235.1L370.0 279.1" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<text x="32.0" y="262.1" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" fill="rgb(37, 38, 42)">••••••</text>
+<text x="20.0" y="296.1" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="400" fill="rgb(115, 117, 124)">至少 6 位；仅演示</text>
+<text x="20.0" y="330.9" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">确认新密码 *</text>
+<rect x="20.0" y="344.1" width="350.0" height="44.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 344.1L370.0 344.1" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 388.1L370.0 388.1" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 344.1L20.0 388.1" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M370.0 344.1L370.0 388.1" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<text x="32.0" y="371.1" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" fill="rgb(37, 38, 42)">••••••</text>
+<rect x="0.0" y="766.0" width="390.0" height="78.0" rx="0" fill="rgb(253, 253, 253)" />
+<path d="M0.0 766.0L390.0 766.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<rect x="20.0" y="779.0" width="350.0" height="46.0" rx="6" fill="rgb(48, 49, 56)" />
+<path d="M20.0 779.0L370.0 779.0" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<path d="M20.0 825.0L370.0 825.0" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<path d="M20.0 779.0L20.0 825.0" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<path d="M370.0 779.0L370.0 825.0" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<text x="156.0" y="805.7" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" font-weight="550" fill="rgb(247, 247, 249)">确认重置密码</text>
+</svg><text x="1324" y="3058.0" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="14" font-weight="600" fill="#303138">D04 员工状态确认</text><svg width="390" height="844" viewBox="0 0 390 844" x="1324" y="3076.0"><title>D04 员工状态确认</title><rect width="390" height="844" fill="#fdfdfd" />
+<path d="M0.0 55.0L390.0 55.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<svg x="31.5" y="16.5" width="21.0" height="21.0" viewBox="0 0 24 24" fill="none" stroke="rgb(37, 38, 42)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5-7 7 7 7" /></svg>
+<text x="163.0" y="32.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="16" font-weight="650" fill="rgb(37, 38, 42)">停用员工</text>
+<text x="20.0" y="102.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="24" font-weight="700" fill="rgb(37, 38, 42)">确认停用 栗子？</text>
+<path d="M20.0 127.6L370.0 127.6" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M20.0 240.4L370.0 240.4" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M20.0 127.6L20.0 240.4" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M370.0 127.6L370.0 240.4" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="36.0" y="166.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">登录账号</text>
+<text x="298.8" y="166.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">lizi_demo</text>
+<text x="36.0" y="206.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">岗位</text>
+<text x="330.0" y="206.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">店员</text>
+<rect x="20.0" y="255.4" width="350.0" height="42.7" rx="5" fill="rgb(247, 247, 249)" />
+<path d="M20.0 255.4L370.0 255.4" stroke="rgb(197, 199, 206)" stroke-width="1" />
+<path d="M20.0 298.1L370.0 298.1" stroke="rgb(197, 199, 206)" stroke-width="1" />
+<path d="M20.0 255.4L20.0 298.1" stroke="rgb(197, 199, 206)" stroke-width="1" />
+<path d="M370.0 255.4L370.0 298.1" stroke="rgb(197, 199, 206)" stroke-width="1" />
+<text x="33.0" y="279.3" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(104, 107, 117)">停用后无法继续登录，历史业务记录仍保留。</text>
+<rect x="0.0" y="710.0" width="390.0" height="134.0" rx="0" fill="rgb(253, 253, 253)" />
+<path d="M0.0 710.0L390.0 710.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<rect x="20.0" y="723.0" width="350.0" height="46.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 723.0L370.0 723.0" stroke="rgb(153, 156, 165)" stroke-width="1" />
+<path d="M20.0 769.0L370.0 769.0" stroke="rgb(153, 156, 165)" stroke-width="1" />
+<path d="M20.0 723.0L20.0 769.0" stroke="rgb(153, 156, 165)" stroke-width="1" />
+<path d="M370.0 723.0L370.0 769.0" stroke="rgb(153, 156, 165)" stroke-width="1" />
+<text x="169.0" y="749.7" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" font-weight="550" fill="rgb(37, 38, 42)">确认停用</text>
+<rect x="20.0" y="779.0" width="350.0" height="46.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 779.0L370.0 779.0" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M20.0 825.0L370.0 825.0" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M20.0 779.0L20.0 825.0" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M370.0 779.0L370.0 825.0" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<text x="182.0" y="805.7" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" font-weight="550" fill="rgb(37, 38, 42)">取消</text>
+</svg><text x="1756" y="3058.0" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="14" font-weight="600" fill="#303138">D05 我的</text><svg width="390" height="844" viewBox="0 0 390 844" x="1756" y="3076.0"><title>D05 我的</title><rect width="390" height="844" fill="#fdfdfd" />
+<path d="M0.0 55.0L390.0 55.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="179.0" y="32.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="16" font-weight="650" fill="rgb(37, 38, 42)">我的</text>
+<path d="M20.0 146.0L370.0 146.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<rect x="20.0" y="79.5" width="46.0" height="46.0" rx="50" fill="rgb(236, 236, 239)" />
+<path d="M20.0 79.5L66.0 79.5" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M20.0 125.5L66.0 125.5" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M20.0 79.5L20.0 125.5" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M66.0 79.5L66.0 125.5" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="34.5" y="107.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="17" font-weight="400" fill="rgb(37, 38, 42)">栗</text>
+<text x="78.0" y="97.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="18" font-weight="700" fill="rgb(37, 38, 42)">栗子</text>
+<text x="78.0" y="120.9" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(115, 117, 124)">店长 · 千绵美学</text>
+<text x="20.0" y="183.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="650" fill="rgb(37, 38, 42)">个人账号</text>
+<path d="M20.0 271.6L370.0 271.6" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="20.0" y="229.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="550" fill="rgb(37, 38, 42)">个人资料</text>
+<text x="20.0" y="251.9" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(115, 117, 124)">昵称、头像与账号信息</text>
+<svg x="354.0" y="228.3" width="16.0" height="16.0" viewBox="0 0 24 24" fill="none" stroke="rgb(144, 146, 154)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7" /></svg>
+<path d="M20.0 341.2L370.0 341.2" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="20.0" y="299.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="550" fill="rgb(37, 38, 42)">账号与关于</text>
+<text x="20.0" y="321.5" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(115, 117, 124)">账号资料、协议、版本信息</text>
+<svg x="354.0" y="297.9" width="16.0" height="16.0" viewBox="0 0 24 24" fill="none" stroke="rgb(144, 146, 154)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7" /></svg>
+<text x="20.0" y="378.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="650" fill="rgb(37, 38, 42)">帮助与服务</text>
+<rect x="20.0" y="397.2" width="350.0" height="61.4" rx="5" fill="rgb(247, 247, 249)" />
+<path d="M20.0 397.2L370.0 397.2" stroke="rgb(197, 199, 206)" stroke-width="1" />
+<path d="M20.0 458.6L370.0 458.6" stroke="rgb(197, 199, 206)" stroke-width="1" />
+<path d="M20.0 397.2L20.0 458.6" stroke="rgb(197, 199, 206)" stroke-width="1" />
+<path d="M370.0 397.2L370.0 458.6" stroke="rgb(197, 199, 206)" stroke-width="1" />
+<text x="33.0" y="421.1" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(104, 107, 117)">收款码、在线客服、反馈目前没有完成业务闭环，本版保留范围记</text>
+<text x="33.0" y="439.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(104, 107, 117)">录，不提供虚假的已开通状态。</text>
+<text x="154.3" y="490.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="400" fill="rgb(115, 117, 124)">CHIME · 门店管理</text>
+<text x="174.0" y="508.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="400" fill="rgb(115, 117, 124)">原型 v0.1</text>
+<rect x="0.0" y="693.0" width="390.0" height="78.0" rx="0" fill="rgb(253, 253, 253)" />
+<path d="M0.0 693.0L390.0 693.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<rect x="20.0" y="706.0" width="350.0" height="46.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 706.0L370.0 706.0" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M20.0 752.0L370.0 752.0" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M20.0 706.0L20.0 752.0" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M370.0 706.0L370.0 752.0" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<text x="169.0" y="732.7" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" font-weight="550" fill="rgb(37, 38, 42)">退出登录</text>
+<rect x="0.0" y="771.0" width="390.0" height="73.0" rx="0" fill="rgb(253, 253, 253)" />
+<path d="M0.0 771.0L390.0 771.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<svg x="46.3" y="785.5" width="20.0" height="20.0" viewBox="0 0 24 24" fill="none" stroke="rgb(136, 139, 148)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m3 10 9-7 9 7v10H3Z" /><path d="M9 20v-7h6v7" /></svg>
+<text x="46.3" y="819.5" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="400" fill="rgb(136, 139, 148)">首页</text>
+<svg x="138.8" y="785.5" width="20.0" height="20.0" viewBox="0 0 24 24" fill="none" stroke="rgb(136, 139, 148)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3" /><path d="M3 21v-3a6 6 0 0 1 12 0v3M16 5a3 3 0 0 1 0 6m2 4a5 5 0 0 1 3 4v2" /></svg>
+<text x="138.8" y="819.5" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="400" fill="rgb(136, 139, 148)">会员</text>
+<svg x="231.3" y="785.5" width="20.0" height="20.0" viewBox="0 0 24 24" fill="none" stroke="rgb(136, 139, 148)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" /></svg>
+<text x="226.3" y="819.5" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="400" fill="rgb(136, 139, 148)">工作台</text>
+<svg x="323.8" y="785.5" width="20.0" height="20.0" viewBox="0 0 24 24" fill="none" stroke="rgb(37, 38, 42)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4" /><path d="M4 21a8 8 0 0 1 16 0" /></svg>
+<text x="323.8" y="819.5" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="650" fill="rgb(37, 38, 42)">我的</text>
+</svg><text x="2188" y="3058.0" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="14" font-weight="600" fill="#303138">D06 个人资料</text><svg width="390" height="844" viewBox="0 0 390 844" x="2188" y="3076.0"><title>D06 个人资料</title><rect width="390" height="844" fill="#fdfdfd" />
+<path d="M0.0 55.0L390.0 55.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<svg x="31.5" y="16.5" width="21.0" height="21.0" viewBox="0 0 24 24" fill="none" stroke="rgb(37, 38, 42)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5-7 7 7 7" /></svg>
+<text x="163.0" y="32.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="16" font-weight="650" fill="rgb(37, 38, 42)">个人资料</text>
+<path d="M20.0 146.0L370.0 146.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<rect x="20.0" y="79.5" width="46.0" height="46.0" rx="50" fill="rgb(236, 236, 239)" />
+<path d="M20.0 79.5L66.0 79.5" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M20.0 125.5L66.0 125.5" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M20.0 79.5L20.0 125.5" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M66.0 79.5L66.0 125.5" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="34.5" y="107.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="17" font-weight="400" fill="rgb(37, 38, 42)">栗</text>
+<text x="78.0" y="97.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="18" font-weight="700" fill="rgb(37, 38, 42)">栗子</text>
+<text x="78.0" y="120.9" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(115, 117, 124)">头像上传位置，原型不执行文件上传</text>
+<text x="20.0" y="183.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="650" fill="rgb(37, 38, 42)">基本资料</text>
+<text x="20.0" y="213.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">昵称 *</text>
+<rect x="20.0" y="227.0" width="350.0" height="44.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 227.0L370.0 227.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 271.0L370.0 271.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 227.0L20.0 271.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M370.0 227.0L370.0 271.0" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<text x="32.0" y="254.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" fill="rgb(37, 38, 42)">栗子</text>
+<text x="20.0" y="288.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="400" fill="rgb(115, 117, 124)">现有可编辑字段</text>
+<text x="20.0" y="333.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">用户名</text>
+<text x="295.6" y="333.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">demo_admin</text>
+<text x="20.0" y="374.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">手机号</text>
+<text x="286.0" y="374.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">未填写（只读）</text>
+<text x="20.0" y="414.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">邮箱</text>
+<text x="286.0" y="414.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">未填写（只读）</text>
+<rect x="0.0" y="766.0" width="390.0" height="78.0" rx="0" fill="rgb(253, 253, 253)" />
+<path d="M0.0 766.0L390.0 766.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<rect x="20.0" y="779.0" width="350.0" height="46.0" rx="6" fill="rgb(48, 49, 56)" />
+<path d="M20.0 779.0L370.0 779.0" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<path d="M20.0 825.0L370.0 825.0" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<path d="M20.0 779.0L20.0 825.0" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<path d="M370.0 779.0L370.0 825.0" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<text x="169.0" y="805.7" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" font-weight="550" fill="rgb(247, 247, 249)">保存昵称</text>
+</svg><text x="28" y="3987.0" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="14" font-weight="600" fill="#303138">D07 账号与关于</text><svg width="390" height="844" viewBox="0 0 390 844" x="28" y="4005.0"><title>D07 账号与关于</title><rect width="390" height="844" fill="#fdfdfd" />
+<path d="M0.0 55.0L390.0 55.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<svg x="31.5" y="16.5" width="21.0" height="21.0" viewBox="0 0 24 24" fill="none" stroke="rgb(37, 38, 42)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5-7 7 7 7" /></svg>
+<text x="155.0" y="32.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="16" font-weight="650" fill="rgb(37, 38, 42)">账号与关于</text>
+<text x="20.0" y="112.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="650" fill="rgb(37, 38, 42)">当前账号</text>
+<text x="20.0" y="153.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">用户名</text>
+<text x="295.6" y="153.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">demo_admin</text>
+<text x="20.0" y="194.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">角色</text>
+<text x="346.0" y="194.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">店长</text>
+<text x="20.0" y="234.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">当前门店</text>
+<text x="322.0" y="234.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">千绵美学</text>
+<text x="20.0" y="289.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="650" fill="rgb(37, 38, 42)">关于</text>
+<path d="M20.0 372.2L370.0 372.2" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="20.0" y="343.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="550" fill="rgb(37, 38, 42)">关于 CHIME</text>
+<svg x="354.0" y="331.7" width="16.0" height="16.0" viewBox="0 0 24 24" fill="none" stroke="rgb(144, 146, 154)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7" /></svg>
+<path d="M20.0 436.2L370.0 436.2" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="20.0" y="407.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="550" fill="rgb(37, 38, 42)">用户协议</text>
+<svg x="354.0" y="395.7" width="16.0" height="16.0" viewBox="0 0 24 24" fill="none" stroke="rgb(144, 146, 154)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7" /></svg>
+<path d="M20.0 500.2L370.0 500.2" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="20.0" y="471.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="550" fill="rgb(37, 38, 42)">隐私政策</text>
+<svg x="354.0" y="459.7" width="16.0" height="16.0" viewBox="0 0 24 24" fill="none" stroke="rgb(144, 146, 154)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7" /></svg>
+<text x="20.0" y="537.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="650" fill="rgb(37, 38, 42)">账号操作</text>
+<rect x="20.0" y="556.2" width="350.0" height="46.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 556.2L370.0 556.2" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M20.0 602.2L370.0 602.2" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M20.0 556.2L20.0 602.2" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M370.0 556.2L370.0 602.2" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<text x="169.0" y="582.9" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" font-weight="550" fill="rgb(37, 38, 42)">切换账号</text>
+<rect x="20.0" y="612.2" width="350.0" height="46.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 612.2L370.0 612.2" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M20.0 658.2L370.0 658.2" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M20.0 612.2L20.0 658.2" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M370.0 612.2L370.0 658.2" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<text x="169.0" y="638.9" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" font-weight="550" fill="rgb(37, 38, 42)">退出登录</text>
+</svg><text x="460" y="3987.0" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="14" font-weight="600" fill="#303138">D08 协议 / 关于</text><svg width="390" height="844" viewBox="0 0 390 844" x="460" y="4005.0"><title>D08 协议 / 关于</title><rect width="390" height="844" fill="#fdfdfd" />
+<path d="M0.0 55.0L390.0 55.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<svg x="31.5" y="16.5" width="21.0" height="21.0" viewBox="0 0 24 24" fill="none" stroke="rgb(37, 38, 42)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5-7 7 7 7" /></svg>
+<text x="151.1" y="32.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="16" font-weight="650" fill="rgb(37, 38, 42)">关于 CHIME</text>
+<text x="20.0" y="102.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="24" font-weight="700" fill="rgb(37, 38, 42)">关于 CHIME</text>
+<rect x="20.0" y="121.6" width="350.0" height="61.4" rx="5" fill="rgb(247, 247, 249)" />
+<path d="M20.0 121.6L370.0 121.6" stroke="rgb(197, 199, 206)" stroke-width="1" />
+<path d="M20.0 183.0L370.0 183.0" stroke="rgb(197, 199, 206)" stroke-width="1" />
+<path d="M20.0 121.6L20.0 183.0" stroke="rgb(197, 199, 206)" stroke-width="1" />
+<path d="M370.0 121.6L370.0 183.0" stroke="rgb(197, 199, 206)" stroke-width="1" />
+<text x="33.0" y="145.5" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(104, 107, 117)">此处为文档阅读结构，不包含正式条款。正式内容应从现有文档配</text>
+<text x="33.0" y="164.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(104, 107, 117)">置读取并核对。</text>
+<rect x="20.0" y="201.0" width="350.0" height="14.0" rx="3" fill="rgb(231, 232, 236)" />
+<rect x="20.0" y="231.0" width="350.0" height="14.0" rx="3" fill="rgb(231, 232, 236)" />
+<rect x="20.0" y="261.0" width="175.0" height="14.0" rx="3" fill="rgb(231, 232, 236)" />
+<text x="20.0" y="312.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="650" fill="rgb(37, 38, 42)">正文区域</text>
+<text x="20.0" y="343.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">保留标题、更新日期、段落、链接与长文滚动能力。</text>
+</svg><text x="892" y="3987.0" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="14" font-weight="600" fill="#303138">D09 退出登录确认</text><svg width="390" height="844" viewBox="0 0 390 844" x="892" y="4005.0"><title>D09 退出登录确认</title><rect width="390" height="844" fill="#fdfdfd" />
+<path d="M0.0 55.0L390.0 55.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<svg x="31.5" y="16.5" width="21.0" height="21.0" viewBox="0 0 24 24" fill="none" stroke="rgb(37, 38, 42)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5-7 7 7 7" /></svg>
+<text x="163.0" y="32.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="16" font-weight="650" fill="rgb(37, 38, 42)">退出登录</text>
+<text x="20.0" y="102.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="24" font-weight="700" fill="rgb(37, 38, 42)">退出当前账号？</text>
+<text x="20.0" y="134.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">下次使用时需要重新登录。</text>
+<path d="M20.0 156.4L370.0 156.4" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M20.0 269.2L370.0 269.2" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M20.0 156.4L20.0 269.2" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M370.0 156.4L370.0 269.2" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="36.0" y="195.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">账号</text>
+<text x="279.6" y="195.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">demo_admin</text>
+<text x="36.0" y="235.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">当前门店</text>
+<text x="306.0" y="235.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">千绵美学</text>
+<rect x="0.0" y="710.0" width="390.0" height="134.0" rx="0" fill="rgb(253, 253, 253)" />
+<path d="M0.0 710.0L390.0 710.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<rect x="20.0" y="723.0" width="350.0" height="46.0" rx="6" fill="rgb(48, 49, 56)" />
+<path d="M20.0 723.0L370.0 723.0" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<path d="M20.0 769.0L370.0 769.0" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<path d="M20.0 723.0L20.0 769.0" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<path d="M370.0 723.0L370.0 769.0" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<text x="169.0" y="749.7" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" font-weight="550" fill="rgb(247, 247, 249)">确认退出</text>
+<rect x="20.0" y="779.0" width="350.0" height="46.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 779.0L370.0 779.0" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M20.0 825.0L370.0 825.0" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M20.0 779.0L20.0 825.0" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M370.0 779.0L370.0 825.0" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<text x="169.0" y="805.7" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" font-weight="550" fill="rgb(37, 38, 42)">继续使用</text>
+</svg><text x="1324" y="3987.0" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="14" font-weight="600" fill="#303138">E01 平台运营范围</text><svg width="390" height="844" viewBox="0 0 390 844" x="1324" y="4005.0"><title>E01 平台运营范围</title><rect width="390" height="844" fill="#fdfdfd" />
+<path d="M0.0 55.0L390.0 55.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<svg x="31.5" y="16.5" width="21.0" height="21.0" viewBox="0 0 24 24" fill="none" stroke="rgb(37, 38, 42)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5-7 7 7 7" /></svg>
+<text x="147.0" y="32.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="16" font-weight="650" fill="rgb(37, 38, 42)">平台运营范围</text>
+<rect x="20.0" y="75.0" width="350.0" height="61.4" rx="5" fill="rgb(247, 247, 249)" />
+<path d="M20.0 75.0L370.0 75.0" stroke="rgb(197, 199, 206)" stroke-width="1" />
+<path d="M20.0 136.4L370.0 136.4" stroke="rgb(197, 199, 206)" stroke-width="1" />
+<path d="M20.0 75.0L20.0 136.4" stroke="rgb(197, 199, 206)" stroke-width="1" />
+<path d="M370.0 75.0L370.0 136.4" stroke="rgb(197, 199, 206)" stroke-width="1" />
+<text x="33.0" y="98.9" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="600" fill="rgb(37, 38, 42)">非店长日常主线</text>
+<text x="33.0" y="117.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(104, 107, 117)">以下页面保留信息结构供范围评审，均不能视为已完成的业务。</text>
+<text x="20.0" y="178.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="24" font-weight="700" fill="rgb(37, 38, 42)">平台运营</text>
+<text x="20.0" y="209.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">是否向店长开放，需要结合平台权限重新确认。</text>
+<path d="M20.0 294.4L370.0 294.4" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="20.0" y="252.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="550" fill="rgb(37, 38, 42)">门店管理</text>
+<text x="20.0" y="274.7" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(115, 117, 124)">列表 / 开通 / 切换 / 续期</text>
+<text x="318.0" y="262.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(37, 38, 42)">演示</text>
+<svg x="354.0" y="251.1" width="16.0" height="16.0" viewBox="0 0 24 24" fill="none" stroke="rgb(144, 146, 154)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7" /></svg>
+<path d="M20.0 364.0L370.0 364.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="20.0" y="322.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="550" fill="rgb(37, 38, 42)">服务方案</text>
+<text x="20.0" y="344.3" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(115, 117, 124)">次卡次数 / 价格 / 有效期 / 上下架</text>
+<text x="318.0" y="332.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(37, 38, 42)">演示</text>
+<svg x="354.0" y="320.7" width="16.0" height="16.0" viewBox="0 0 24 24" fill="none" stroke="rgb(144, 146, 154)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7" /></svg>
+<path d="M20.0 433.5L370.0 433.5" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="20.0" y="391.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="550" fill="rgb(37, 38, 42)">门店品牌</text>
+<text x="20.0" y="413.9" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(115, 117, 124)">名称 / Logo / 地址 / 营业时间</text>
+<text x="318.0" y="401.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(37, 38, 42)">演示</text>
+<svg x="354.0" y="390.3" width="16.0" height="16.0" viewBox="0 0 24 24" fill="none" stroke="rgb(144, 146, 154)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7" /></svg>
+<text x="20.0" y="471.1" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="650" fill="rgb(37, 38, 42)">不纳入本期主线</text>
+<text x="20.0" y="502.3" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">充值、预约、商品、收款码、客服与意见反馈。</text>
+</svg><text x="1756" y="3987.0" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="14" font-weight="600" fill="#303138">E02 门店管理结构</text><svg width="390" height="844" viewBox="0 0 390 844" x="1756" y="4005.0"><title>E02 门店管理结构</title><rect width="390" height="844" fill="#fdfdfd" />
+<path d="M0.0 55.0L390.0 55.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<svg x="31.5" y="16.5" width="21.0" height="21.0" viewBox="0 0 24 24" fill="none" stroke="rgb(37, 38, 42)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5-7 7 7 7" /></svg>
+<text x="147.0" y="32.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="16" font-weight="650" fill="rgb(37, 38, 42)">门店管理结构</text>
+<rect x="20.0" y="75.0" width="350.0" height="42.7" rx="5" fill="rgb(247, 247, 249)" />
+<path d="M20.0 75.0L370.0 75.0" stroke="rgb(197, 199, 206)" stroke-width="1" />
+<path d="M20.0 117.7L370.0 117.7" stroke="rgb(197, 199, 206)" stroke-width="1" />
+<path d="M20.0 75.0L20.0 117.7" stroke="rgb(197, 199, 206)" stroke-width="1" />
+<path d="M370.0 75.0L370.0 117.7" stroke="rgb(197, 199, 206)" stroke-width="1" />
+<text x="33.0" y="98.9" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(104, 107, 117)">现有静态页面，仅供范围核对；操作待接入。</text>
+<path d="M20.0 135.7L370.0 135.7" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M20.0 263.5L370.0 263.5" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M20.0 135.7L20.0 263.5" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M370.0 135.7L370.0 263.5" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="36.0" y="167.3" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="600" fill="rgb(37, 38, 42)">千绵美学</text>
+<path d="M308.0 151.7L354.0 151.7" stroke="rgb(203, 206, 213)" stroke-width="1" />
+<path d="M308.0 175.7L354.0 175.7" stroke="rgb(203, 206, 213)" stroke-width="1" />
+<path d="M308.0 151.7L308.0 175.7" stroke="rgb(203, 206, 213)" stroke-width="1" />
+<path d="M354.0 151.7L354.0 175.7" stroke="rgb(203, 206, 213)" stroke-width="1" />
+<text x="316.0" y="166.7" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="600" fill="rgb(37, 38, 42)">营业中</text>
+<text x="36.0" y="196.5" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">门店地址 · 服务到期时间</text>
+<rect x="36.0" y="211.5" width="100.7" height="36.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M36.0 211.5L136.7 211.5" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M36.0 247.5L136.7 247.5" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M36.0 211.5L36.0 247.5" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M136.7 211.5L136.7 247.5" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<text x="75.3" y="232.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="550" fill="rgb(37, 38, 42)">切换</text>
+<rect x="144.7" y="211.5" width="100.7" height="36.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M144.7 211.5L245.3 211.5" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M144.7 247.5L245.3 247.5" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M144.7 211.5L144.7 247.5" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M245.3 211.5L245.3 247.5" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<text x="173.0" y="232.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="550" fill="rgb(37, 38, 42)">编辑资料</text>
+<rect x="253.3" y="211.5" width="100.7" height="36.0" rx="6" fill="rgb(48, 49, 56)" />
+<path d="M253.3 211.5L354.0 211.5" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<path d="M253.3 247.5L354.0 247.5" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<path d="M253.3 211.5L253.3 247.5" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<path d="M354.0 211.5L354.0 247.5" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<text x="292.7" y="232.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="550" fill="rgb(247, 247, 249)">续期</text>
+<path d="M20.0 278.5L370.0 278.5" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M20.0 406.3L370.0 406.3" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M20.0 278.5L20.0 406.3" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M370.0 278.5L370.0 406.3" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="36.0" y="310.1" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="600" fill="rgb(37, 38, 42)">千绵美学 · 宝安店</text>
+<path d="M308.0 294.5L354.0 294.5" stroke="rgb(203, 206, 213)" stroke-width="1" />
+<path d="M308.0 318.5L354.0 318.5" stroke="rgb(203, 206, 213)" stroke-width="1" />
+<path d="M308.0 294.5L308.0 318.5" stroke="rgb(203, 206, 213)" stroke-width="1" />
+<path d="M354.0 294.5L354.0 318.5" stroke="rgb(203, 206, 213)" stroke-width="1" />
+<text x="316.0" y="309.5" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="600" fill="rgb(37, 38, 42)">已到期</text>
+<text x="36.0" y="339.3" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">门店地址 · 服务到期时间</text>
+<rect x="36.0" y="354.3" width="100.7" height="36.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M36.0 354.3L136.7 354.3" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M36.0 390.3L136.7 390.3" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M36.0 354.3L36.0 390.3" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M136.7 354.3L136.7 390.3" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<text x="75.3" y="375.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="550" fill="rgb(37, 38, 42)">切换</text>
+<rect x="144.7" y="354.3" width="100.7" height="36.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M144.7 354.3L245.3 354.3" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M144.7 390.3L245.3 390.3" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M144.7 354.3L144.7 390.3" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M245.3 354.3L245.3 390.3" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<text x="173.0" y="375.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="550" fill="rgb(37, 38, 42)">编辑资料</text>
+<rect x="253.3" y="354.3" width="100.7" height="36.0" rx="6" fill="rgb(48, 49, 56)" />
+<path d="M253.3 354.3L354.0 354.3" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<path d="M253.3 390.3L354.0 390.3" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<path d="M253.3 354.3L253.3 390.3" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<path d="M354.0 354.3L354.0 390.3" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<text x="292.7" y="375.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="550" fill="rgb(247, 247, 249)">续期</text>
+<rect x="20.0" y="421.3" width="350.0" height="46.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 421.3L370.0 421.3" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M20.0 467.3L370.0 467.3" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M20.0 421.3L20.0 467.3" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M370.0 421.3L370.0 467.3" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<text x="144.0" y="448.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" font-weight="550" fill="rgb(37, 38, 42)">新增门店 · 待接入</text>
+</svg><text x="2188" y="3987.0" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="14" font-weight="600" fill="#303138">E03 服务方案结构</text><svg width="390" height="844" viewBox="0 0 390 844" x="2188" y="4005.0"><title>E03 服务方案结构</title><rect width="390" height="844" fill="#fdfdfd" />
+<path d="M0.0 55.0L390.0 55.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<svg x="31.5" y="16.5" width="21.0" height="21.0" viewBox="0 0 24 24" fill="none" stroke="rgb(37, 38, 42)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5-7 7 7 7" /></svg>
+<text x="147.0" y="32.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="16" font-weight="650" fill="rgb(37, 38, 42)">服务方案结构</text>
+<rect x="20.0" y="75.0" width="350.0" height="42.7" rx="5" fill="rgb(247, 247, 249)" />
+<path d="M20.0 75.0L370.0 75.0" stroke="rgb(197, 199, 206)" stroke-width="1" />
+<path d="M20.0 117.7L370.0 117.7" stroke="rgb(197, 199, 206)" stroke-width="1" />
+<path d="M20.0 75.0L20.0 117.7" stroke="rgb(197, 199, 206)" stroke-width="1" />
+<path d="M370.0 75.0L370.0 117.7" stroke="rgb(197, 199, 206)" stroke-width="1" />
+<text x="33.0" y="98.9" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(104, 107, 117)">方案是现有页面的次卡服务方案；不等同于订阅套餐。</text>
+<path d="M20.0 135.7L370.0 135.7" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M20.0 263.5L370.0 263.5" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M20.0 135.7L20.0 263.5" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M370.0 135.7L370.0 263.5" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="36.0" y="167.3" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="600" fill="rgb(37, 38, 42)">水光焕肤</text>
+<path d="M289.0 151.7L354.0 151.7" stroke="rgb(203, 206, 213)" stroke-width="1" />
+<path d="M289.0 175.7L354.0 175.7" stroke="rgb(203, 206, 213)" stroke-width="1" />
+<path d="M289.0 151.7L289.0 175.7" stroke="rgb(203, 206, 213)" stroke-width="1" />
+<path d="M354.0 151.7L354.0 175.7" stroke="rgb(203, 206, 213)" stroke-width="1" />
+<text x="297.0" y="166.7" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="600" fill="rgb(37, 38, 42)">在售 · 演示</text>
+<text x="36.0" y="196.5" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">¥680 · 4 次 · 90 天</text>
+<rect x="36.0" y="211.5" width="155.0" height="36.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M36.0 211.5L191.0 211.5" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M36.0 247.5L191.0 247.5" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M36.0 211.5L36.0 247.5" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M191.0 211.5L191.0 247.5" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<text x="91.5" y="232.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="550" fill="rgb(37, 38, 42)">编辑方案</text>
+<rect x="199.0" y="211.5" width="155.0" height="36.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M199.0 211.5L354.0 211.5" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M199.0 247.5L354.0 247.5" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M199.0 211.5L199.0 247.5" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M354.0 211.5L354.0 247.5" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<text x="265.5" y="232.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="550" fill="rgb(37, 38, 42)">下架</text>
+<path d="M20.0 278.5L370.0 278.5" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M20.0 406.3L370.0 406.3" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M20.0 278.5L20.0 406.3" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<path d="M370.0 278.5L370.0 406.3" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<text x="36.0" y="310.1" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="600" fill="rgb(37, 38, 42)">肩颈舒缓</text>
+<path d="M289.0 294.5L354.0 294.5" stroke="rgb(203, 206, 213)" stroke-width="1" />
+<path d="M289.0 318.5L354.0 318.5" stroke="rgb(203, 206, 213)" stroke-width="1" />
+<path d="M289.0 294.5L289.0 318.5" stroke="rgb(203, 206, 213)" stroke-width="1" />
+<path d="M354.0 294.5L354.0 318.5" stroke="rgb(203, 206, 213)" stroke-width="1" />
+<text x="297.0" y="309.5" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="600" fill="rgb(37, 38, 42)">在售 · 演示</text>
+<text x="36.0" y="339.3" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">¥980 · 6 次 · 180 天</text>
+<rect x="36.0" y="354.3" width="155.0" height="36.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M36.0 354.3L191.0 354.3" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M36.0 390.3L191.0 390.3" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M36.0 354.3L36.0 390.3" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M191.0 354.3L191.0 390.3" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<text x="91.5" y="375.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="550" fill="rgb(37, 38, 42)">编辑方案</text>
+<rect x="199.0" y="354.3" width="155.0" height="36.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M199.0 354.3L354.0 354.3" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M199.0 390.3L354.0 390.3" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M199.0 354.3L199.0 390.3" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M354.0 354.3L354.0 390.3" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<text x="265.5" y="375.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="550" fill="rgb(37, 38, 42)">下架</text>
+<rect x="20.0" y="421.3" width="350.0" height="46.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 421.3L370.0 421.3" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M20.0 467.3L370.0 467.3" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M20.0 421.3L20.0 467.3" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<path d="M370.0 421.3L370.0 467.3" stroke="rgb(201, 203, 209)" stroke-width="1" />
+<text x="144.0" y="448.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" font-weight="550" fill="rgb(37, 38, 42)">新增方案 · 待接入</text>
+</svg><text x="28" y="4916.0" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="14" font-weight="600" fill="#303138">E04 门店品牌结构</text><svg width="390" height="921" viewBox="0 0 390 921" x="28" y="4934.0"><title>E04 门店品牌结构</title><rect width="390" height="921" fill="#fdfdfd" />
+<path d="M0.0 55.0L390.0 55.0" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<svg x="31.5" y="16.5" width="21.0" height="21.0" viewBox="0 0 24 24" fill="none" stroke="rgb(37, 38, 42)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5-7 7 7 7" /></svg>
+<text x="147.0" y="32.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="16" font-weight="650" fill="rgb(37, 38, 42)">门店品牌结构</text>
+<rect x="20.0" y="75.0" width="350.0" height="42.7" rx="5" fill="rgb(247, 247, 249)" />
+<path d="M20.0 75.0L370.0 75.0" stroke="rgb(197, 199, 206)" stroke-width="1" />
+<path d="M20.0 117.7L370.0 117.7" stroke="rgb(197, 199, 206)" stroke-width="1" />
+<path d="M20.0 75.0L20.0 117.7" stroke="rgb(197, 199, 206)" stroke-width="1" />
+<path d="M370.0 75.0L370.0 117.7" stroke="rgb(197, 199, 206)" stroke-width="1" />
+<text x="33.0" y="98.9" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(104, 107, 117)">品牌保存、Logo 上传、地址与营业时间操作尚未接入。</text>
+<text x="20.0" y="158.5" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">门店 Logo</text>
+<text x="322.0" y="158.5" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">上传位置</text>
+<text x="20.0" y="187.9" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">门店名称</text>
+<rect x="20.0" y="201.1" width="350.0" height="44.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 201.1L370.0 201.1" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 245.1L370.0 245.1" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 201.1L20.0 245.1" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M370.0 201.1L370.0 245.1" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<text x="32.0" y="228.1" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" fill="rgb(37, 38, 42)">千绵美学</text>
+<text x="20.0" y="274.9" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">门店简称</text>
+<rect x="20.0" y="288.1" width="350.0" height="44.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 288.1L370.0 288.1" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 332.1L370.0 332.1" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 288.1L20.0 332.1" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M370.0 288.1L370.0 332.1" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<text x="32.0" y="315.1" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" fill="rgb(37, 38, 42)">千绵美学</text>
+<text x="20.0" y="361.9" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">门店品类</text>
+<rect x="20.0" y="375.1" width="350.0" height="44.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 375.1L370.0 375.1" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 419.1L370.0 419.1" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 375.1L20.0 419.1" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M370.0 375.1L370.0 419.1" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<text x="32.0" y="402.1" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" fill="rgb(37, 38, 42)">美容美体 / 皮肤管理</text>
+<text x="20.0" y="448.9" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">联系电话</text>
+<rect x="20.0" y="462.1" width="350.0" height="44.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 462.1L370.0 462.1" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 506.1L370.0 506.1" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 462.1L20.0 506.1" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M370.0 462.1L370.0 506.1" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<text x="32.0" y="489.1" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" fill="rgb(37, 38, 42)">0755-0000 0000</text>
+<text x="20.0" y="535.9" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">门店地址</text>
+<rect x="20.0" y="549.1" width="350.0" height="44.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 549.1L370.0 549.1" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 593.1L370.0 593.1" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 549.1L20.0 593.1" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M370.0 549.1L370.0 593.1" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<text x="32.0" y="576.1" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" fill="rgb(37, 38, 42)">南山区 · 演示地址</text>
+<text x="20.0" y="622.9" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">营业时间</text>
+<rect x="20.0" y="636.1" width="350.0" height="44.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 636.1L370.0 636.1" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 680.1L370.0 680.1" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 636.1L20.0 680.1" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M370.0 636.1L370.0 680.1" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<text x="32.0" y="663.1" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" fill="rgb(37, 38, 42)">10:00–22:00</text>
+<text x="20.0" y="709.9" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">门店简介</text>
+<rect x="20.0" y="723.1" width="350.0" height="70.0" rx="6" fill="rgb(253, 253, 253)" />
+<path d="M20.0 723.1L370.0 723.1" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 793.1L370.0 793.1" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M20.0 723.1L20.0 793.1" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<path d="M370.0 723.1L370.0 793.1" stroke="rgb(205, 206, 211)" stroke-width="1" />
+<text x="32.0" y="751.1" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" fill="rgb(37, 38, 42)">门店介绍文案</text>
+<rect x="0.0" y="842.1" width="390.0" height="78.0" rx="0" fill="rgb(253, 253, 253)" />
+<path d="M0.0 842.1L390.0 842.1" stroke="rgb(225, 226, 229)" stroke-width="1" />
+<rect x="20.0" y="855.1" width="350.0" height="46.0" rx="6" fill="rgb(48, 49, 56)" />
+<path d="M20.0 855.1L370.0 855.1" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<path d="M20.0 901.1L370.0 901.1" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<path d="M20.0 855.1L20.0 901.1" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<path d="M370.0 855.1L370.0 901.1" stroke="rgb(48, 49, 56)" stroke-width="1" />
+<text x="144.0" y="881.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" font-weight="550" fill="rgb(247, 247, 249)">保存修改 · 待接入</text>
+</svg></svg>

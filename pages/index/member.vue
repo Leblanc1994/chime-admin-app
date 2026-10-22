@@ -1,1675 +1,696 @@
 <template>
-	<cl-page status-bar-background="transparent" :background-color="pageBackground">
-		<view class="page-member">
-			<view class="member-hero">
-				<view class="member-hero__content">
-					<view class="member-hero__top">
-						<view><text class="member-hero__title">会员</text><text class="member-hero__count">共 <text class="member-hero__count-value">{{ pagination.total }}</text> 位会员</text></view>
-						<view class="member-hero__more">•••</view>
-					</view>
-
-					<view class="member-search-row">
-						<view class="member-search">
-							<cl-icon name="search" :size="42" color="#969ca7" />
-							<input
-								v-model.trim="filters.keyWord"
-								class="member-search__input"
-								placeholder="搜索姓名、手机号、微信昵称"
-								placeholder-class="member-search__placeholder"
-								confirm-type="search"
-								@confirm="reload"
-							/>
-
-							<view class="member-search__filter" @tap="openFilterPopup">
-								<view class="filter-funnel"></view>
-								<text class="member-search__badge" v-if="activeFilterCount">{{ activeFilterCount }}</text>
-							</view>
-						</view>
-						<view class="member-add-button" @tap="openUpsert('add')"><cl-icon name="plus" :size="36" color="#fff" /></view>
-					</view>
-
-					<view class="member-hero__filters">
-						<scroll-view class="member-tab-scroll" scroll-x>
-							<view class="member-tab-group">
-								<view
-									v-for="item in memberTabOptions"
-									:key="item.value"
-									class="member-tab-chip"
-									:class="{ 'is-active': filters.memberTab === item.value }"
-									@tap="setMemberTab(item.value)"
-								>
-									{{ item.label }}
-								</view>
-							</view>
-						</scroll-view>
-
-						<view class="toolbar__active-bar" v-if="activeFilterPills.length">
-							<scroll-view class="toolbar__active-scroll" scroll-x>
-								<view class="toolbar__active">
-									<text class="active-pill" v-for="item in activeFilterPills" :key="item">
-										{{ item }}
-									</text>
-								</view>
-							</scroll-view>
-
-							<text class="toolbar__reset" @tap="resetFilters">重置</text>
-						</view>
-					</view>
-				</view>
-			</view>
-
-			<view class="member-list" v-if="list.length">
+	<cl-page background-color="#f8f5f0" status-bar-background="#f8f5f0">
+		<view class="chime-business member-page" :style="{ top: statusBarHeight + 'px' }">
+			<view class="member-controls">
 				<view
-					class="member-card"
-					v-for="item in list"
-					:key="item.id"
-					:class="`is-${getCardTone(item)}`"
-					@tap="toDetail(item)"
+					class="member-main-header"
+					:style="
+						navigation.enabled
+							? {
+									minHeight: navigation.barHeight + 'px',
+									paddingRight: 'calc(' + navigation.sideInset + 'px - 38rpx)',
+								}
+							: {}
+					"
 				>
-					<view class="member-card__top">
-						<view class="member-card__avatar">{{ getInitial(item) }}</view>
-
-						<view class="member-card__body">
-							<view class="member-card__name-row">
-								<text class="member-card__name">{{ getDisplayName(item) }}</text>
-								<view class="member-card__member-mark" v-if="item.validCardCount || item.remainTimes">
-									<cl-icon name="my" :size="28" color="#42b978" />
-								</view>
-							</view>
-
-							<text class="member-card__phone">{{ item.phone || "未绑定手机号" }}</text>
-
-							<view class="member-card__tags">
-								<text class="tag-chip" :class="`is-${getGender(item.gender).tone}`">
-									{{ getGender(item.gender).label }}
-								</text>
-								<text class="tag-chip" :class="`is-${getSource(item.source).tone}`">
-									{{ getSource(item.source).label }}
-								</text>
-							</view>
-						</view>
-
-					</view>
-
-					<view class="member-card__metrics">
-						<view><text>剩余次数</text><strong>{{ item.remainTimes || 0 }}<small> 次</small></strong></view>
-						<view><text>有效次卡</text><strong>{{ item.validCardCount || 0 }}<small> 张</small></strong></view>
-						<view><text>最近消费</text><strong class="member-card__consume-time">{{ formatLastConsume(item.lastConsumeTime) }}</strong></view>
-					</view>
-
-					<view class="member-card__footer">
-						<view class="member-card__quick">
-							<view class="member-card__action-link" @tap.stop="openUpsert('edit', item)">
-								<cl-icon name="edit" :size="30" color="#969ca7" />
-								<text>编辑</text>
-							</view>
-							<view class="member-card__action-link" @tap.stop="removeMember(item)">
-								<cl-icon name="delete" :size="30" color="#969ca7" />
-								<text>删除</text>
-							</view>
-						</view>
-
-						<view class="member-card__detail" @tap.stop="toDetail(item)">
-							<text class="member-card__detail-text">会员档案</text>
-							<cl-icon name="arrow-right" :size="30" color="currentColor" />
-						</view>
-					</view>
+					<view class="member-heading"
+						><view><text>千绵美学</text><text>会员</text></view></view
+					>
 				</view>
-			</view>
-
-			<view class="empty-wrap" v-else-if="loaded">
-				<cl-empty :fixed="false" text="暂时没有匹配的会员" />
-			</view>
-
-			<view class="loading-wrap" v-if="loading && !loaded">
-				<cl-loading :size="42" />
-				<text class="loading-wrap__text">正在整理会员档案</text>
-			</view>
-
-			<view class="list-footer" v-if="loaded && list.length">
-				<text>{{ loadText }}</text>
-			</view>
-
-			<cl-popup
-				v-model="filterPopupVisible"
-				title="筛选会员"
-				direction="bottom"
-				border-radius="36rpx 36rpx 0 0"
-				:padding="0"
-			>
-				<view class="filter-popup">
-					<view class="filter-popup__summary">
-						<text class="filter-popup__summary-title">按条件筛选会员列表</text>
-						<text class="filter-popup__summary-text">
-							{{ activeFilterCount ? `当前已启用 ${activeFilterCount} 个条件` : "当前使用默认排序与全量条件" }}
-						</text>
-					</view>
-
-					<view class="filter-popup__section">
-						<text class="toolbar__label">性别</text>
-
-						<view class="chip-group">
-							<view
-								v-for="item in genderOptions"
-								:key="item.value"
-								class="chip"
-								:class="{ 'is-active': draftFilters.gender === item.value }"
-								@tap="draftFilters.gender = item.value"
-							>
-								{{ item.label }}
-							</view>
-						</view>
-					</view>
-
-					<view class="filter-popup__section">
-						<text class="toolbar__label">来源</text>
-
-						<scroll-view class="chip-scroll" scroll-x>
-							<view class="chip-group chip-group--nowrap">
-								<view
-									v-for="item in sourceOptions"
-									:key="item.value"
-									class="chip"
-									:class="{ 'is-active': draftFilters.source === item.value }"
-									@tap="draftFilters.source = item.value"
-								>
-									{{ item.label }}
-								</view>
-							</view>
-						</scroll-view>
-					</view>
-
-					<view class="filter-popup__section">
-						<text class="toolbar__label">排序</text>
-
-						<scroll-view class="chip-scroll" scroll-x>
-							<view class="chip-group chip-group--nowrap">
-								<view
-									v-for="item in sortOptions"
-									:key="item.value"
-									class="chip chip--soft"
-									:class="{ 'is-active': draftFilters.order === item.value }"
-									@tap="draftFilters.order = item.value"
-								>
-									{{ item.label }}
-								</view>
-							</view>
-						</scroll-view>
-					</view>
-
-					<view class="filter-popup__footer">
-						<view class="filter-popup__secondary" @tap="resetPopupFilters">重置条件</view>
-						<view class="filter-popup__primary" @tap="applyPopupFilters">应用筛选</view>
-					</view>
-				</view>
-			</cl-popup>
-
-			<cl-popup
-				v-model="upsertPopupVisible"
-				:title="upsertTitle"
-				direction="bottom"
-				border-radius="36rpx 36rpx 0 0"
-				:padding="0"
-			>
-				<view class="upsert-popup">
-					<view class="upsert-popup__summary">
-						<text class="upsert-popup__summary-title">{{ upsertTitle }}</text>
-						<text class="upsert-popup__summary-text">{{ upsertSummary }}</text>
-					</view>
-
-					<scroll-view class="upsert-popup__body" scroll-y>
-						<view class="upsert-popup__loading" v-if="formLoading">
-							<cl-loading :size="36" />
-							<text class="upsert-popup__loading-text">正在准备会员资料</text>
-						</view>
-
-						<cl-form
-							ref="Form"
-							:model-value="form"
-							:rules="rules"
-							:disabled="saving || formLoading"
-							label-position="top"
-							tips="toast"
+				<view class="member-search-row">
+					<view class="qm-search">
+						<image src="/static/business/v53/search.svg" class="search-icon" />
+						<input
+							v-model.trim="filters.keyWord"
+							placeholder="姓名 / 手机号 / 微信昵称"
+							confirm-type="search"
+							@confirm="reload"
+						/>
+						<button
+							v-if="filters.keyWord"
+							aria-label="清空搜索"
+							@tap="
+								filters.keyWord = '';
+								reload();
+							"
 						>
-							<cl-form-item label="姓名">
-								<cl-input
-									v-model="form.name"
-									placeholder="选填，便于快速识别会员"
-									:maxlength="50"
-								/>
-							</cl-form-item>
-
-							<cl-form-item label="手机号">
-								<cl-input
-									v-model="form.phone"
-									placeholder="选填，用于联系或补充档案"
-									:maxlength="20"
-								/>
-							</cl-form-item>
-
-							<cl-form-item label="微信昵称" prop="nickName">
-								<cl-input
-									v-model="form.nickName"
-									placeholder="请填写微信昵称"
-									:maxlength="50"
-								/>
-							</cl-form-item>
-
-							<cl-form-item label="微信号" prop="wechatNo">
-								<cl-input
-									v-model="form.wechatNo"
-									placeholder="请填写微信号"
-									:maxlength="50"
-								/>
-							</cl-form-item>
-
-							<cl-form-item label="性别">
-								<view class="upsert-choice-group upsert-choice-group--gender">
-									<view
-										v-for="item in genderOptions.filter((e) => e.value > -1)"
-										:key="item.value"
-										class="upsert-choice"
-										:class="{ 'is-active': form.gender === item.value }"
-										@tap="form.gender = item.value"
-									>
-										{{ item.label }}
-									</view>
-								</view>
-							</cl-form-item>
-
-							<cl-form-item label="来源" prop="source">
-								<view class="upsert-choice-group upsert-choice-group--source">
-									<view
-										v-for="item in sourceOptions.filter((e) => e.value > -1)"
-										:key="item.value"
-										class="upsert-choice"
-										:class="{ 'is-active': form.source === item.value }"
-										@tap="form.source = item.value"
-									>
-										{{ item.label }}
-									</view>
-								</view>
-							</cl-form-item>
-
-							<cl-form-item label="备注">
-								<cl-textarea
-									v-model="form.remark"
-									placeholder="填写沟通重点、偏好或其他备注"
-									count
-									auto-height
-									:maxlength="200"
-								/>
-							</cl-form-item>
-						</cl-form>
-					</scroll-view>
-
-					<view class="upsert-popup__footer">
-						<view class="filter-popup__secondary" @tap="upsertPopupVisible = false">取消</view>
-						<view class="filter-popup__primary" @tap="submitUpsert">
-							{{ saving ? "保存中..." : popupMode === "add" ? "确认新增" : "保存修改" }}
-						</view>
+							×
+						</button>
 					</view>
+					<button class="member-create" aria-label="新增会员" @tap="create">
+						<image src="/static/business/v53/plus.svg" mode="aspectFit" /><text
+							>新增</text
+						>
+					</button>
 				</view>
-			</cl-popup>
-
+				<view class="qm-segments" aria-label="会员分类"
+					><button
+						v-for="item in categories"
+						:key="item.value"
+						:id="'member-category-' + item.value"
+						:class="{ 'is-active': category === item.value }"
+						:aria-pressed="category === item.value"
+						@tap="setCategory(item.value)"
+					>
+						{{ item.label }}
+					</button></view
+				>
+				<view class="member-quick-filters"
+					><view
+						><button
+							id="member-filter-low"
+							:class="{ 'is-active': attention === 'low' }"
+							:aria-pressed="attention === 'low'"
+							@tap="setAttention('low')"
+						>
+							低余次</button
+						><button
+							id="member-filter-expired"
+							:class="{ 'is-active': attention === 'expired' }"
+							:aria-pressed="attention === 'expired'"
+							@tap="setAttention('expired')"
+						>
+							已过期</button
+						><button
+							v-if="attention === 'expiring'"
+							class="is-active"
+							@tap="setAttention('expiring')"
+						>
+							即将到期
+						</button></view
+					><button @tap="openFilter">
+						<image src="/static/business/v53/sort.svg" mode="aspectFit" />{{
+							filterCount ? "筛选 · " + filterCount : "默认顺序"
+						}}
+					</button></view
+				>
+				<view v-if="memberAction" class="qm-notice member-choice"
+					><text>{{ memberAction === "openCard" ? "选择开卡会员" : "选择扣次会员" }}</text
+					><button @tap="memberAction = undefined">取消</button></view
+				><view class="member-toolbar" role="status" aria-live="polite"
+					><text>{{
+						loading && !loaded
+							? "正在加载会员…"
+							: loaded
+								? "全部会员 · " + pagination.total + " 位"
+								: "会员档案"
+					}}</text>
+				</view>
+			</view>
+			<scroll-view
+				class="member-scroll"
+				scroll-y
+				:scroll-top="scrollTop"
+				:refresher-enabled="!loading"
+				:refresher-triggered="refreshing"
+				refresher-background="#f8f5f0"
+				:aria-busy="loading"
+				@scroll="scrollTop = $event.detail.scrollTop"
+				@scrolltolower="more"
+				@refresherrefresh="refresh"
+			>
+				<view v-if="loading && !loaded" class="member-loading" aria-hidden="true"
+					><view v-for="n in 4" :key="n" class="qm-skeleton"
+				/></view>
+				<template v-else>
+					<view v-if="error" class="qm-error" role="alert"
+						>{{ error }}<button class="qm-inline" @tap="reload">重新加载</button></view
+					><view class="member-list"
+						><button
+							v-for="item in list"
+							:key="item.id"
+							class="qm-panel member-card"
+							:class="{
+								'is-low': memberStatus(item) === '低余次',
+								'is-muted': !(item.validCardCount > 0),
+							}"
+							@tap="detail(item)"
+						>
+							<view class="qm-identity"
+								><view class="qm-avatar">{{ name(item).slice(0, 1) }}</view
+								><view class="member-copy"
+									><text class="qm-identity__name"
+										>{{ name(item)
+										}}<text
+											v-if="memberStatus(item)"
+											class="qm-tag"
+											:class="{
+												'is-warning': memberStatus(item) === '低余次',
+											}"
+											>{{ memberStatus(item) }}</text
+										></text
+									><text class="qm-identity__meta">{{
+										phone(item.phone)
+									}}</text></view
+								><view class="member-balance"
+									><text>{{ item.remainTimes ?? 0 }}<text> 次</text></text
+									><text>{{ item.validCardCount ?? 0 }} 张次卡</text></view
+								></view
+							><view class="member-meta"
+								><text>{{ memberCardCaption(item) }}</text
+								><text>{{
+									item.lastConsumeTime
+										? dayjs(item.lastConsumeTime).format("MM.DD") + " 消费"
+										: "暂无消费"
+								}}</text></view
+							><text v-if="memberAction" class="member-action"
+								>{{
+									memberAction === "openCard" ? "为此会员开卡" : "为此会员扣次"
+								}}
+								›</text
+							>
+						</button></view
+					><view v-if="loaded && !list.length && !error" class="qm-empty"
+						><text>{{
+							filters.keyWord || category !== "all" || attention || filterCount
+								? "没有匹配的会员"
+								: "还没有会员"
+						}}</text
+						><text>{{
+							filters.keyWord || category !== "all" || attention || filterCount
+								? "调整搜索或筛选条件后再试"
+								: "先建立一份档案，开始记录每次服务。"
+						}}</text
+						><qm-button @click="create">新增会员</qm-button></view
+					><button
+						v-if="list.length && !finished"
+						class="qm-inline"
+						:disabled="loading"
+						@tap="more"
+					>
+						{{ loading ? "正在加载…" : "加载更多" }}</button
+					><text v-else-if="list.length" class="member-end">已显示全部结果</text>
+				</template>
+			</scroll-view>
 		</view>
-
-		<tabbar />
+		<!-- #ifndef MP-WEIXIN -->
+		<tabbar design />
+		<!-- #endif -->
+		<qm-sheet v-model="filterVisible" title="筛选会员"
+			><view
+				v-for="group in filterGroups"
+				:key="group.key"
+				class="qm-field member-filter-group"
+			>
+				<text class="qm-label">{{ group.label }}</text>
+				<view class="qm-chips"
+					><button
+						v-for="option in group.options"
+						:key="option.value"
+						class="qm-chip"
+						:class="{ 'is-active': draft[group.key] === option.value }"
+						role="button"
+						tabindex="0"
+						:aria-pressed="draft[group.key] === option.value"
+						@tap="draft[group.key] = option.value"
+						@keydown.enter.prevent="draft[group.key] = option.value"
+						@keydown.space.prevent="draft[group.key] = option.value"
+					>
+						{{ option.label }}
+					</button></view
+				> </view
+			><template #footer
+				><view class="qm-pair"
+					><qm-button variant="secondary" @click="resetFilter">重置</qm-button
+					><qm-button @click="applyFilter">应用筛选</qm-button></view
+				></template
+			></qm-sheet
+		>
+		<qm-member-business-sheet ref="businessSheet" @saved="reload" />
 	</cl-page>
 </template>
-
-<script lang="ts" setup>
-import { computed, nextTick, reactive, ref } from "vue";
-import { onPullDownRefresh, onReachBottom, onShow } from "@dcloudio/uni-app";
+<script setup lang="ts">
+import QmMemberBusinessSheet from "./components/qm-member-business-sheet.vue";
+const businessSheet = ref<InstanceType<typeof QmMemberBusinessSheet>>();
+import { useMiniNavigation } from "./utils/use-mini-navigation";
+import { ref, reactive, computed, watch, onUnmounted } from "vue";
+import { onShow, onHide } from "@dcloudio/uni-app";
+import dayjs from "dayjs";
 import { useCool } from "/@/cool";
-import { useUi } from "/$/cool-ui";
+import MemberService from "../../service/member/info";
+// #ifndef MP-WEIXIN
 import Tabbar from "./components/tabbar.vue";
-import MemberInfoService from "../../service/member/info";
-
-type GenderValue = -1 | 0 | 1 | 2;
-type SourceValue = -1 | 1 | 2 | 3;
-type SortValue = "createTime" | "lastConsumeTime" | "remainTimes" | "validCardCount";
-type PopupMode = "add" | "edit";
-type MemberTabValue = "all" | "member";
-
-interface MemberItem {
-	id: number;
-	name?: string;
-	phone?: string;
-	nickName?: string;
-	wechatNo?: string;
-	remark?: string;
-	gender?: 0 | 1 | 2;
-	source?: 1 | 2 | 3;
-	lastConsumeTime?: string;
-	remainTimes?: number;
-	validCardCount?: number;
-	createTime?: string;
-	[key: string]: any;
+// #endif
+import QmButton from "./components/qm-button.vue";
+import QmSheet from "./components/qm-sheet.vue";
+import CardService from "../../service/member/card-account";
+import {
+	collectMemberPages,
+	hydrateMemberCards,
+	matchesMemberFilter,
+	memberCardCaption,
+	memberStatus,
+} from "./utils/member-directory";
+import { pendingMemberQuickAction, pendingMemberFilter } from "./utils/member-quick-action";
+const { router } = useCool(),
+	service = new MemberService(),
+	cardService = new CardService();
+const navigation = useMiniNavigation();
+const category = ref("all"),
+	attention = ref("");
+const categories = [
+	{ label: "全部", value: "all" },
+	{ label: "持卡会员", value: "carded" },
+	{ label: "非持卡会员", value: "uncarded" },
+];
+let filteredCache: any[] | null = null;
+const cardCache = new Map<number, any[]>();
+async function withCards(rows: any[], seq: number) {
+	return hydrateMemberCards(rows, async (id) => {
+		if (cardCache.has(id)) return cardCache.get(id)!;
+		const cards: any = await cardService.list({ memberId: id });
+		if (seq === generation) cardCache.set(id, cards);
+		return cards;
+	});
 }
-
-interface MemberFormData {
-	id?: number;
-	name: string;
-	phone: string;
-	nickName: string;
-	wechatNo: string;
-	gender: 0 | 1 | 2;
-	source: 1 | 2 | 3;
-	remark: string;
+function setCategory(value: string) {
+	if (category.value === value) return;
+	category.value = value;
+	reload();
 }
-
-const ui = useUi();
-const { router } = useCool();
-const service = new MemberInfoService();
-
-const genderOptions = [
-	{ label: "全部", value: -1 as GenderValue, tone: "neutral" },
-	{ label: "未知", value: 0 as GenderValue, tone: "neutral" },
-	{ label: "男", value: 1 as GenderValue, tone: "success" },
-	{ label: "女", value: 2 as GenderValue, tone: "danger" },
+function setAttention(value: string) {
+	attention.value = attention.value === value ? "" : value;
+	reload();
+}
+const list = ref<any[]>([]),
+	loading = ref(false),
+	loaded = ref(false),
+	statusBarHeight = ref(0),
+	scrollTop = ref(0),
+	refreshing = ref(false),
+	error = ref(""),
+	finished = ref(false),
+	memberAction = ref<"openCard" | "deduct">(),
+	filterVisible = ref(false);
+const pagination = reactive({ page: 1, size: 15, total: 0 }),
+	filters = reactive({
+		keyWord: "",
+		gender: -1,
+		source: -1,
+		order: "createTime",
+	}),
+	draft = reactive({ gender: -1, source: -1, order: "createTime" });
+let generation = 0,
+	dirty = true;
+const sources = { 1: "抖音", 2: "美团", 3: "朋友介绍" },
+	genders = [
+		{ label: "全部", value: -1 },
+		{ label: "未知", value: 0 },
+		{ label: "男", value: 1 },
+		{ label: "女", value: 2 },
+	],
+	sourceOptions = [
+		{ label: "全部来源", value: -1 },
+		{ label: "抖音", value: 1 },
+		{ label: "美团", value: 2 },
+		{ label: "朋友介绍", value: 3 },
+	],
+	orders = [
+		{ label: "最新加入", value: "createTime" },
+		{ label: "最近消费", value: "lastConsumeTime" },
+		{ label: "剩余次数", value: "remainTimes" },
+		{ label: "有效次卡", value: "validCardCount" },
+	];
+const filterGroups = [
+	{ key: "gender" as const, label: "性别", options: genders },
+	{ key: "source" as const, label: "来源", options: sourceOptions },
+	{ key: "order" as const, label: "排序", options: orders },
 ];
-
-const sourceOptions = [
-	{ label: "全部来源", value: -1 as SourceValue, tone: "neutral" },
-	{ label: "抖音", value: 1 as SourceValue, tone: "danger" },
-	{ label: "美团", value: 2 as SourceValue, tone: "success" },
-	{ label: "朋友介绍", value: 3 as SourceValue, tone: "warning" },
-];
-
-const sortOptions = [
-	{ label: "最新加入", value: "createTime" as SortValue },
-	{ label: "最近消费", value: "lastConsumeTime" as SortValue },
-	{ label: "剩余次数", value: "remainTimes" as SortValue },
-	{ label: "有效次卡", value: "validCardCount" as SortValue },
-];
-
-const memberTabOptions = [{ label: "会员", value: "member" as MemberTabValue }];
-
-const filters = reactive({
-	keyWord: "",
-	gender: -1 as GenderValue,
-	source: -1 as SourceValue,
-	order: "createTime" as SortValue,
-	memberTab: "member" as MemberTabValue,
-});
-
-const pagination = reactive({
-	page: 1,
-	size: 10,
-	total: 0,
-});
-
-const list = ref<MemberItem[]>([]);
-const loading = ref(false);
-const loaded = ref(false);
-const finished = ref(false);
-const filterPopupVisible = ref(false);
-const upsertPopupVisible = ref(false);
-const popupMode = ref<PopupMode>("add");
-const formLoading = ref(false);
-const saving = ref(false);
-const pageBackground = "#f8fbf9";
-const draftFilters = reactive({
-	gender: -1 as GenderValue,
-	source: -1 as SourceValue,
-	order: "createTime" as SortValue,
-});
-const form = reactive<MemberFormData>(createEmptyForm());
-const rules = reactive({
-	nickName: {
-		required: true,
-		message: "请填写微信昵称",
-	},
-	wechatNo: {
-		required: true,
-		message: "请填写微信号",
-	},
-	source: {
-		required: true,
-		message: "请选择来源",
-	},
-});
-const Form = ref<ClForm.Ref>();
-
-const activeFilterPills = computed(() => {
-	const pills: string[] = [];
-
-	if (filters.keyWord) {
-		pills.push(`搜索: ${filters.keyWord}`);
-	}
-
-	if (filters.gender > -1) {
-		pills.push(`性别: ${getGender(filters.gender).label}`);
-	}
-
-	if (filters.source > -1) {
-		pills.push(`来源: ${getSource(filters.source).label}`);
-	}
-
-	if (filters.order !== "createTime") {
-		const sortLabel = sortOptions.find((item) => item.value === filters.order)?.label || "自定义排序";
-		pills.push(`排序: ${sortLabel}`);
-	}
-
-	pills.push(`档案: ${getMemberTabLabel(filters.memberTab)}`);
-
-	return pills;
-});
-
-const activeFilterCount = computed(() => activeFilterPills.value.length);
-const upsertTitle = computed(() => (popupMode.value === "add" ? "新增会员" : "编辑会员"));
-const upsertSummary = computed(() =>
-	popupMode.value === "add"
-		? "补充基础会员档案，保存后会自动刷新列表。"
-		: "修改基础信息，不影响现有次卡与消费记录。",
+const filterCount = computed(
+	() =>
+		Number(filters.gender !== -1) +
+		Number(filters.source !== -1) +
+		Number(filters.order !== "createTime"),
 );
-
-const loadText = computed(() => {
-	if (loading.value && !loaded.value) {
-		return "正在加载会员列表";
-	}
-
-	if (loading.value && loaded.value) {
-		return "正在加载更多会员";
-	}
-
-	if (finished.value) {
-		return "已经到底了";
-	}
-
-	return `第 ${pagination.page} 页 / 共 ${Math.max(Math.ceil(pagination.total / pagination.size), 1)} 页`;
-});
-
-function getDisplayName(item: MemberItem) {
-	return item.name || item.nickName || `会员 #${item.id}`;
+function name(item: any) {
+	return item.name || item.nickName || "未命名会员";
 }
-
-function getInitial(item: MemberItem) {
-	const value = getDisplayName(item).trim();
-	return value.slice(0, 1).toUpperCase();
+function phone(value?: string) {
+	return value ? value.replace(/^(\d{3})(\d{4})(\d{4})$/, "$1 $2 $3") : "未填写手机号";
 }
-
-function formatLastConsume(value?: string) {
-	if (!value) {
-		return "暂无";
-	}
-
-	return value.slice(5, 10).replace("-", "/") || "近期";
-}
-
-function getCardTone(item: MemberItem) {
-	const tones = ["mint", "violet", "amber", "blue", "aqua"];
-	const seed = Number(item.id || item.remainTimes || item.validCardCount || 0);
-
-	return tones[Math.abs(seed) % tones.length];
-}
-
-function getGender(value?: number) {
-	return (
-		genderOptions.find((item) => item.value === value) || {
-			label: "未知",
-			value: 0,
-			tone: "neutral",
-		}
-	);
-}
-
-function getSource(value?: number) {
-	const match = sourceOptions.find((item) => item.value === value);
-
-	return (
-		match || {
-			label: "未标记",
-			value: -1,
-			tone: "neutral",
-		}
-	);
-}
-
-function getMemberTabLabel(value: MemberTabValue) {
-	return memberTabOptions.find((item) => item.value === value)?.label || "会员";
-}
-
-function createEmptyForm(): MemberFormData {
-	return {
-		name: "",
-		phone: "",
-		nickName: "",
-		wechatNo: "",
-		gender: 2,
-		source: 1,
-		remark: "",
-	};
-}
-
-function fillForm(data?: Partial<MemberFormData>) {
-	const next = {
-		...createEmptyForm(),
-		...data,
-	};
-
-	form.id = next.id;
-	form.name = next.name || "";
-	form.phone = next.phone || "";
-	form.nickName = next.nickName || "";
-	form.wechatNo = next.wechatNo || "";
-	form.gender = [0, 1, 2].includes(Number(next.gender)) ? (Number(next.gender) as 0 | 1 | 2) : 2;
-	form.source = [1, 2, 3].includes(Number(next.source)) ? (Number(next.source) as 1 | 2 | 3) : 1;
-	form.remark = next.remark || "";
-}
-
-function normalizeForm() {
-	return {
-		id: form.id,
-		name: form.name.trim(),
-		phone: form.phone.trim(),
-		nickName: form.nickName.trim(),
-		wechatNo: form.wechatNo.trim(),
-		gender: form.gender,
-		source: form.source,
-		remark: form.remark.trim(),
-	};
-}
-
-function buildParams() {
-	return {
-		page: pagination.page,
-		size: pagination.size,
-		keyWord: filters.keyWord || undefined,
-		gender: filters.gender > -1 ? filters.gender : undefined,
-		source: filters.source > -1 ? filters.source : undefined,
-		order: filters.order,
-		sort: "desc",
-		memberTab: "member",
-	};
-}
-
-async function fetchList(options?: { append?: boolean; silent?: boolean }) {
-	const { append = false, silent = false } = options || {};
-
-	if (!silent) {
-		loading.value = true;
-	}
-
+async function fetch(append = false) {
+	const seq = ++generation;
+	loading.value = true;
+	error.value = "";
 	try {
-		const res = await service.page(buildParams());
-		const rows = res?.list || [];
-		const total = res?.pagination?.total || 0;
-
-		pagination.total = total;
+		const params = {
+			...filters,
+			gender: filters.gender === -1 ? undefined : filters.gender,
+			source: filters.source === -1 ? undefined : filters.source,
+			sort: "desc",
+		};
+		let rows: any[], total: number;
+		if (category.value !== "all" || attention.value) {
+			if (!filteredCache) {
+				const all = await collectMemberPages((params) => service.page(params), params);
+				if (seq !== generation) return;
+				const hydrated = await withCards(all, seq);
+				if (seq !== generation) return;
+				filteredCache = hydrated.filter(
+					(row) =>
+						matchesMemberFilter(row, category.value) &&
+						matchesMemberFilter(row, attention.value),
+				);
+			}
+			total = filteredCache.length;
+			rows = filteredCache.slice(
+				(pagination.page - 1) * pagination.size,
+				pagination.page * pagination.size,
+			);
+		} else {
+			const res: any = await service.page({
+				...params,
+				page: pagination.page,
+				size: pagination.size,
+			});
+			if (seq !== generation) return;
+			rows = await withCards(res.list || [], seq);
+			total = res.pagination?.total ?? res.total ?? rows.length;
+		}
+		if (seq !== generation) return;
 		list.value = append ? [...list.value, ...rows] : rows;
+		pagination.total = total;
 		finished.value = list.value.length >= total || rows.length < pagination.size;
 		loaded.value = true;
-	} catch (err: any) {
-		if (append && pagination.page > 1) {
-			pagination.page -= 1;
-		}
-
-		ui.showTips(err?.message || "会员列表加载失败");
+		dirty = false;
+	} catch (e: any) {
+		if (seq !== generation) return;
+		error.value = e?.message || "会员列表加载失败";
+		if (append) pagination.page--;
 	} finally {
-		loading.value = false;
+		if (seq === generation) loading.value = false;
 	}
 }
-
-async function reload() {
+function reload() {
+	cardCache.clear();
+	filteredCache = null;
+	loaded.value = false;
+	list.value = [];
+	scrollTop.value = 0;
 	pagination.page = 1;
 	finished.value = false;
-	await fetchList();
+	return fetch();
 }
-
-function resetFilters() {
-	filters.keyWord = "";
-	filters.gender = -1;
-	filters.source = -1;
-	filters.order = "createTime";
-	filters.memberTab = "member";
-	syncDraftFilters();
+async function refresh() {
+	if (loading.value) return;
+	refreshing.value = true;
+	try {
+		await reload();
+	} finally {
+		refreshing.value = false;
+	}
+}
+function more() {
+	if (loading.value || finished.value) return;
+	pagination.page++;
+	fetch(true);
+}
+function create() {
+	businessSheet.value?.openCreate();
+}
+function detail(item: any) {
+	if (memberAction.value === "openCard") return businessSheet.value?.openCard(item);
+	if (memberAction.value) {
+		router.push({
+			path: "/pages/index/member-action",
+			query: {
+				memberId: item.id,
+				mode: memberAction.value === "openCard" ? "openCard" : undefined,
+			},
+		});
+	} else router.push({ path: "/pages/index/member-detail", query: { id: item.id } });
+}
+function openFilter() {
+	Object.assign(draft, { gender: filters.gender, source: filters.source, order: filters.order });
+	filterVisible.value = true;
+}
+function resetFilter() {
+	Object.assign(draft, { gender: -1, source: -1, order: "createTime" });
+}
+function applyFilter() {
+	Object.assign(filters, draft);
+	filterVisible.value = false;
 	reload();
 }
-
-function setMemberTab(value: MemberTabValue) {
-	if (loading.value || filters.memberTab === value) {
-		return;
-	}
-
-	filters.memberTab = value;
-	reload();
+function pending() {
+	if ((router.path || "").replace(/^\//, "") !== "pages/index/member") return;
+	const action = pendingMemberQuickAction.value;
+	if (!action) return;
+	pendingMemberQuickAction.value = undefined;
+	if (action === "addMember") {
+		memberAction.value = undefined;
+		create();
+	} else memberAction.value = action;
 }
-
-function syncDraftFilters() {
-	draftFilters.gender = filters.gender;
-	draftFilters.source = filters.source;
-	draftFilters.order = filters.order;
+function markDirty() {
+	cardCache.clear();
+	filteredCache = null;
+	dirty = true;
 }
-
-function openFilterPopup() {
-	syncDraftFilters();
-	filterPopupVisible.value = true;
-}
-
-function resetPopupFilters() {
-	draftFilters.gender = -1;
-	draftFilters.source = -1;
-	draftFilters.order = "createTime";
-}
-
-function applyPopupFilters() {
-	const changed =
-		filters.gender !== draftFilters.gender ||
-		filters.source !== draftFilters.source ||
-		filters.order !== draftFilters.order;
-
-	filters.gender = draftFilters.gender;
-	filters.source = draftFilters.source;
-	filters.order = draftFilters.order;
-	filterPopupVisible.value = false;
-
-	if (changed) {
-		reload();
-	}
-}
-
-async function openUpsert(mode: PopupMode, item?: MemberItem) {
-	popupMode.value = mode;
-	formLoading.value = false;
-
-	if (mode === "add") {
-		fillForm();
-		upsertPopupVisible.value = true;
-		await nextTick();
-		Form.value?.clearValidate();
-		return;
-	}
-
-	if (!item?.id) {
-		ui.showTips("没有找到可编辑的会员信息");
-		return;
-	}
-
-	fillForm(item);
-	upsertPopupVisible.value = true;
-	await nextTick();
-	Form.value?.clearValidate();
-	formLoading.value = true;
-
-	try {
-		const detail = await service.info({
-			id: item.id,
-		});
-
-		fillForm(detail);
-	} catch (err: any) {
-		ui.showTips(err?.message || "会员信息加载失败");
-	} finally {
-		formLoading.value = false;
-	}
-}
-
-function validateUpsert() {
-	return new Promise<boolean>((resolve) => {
-		if (!Form.value) {
-			resolve(false);
-			return;
-		}
-
-		Form.value?.validate((valid: boolean) => {
-			resolve(valid);
-		});
-	});
-}
-
-async function submitUpsert() {
-	if (saving.value || formLoading.value) {
-		return;
-	}
-
-	const valid = await validateUpsert();
-
-	if (!valid) {
-		return;
-	}
-
-	const payload = normalizeForm();
-
-	if (!payload.nickName) {
-		ui.showTips("请填写微信昵称");
-		return;
-	}
-
-	if (!payload.wechatNo) {
-		ui.showTips("请填写微信号");
-		return;
-	}
-
-	saving.value = true;
-
-	try {
-		if (popupMode.value === "edit" && payload.id) {
-			await service.update(payload);
-		} else {
-			await service.add(payload);
-		}
-
-		upsertPopupVisible.value = false;
-
-		if (popupMode.value === "add") {
-			await reload();
-		} else {
-			await fetchList({
-				silent: true,
-			});
-		}
-
-		ui.showTips(popupMode.value === "add" ? "会员新增成功" : "会员信息已更新");
-	} catch (err: any) {
-		ui.showTips(
-			err?.message || (popupMode.value === "add" ? "会员新增失败，请稍后重试" : "会员更新失败，请稍后重试"),
-		);
-	} finally {
-		saving.value = false;
-	}
-}
-
-async function refreshAfterDelete() {
-	if (list.value.length === 1 && pagination.page > 1) {
-		pagination.page -= 1;
-	}
-
-	finished.value = false;
-	await fetchList({
-		silent: true,
-	});
-}
-
-function removeMember(item: MemberItem) {
-	if (!item?.id) {
-		ui.showTips("没有找到可删除的会员信息");
-		return;
-	}
-
-	const name = getDisplayName(item);
-
-	ui.showConfirm({
-		title: "删除会员",
-		type: "warning",
-		message: `确认删除「${name}」吗？删除后无法恢复。`,
-		confirmButtonText: "确认删除",
-		beforeClose(action, { done, showLoading, hideLoading }) {
-			if (action !== "confirm") {
-				done();
-				return;
-			}
-
-			showLoading();
-
-			service
-				.delete({
-					ids: [item.id],
-				})
-				.then(async () => {
-					if (upsertPopupVisible.value && form.id === item.id) {
-						upsertPopupVisible.value = false;
-					}
-
-					await refreshAfterDelete();
-					done();
-					ui.showTips("会员删除成功");
-				})
-				.catch((err: any) => {
-					hideLoading();
-					ui.showTips(err?.message || "会员删除失败，请稍后重试");
-				});
-		},
-	});
-}
-
-function toDetail(item: MemberItem) {
-	router.push({
-		path: "/pages/index/member-detail",
-		query: {
-			id: item.id,
-		},
-	});
-}
-
+uni.$on("chime:members-changed", markDirty);
+uni.$on("chime:member-changed", markDirty);
+onUnmounted(() => {
+	uni.$off("chime:members-changed", markDirty);
+	uni.$off("chime:member-changed", markDirty);
+});
+watch(pendingMemberQuickAction, pending, { flush: "post" });
 onShow(() => {
-	if (!loaded.value) {
-		reload();
+	statusBarHeight.value = uni.getSystemInfoSync().statusBarHeight || 0;
+	const intent = pendingMemberFilter.value;
+	if (intent) {
+		pendingMemberFilter.value = undefined;
+		category.value = "all";
+		attention.value = intent === "all" ? "" : intent;
+		filteredCache = null;
+		dirty = true;
 	}
+	pending();
+	if (dirty) reload();
 });
-
-onPullDownRefresh(async () => {
-	await reload();
-	uni.stopPullDownRefresh();
-});
-
-onReachBottom(async () => {
-	if (loading.value || finished.value) {
-		return;
-	}
-
-	pagination.page += 1;
-	await fetchList({
-		append: true,
-	});
-});
+onHide(() => (memberAction.value = undefined));
 </script>
-
-<style lang="scss" scoped>
-.page-member {
-	--ink: #1f2734;
-	--muted: #697080;
-	--soft: #f3faf6;
-	--accent: #32b66d;
-	--accent-dark: #10845a;
-	--line: rgba(54, 99, 77, 0.08);
-	--pink: #d14f78;
-	--violet: #8d55c8;
-	--amber: #e78212;
-
-	position: relative;
-	min-height: 100%;
-	padding: 0 34rpx 188rpx;
-	background:
-		linear-gradient(180deg, rgba(250, 255, 252, 0) 0, #f8fbf9 420rpx),
-		#f8fbf9;
-	box-sizing: border-box;
+<style scoped lang="scss">
+.member-page {
+	position: fixed;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	display: flex;
+	flex-direction: column;
 	overflow: hidden;
+	padding: 30rpx 38rpx 20rpx;
+	/* #ifndef MP-WEIXIN */
+	bottom: calc(130rpx + env(safe-area-inset-bottom) + 1px);
+	/* #endif */
+	/* #ifdef MP-WEIXIN */
+	padding-top: 0;
+	/* #endif */
 }
-
-.member-hero {
-	position: relative;
-	margin: 0 -34rpx;
-	padding: 96rpx 34rpx 34rpx;
-	background: url("/static/member-bg.png") top center / 100% 520rpx no-repeat;
-	overflow: hidden;
-}
-
-.member-hero__content {
-	position: relative;
-	z-index: 1;
-}
-
-.member-hero__top {
-	display: flex;
-	align-items: center;
-	justify-content: flex-start;
-	height: 116rpx;
-	padding-left: 278rpx;
-	box-sizing: border-box;
-}
-
-.member-hero__count {
-	display: inline-flex;
-	align-items: center;
-	height: 44rpx;
-	padding: 0;
-	font-size: 24rpx;
-	font-weight: 600;
-	line-height: 44rpx;
-	color: #28313f;
-	white-space: nowrap;
-}
-
-.member-hero__count::before {
-	content: "";
-	display: inline-block;
-	width: 1rpx;
-	height: 28rpx;
-	margin-right: 18rpx;
-	background: rgba(40, 49, 63, 0.42);
-}
-
-.member-hero__count-value {
-	font-size: 30rpx;
-	font-weight: 800;
-	line-height: 44rpx;
-	color: #26a365;
-	margin: 0 4rpx;
-}
-
-.member-search {
-	display: flex;
-	align-items: center;
-	gap: 18rpx;
-	height: 112rpx;
-	margin-top: 42rpx;
-	padding: 0 14rpx 0 34rpx;
-	border-radius: 999rpx;
-	background: rgba(255, 255, 255, 0.94);
-	box-shadow: 0 22rpx 48rpx rgba(64, 100, 82, 0.1);
-	box-sizing: border-box;
-}
-
-.member-search__input {
-	flex: 1;
-	min-width: 0;
-	height: 100%;
-	font-size: 28rpx;
-	color: var(--ink);
-}
-
-.member-search__placeholder {
-	color: #9da2ad;
-	font-weight: 500;
-}
-
-.member-search__filter {
-	position: relative;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 96rpx;
-	height: 96rpx;
-	border-radius: 50%;
-	background: linear-gradient(145deg, #65c97d 0%, #23945c 100%);
-	box-shadow: 0 18rpx 34rpx rgba(36, 153, 91, 0.3);
+.member-controls {
 	flex-shrink: 0;
 }
-
-.member-search__badge {
-	position: absolute;
-	top: 2rpx;
-	right: 4rpx;
-	min-width: 32rpx;
-	height: 32rpx;
-	padding: 0 8rpx;
-	border-radius: 999rpx;
-	background: #202936;
-	color: #fff;
-	font-size: 18rpx;
-	line-height: 32rpx;
-	text-align: center;
-	box-shadow: 0 4rpx 10rpx rgba(32, 41, 54, 0.2);
+.member-main-header {
+	display: flex;
+	align-items: center;
+	box-sizing: border-box;
 }
-
-.filter-funnel {
-	width: 46rpx;
-	height: 46rpx;
-	background: url("data:image/svg+xml,%3Csvg width='46' height='46' viewBox='0 0 46 46' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9 12H37L26 25V34L20 37V25L9 12Z' stroke='white' stroke-width='4.5' stroke-linejoin='round' stroke-linecap='round'/%3E%3C/svg%3E")
-		center / contain no-repeat;
+.member-scroll {
+	flex: 1;
+	height: 0;
+	min-height: 0;
+	overscroll-behavior-y: contain;
 }
-
-.member-hero__filters {
-	margin-top: 20rpx;
+.member-loading .qm-skeleton {
+	height: 184rpx;
+	border-radius: 38rpx;
+	margin-bottom: 16rpx;
 }
-
-.member-tab-scroll,
-.chip-scroll,
-.toolbar__active-scroll {
+.member-heading {
 	width: 100%;
-	white-space: nowrap;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin: 6rpx 0 26rpx;
+	> view > text {
+		display: block;
+		font-size: 21rpx;
+		color: var(--qm-muted);
+	}
+	> view > text + text {
+		font-size: 50rpx;
+		line-height: 1.4;
+		font-weight: 700;
+		color: var(--qm-deep);
+		margin-top: 8rpx;
+	}
 }
-
-.member-tab-group {
-	display: inline-flex;
-	gap: 12rpx;
-	padding-right: 8rpx;
+.member-search-row {
+	display: flex;
+	align-items: stretch;
+	gap: 16rpx;
+	.qm-search {
+		flex: 1;
+		min-width: 0;
+	}
 }
-
-.member-tab-chip {
-	display: inline-flex;
+.member-create {
+	display: flex;
 	align-items: center;
 	justify-content: center;
-	height: 54rpx;
+	flex-shrink: 0;
+	gap: 5rpx;
 	padding: 0 24rpx;
-	border-radius: 999rpx;
-	background: rgba(255, 255, 255, 0.62);
-	border: 1rpx solid rgba(45, 157, 96, 0.12);
-	color: rgba(30, 132, 83, 0.72);
-	font-size: 23rpx;
-	font-weight: 700;
+	min-height: 88rpx;
+	color: var(--qm-on-brand);
+	background: var(--qm-brand);
+	border-radius: 24rpx;
+	font-size: 28rpx;
+	image {
+		width: 26rpx;
+		height: 26rpx;
+		filter: brightness(0) invert(1);
+	}
 }
-
-.member-tab-chip.is-active {
-	background: rgba(28, 151, 91, 0.94);
-	border-color: rgba(28, 151, 91, 0.94);
-	color: #fff;
-	box-shadow: 0 12rpx 24rpx rgba(34, 142, 88, 0.18);
+.search-icon {
+	width: 36rpx;
+	height: 36rpx;
 }
-
-.toolbar__active-bar {
-	display: flex;
-	align-items: center;
-	gap: 18rpx;
-	margin-top: 14rpx;
-}
-
-.toolbar__active {
-	display: inline-flex;
-	gap: 10rpx;
-	padding-right: 8rpx;
-}
-
-.active-pill {
-	display: inline-flex;
-	align-items: center;
-	height: 46rpx;
-	padding: 0 18rpx;
-	border-radius: 999rpx;
-	background: rgba(255, 255, 255, 0.7);
-	color: var(--muted);
-	font-size: 21rpx;
-	white-space: nowrap;
-}
-
-.toolbar__reset {
-	font-size: 22rpx;
-	font-weight: 700;
-	color: var(--accent-dark);
-	white-space: nowrap;
-	flex-shrink: 0;
-}
-
-.member-list {
-	position: relative;
-	z-index: 2;
-	margin-top: -8rpx;
-}
-
-.member-card {
-	--tone: #32b66d;
-	--tone-dark: #11895c;
-	--tone-soft: rgba(50, 182, 109, 0.1);
-	--tone-glow: rgba(50, 182, 109, 0.18);
-
-	position: relative;
-	margin-bottom: 24rpx;
-	padding: 42rpx 34rpx 26rpx;
-	border-radius: 36rpx;
-	background:
-		radial-gradient(circle at 88% 20%, var(--tone-soft) 0, rgba(255, 255, 255, 0) 220rpx),
-		linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.92));
-	border: 1rpx solid rgba(255, 255, 255, 0.94);
-	box-shadow: 0 22rpx 48rpx rgba(42, 58, 69, 0.08);
-	box-sizing: border-box;
-	overflow: hidden;
-}
-
-.member-card::before {
-	content: "";
-	position: absolute;
-	inset: 0;
-	border-radius: inherit;
-	border: 1rpx solid rgba(61, 191, 122, 0.08);
-	pointer-events: none;
-}
-
-.member-card.is-violet {
-	--tone: #b66ce5;
-	--tone-dark: #7f4db1;
-	--tone-soft: rgba(182, 108, 229, 0.12);
-	--tone-glow: rgba(182, 108, 229, 0.22);
-}
-
-.member-card.is-amber {
-	--tone: #ffab31;
-	--tone-dark: #e47b0e;
-	--tone-soft: rgba(255, 171, 49, 0.12);
-	--tone-glow: rgba(255, 171, 49, 0.22);
-}
-
-.member-card.is-blue {
-	--tone: #5298ff;
-	--tone-dark: #1e7fe9;
-	--tone-soft: rgba(82, 152, 255, 0.12);
-	--tone-glow: rgba(82, 152, 255, 0.2);
-}
-
-.member-card.is-aqua {
-	--tone: #65d9c0;
-	--tone-dark: #2aa98f;
-	--tone-soft: rgba(101, 217, 192, 0.14);
-	--tone-glow: rgba(101, 217, 192, 0.2);
-}
-
-.member-card__top {
-	position: relative;
-	z-index: 1;
-	display: flex;
-	align-items: flex-start;
-	gap: 26rpx;
-}
-
-.member-card__avatar {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 104rpx;
-	height: 104rpx;
-	border-radius: 28rpx;
-	background: linear-gradient(145deg, var(--tone), var(--tone-dark));
-	box-shadow: 0 18rpx 30rpx var(--tone-glow);
-	color: #fff;
-	font-size: 46rpx;
-	font-weight: 900;
-	flex-shrink: 0;
-}
-
-.member-card__body {
-	flex: 1;
-	min-width: 0;
-	padding-top: 4rpx;
-}
-
-.member-card__name-row {
-	display: flex;
-	align-items: center;
-	gap: 10rpx;
-	min-width: 0;
-}
-
-.member-card__name {
-	display: block;
-	max-width: 248rpx;
-	font-size: 34rpx;
-	line-height: 1.18;
-	font-weight: 900;
-	color: var(--ink);
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-}
-
-.member-card__member-mark {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 34rpx;
-	height: 34rpx;
-	border-radius: 50%;
-	background: rgba(66, 185, 120, 0.12);
-	flex-shrink: 0;
-}
-
-.member-card__phone {
-	display: block;
-	margin-top: 4rpx;
-	font-size: 26rpx;
-	line-height: 1.2;
-	color: var(--muted);
-}
-
-.member-card__tags {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 12rpx;
-	margin-top: 10rpx;
-}
-
-.tag-chip {
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	min-width: 72rpx;
-	height: 38rpx;
-	padding: 0 18rpx;
-	border-radius: 999rpx;
-	font-size: 22rpx;
-	font-weight: 800;
-	line-height: 1;
-	box-sizing: border-box;
-}
-
-.tag-chip.is-neutral {
-	background: rgba(105, 112, 128, 0.1);
-	color: #7b8190;
-}
-
-.tag-chip.is-success {
-	background: rgba(50, 182, 109, 0.12);
-	color: #1f9a62;
-}
-
-.tag-chip.is-danger {
-	background: rgba(235, 93, 139, 0.12);
-	color: var(--pink);
-}
-
-.tag-chip.is-warning {
-	background: rgba(241, 171, 52, 0.16);
-	color: #cf7d06;
-}
-
-.tag-chip.is-dark {
-	background: rgba(31, 39, 52, 0.9);
-	color: #fff;
-}
-
-.member-card__stats {
-	width: 170rpx;
-	padding-top: 8rpx;
-	text-align: right;
-	flex-shrink: 0;
-}
-
-.member-card__remain {
-	display: flex;
-	align-items: baseline;
-	justify-content: flex-end;
-	gap: 6rpx;
-	color: #2d3747;
-}
-
-.member-card__remain-label,
-.member-card__remain-unit {
-	font-size: 25rpx;
-	font-weight: 700;
-}
-
-.member-card__remain-value {
-	font-size: 48rpx;
-	font-weight: 900;
-	line-height: 0.95;
-	color: var(--tone-dark);
-}
-
-.member-card__card-count {
-	display: block;
-	margin-top: 22rpx;
-	font-size: 24rpx;
-	line-height: 1.2;
-	color: var(--muted);
-	white-space: nowrap;
-}
-
-.member-card__footer {
-	position: relative;
-	z-index: 1;
+.member-quick-filters {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	gap: 24rpx;
-	margin-top: 38rpx;
-}
-
-.member-card__quick {
-	display: flex;
-	align-items: center;
-	gap: 34rpx;
-	min-width: 0;
-}
-
-.member-card__action-link {
-	display: inline-flex;
-	align-items: center;
 	gap: 12rpx;
-	font-size: 24rpx;
-	font-weight: 600;
-	color: #747b88;
-	white-space: nowrap;
+	margin: 20rpx 0 16rpx;
+	> view {
+		display: flex;
+		gap: 14rpx;
+		flex-wrap: wrap;
+	}
+	button {
+		display: flex;
+		align-items: center;
+		gap: 8rpx;
+		font-size: 22rpx;
+		color: var(--qm-muted);
+		min-height: 60rpx;
+	}
+	> view button {
+		padding: 10rpx 26rpx;
+		background: var(--qm-surface);
+		border-radius: 999rpx;
+	}
+	.is-active {
+		color: var(--qm-brand);
+		background: var(--qm-lilac);
+	}
+	image {
+		width: 28rpx;
+		height: 28rpx;
+	}
 }
-
-.member-card__detail {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	gap: 12rpx;
-	width: 196rpx;
-	height: 60rpx;
-	border-radius: 22rpx;
-	background: var(--tone-soft);
-	color: var(--tone-dark);
-	font-size: 24rpx;
-	font-weight: 900;
-	white-space: nowrap;
-	flex-shrink: 0;
+.member-toolbar {
+	font-size: 23rpx;
+	color: var(--qm-muted);
+	margin: 16rpx 0 18rpx;
 }
-
-.member-card__detail-text {
-	font-size: 24rpx;
-	font-weight: 900;
-}
-
-.member-fab {
-	position: fixed;
-	right: 30rpx;
-	bottom: calc(148rpx + env(safe-area-inset-bottom));
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	width: 104rpx;
-	height: 104rpx;
-	border-radius: 50%;
-	background: linear-gradient(145deg, #32e0a1 0%, #19a963 100%);
-	box-shadow: 0 18rpx 34rpx rgba(25, 169, 99, 0.3);
-	color: #fff;
-	z-index: 30;
-}
-
-.member-fab::before,
-.member-fab::after {
-	content: "";
-	position: absolute;
-	border-radius: 6rpx;
-	transform: rotate(28deg);
-}
-
-.member-fab::before {
-	top: -18rpx;
-	right: 8rpx;
-	width: 12rpx;
-	height: 20rpx;
-	background: #4db4ff;
-}
-
-.member-fab::after {
-	top: 2rpx;
-	right: -14rpx;
-	width: 10rpx;
-	height: 16rpx;
-	background: #ee62bf;
-}
-
-.toolbar__label {
+.member-card {
 	display: block;
-	margin-bottom: 14rpx;
-	font-size: 22rpx;
-	color: var(--muted);
+	width: 100%;
+	padding: 24rpx 26rpx !important;
+	text-align: left;
+	margin-bottom: 16rpx !important;
 }
-
-.chip-group {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 12rpx;
-}
-
-.chip-group--nowrap {
-	display: inline-flex;
-	flex-wrap: nowrap;
-	padding-right: 12rpx;
-}
-
-.chip {
-	padding: 12rpx 22rpx;
-	border-radius: 999rpx;
-	background: rgba(50, 182, 109, 0.08);
-	border: 1rpx solid transparent;
-	font-size: 22rpx;
-	color: var(--muted);
-	transition: all 0.2s ease;
-}
-
-.chip--soft {
-	background: rgba(141, 85, 200, 0.08);
-}
-
-.chip.is-active {
-	background: var(--accent-dark);
-	border-color: var(--accent-dark);
-	color: #fff;
-	box-shadow: 0 10rpx 24rpx rgba(28, 132, 90, 0.18);
-}
-
-.filter-popup,
-.upsert-popup {
-	padding: 16rpx 24rpx calc(28rpx + env(safe-area-inset-bottom));
-	background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(244, 251, 247, 0.98));
-}
-
-.filter-popup__summary,
-.upsert-popup__summary {
-	padding: 12rpx 4rpx 10rpx;
-}
-
-.filter-popup__summary-title,
-.upsert-popup__summary-title {
-	display: block;
-	font-size: 28rpx;
-	font-weight: 800;
-	color: var(--ink);
-}
-
-.filter-popup__summary-text,
-.upsert-popup__summary-text {
-	display: block;
-	margin-top: 8rpx;
-	font-size: 22rpx;
-	color: var(--muted);
-}
-
-.filter-popup__section {
-	margin-top: 24rpx;
-}
-
-.filter-popup__footer,
-.upsert-popup__footer {
-	display: flex;
-	gap: 16rpx;
-	margin-top: 28rpx;
-	padding-top: 20rpx;
-	border-top: 1rpx solid rgba(31, 39, 52, 0.06);
-}
-
-.filter-popup__secondary,
-.filter-popup__primary {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: 78rpx;
-	border-radius: 22rpx;
-	font-size: 24rpx;
-	font-weight: 800;
-}
-
-.filter-popup__secondary {
+.member-copy {
 	flex: 1;
-	background: rgba(31, 39, 52, 0.06);
-	color: var(--muted);
+	min-width: 0;
+	.qm-identity__name {
+		font-weight: 500;
+		font-size: 29rpx;
+	}
+	.qm-tag {
+		margin-left: 12rpx;
+		font-size: 20rpx;
+		font-weight: 400;
+	}
 }
-
-.filter-popup__primary {
-	flex: 1.4;
-	background: linear-gradient(145deg, #44c879, #15935d);
-	color: #fff;
-	box-shadow: 0 14rpx 28rpx rgba(30, 159, 94, 0.2);
+.member-balance {
+	text-align: right;
+	white-space: nowrap;
+	> text {
+		display: block;
+		color: var(--qm-deep);
+		font-size: 43rpx;
+		font-weight: 700;
+		line-height: 1.2;
+		text {
+			font-size: 22rpx;
+			font-weight: 400;
+			margin-left: 4rpx;
+		}
+	}
+	> text + text {
+		font-size: 21rpx;
+		font-weight: 400;
+		color: var(--qm-muted);
+		margin-top: 10rpx;
+	}
 }
-
-.upsert-popup__body {
-	max-height: 68vh;
-	margin-top: 8rpx;
+.member-card.is-low .member-balance > text:first-child {
+	color: var(--qm-warning);
 }
-
-.upsert-popup__loading {
+.member-card.is-low .qm-avatar {
+	background: var(--qm-cream);
+	color: var(--qm-warning);
+}
+.member-card.is-muted .qm-avatar {
+	background: var(--qm-paper);
+	color: var(--qm-muted);
+}
+.member-card.is-muted .member-balance > text:first-child {
+	color: var(--qm-muted);
+}
+.member-meta {
 	display: flex;
-	align-items: center;
-	gap: 16rpx;
-	padding: 14rpx 4rpx 24rpx;
-}
-
-.upsert-popup__loading-text {
-	font-size: 22rpx;
-	color: var(--muted);
-}
-
-.upsert-popup :deep(.cl-form-item) {
-	margin-bottom: 20rpx;
-}
-
-.upsert-popup :deep(.cl-form-item__label) {
-	font-size: 24rpx;
-	font-weight: 700;
-	color: var(--ink);
-}
-
-.upsert-popup :deep(.cl-input),
-.upsert-popup :deep(.cl-textarea) {
-	background: rgba(255, 255, 255, 0.78);
-}
-
-.upsert-choice-group {
-	display: flex;
-	flex-wrap: wrap;
+	justify-content: space-between;
 	gap: 14rpx;
-	padding: 10rpx;
-	border-radius: 24rpx;
-	background: rgba(255, 255, 255, 0.6);
-	border: 1rpx solid rgba(31, 39, 52, 0.06);
-	box-shadow: inset 0 1rpx 0 rgba(255, 255, 255, 0.9);
-}
-
-.upsert-choice {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	min-width: 112rpx;
-	height: 62rpx;
-	padding: 0 24rpx;
-	border-radius: 18rpx;
-	background: rgba(255, 255, 255, 0.92);
-	border: 1rpx solid rgba(31, 39, 52, 0.1);
-	color: var(--ink);
-	font-size: 24rpx;
-	font-weight: 700;
-	box-sizing: border-box;
-	transition: all 0.2s ease;
-}
-
-.upsert-choice.is-active {
-	color: #fff;
-	border-color: transparent;
-	box-shadow: 0 10rpx 24rpx rgba(42, 58, 69, 0.12);
-}
-
-.upsert-choice-group--gender .upsert-choice.is-active {
-	background: linear-gradient(135deg, #e7659a, #c94e7d);
-}
-
-.upsert-choice-group--source .upsert-choice.is-active {
-	background: linear-gradient(135deg, #44c879, #15935d);
-}
-
-.empty-wrap,
-.loading-wrap {
-	position: relative;
-	z-index: 2;
-	padding: 90rpx 0 20rpx;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-}
-
-.loading-wrap__text {
-	margin-top: 18rpx;
-	font-size: 24rpx;
-	color: var(--muted);
-}
-
-.list-footer {
-	padding: 8rpx 0 14rpx;
-	text-align: center;
+	margin-top: 20rpx;
 	font-size: 22rpx;
-	color: #9aa0aa;
+	color: var(--qm-muted);
+	> text:first-child {
+		flex: 1;
+		min-width: 0;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+	> text:last-child {
+		flex-shrink: 0;
+	}
 }
-
-/* Compact member-directory treatment aligned with the supplied reference. */
-.page-member {
-	--ink: #2e293d;
-	--muted: #9892a4;
-	--accent: #724af1;
-	--accent-dark: #633af0;
-	min-height: 100%;
-	padding: 92rpx 24rpx 170rpx;
-	background: #fbfbfe;
+.member-choice {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	button {
+		color: var(--qm-brand);
+		min-height: 60rpx;
+	}
 }
-
-.member-hero {
-	margin: 0 -24rpx;
-	padding: 0 24rpx 19rpx;
-	background: #fbfbfe;
-	overflow: visible;
+.member-action {
+	display: block;
+	text-align: right;
+	font-size: 24rpx;
+	color: var(--qm-brand);
+	margin-top: 14rpx;
 }
-
-.member-hero__top { height: 58rpx; padding: 0 6rpx; justify-content: space-between; }
-.member-hero__title { margin-right: 14rpx; color: var(--ink); font-size: 34rpx; font-weight: 850; }
-.member-hero__count { display: inline; height: auto; color: #9993a4; font-size: 19rpx; font-weight: 500; line-height: 1; }
-.member-hero__count::before { display: none; }
-.member-hero__count-value { color: var(--accent); font-size: 20rpx; font-weight: 800; }
-.member-hero__more { color: #958fa2; font-size: 25rpx; letter-spacing: 5rpx; line-height: 1; }
-
-.member-search-row { display: flex; align-items: center; gap: 16rpx; margin-top: 20rpx; }
-.member-search { flex: 1; height: 70rpx; margin: 0; gap: 12rpx; padding: 0 13rpx 0 20rpx; border: 1rpx solid #ece9f1; border-radius: 18rpx; background: #fff; box-shadow: none; }
-.member-search__input { font-size: 21rpx; }.member-search__placeholder { color: #ada8b5; font-weight: 400; }
-.member-search__filter { width: 45rpx; height: 45rpx; border-radius: 12rpx; background: #f1edff; box-shadow: none; }.filter-funnel { width: 25rpx; height: 25rpx; filter: invert(35%) sepia(69%) saturate(2682%) hue-rotate(238deg) brightness(96%); }
-.member-search__badge { top: -8rpx; right: -8rpx; min-width: 22rpx; height: 22rpx; padding: 0 4rpx; background: #f06179; font-size: 14rpx; line-height: 22rpx; }
-.member-add-button { display: flex; align-items: center; justify-content: center; width: 70rpx; height: 70rpx; border-radius: 20rpx; background: linear-gradient(145deg,#8158fc,#6841ec); box-shadow: 0 8rpx 18rpx rgba(101,61,234,.26); }
-
-.member-hero__filters { margin-top: 18rpx; }.member-tab-group { gap: 12rpx; }.member-tab-chip { height: 43rpx; padding: 0 20rpx; border-color: #e5dfff; background: #f7f4ff; color: #7a59df; font-size: 18rpx; }.member-tab-chip.is-active { background: #754bf2; border-color: #754bf2; box-shadow: none; }
-.toolbar__active-bar { gap: 12rpx; margin-top: 11rpx; }.active-pill { height: 34rpx; padding: 0 12rpx; background: #f2eff8; color: #80798d; font-size: 16rpx; }.toolbar__reset { color: #754bf2; font-size: 17rpx; }
-
-.member-list { margin-top: 4rpx; }.member-card { margin-bottom: 14rpx; padding: 20rpx 20rpx 16rpx; border: 1rpx solid #efedf3; border-radius: 19rpx; background: #fff; box-shadow: 0 6rpx 20rpx rgba(44,34,79,.045); overflow: visible; }.member-card::before { display: none; }
-.member-card, .member-card.is-violet, .member-card.is-amber, .member-card.is-blue, .member-card.is-aqua { --tone: #7b54ef; --tone-dark: #6943e6; --tone-soft: #f1edff; --tone-glow: rgba(109,68,237,.14); }
-.member-card.is-amber { --tone: #e9ad50; --tone-dark: #c98a2c; --tone-soft: #fff4df; }.member-card.is-blue { --tone: #6592ef; --tone-dark: #4873ce; --tone-soft: #ecf2ff; }.member-card.is-aqua { --tone: #50baab; --tone-dark: #32998b; --tone-soft: #e6f8f4; }
-.member-card__top { align-items: center; gap: 14rpx; }.member-card__avatar { width: 68rpx; height: 68rpx; border-radius: 50%; box-shadow: none; font-size: 29rpx; }.member-card__body { padding-top: 0; }.member-card__name-row { gap: 7rpx; }.member-card__name { max-width: 250rpx; color: #332d42; font-size: 24rpx; }.member-card__member-mark { width: 24rpx; height: 24rpx; background: #e9f7f0; }.member-card__phone { margin-top: 5rpx; color: #9690a1; font-size: 17rpx; }.member-card__tags { gap: 7rpx; margin-top: 7rpx; }.tag-chip { min-width: 45rpx; height: 27rpx; padding: 0 10rpx; font-size: 15rpx; }
-.member-card__metrics { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); margin-top: 17rpx; padding: 14rpx 0; border-top: 1rpx solid #f0eef4; border-bottom: 1rpx solid #f0eef4; }.member-card__metrics view { display: flex; align-items: center; min-width: 0; flex-direction: column; gap: 6rpx; border-right: 1rpx solid #efedf3; }.member-card__metrics view:last-child { border-right: 0; }.member-card__metrics text { color: #9b95a6; font-size: 15rpx; }.member-card__metrics strong { color: #40394f; font-size: 22rpx; line-height: 1; }.member-card__metrics small { margin-left: 2rpx; color: #9b95a6; font-size: 14rpx; font-weight: 500; }.member-card__consume-time { font-size: 17rpx !important; padding-top: 2rpx; }
-.member-card__footer { margin-top: 12rpx; gap: 16rpx; }.member-card__quick { gap: 22rpx; }.member-card__action-link { gap: 6rpx; color: #928c9c; font-size: 16rpx; }.member-card__detail { width: 112rpx; height: 39rpx; border-radius: 11rpx; color: var(--tone-dark); font-size: 16rpx; }.member-card__detail-text { font-size: 16rpx; }.member-fab { display: none; }
-
-.filter-popup, .upsert-popup { background: #fbfbfe; }.chip.is-active, .filter-popup__primary { background: linear-gradient(135deg,#8158fc,#6841ec); border-color: #6841ec; box-shadow: 0 8rpx 20rpx rgba(101,61,234,.18); }.filter-popup__secondary { background: #f0edf5; }.upsert-choice-group--source .upsert-choice.is-active { background: #7048f1; }
-
-@media screen and (max-width: 390px) {
-	.page-member {
-		padding-right: 24rpx;
-		padding-left: 24rpx;
-	}
-
-	.member-hero {
-		margin-right: -24rpx;
-		margin-left: -24rpx;
-		padding-right: 24rpx;
-		padding-left: 24rpx;
-	}
-
-	.member-search {
-		height: 104rpx;
-		padding-left: 28rpx;
-	}
-
-	.member-search__filter {
-		width: 88rpx;
-		height: 88rpx;
-	}
-
-	.member-card {
-		padding: 36rpx 28rpx 24rpx;
-		border-radius: 32rpx;
-	}
-
-	.member-card__top {
-		gap: 20rpx;
-	}
-
-	.member-card__avatar {
-		width: 96rpx;
-		height: 96rpx;
-		font-size: 42rpx;
-	}
-
-	.member-card__stats {
-		width: 142rpx;
-	}
-
-	.member-card__name {
-		max-width: 210rpx;
-		font-size: 32rpx;
-	}
-
-	.member-card__remain-value {
-		font-size: 44rpx;
-	}
-
-	.member-card__footer {
-		gap: 16rpx;
-	}
-
-	.member-card__quick {
-		gap: 22rpx;
-	}
-
-	.member-card__detail {
-		width: 174rpx;
-	}
+.member-end {
+	display: block;
+	text-align: center;
+	font-size: 21rpx;
+	color: var(--qm-muted);
+	margin: 22rpx 0;
+}
+.member-filter-group .qm-chips {
+	margin: 16rpx 0 28rpx;
 }
 </style>

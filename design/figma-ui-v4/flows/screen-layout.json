@@ -1,0 +1,808 @@
+[
+  {
+    "id": "login",
+    "rect": {
+      "bottom": 1040.5,
+      "height": 880,
+      "left": 32,
+      "right": 422,
+      "top": 160.5,
+      "width": 390,
+      "x": 32,
+      "y": 160.5
+    }
+  },
+  {
+    "id": "member-new",
+    "rect": {
+      "bottom": 1289.5,
+      "height": 1129,
+      "left": 454,
+      "right": 844,
+      "top": 160.5,
+      "width": 390,
+      "x": 454,
+      "y": 160.5
+    }
+  },
+  {
+    "id": "member-edit",
+    "rect": {
+      "bottom": 1342.5,
+      "height": 1182,
+      "left": 876,
+      "right": 1266,
+      "top": 160.5,
+      "width": 390,
+      "x": 876,
+      "y": 160.5
+    }
+  },
+  {
+    "id": "member-records",
+    "rect": {
+      "bottom": 1040.5,
+      "height": 880,
+      "left": 1298,
+      "right": 1688,
+      "top": 160.5,
+      "width": 390,
+      "x": 1298,
+      "y": 160.5
+    }
+  },
+  {
+    "id": "member-flows",
+    "rect": {
+      "bottom": 1040.5,
+      "height": 880,
+      "left": 1720,
+      "right": 2110,
+      "top": 160.5,
+      "width": 390,
+      "x": 1720,
+      "y": 160.5
+    }
+  },
+  {
+    "id": "member-sms",
+    "rect": {
+      "bottom": 2268.5,
+      "height": 880,
+      "left": 32,
+      "right": 422,
+      "top": 1388.5,
+      "width": 390,
+      "x": 32,
+      "y": 1388.5
+    }
+  },
+  {
+    "id": "open-card",
+    "rect": {
+      "bottom": 2297.5,
+      "height": 909,
+      "left": 454,
+      "right": 844,
+      "top": 1388.5,
+      "width": 390,
+      "x": 454,
+      "y": 1388.5
+    }
+  },
+  {
+    "id": "deduct",
+    "rect": {
+      "bottom": 2405.5,
+      "height": 1017,
+      "left": 876,
+      "right": 1266,
+      "top": 1388.5,
+      "width": 390,
+      "x": 876,
+      "y": 1388.5
+    }
+  },
+  {
+    "id": "deduct-edit",
+    "rect": {
+      "bottom": 2378.5,
+      "height": 990,
+      "left": 1298,
+      "right": 1688,
+      "top": 1388.5,
+      "width": 390,
+      "x": 1298,
+      "y": 1388.5
+    }
+  },
+  {
+    "id": "deduct-confirm",
+    "rect": {
+      "bottom": 2266.5,
+      "height": 878,
+      "left": 1720,
+      "right": 2110,
+      "top": 1388.5,
+      "width": 390,
+      "x": 1720,
+      "y": 1388.5
+    }
+  },
+  {
+    "id": "deduct-success",
+    "rect": {
+      "bottom": 3347.5,
+      "height": 896,
+      "left": 32,
+      "right": 422,
+      "top": 2451.5,
+      "width": 390,
+      "x": 32,
+      "y": 2451.5
+    }
+  },
+  {
+    "id": "member-success",
+    "rect": {
+      "bottom": 3331.5,
+      "height": 880,
+      "left": 454,
+      "right": 844,
+      "top": 2451.5,
+      "width": 390,
+      "x": 454,
+      "y": 2451.5
+    }
+  },
+  {
+    "id": "card-success",
+    "rect": {
+      "bottom": 3331.5,
+      "height": 880,
+      "left": 876,
+      "right": 1266,
+      "top": 2451.5,
+      "width": 390,
+      "x": 876,
+      "y": 2451.5
+    }
+  },
+  {
+    "id": "card-manage",
+    "rect": {
+      "bottom": 3331.5,
+      "height": 880,
+      "left": 1298,
+      "right": 1688,
+      "top": 2451.5,
+      "width": 390,
+      "x": 1298,
+      "y": 2451.5
+    }
+  },
+  {
+    "id": "card-plus",
+    "rect": {
+      "bottom": 3329.5,
+      "height": 878,
+      "left": 1720,
+      "right": 2110,
+      "top": 2451.5,
+      "width": 390,
+      "x": 1720,
+      "y": 2451.5
+    }
+  },
+  {
+    "id": "card-set",
+    "rect": {
+      "bottom": 4271.5,
+      "height": 878,
+      "left": 32,
+      "right": 422,
+      "top": 3393.5,
+      "width": 390,
+      "x": 32,
+      "y": 3393.5
+    }
+  },
+  {
+    "id": "card-stop",
+    "rect": {
+      "bottom": 4271.5,
+      "height": 878,
+      "left": 454,
+      "right": 844,
+      "top": 3393.5,
+      "width": 390,
+      "x": 454,
+      "y": 3393.5
+    }
+  },
+  {
+    "id": "card-enable",
+    "rect": {
+      "bottom": 4271.5,
+      "height": 878,
+      "left": 876,
+      "right": 1266,
+      "top": 3393.5,
+      "width": 390,
+      "x": 876,
+      "y": 3393.5
+    }
+  },
+  {
+    "id": "card-discard",
+    "rect": {
+      "bottom": 4271.5,
+      "height": 878,
+      "left": 1298,
+      "right": 1688,
+      "top": 3393.5,
+      "width": 390,
+      "x": 1298,
+      "y": 3393.5
+    }
+  },
+  {
+    "id": "member-delete",
+    "rect": {
+      "bottom": 4271.5,
+      "height": 878,
+      "left": 1720,
+      "right": 2110,
+      "top": 3393.5,
+      "width": 390,
+      "x": 1720,
+      "y": 3393.5
+    }
+  },
+  {
+    "id": "member-delete-blocked",
+    "rect": {
+      "bottom": 5195.5,
+      "height": 878,
+      "left": 32,
+      "right": 422,
+      "top": 4317.5,
+      "width": 390,
+      "x": 32,
+      "y": 4317.5
+    }
+  },
+  {
+    "id": "records",
+    "rect": {
+      "bottom": 5197.5,
+      "height": 880,
+      "left": 454,
+      "right": 844,
+      "top": 4317.5,
+      "width": 390,
+      "x": 454,
+      "y": 4317.5
+    }
+  },
+  {
+    "id": "date-filter",
+    "rect": {
+      "bottom": 5195.5,
+      "height": 878,
+      "left": 876,
+      "right": 1266,
+      "top": 4317.5,
+      "width": 390,
+      "x": 876,
+      "y": 4317.5
+    }
+  },
+  {
+    "id": "record-card",
+    "rect": {
+      "bottom": 5283.5,
+      "height": 966,
+      "left": 1298,
+      "right": 1688,
+      "top": 4317.5,
+      "width": 390,
+      "x": 1298,
+      "y": 4317.5
+    }
+  },
+  {
+    "id": "record-guest",
+    "rect": {
+      "bottom": 5197.5,
+      "height": 880,
+      "left": 1720,
+      "right": 2110,
+      "top": 4317.5,
+      "width": 390,
+      "x": 1720,
+      "y": 4317.5
+    }
+  },
+  {
+    "id": "consume-guest",
+    "rect": {
+      "bottom": 6360.5,
+      "height": 1031,
+      "left": 32,
+      "right": 422,
+      "top": 5329.5,
+      "width": 390,
+      "x": 32,
+      "y": 5329.5
+    }
+  },
+  {
+    "id": "consume-member",
+    "rect": {
+      "bottom": 6209.5,
+      "height": 880,
+      "left": 454,
+      "right": 844,
+      "top": 5329.5,
+      "width": 390,
+      "x": 454,
+      "y": 5329.5
+    }
+  },
+  {
+    "id": "consume-edit",
+    "rect": {
+      "bottom": 6360.5,
+      "height": 1031,
+      "left": 876,
+      "right": 1266,
+      "top": 5329.5,
+      "width": 390,
+      "x": 876,
+      "y": 5329.5
+    }
+  },
+  {
+    "id": "record-delete",
+    "rect": {
+      "bottom": 6207.5,
+      "height": 878,
+      "left": 1298,
+      "right": 1688,
+      "top": 5329.5,
+      "width": 390,
+      "x": 1298,
+      "y": 5329.5
+    }
+  },
+  {
+    "id": "record-delete-guest",
+    "rect": {
+      "bottom": 6207.5,
+      "height": 878,
+      "left": 1720,
+      "right": 2110,
+      "top": 5329.5,
+      "width": 390,
+      "x": 1720,
+      "y": 5329.5
+    }
+  },
+  {
+    "id": "consume-success",
+    "rect": {
+      "bottom": 7286.5,
+      "height": 880,
+      "left": 32,
+      "right": 422,
+      "top": 6406.5,
+      "width": 390,
+      "x": 32,
+      "y": 6406.5
+    }
+  },
+  {
+    "id": "staff",
+    "rect": {
+      "bottom": 7286.5,
+      "height": 880,
+      "left": 454,
+      "right": 844,
+      "top": 6406.5,
+      "width": 390,
+      "x": 454,
+      "y": 6406.5
+    }
+  },
+  {
+    "id": "staff-new",
+    "rect": {
+      "bottom": 7399.5,
+      "height": 993,
+      "left": 876,
+      "right": 1266,
+      "top": 6406.5,
+      "width": 390,
+      "x": 876,
+      "y": 6406.5
+    }
+  },
+  {
+    "id": "staff-edit",
+    "rect": {
+      "bottom": 7431.5,
+      "height": 1025,
+      "left": 1298,
+      "right": 1688,
+      "top": 6406.5,
+      "width": 390,
+      "x": 1298,
+      "y": 6406.5
+    }
+  },
+  {
+    "id": "staff-password",
+    "rect": {
+      "bottom": 7284.5,
+      "height": 878,
+      "left": 1720,
+      "right": 2110,
+      "top": 6406.5,
+      "width": 390,
+      "x": 1720,
+      "y": 6406.5
+    }
+  },
+  {
+    "id": "staff-stop",
+    "rect": {
+      "bottom": 8355.5,
+      "height": 878,
+      "left": 32,
+      "right": 422,
+      "top": 7477.5,
+      "width": 390,
+      "x": 32,
+      "y": 7477.5
+    }
+  },
+  {
+    "id": "staff-enable",
+    "rect": {
+      "bottom": 8355.5,
+      "height": 878,
+      "left": 454,
+      "right": 844,
+      "top": 7477.5,
+      "width": 390,
+      "x": 454,
+      "y": 7477.5
+    }
+  },
+  {
+    "id": "profile",
+    "rect": {
+      "bottom": 8357.5,
+      "height": 880,
+      "left": 876,
+      "right": 1266,
+      "top": 7477.5,
+      "width": 390,
+      "x": 876,
+      "y": 7477.5
+    }
+  },
+  {
+    "id": "account",
+    "rect": {
+      "bottom": 8445.5,
+      "height": 968,
+      "left": 1298,
+      "right": 1688,
+      "top": 7477.5,
+      "width": 390,
+      "x": 1298,
+      "y": 7477.5
+    }
+  },
+  {
+    "id": "about",
+    "rect": {
+      "bottom": 8357.5,
+      "height": 880,
+      "left": 1720,
+      "right": 2110,
+      "top": 7477.5,
+      "width": 390,
+      "x": 1720,
+      "y": 7477.5
+    }
+  },
+  {
+    "id": "agreement",
+    "rect": {
+      "bottom": 9371.5,
+      "height": 880,
+      "left": 32,
+      "right": 422,
+      "top": 8491.5,
+      "width": 390,
+      "x": 32,
+      "y": 8491.5
+    }
+  },
+  {
+    "id": "privacy",
+    "rect": {
+      "bottom": 9371.5,
+      "height": 880,
+      "left": 454,
+      "right": 844,
+      "top": 8491.5,
+      "width": 390,
+      "x": 454,
+      "y": 8491.5
+    }
+  },
+  {
+    "id": "logout",
+    "rect": {
+      "bottom": 9369.5,
+      "height": 878,
+      "left": 876,
+      "right": 1266,
+      "top": 8491.5,
+      "width": 390,
+      "x": 876,
+      "y": 8491.5
+    }
+  },
+  {
+    "id": "staff-success",
+    "rect": {
+      "bottom": 9371.5,
+      "height": 880,
+      "left": 1298,
+      "right": 1688,
+      "top": 8491.5,
+      "width": 390,
+      "x": 1298,
+      "y": 8491.5
+    }
+  },
+  {
+    "id": "loading",
+    "rect": {
+      "bottom": 9371.5,
+      "height": 880,
+      "left": 1720,
+      "right": 2110,
+      "top": 8491.5,
+      "width": 390,
+      "x": 1720,
+      "y": 8491.5
+    }
+  },
+  {
+    "id": "members-empty",
+    "rect": {
+      "bottom": 10297.5,
+      "height": 880,
+      "left": 32,
+      "right": 422,
+      "top": 9417.5,
+      "width": 390,
+      "x": 32,
+      "y": 9417.5
+    }
+  },
+  {
+    "id": "records-empty",
+    "rect": {
+      "bottom": 10297.5,
+      "height": 880,
+      "left": 454,
+      "right": 844,
+      "top": 9417.5,
+      "width": 390,
+      "x": 454,
+      "y": 9417.5
+    }
+  },
+  {
+    "id": "load-error",
+    "rect": {
+      "bottom": 10297.5,
+      "height": 880,
+      "left": 876,
+      "right": 1266,
+      "top": 9417.5,
+      "width": 390,
+      "x": 876,
+      "y": 9417.5
+    }
+  },
+  {
+    "id": "submit-error",
+    "rect": {
+      "bottom": 10392.5,
+      "height": 975,
+      "left": 1298,
+      "right": 1688,
+      "top": 9417.5,
+      "width": 390,
+      "x": 1298,
+      "y": 9417.5
+    }
+  },
+  {
+    "id": "validation",
+    "rect": {
+      "bottom": 10295.5,
+      "height": 878,
+      "left": 1720,
+      "right": 2110,
+      "top": 9417.5,
+      "width": 390,
+      "x": 1720,
+      "y": 9417.5
+    }
+  },
+  {
+    "id": "no-card",
+    "rect": {
+      "bottom": 11318.5,
+      "height": 880,
+      "left": 32,
+      "right": 422,
+      "top": 10438.5,
+      "width": 390,
+      "x": 32,
+      "y": 10438.5
+    }
+  },
+  {
+    "id": "no-usable-card",
+    "rect": {
+      "bottom": 11318.5,
+      "height": 880,
+      "left": 454,
+      "right": 844,
+      "top": 10438.5,
+      "width": 390,
+      "x": 454,
+      "y": 10438.5
+    }
+  },
+  {
+    "id": "card-expired",
+    "rect": {
+      "bottom": 11318.5,
+      "height": 880,
+      "left": 876,
+      "right": 1266,
+      "top": 10438.5,
+      "width": 390,
+      "x": 876,
+      "y": 10438.5
+    }
+  },
+  {
+    "id": "card-stopped",
+    "rect": {
+      "bottom": 11318.5,
+      "height": 880,
+      "left": 1298,
+      "right": 1688,
+      "top": 10438.5,
+      "width": 390,
+      "x": 1298,
+      "y": 10438.5
+    }
+  },
+  {
+    "id": "card-discarded",
+    "rect": {
+      "bottom": 11318.5,
+      "height": 880,
+      "left": 1720,
+      "right": 2110,
+      "top": 10438.5,
+      "width": 390,
+      "x": 1720,
+      "y": 10438.5
+    }
+  },
+  {
+    "id": "sms-sending",
+    "rect": {
+      "bottom": 12244.5,
+      "height": 880,
+      "left": 32,
+      "right": 422,
+      "top": 11364.5,
+      "width": 390,
+      "x": 32,
+      "y": 11364.5
+    }
+  },
+  {
+    "id": "sms-failed",
+    "rect": {
+      "bottom": 12244.5,
+      "height": 880,
+      "left": 454,
+      "right": 844,
+      "top": 11364.5,
+      "width": 390,
+      "x": 454,
+      "y": 11364.5
+    }
+  },
+  {
+    "id": "submitting",
+    "rect": {
+      "bottom": 12242.5,
+      "height": 878,
+      "left": 876,
+      "right": 1266,
+      "top": 11364.5,
+      "width": 390,
+      "x": 876,
+      "y": 11364.5
+    }
+  },
+  {
+    "id": "operations",
+    "rect": {
+      "bottom": 12244.5,
+      "height": 880,
+      "left": 1298,
+      "right": 1688,
+      "top": 11364.5,
+      "width": 390,
+      "x": 1298,
+      "y": 11364.5
+    }
+  },
+  {
+    "id": "stores",
+    "rect": {
+      "bottom": 12244.5,
+      "height": 880,
+      "left": 1720,
+      "right": 2110,
+      "top": 11364.5,
+      "width": 390,
+      "x": 1720,
+      "y": 11364.5
+    }
+  },
+  {
+    "id": "schemes",
+    "rect": {
+      "bottom": 13180.5,
+      "height": 890,
+      "left": 32,
+      "right": 422,
+      "top": 12290.5,
+      "width": 390,
+      "x": 32,
+      "y": 12290.5
+    }
+  },
+  {
+    "id": "brand",
+    "rect": {
+      "bottom": 13491.5,
+      "height": 1201,
+      "left": 454,
+      "right": 844,
+      "top": 12290.5,
+      "width": 390,
+      "x": 454,
+      "y": 12290.5
+    }
+  }
+]

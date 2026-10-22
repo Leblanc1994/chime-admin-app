@@ -1,0 +1,16 @@
+{
+  "fileKey": "DdJzWUCAaR8FscwCjLzYz9",
+  "pageId": "64:2",
+  "pageName": "30 · 千绵品牌视觉 V4",
+  "headerId": "64:3",
+  "screens": {
+    "home": "69:4",
+    "members": "69:229",
+    "member": "69:395",
+    "workbench": "69:525",
+    "my": "69:658"
+  },
+  "navInstances": ["70:4", "70:30", "70:56", "70:82"],
+  "source": "design/figma-ui-v4",
+  "status": "Five editable primary screens synced and visually checked; local prototype contains deduction flow."
+}

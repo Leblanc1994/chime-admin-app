@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1180" viewBox="0 0 1600 1180"><rect width="1600" height="1180" fill="#f8f8fa"/>
+<text x="40" y="50" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="28" font-weight="650" fill="#303138">CHIME / 信息架构与核心流程</text>
+<text x="40" y="81" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="400" fill="#73757c">v0.1 · 店长日常业务优先 · 虚线框表示新增交互或演示范围</text>
+<rect x="40" y="120" width="190" height="72" rx="7" fill="#fdfdfd" stroke="#c9cbd1"/>
+<text x="56" y="148" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="15" font-weight="600" fill="#303138">A01 登录</text>
+<text x="56" y="171" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="#73757c">账号 / 密码 / 图形验证码</text>
+<path d="M230 156 H272 M265 151 L272 156 L265 161" fill="none" stroke="#979ba5" stroke-width="1.5"/>
+<rect x="280" y="120" width="285" height="72" rx="7" fill="#fdfdfd" stroke="#c9cbd1"/>
+<text x="296" y="148" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="15" font-weight="600" fill="#303138">A02 首页</text>
+<text x="296" y="171" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="#73757c">概览 / 提醒 / 常用操作</text>
+<rect x="595" y="120" width="285" height="72" rx="7" fill="#fdfdfd" stroke="#c9cbd1"/>
+<text x="611" y="148" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="15" font-weight="600" fill="#303138">B01 会员</text>
+<text x="611" y="171" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="#73757c">搜索 → 档案与次卡</text>
+<rect x="910" y="120" width="285" height="72" rx="7" fill="#fdfdfd" stroke="#c9cbd1"/>
+<text x="926" y="148" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="15" font-weight="600" fill="#303138">C01 工作台</text>
+<text x="926" y="171" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="#73757c">消费查询 / 员工管理</text>
+<rect x="1225" y="120" width="285" height="72" rx="7" fill="#fdfdfd" stroke="#c9cbd1"/>
+<text x="1241" y="148" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="15" font-weight="600" fill="#303138">D05 我的</text>
+<text x="1241" y="171" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="#73757c">个人资料 / 账号 / 关于</text>
+<text x="40" y="265" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="19" font-weight="600" fill="#303138">01 / 会员扣次</text>
+<rect x="40" y="292" width="270" height="72" rx="7" fill="#fdfdfd" stroke="#c9cbd1"/>
+<text x="56" y="320" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="15" font-weight="600" fill="#303138">首页扣次</text>
+<text x="56" y="343" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="#73757c">选择会员</text>
+<path d="M310 328 H342 M335 323 L342 328 L335 333" fill="none" stroke="#979ba5" stroke-width="1.5"/>
+<rect x="350" y="292" width="270" height="72" rx="7" fill="#fdfdfd" stroke="#c9cbd1"/>
+<text x="366" y="320" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="15" font-weight="600" fill="#303138">B01 会员列表</text>
+<text x="366" y="343" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="#73757c">搜索姓名或手机号</text>
+<path d="M620 328 H652 M645 323 L652 328 L645 333" fill="none" stroke="#979ba5" stroke-width="1.5"/>
+<rect x="660" y="292" width="270" height="72" rx="7" fill="#fdfdfd" stroke="#c9cbd1"/>
+<text x="676" y="320" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="15" font-weight="600" fill="#303138">B05 填写扣次</text>
+<text x="676" y="343" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="#73757c">卡项 / 次数 / 时间</text>
+<path d="M930 328 H962 M955 323 L962 328 L955 333" fill="none" stroke="#979ba5" stroke-width="1.5"/>
+<rect x="970" y="292" width="270" height="72" rx="7" fill="#fdfdfd" stroke="#c9cbd1" stroke-dasharray="5 4"/>
+<text x="986" y="320" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="15" font-weight="600" fill="#303138">B06 核对提交</text>
+<text x="986" y="343" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="#73757c">对象与扣后余次</text>
+<path d="M1240 328 H1272 M1265 323 L1272 328 L1265 333" fill="none" stroke="#979ba5" stroke-width="1.5"/>
+<rect x="1280" y="292" width="270" height="72" rx="7" fill="#fdfdfd" stroke="#c9cbd1"/>
+<text x="1296" y="320" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="15" font-weight="600" fill="#303138">B07 结果</text>
+<text x="1296" y="343" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="#73757c">更新余额、记录、流水</text>
+<text x="40" y="390" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" font-weight="400" fill="#73757c">失败保留输入，可重试；余次不足、过期、停用和作废不可扣次；短信发送结果独立于扣次结果。</text>
+<text x="40" y="455" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="19" font-weight="600" fill="#303138">02 / 新会员与开卡</text>
+<rect x="40" y="482" width="270" height="72" rx="7" fill="#fdfdfd" stroke="#c9cbd1"/>
+<text x="56" y="510" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="15" font-weight="600" fill="#303138">B01 新增会员</text>
+<text x="56" y="533" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="#73757c">昵称 / 微信号 / 来源必填</text>
+<path d="M310 518 H342 M335 513 L342 518 L335 523" fill="none" stroke="#979ba5" stroke-width="1.5"/>
+<rect x="350" y="482" width="270" height="72" rx="7" fill="#fdfdfd" stroke="#c9cbd1"/>
+<text x="366" y="510" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="15" font-weight="600" fill="#303138">B02 建立档案</text>
+<text x="366" y="533" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="#73757c">姓名 / 手机选填</text>
+<path d="M620 518 H652 M645 513 L652 518 L645 523" fill="none" stroke="#979ba5" stroke-width="1.5"/>
+<rect x="660" y="482" width="270" height="72" rx="7" fill="#fdfdfd" stroke="#c9cbd1"/>
+<text x="676" y="510" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="15" font-weight="600" fill="#303138">B03 会员档案</text>
+<text x="676" y="533" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="#73757c">从当前会员开始开卡</text>
+<path d="M930 518 H962 M955 513 L962 518 L955 523" fill="none" stroke="#979ba5" stroke-width="1.5"/>
+<rect x="970" y="482" width="270" height="72" rx="7" fill="#fdfdfd" stroke="#c9cbd1"/>
+<text x="986" y="510" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="15" font-weight="600" fill="#303138">B04 次卡信息</text>
+<text x="986" y="533" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="#73757c">卡名 / 总次 / 有效期</text>
+<path d="M1240 518 H1272 M1265 513 L1272 518 L1265 523" fill="none" stroke="#979ba5" stroke-width="1.5"/>
+<rect x="1280" y="482" width="270" height="72" rx="7" fill="#fdfdfd" stroke="#c9cbd1"/>
+<text x="1296" y="510" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="15" font-weight="600" fill="#303138">B07 开卡结果</text>
+<text x="1296" y="533" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="#73757c">回到次卡账户</text>
+<text x="40" y="580" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" font-weight="400" fill="#73757c">次卡服务方案目前仍为演示；本流程保留手填卡信息，不建立尚未实现的依赖。</text>
+<text x="40" y="645" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="19" font-weight="600" fill="#303138">03 / 消费查询与更正</text>
+<rect x="40" y="672" width="270" height="72" rx="7" fill="#fdfdfd" stroke="#c9cbd1"/>
+<text x="56" y="700" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="15" font-weight="600" fill="#303138">C01 工作台</text>
+<text x="56" y="723" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="#73757c">消费查询入口</text>
+<path d="M310 708 H342 M335 703 L342 708 L335 713" fill="none" stroke="#979ba5" stroke-width="1.5"/>
+<rect x="350" y="672" width="270" height="72" rx="7" fill="#fdfdfd" stroke="#c9cbd1"/>
+<text x="366" y="700" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="15" font-weight="600" fill="#303138">C02 消费查询</text>
+<text x="366" y="723" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="#73757c">日期 / 姓名 / 类型</text>
+<path d="M620 708 H652 M645 703 L652 708 L645 713" fill="none" stroke="#979ba5" stroke-width="1.5"/>
+<rect x="660" y="672" width="270" height="72" rx="7" fill="#fdfdfd" stroke="#c9cbd1" stroke-dasharray="5 4"/>
+<text x="676" y="700" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="15" font-weight="600" fill="#303138">C03 消费详情</text>
+<text x="676" y="723" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="#73757c">单笔消费上下文</text>
+<path d="M930 708 H962 M955 703 L962 708 L955 713" fill="none" stroke="#979ba5" stroke-width="1.5"/>
+<rect x="970" y="672" width="270" height="72" rx="7" fill="#fdfdfd" stroke="#c9cbd1"/>
+<text x="986" y="700" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="15" font-weight="600" fill="#303138">C04 编辑或 C05 删除</text>
+<text x="986" y="723" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="#73757c">次卡消费回到扣次填写</text>
+<path d="M1240 708 H1272 M1265 703 L1272 708 L1265 713" fill="none" stroke="#979ba5" stroke-width="1.5"/>
+<rect x="1280" y="672" width="270" height="72" rx="7" fill="#fdfdfd" stroke="#c9cbd1"/>
+<text x="1296" y="700" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="15" font-weight="600" fill="#303138">B07 结果</text>
+<text x="1296" y="723" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="#73757c">必要时重算余次与流水</text>
+<text x="40" y="770" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" font-weight="400" fill="#73757c">新增散客消费从首页或消费查询进入；不新增支付、收款、金额、到账或退款能力。</text>
+<text x="40" y="835" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="19" font-weight="600" fill="#303138">04 / 员工与账号</text>
+<rect x="40" y="862" width="270" height="72" rx="7" fill="#fdfdfd" stroke="#c9cbd1"/>
+<text x="56" y="890" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="15" font-weight="600" fill="#303138">C01 工作台</text>
+<text x="56" y="913" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="#73757c">员工管理</text>
+<path d="M310 898 H342 M335 893 L342 898 L335 903" fill="none" stroke="#979ba5" stroke-width="1.5"/>
+<rect x="350" y="862" width="270" height="72" rx="7" fill="#fdfdfd" stroke="#c9cbd1"/>
+<text x="366" y="890" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="15" font-weight="600" fill="#303138">D01 员工列表</text>
+<text x="366" y="913" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="#73757c">本店 / 状态 / 搜索</text>
+<path d="M620 898 H652 M645 893 L652 898 L645 903" fill="none" stroke="#979ba5" stroke-width="1.5"/>
+<rect x="660" y="862" width="270" height="72" rx="7" fill="#fdfdfd" stroke="#c9cbd1"/>
+<text x="676" y="890" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="15" font-weight="600" fill="#303138">D02 新增或编辑</text>
+<text x="676" y="913" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="#73757c">岗位固定店员</text>
+<path d="M930 898 H962 M955 893 L962 898 L955 903" fill="none" stroke="#979ba5" stroke-width="1.5"/>
+<rect x="970" y="862" width="270" height="72" rx="7" fill="#fdfdfd" stroke="#c9cbd1"/>
+<text x="986" y="890" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="15" font-weight="600" fill="#303138">D03 密码 / D04 状态</text>
+<text x="986" y="913" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="#73757c">二次校验与确认</text>
+<path d="M1240 898 H1272 M1265 893 L1272 898 L1265 903" fill="none" stroke="#979ba5" stroke-width="1.5"/>
+<rect x="1280" y="862" width="270" height="72" rx="7" fill="#fdfdfd" stroke="#c9cbd1"/>
+<text x="1296" y="890" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="15" font-weight="600" fill="#303138">B07 结果</text>
+<text x="1296" y="913" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="#73757c">返回员工列表</text>
+<text x="40" y="960" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" font-weight="400" fill="#73757c">账号编辑时不可修改；停用或重置密码的登录影响需要与服务端联调确认。</text>
+<rect x="40" y="1015" width="460" height="72" rx="7" fill="#fdfdfd" stroke="#c9cbd1" stroke-dasharray="5 4"/>
+<text x="56" y="1043" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="15" font-weight="600" fill="#303138">E01–E04 平台运营 · 单独标注</text>
+<text x="56" y="1066" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="#73757c">门店管理 / 服务方案 / 门店品牌</text>
+<text x="530" y="1041" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="400" fill="#303138">当前多为静态数据或占位操作，是否向店长开放待确认。</text>
+<text x="530" y="1069" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" font-weight="400" fill="#73757c">充值、预约、商品、收款码、客服、反馈不纳入日常业务主线。</text>
+<text x="40" y="1140" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="15" font-weight="600" fill="#303138">下一阶段：评审结构与规则 → Figma 设计基础与组件 → 核心流程高保真 → 全站扩展与状态验收</text>
+</svg>

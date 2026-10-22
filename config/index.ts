@@ -12,9 +12,9 @@ export const config = {
 	// 应用信息
 	app: {
 		// 应用名称
-		name: "CHIME",
+		name: "千绵美学",
 		// 应用描述
-		desc: "uniapp快速开发脚手架",
+		desc: "千绵美学门店管理",
 		// 页面配置
 		pages: {
 			login: "/pages/user/login",

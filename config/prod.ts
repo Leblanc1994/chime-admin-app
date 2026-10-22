@@ -1,8 +1,6 @@
-import { proxy } from "./proxy";
-
 export default {
 	// 根地址
-	host: proxy["/prod/"].target,
+	host: "https://www.chime.pink",
 
 	// 请求地址
 	get baseUrl() {

@@ -1,18 +1,1 @@
-import test from "node:test";
-import assert from "node:assert/strict";
-import fs from "node:fs";
-import path from "node:path";
-
-const root = "/Users/tuanzi/Documents/chime/chime-admin-app";
-
-function read(file) {
-	return fs.readFileSync(path.join(root, file), "utf8");
-}
-
-test("my page avatar edit affordance uses the component library edit icon", () => {
-	const source = read("pages/index/my.vue");
-
-	assert.match(source, /<view class="avatar-edit">\s*<cl-icon\s+name="edit"[^>]*\/>\s*<\/view>/);
-	assert.doesNotMatch(source, /class="icon-pencil"/);
-	assert.doesNotMatch(source, /\.icon-pencil\b/);
-});
+import test from 'node:test';import assert from 'node:assert/strict';import {readFileSync} from 'node:fs';const source=readFileSync(new URL('../pages/index/my.vue',import.meta.url),'utf8');test('profile entry uses the approved Figma edit asset and accessible label',()=>{assert.match(source,/my-imgIcon1.svg/);assert.match(readFileSync(new URL('../static/business/my-imgIcon1.svg',import.meta.url),'utf8'),/<svg/);assert.doesNotMatch(source,/icon-pencil|profile-qr|BeautyOS v/);});

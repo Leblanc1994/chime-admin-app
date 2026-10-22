@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="390" height="844" viewBox="0 0 390 844"><title>D02 新增 / 编辑员工</title><rect width="390" height="844" fill="#fdfdfd"/>
+<path d="M0.0 55.0L390.0 55.0" stroke="rgb(225, 226, 229)" stroke-width="1"/>
+<svg x="31.5" y="16.5" width="21.0" height="21.0" viewBox="0 0 24 24" fill="none" stroke="rgb(37, 38, 42)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5-7 7 7 7"></path></svg>
+<text x="163.0" y="32.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="16" font-weight="650" fill="rgb(37, 38, 42)">编辑员工</text>
+<text x="20.0" y="86.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">员工姓名 *</text>
+<rect x="20.0" y="100.0" width="350.0" height="44.0" rx="6" fill="rgb(253, 253, 253)"/>
+<path d="M20.0 100.0L370.0 100.0" stroke="rgb(205, 206, 211)" stroke-width="1"/>
+<path d="M20.0 144.0L370.0 144.0" stroke="rgb(205, 206, 211)" stroke-width="1"/>
+<path d="M20.0 100.0L20.0 144.0" stroke="rgb(205, 206, 211)" stroke-width="1"/>
+<path d="M370.0 100.0L370.0 144.0" stroke="rgb(205, 206, 211)" stroke-width="1"/>
+<text x="32.0" y="127.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" fill="rgb(37, 38, 42)">栗子</text>
+<text x="20.0" y="173.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">手机号</text>
+<rect x="20.0" y="187.0" width="350.0" height="44.0" rx="6" fill="rgb(253, 253, 253)"/>
+<path d="M20.0 187.0L370.0 187.0" stroke="rgb(205, 206, 211)" stroke-width="1"/>
+<path d="M20.0 231.0L370.0 231.0" stroke="rgb(205, 206, 211)" stroke-width="1"/>
+<path d="M20.0 187.0L20.0 231.0" stroke="rgb(205, 206, 211)" stroke-width="1"/>
+<path d="M370.0 187.0L370.0 231.0" stroke="rgb(205, 206, 211)" stroke-width="1"/>
+<text x="32.0" y="214.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" fill="rgb(37, 38, 42)">13900000001</text>
+<text x="20.0" y="248.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="400" fill="rgb(115, 117, 124)">选填</text>
+<text x="20.0" y="282.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">登录账号 *</text>
+<rect x="20.0" y="296.0" width="350.0" height="44.0" rx="6" fill="rgb(243, 243, 245)"/>
+<path d="M20.0 296.0L370.0 296.0" stroke="rgb(205, 206, 211)" stroke-width="1"/>
+<path d="M20.0 340.0L370.0 340.0" stroke="rgb(205, 206, 211)" stroke-width="1"/>
+<path d="M20.0 296.0L20.0 340.0" stroke="rgb(205, 206, 211)" stroke-width="1"/>
+<path d="M370.0 296.0L370.0 340.0" stroke="rgb(205, 206, 211)" stroke-width="1"/>
+<text x="32.0" y="323.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" fill="rgb(37, 38, 42)">lizi_demo</text>
+<text x="20.0" y="357.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="400" fill="rgb(115, 117, 124)">3–32 位，以字母开头，允许数字、_、-</text>
+<text x="20.0" y="402.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">岗位</text>
+<text x="298.0" y="402.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">店员（固定）</text>
+<text x="20.0" y="432.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">备注</text>
+<rect x="20.0" y="445.4" width="350.0" height="70.0" rx="6" fill="rgb(253, 253, 253)"/>
+<path d="M20.0 445.4L370.0 445.4" stroke="rgb(205, 206, 211)" stroke-width="1"/>
+<path d="M20.0 515.4L370.0 515.4" stroke="rgb(205, 206, 211)" stroke-width="1"/>
+<path d="M20.0 445.4L20.0 515.4" stroke="rgb(205, 206, 211)" stroke-width="1"/>
+<path d="M370.0 445.4L370.0 515.4" stroke="rgb(205, 206, 211)" stroke-width="1"/>
+<text x="20.0" y="556.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="650" fill="rgb(37, 38, 42)">账号操作</text>
+<rect x="20.0" y="574.4" width="350.0" height="46.0" rx="6" fill="rgb(253, 253, 253)"/>
+<path d="M20.0 574.4L370.0 574.4" stroke="rgb(201, 203, 209)" stroke-width="1"/>
+<path d="M20.0 620.4L370.0 620.4" stroke="rgb(201, 203, 209)" stroke-width="1"/>
+<path d="M20.0 574.4L20.0 620.4" stroke="rgb(201, 203, 209)" stroke-width="1"/>
+<path d="M370.0 574.4L370.0 620.4" stroke="rgb(201, 203, 209)" stroke-width="1"/>
+<text x="169.0" y="601.1" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" font-weight="550" fill="rgb(37, 38, 42)">重置密码</text>
+<rect x="20.0" y="630.4" width="350.0" height="46.0" rx="6" fill="rgb(253, 253, 253)"/>
+<path d="M20.0 630.4L370.0 630.4" stroke="rgb(153, 156, 165)" stroke-width="1"/>
+<path d="M20.0 676.4L370.0 676.4" stroke="rgb(153, 156, 165)" stroke-width="1"/>
+<path d="M20.0 630.4L20.0 676.4" stroke="rgb(153, 156, 165)" stroke-width="1"/>
+<path d="M370.0 630.4L370.0 676.4" stroke="rgb(153, 156, 165)" stroke-width="1"/>
+<text x="169.0" y="657.1" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" font-weight="550" fill="rgb(37, 38, 42)">停用员工</text>
+<rect x="0.0" y="766.0" width="390.0" height="78.0" rx="0" fill="rgb(253, 253, 253)"/>
+<path d="M0.0 766.0L390.0 766.0" stroke="rgb(225, 226, 229)" stroke-width="1"/>
+<rect x="20.0" y="779.0" width="350.0" height="46.0" rx="6" fill="rgb(48, 49, 56)"/>
+<path d="M20.0 779.0L370.0 779.0" stroke="rgb(48, 49, 56)" stroke-width="1"/>
+<path d="M20.0 825.0L370.0 825.0" stroke="rgb(48, 49, 56)" stroke-width="1"/>
+<path d="M20.0 779.0L20.0 825.0" stroke="rgb(48, 49, 56)" stroke-width="1"/>
+<path d="M370.0 779.0L370.0 825.0" stroke="rgb(48, 49, 56)" stroke-width="1"/>
+<text x="156.0" y="805.7" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" font-weight="550" fill="rgb(247, 247, 249)">保存员工资料</text>
+</svg>

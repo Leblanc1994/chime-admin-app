@@ -11,6 +11,7 @@ export type MemberDashboardMonthlyCount = {
 };
 
 export type MemberDashboardSummary = {
+	statisticsDate?: string;
 	totalMemberCount: number;
 	todayNewMemberCount: number;
 	todayConsumeRecordCount: number;
@@ -22,6 +23,7 @@ export type MemberDashboardSummary = {
 	inactiveMemberCount: number;
 	todayTypeCounts: MemberDashboardTypeCount[];
 	monthlyConsumeRecordCounts: MemberDashboardMonthlyCount[];
+	dailyConsumeRecordCounts?: { date: string; recordCount: number }[];
 };
 
 export default class MemberDashboardService extends BaseService {

@@ -57,20 +57,21 @@ export function createEps() {
 	// 遍历每一个方法
 	set(eps.service);
 
-	// 合并 eps
-	merge(service, eps.service);
-
-	// 合并[local]
-	merge(
+	// Build a fresh tree before publishing it so EPS refreshes cannot mutate local instances.
+	Object.assign(
 		service,
-		path2Obj(
-			services.map((e) => {
-				return {
-					path: (e.namespace || "").replace("app/", ""),
-					value: e,
-				};
-			})
-		)
+		merge(
+			{},
+			eps.service,
+			path2Obj(
+				services.map((e) => {
+					return {
+						path: (e.namespace || "").replace("app/", ""),
+						value: e,
+					};
+				}),
+			),
+		),
 	);
 
 	// 提示

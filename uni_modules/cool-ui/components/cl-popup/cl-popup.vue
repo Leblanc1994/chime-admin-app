@@ -11,6 +11,7 @@
 		]"
 		:style="{
 			zIndex,
+			bottom: direction === 'bottom' ? offsetBottom + 'px' : undefined,
 		}"
 		@touchmove.stop.prevent
 	>
@@ -66,6 +67,8 @@ export default defineComponent({
 			type: Boolean,
 			default: true,
 		},
+		// 底部弹层在软键盘上方的偏移
+		offsetBottom: { type: Number, default: 0 },
 		// 弹出方向
 		direction: {
 			type: String as PropType<"top" | "right" | "bottom" | "center" | "left">,
@@ -199,57 +202,40 @@ export default defineComponent({
 			// 层级
 			zIndex.value = props.zIndex + id++;
 
-			if (!visible.value) {
-				// 显示内容
-				visible.value = true;
+			// Reopening during the close animation must cancel its pending hide.
+			const wasVisible = visible.value;
+			clearTimeout(timer);
+			visible.value = true;
+			isClosed.value = false;
+			isOpened.value = false;
+			emit("update:modelValue", true);
+			emit("open");
 
-				// 未打开
-				isClosed.value = false;
-
-				emit("update:modelValue", true);
-				emit("open");
-
-				clearTimeout(timer);
-
-				timer = setTimeout(() => {
-					// 开始动画
+			timer = setTimeout(
+				() => {
 					status.value = true;
-
-					// 等待动画结束
 					timer = setTimeout(() => {
-						// 已打开
 						isOpened.value = true;
 						emit("opened");
 					}, 350);
-				}, 50);
-			}
+				},
+				wasVisible ? 0 : 50,
+			);
 		}
 
 		// 关闭
 		function close() {
-			if (status.value) {
-				const done = () => {
-					isOpened.value = false;
-
-					// 关闭动画
-					status.value = false;
-					emit("close");
-
-					clearTimeout(timer);
-
-					timer = setTimeout(() => {
-						// 隐藏内容
-						visible.value = false;
-						emit("update:modelValue", false);
-
-						// 已关闭
-						isClosed.value = true;
-						emit("closed");
-					}, 300);
-				};
-
-				done();
-			}
+			clearTimeout(timer);
+			if (!visible.value) return;
+			isOpened.value = false;
+			status.value = false;
+			emit("close");
+			timer = setTimeout(() => {
+				visible.value = false;
+				emit("update:modelValue", false);
+				isClosed.value = true;
+				emit("closed");
+			}, 300);
 		}
 
 		// 遮罩层关闭

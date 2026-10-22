@@ -19,9 +19,7 @@ function resolve(dir: string) {
 }
 
 function resolveUniVue(specifier: string) {
-	const uniPluginDir = path.dirname(
-		require.resolve("@dcloudio/vite-plugin-uni/package.json"),
-	);
+	const uniPluginDir = path.dirname(require.resolve("@dcloudio/vite-plugin-uni/package.json"));
 
 	return require.resolve(specifier, {
 		paths: [uniPluginDir],
@@ -70,13 +68,24 @@ function fixUniH5VueSlotFlags() {
 // https://vitejs.dev/config
 
 export default defineConfig(() => {
+	const isH5 = !process.env.UNI_PLATFORM || process.env.UNI_PLATFORM === "h5";
+
 	return {
 		plugins: [
 			uni(),
-			fixUniH5VueSlotFlags(),
+			...(isH5 ? [fixUniH5VueSlotFlags()] : []),
 			cool({
 				type: "app",
-				proxy,
+				proxy:
+					process.env.VITE_CHIME_UI_PREVIEW === "1"
+						? {
+								...proxy,
+								"/prod/": {
+									...proxy["/preview/"],
+									rewrite: (url: string) => url.replace(/^\/prod/, ""),
+								},
+							}
+						: proxy,
 			}),
 		],
 		server: {
@@ -88,10 +97,14 @@ export default defineConfig(() => {
 		},
 		resolve: {
 			alias: {
-				vue: uniVueRuntime,
-				"vue/package.json": uniVuePackage,
-				"vue-router": uniVueRouter,
-				"vue-router/package.json": uniVueRouterPackage,
+				...(isH5
+					? {
+							vue: uniVueRuntime,
+							"vue/package.json": uniVuePackage,
+							"vue-router": uniVueRouter,
+							"vue-router/package.json": uniVueRouterPackage,
+						}
+					: {}),
 				pinia: projectPinia,
 				"vue-demi": projectVueDemi,
 				"/@": resolve("./"),

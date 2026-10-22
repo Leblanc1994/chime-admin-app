@@ -1,5 +1,5 @@
 {
-    "name" : "chime-admin",
+    "name" : "千绵美学",
     "appid" : "__UNI__1F1A85E",
     "description" : "",
     "versionName" : "1.0.0",
@@ -151,10 +151,11 @@
     },
     "quickapp" : {},
     "mp-weixin" : {
-        "appid" : "wxdebc4de0b5584ca4",
+        "appid" : "wxd386e8ac8265b270",
         "setting" : {
             "urlCheck" : true,
-            "es6" : false
+            "es6" : true,
+            "enhance" : true
         },
         "usingComponents" : true
     },

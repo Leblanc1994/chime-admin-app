@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="390" height="844" viewBox="0 0 390 844"><title>A01 登录</title><rect width="390" height="844" fill="#fdfdfd"/>
+<text x="20.0" y="78.3" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="27" font-weight="650" fill="rgb(37, 38, 42)">CHIME</text>
+<text x="20.0" y="104.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">门店管理</text>
+<text x="20.0" y="175.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="24" font-weight="700" fill="rgb(37, 38, 42)">欢迎回来</text>
+<text x="20.0" y="207.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">使用管理员账号进入门店。</text>
+<text x="20.0" y="254.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">用户名 *</text>
+<rect x="20.0" y="267.4" width="350.0" height="44.0" rx="6" fill="rgb(253, 253, 253)"/>
+<path d="M20.0 267.4L370.0 267.4" stroke="rgb(205, 206, 211)" stroke-width="1"/>
+<path d="M20.0 311.4L370.0 311.4" stroke="rgb(205, 206, 211)" stroke-width="1"/>
+<path d="M20.0 267.4L20.0 311.4" stroke="rgb(205, 206, 211)" stroke-width="1"/>
+<path d="M370.0 267.4L370.0 311.4" stroke="rgb(205, 206, 211)" stroke-width="1"/>
+<text x="32.0" y="294.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" fill="rgb(37, 38, 42)">demo_admin</text>
+<text x="20.0" y="328.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="400" fill="rgb(115, 117, 124)">演示账号，不会连接服务</text>
+<text x="20.0" y="363.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">密码 *</text>
+<rect x="20.0" y="376.4" width="350.0" height="44.0" rx="6" fill="rgb(253, 253, 253)"/>
+<path d="M20.0 376.4L370.0 376.4" stroke="rgb(205, 206, 211)" stroke-width="1"/>
+<path d="M20.0 420.4L370.0 420.4" stroke="rgb(205, 206, 211)" stroke-width="1"/>
+<path d="M20.0 376.4L20.0 420.4" stroke="rgb(205, 206, 211)" stroke-width="1"/>
+<path d="M370.0 376.4L370.0 420.4" stroke="rgb(205, 206, 211)" stroke-width="1"/>
+<text x="32.0" y="403.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" fill="rgb(37, 38, 42)">••••••</text>
+<text x="20.0" y="437.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="400" fill="rgb(115, 117, 124)">仅用于演示，不要输入真实密码</text>
+<text x="20.0" y="472.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="500" fill="rgb(37, 38, 42)">图形验证码 *</text>
+<rect x="20.0" y="485.4" width="350.0" height="44.0" rx="6" fill="rgb(253, 253, 253)"/>
+<path d="M20.0 485.4L370.0 485.4" stroke="rgb(205, 206, 211)" stroke-width="1"/>
+<path d="M20.0 529.4L370.0 529.4" stroke="rgb(205, 206, 211)" stroke-width="1"/>
+<path d="M20.0 485.4L20.0 529.4" stroke="rgb(205, 206, 211)" stroke-width="1"/>
+<path d="M370.0 485.4L370.0 529.4" stroke="rgb(205, 206, 211)" stroke-width="1"/>
+<text x="32.0" y="512.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" fill="rgb(37, 38, 42)">2468</text>
+<text x="20.0" y="546.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="400" fill="rgb(115, 117, 124)">演示验证码 2468</text>
+<text x="26.0" y="592.7" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(37, 38, 42)">刷新验证码</text>
+<rect x="0.0" y="741.5" width="390.0" height="102.5" rx="0" fill="rgb(253, 253, 253)"/>
+<path d="M0.0 741.5L390.0 741.5" stroke="rgb(225, 226, 229)" stroke-width="1"/>
+<rect x="20.0" y="754.5" width="350.0" height="46.0" rx="6" fill="rgb(48, 49, 56)"/>
+<path d="M20.0 754.5L370.0 754.5" stroke="rgb(48, 49, 56)" stroke-width="1"/>
+<path d="M20.0 800.5L370.0 800.5" stroke="rgb(48, 49, 56)" stroke-width="1"/>
+<path d="M20.0 754.5L20.0 800.5" stroke="rgb(48, 49, 56)" stroke-width="1"/>
+<path d="M370.0 754.5L370.0 800.5" stroke="rgb(48, 49, 56)" stroke-width="1"/>
+<text x="182.0" y="781.2" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="13" font-weight="550" fill="rgb(247, 247, 249)">登录</text>
+<text x="135.0" y="819.5" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10" font-weight="400" fill="rgb(115, 117, 124)">演示原型，不验证真实账号</text>
+</svg>

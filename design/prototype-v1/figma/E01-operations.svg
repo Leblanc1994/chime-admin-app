@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="390" height="844" viewBox="0 0 390 844"><title>E01 平台运营范围</title><rect width="390" height="844" fill="#fdfdfd"/>
+<path d="M0.0 55.0L390.0 55.0" stroke="rgb(225, 226, 229)" stroke-width="1"/>
+<svg x="31.5" y="16.5" width="21.0" height="21.0" viewBox="0 0 24 24" fill="none" stroke="rgb(37, 38, 42)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5-7 7 7 7"></path></svg>
+<text x="147.0" y="32.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="16" font-weight="650" fill="rgb(37, 38, 42)">平台运营范围</text>
+<rect x="20.0" y="75.0" width="350.0" height="61.4" rx="5" fill="rgb(247, 247, 249)"/>
+<path d="M20.0 75.0L370.0 75.0" stroke="rgb(197, 199, 206)" stroke-width="1"/>
+<path d="M20.0 136.4L370.0 136.4" stroke="rgb(197, 199, 206)" stroke-width="1"/>
+<path d="M20.0 75.0L20.0 136.4" stroke="rgb(197, 199, 206)" stroke-width="1"/>
+<path d="M370.0 75.0L370.0 136.4" stroke="rgb(197, 199, 206)" stroke-width="1"/>
+<text x="33.0" y="98.9" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="600" fill="rgb(37, 38, 42)">非店长日常主线</text>
+<text x="33.0" y="117.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(104, 107, 117)">以下页面保留信息结构供范围评审，均不能视为已完成的业务。</text>
+<text x="20.0" y="178.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="24" font-weight="700" fill="rgb(37, 38, 42)">平台运营</text>
+<text x="20.0" y="209.8" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">是否向店长开放，需要结合平台权限重新确认。</text>
+<path d="M20.0 294.4L370.0 294.4" stroke="rgb(225, 226, 229)" stroke-width="1"/>
+<text x="20.0" y="252.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="550" fill="rgb(37, 38, 42)">门店管理</text>
+<text x="20.0" y="274.7" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(115, 117, 124)">列表 / 开通 / 切换 / 续期</text>
+<text x="318.0" y="262.4" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(37, 38, 42)">演示</text>
+<svg x="354.0" y="251.1" width="16.0" height="16.0" viewBox="0 0 24 24" fill="none" stroke="rgb(144, 146, 154)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7"></path></svg>
+<path d="M20.0 364.0L370.0 364.0" stroke="rgb(225, 226, 229)" stroke-width="1"/>
+<text x="20.0" y="322.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="550" fill="rgb(37, 38, 42)">服务方案</text>
+<text x="20.0" y="344.3" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(115, 117, 124)">次卡次数 / 价格 / 有效期 / 上下架</text>
+<text x="318.0" y="332.0" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(37, 38, 42)">演示</text>
+<svg x="354.0" y="320.7" width="16.0" height="16.0" viewBox="0 0 24 24" fill="none" stroke="rgb(144, 146, 154)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7"></path></svg>
+<path d="M20.0 433.5L370.0 433.5" stroke="rgb(225, 226, 229)" stroke-width="1"/>
+<text x="20.0" y="391.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="550" fill="rgb(37, 38, 42)">门店品牌</text>
+<text x="20.0" y="413.9" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="400" fill="rgb(115, 117, 124)">名称 / Logo / 地址 / 营业时间</text>
+<text x="318.0" y="401.6" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(37, 38, 42)">演示</text>
+<svg x="354.0" y="390.3" width="16.0" height="16.0" viewBox="0 0 24 24" fill="none" stroke="rgb(144, 146, 154)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7"></path></svg>
+<text x="20.0" y="471.1" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="14" font-weight="650" fill="rgb(37, 38, 42)">不纳入本期主线</text>
+<text x="20.0" y="502.3" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="12" font-weight="400" fill="rgb(115, 117, 124)">充值、预约、商品、收款码、客服与意见反馈。</text>
+</svg>

@@ -1,71 +1,45 @@
 <template>
-	<cl-page>
-		<view class="page">
-			<view class="form">
-				<cl-form label-position="top">
-					<cl-form-item :label="t('昵称')">
-						<cl-input
-							v-model="form.nickName"
-							type="nickname"
-							:border="false"
-							:height="80"
-							:border-radius="12"
-							:placeholder="t('请填写昵称')"
-						/>
-					</cl-form-item>
-				</cl-form>
-			</view>
-
-			<cl-footer>
-				<cl-button custom type="primary" :loading="loading" @tap="save">
-					{{ t("保存") }}
-				</cl-button>
-			</cl-footer>
-		</view>
-	</cl-page>
+	<qm-page title="编辑昵称" :busy="saving"
+		><view class="qm-panel"
+			><view class="qm-field"
+				><text class="qm-label">昵称</text
+				><cl-input v-model="nickName" placeholder="请输入昵称" :maxlength="30" /><text
+					class="qm-hint"
+					>用于门店内的账号展示</text
+				></view
+			></view
+		><view v-if="error" class="qm-error" role="alert">{{ error }}</view
+		><template #footer
+			><qm-button :loading="saving" @click="save">保存修改</qm-button></template
+		></qm-page
+	>
 </template>
-
-<script lang="ts" setup>
-import { reactive, ref } from "vue";
+<script setup lang="ts">
+import { ref } from "vue";
 import { useCool, useStore } from "/@/cool";
-import { useUi } from "/$/cool-ui";
-import { onReady } from "@dcloudio/uni-app";
-import { useI18n } from "vue-i18n";
-
+import QmPage from "../index/components/qm-page.vue";
+import QmButton from "../index/components/qm-button.vue";
 const { router } = useCool();
 const { user } = useStore();
-const ui = useUi();
-const { t } = useI18n();
-
-const loading = ref(false);
-
-const form = reactive({
-	nickName: "",
-});
-
+const nickName = ref(user.info?.nickName || ""),
+	saving = ref(false),
+	error = ref("");
 async function save() {
-	loading.value = true;
-
-	await user.update(form).catch((err) => {
-		ui.showToast(err.message);
-	});
-
-	loading.value = false;
-
-	ui.showTips(t("用户信息保存成功"), () => {
+	if (saving.value) return;
+	error.value = "";
+	if (!nickName.value.trim()) {
+		error.value = "请填写昵称";
+		return;
+	}
+	saving.value = true;
+	try {
+		await user.update({ nickName: nickName.value.trim() });
+		uni.showToast({ title: "昵称已更新", icon: "success" });
 		router.back();
-	});
-}
-
-onReady(() => {
-	form.nickName = user.info?.nickName || "";
-});
-</script>
-
-<style lang="scss" scoped>
-.page {
-	.form {
-		padding: 20rpx 24rpx;
+	} catch (e: any) {
+		error.value = e?.message || "保存失败，请重试";
+	} finally {
+		saving.value = false;
 	}
 }
-</style>
+</script>
