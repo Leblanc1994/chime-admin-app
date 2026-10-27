@@ -80,7 +80,7 @@ function startTouch(event: IndexTouchEvent, letter: string) {
 	latestY = touchY(event);
 	bounds = [];
 	press(letter);
-	emit("change", letter);
+	activate(letter);
 	uni.createSelectorQuery()
 		.in(instance?.proxy)
 		.selectAll(".qm-alphabet-index__item")
@@ -105,7 +105,7 @@ function moveToY() {
 	const letter = visibleLetters.value[index === -1 ? bounds.length - 1 : index];
 	if (!letter || letter === pressedLetter.value) return;
 	press(letter);
-	emit("change", letter);
+	activate(letter);
 }
 
 function endTouch() {
@@ -136,7 +136,19 @@ function select(letter: string) {
 	if (Date.now() < ignoreTapUntil) return;
 	release();
 	if (props.disabled || !props.counts[letter]) return;
+	activate(letter);
+}
+
+function activate(letter: string) {
 	emit("change", letter);
+	// #ifdef MP-WEIXIN
+	try {
+		const options = { type: "light", fail: () => {} };
+		uni.vibrateShort(options);
+	} catch {
+		// Haptics are optional; unsupported devices must still navigate.
+	}
+	// #endif
 }
 </script>
 <style scoped lang="scss">

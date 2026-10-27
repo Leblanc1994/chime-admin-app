@@ -6,7 +6,7 @@
 	>
 		<view
 			class="chime-business qm-page"
-			:class="{ 'qm-page--footer': $slots.footer, 'qm-page--stacked': footerStacked }"
+			:class="{ 'qm-page--footer': $slots.footer, 'qm-page--stacked': footerStacked, 'qm-page--fill': fill }"
 		>
 			<view
 				class="qm-page__navigation"
@@ -49,7 +49,7 @@
 import { onMounted, watch } from "vue";
 import { useCool } from "/@/cool";
 import { useMiniNavigation } from "../utils/use-mini-navigation";
-const props = defineProps<{ title: string; busy?: boolean; footerStacked?: boolean }>();
+const props = defineProps<{ title: string; busy?: boolean; footerStacked?: boolean; fill?: boolean }>();
 const { router } = useCool();
 const navigation = useMiniNavigation();
 onMounted(() => uni.setNavigationBarTitle({ title: props.title }));
@@ -71,6 +71,28 @@ function back() {
 }
 .qm-page--stacked {
 	padding-bottom: calc(274rpx + env(safe-area-inset-bottom));
+}
+.qm-page--fill {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	display: flex;
+	flex-direction: column;
+	min-height: 0;
+	overflow: hidden;
+	.qm-page__navigation {
+		flex-shrink: 0;
+	}
+	.qm-page__body {
+		display: flex;
+		flex: 1;
+		flex-direction: column;
+		height: 0;
+		min-height: 0;
+		padding-bottom: calc(20rpx + env(safe-area-inset-bottom));
+	}
 }
 .qm-page__navigation {
 	position: sticky;
