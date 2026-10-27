@@ -9,7 +9,7 @@ export function newMemberForm() {
 		phone: "",
 		nickName: "",
 		wechatNo: "",
-		gender: 0,
+		gender: 2,
 		source: undefined as number | undefined,
 		remark: "",
 	};

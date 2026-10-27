@@ -22,19 +22,7 @@
 				×
 			</button></view
 		>
-		<view class="qm-segments"
-			><button
-				v-for="s in statuses"
-				:key="s.value"
-				:class="{ 'is-active': status === s.value }"
-				@tap="
-					status = s.value;
-					reload();
-				"
-			>
-				{{ s.label }}
-			</button></view
-		>
+		<qm-tabs v-model="status" :options="statuses" label="员工状态" @change="reload" />
 		<view class="staff-summary"
 			><text>门店团队</text><text v-if="loaded">{{ total }} 名员工</text></view
 		>
@@ -80,6 +68,7 @@ import { useCool } from "/@/cool";
 import Service, { type StoreStaff } from "../../service/store/staff";
 import QmPage from "./components/qm-page.vue";
 import QmButton from "./components/qm-button.vue";
+import QmTabs from "./components/qm-tabs.vue";
 const { router } = useCool(),
 	service = new Service();
 const keyword = ref(""),

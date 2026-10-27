@@ -21,18 +21,7 @@
 				+ 新增
 			</button>
 		</view>
-		<view class="qm-segments" role="tablist" aria-label="卡项状态筛选">
-			<button
-				v-for="state in states"
-				:key="state.value"
-				role="tab"
-				:aria-selected="status === state.value"
-				:class="{ 'is-active': status === state.value }"
-				@tap="status = state.value"
-			>
-				{{ state.label }}
-			</button>
-		</view>
+		<qm-tabs v-model="status" :options="states" label="卡项状态筛选" />
 		<text v-if="loaded" class="catalog-count"
 			>{{ keyword || status !== -1 ? "找到" : "已新增" }} {{ total }} 个卡项</text
 		>
@@ -93,6 +82,7 @@ import Service from "../../service/member/card-template";
 import { cardColorStyle, cardPrice, type CardTemplate } from "./utils/card-template";
 import QmPage from "./components/qm-page.vue";
 import QmButton from "./components/qm-button.vue";
+import QmTabs from "./components/qm-tabs.vue";
 import QmCardTemplateSheet from "./components/qm-card-template-sheet.vue";
 const service = new Service();
 const editor = ref<InstanceType<typeof QmCardTemplateSheet>>();

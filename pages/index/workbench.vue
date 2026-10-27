@@ -91,6 +91,12 @@ const role = computed(() => {
 const platformAdmin = computed(() => (user.info as any)?.role === "platform_admin");
 const business = [
 	{
+		label: "预约日程",
+		desc: "日历查看预约 · 安排到店时间",
+		icon: "appointment",
+		path: "/pages/index/appointment",
+	},
+	{
 		label: "消费记录",
 		desc: "按日期查看会员与散客消费",
 		icon: "receipt",

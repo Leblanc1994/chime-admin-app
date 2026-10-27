@@ -17,12 +17,18 @@ async function compile(path, imports = {}) {
 const policy = await compile("../pages/index/utils/card-policy.ts");
 const {
 	collectMemberPages,
+	filterMembersByInitial,
 	hydrateMemberCards,
 	matchesMemberFilter,
 	memberCardCaption,
 	memberStatus,
+	memberInitial,
+	sortMembersByName,
 } = await import(
-	await compile("../pages/index/utils/member-directory.ts", { "./card-policy": policy })
+	await compile("../pages/index/utils/member-directory.ts", {
+		"./card-policy": policy,
+		"js-pinyin": import.meta.resolve("js-pinyin"),
+	})
 );
 const now = Date.parse("2026-10-21T10:00:00");
 const usable = (extra = {}) => ({
@@ -31,6 +37,80 @@ const usable = (extra = {}) => ({
 	remainTimes: 5,
 	expireTime: "2099-01-01 00:00:00",
 	...extra,
+});
+
+test("name order uses pinyin and English A–Z, with nickname fallback and unnamed members last", () => {
+	const members = [
+		{ id: 1, name: "张三" },
+		{ id: 2, name: "李四", nickName: "阿丽" },
+		{ id: 3, name: "王五" },
+		{ id: 4, name: "  ", nickName: " 陈静 " },
+		{ id: 5, name: " 阿芳 " },
+		{ id: 6, name: "bob" },
+		{ id: 7, name: "Alice" },
+		{ id: 8, name: "123顾客" },
+		{ id: 9 },
+		{ id: 10, name: "😊小李" },
+		{ id: 11, name: "张三" },
+	];
+	const original = members.slice();
+	assert.deepEqual(
+		sortMembersByName(members).map((m) => m.id),
+		[5, 7, 6, 4, 2, 3, 1, 11, 8, 10, 9],
+	);
+	assert.deepEqual(members, original);
+	assert.deepEqual(
+		sortMembersByName([members[10], members[0]]).map((m) => m.id),
+		[1, 11],
+	);
+	assert.deepEqual(sortMembersByName([]), []);
+});
+
+test("name order includes members from later server pages before UI pagination and card filtering", async () => {
+	const members = Array.from({ length: 103 }, (_, i) => ({ id: i + 1, name: "张三" }));
+	members[102] = { id: 103, name: "阿芳" };
+	const all = await collectMemberPages(async ({ page, size }) => ({
+		list: members.slice((page - 1) * size, page * size),
+		pagination: { total: members.length },
+	}));
+	const sorted = sortMembersByName(all);
+	assert.equal(sorted.slice(0, 15)[0].id, 103);
+	assert.deepEqual(
+		filterMembersByInitial(sorted, "A").map((m) => m.id),
+		[103],
+	);
+	assert.equal(filterMembersByInitial(sorted, "Z").length, 102);
+	assert.equal(filterMembersByInitial(sorted, "Z").slice(15, 30).length, 15);
+	assert.equal(new Set(sorted.map((m) => m.id)).size, 103);
+	const hydrated = await hydrateMemberCards(sorted, async (id) =>
+		id === 103 || id === 1 ? [usable()] : [],
+	);
+	assert.deepEqual(
+		hydrated.filter((member) => matchesMemberFilter(member, "carded")).map((m) => m.id),
+		[103, 1],
+	);
+});
+
+test("letter filtering shares the pinyin sort key, respects nickname fallback, and clears to all", () => {
+	const members = [
+		{ id: 1, name: " 李晓妍 ", nickName: "阿妍" },
+		{ id: 2, name: "  ", nickName: "琳琳" },
+		{ id: 3, name: "alice" },
+		{ id: 4, name: "123顾客" },
+		{ id: 5 },
+		{ id: 6, name: "😊小李" },
+	];
+	assert.deepEqual(members.map(memberInitial), ["L", "L", "A", "#", "#", "#"]);
+	assert.deepEqual(
+		filterMembersByInitial(members, "L").map((m) => m.id),
+		[1, 2],
+	);
+	assert.deepEqual(
+		filterMembersByInitial(members, "#").map((m) => m.id),
+		[4, 5, 6],
+	);
+	assert.deepEqual(filterMembersByInitial(members, "Z"), []);
+	assert.equal(filterMembersByInitial(members, ""), members);
 });
 
 test("card categories include members beyond the first server page and preserve query filters", async () => {

@@ -1,6 +1,14 @@
 <template>
-	<qm-page :title="purpose === 'openCard' ? '选择开卡会员' : '选择扣次会员'">
-		<view v-if="purpose !== 'openCard'" class="qm-steps"
+	<qm-page
+		:title="
+			purpose === 'appointment'
+				? '选择预约会员'
+				: purpose === 'openCard'
+					? '选择开卡会员'
+					: '选择扣次会员'
+		"
+	>
+		<view v-if="purpose === 'deduct'" class="qm-steps"
 			><text class="is-active">1 选择会员</text><text>2 填写扣次</text
 			><text>3 核对</text></view
 		>
@@ -20,7 +28,7 @@
 		>
 		<template v-else>
 			<view class="selector-heading"
-				><text>{{ purpose === "openCard" ? "全部会员" : "可扣次会员" }}</text
+				><text>{{ purpose !== "deduct" ? "全部会员" : "可扣次会员" }}</text
 				><text>{{ available.length }} 位</text></view
 			>
 			<view v-if="available.length" class="selector-list"
@@ -39,7 +47,7 @@
 							}}</text></view
 						><image class="qm-chevron" src="/static/business/v53/chevron.svg" /></view
 					><text
-						v-if="purpose !== 'openCard'"
+						v-if="purpose === 'deduct'"
 						class="selector-caption"
 						:class="{ 'is-warning': memberStatus(member) === '低余次' }"
 						>{{ member.validCardCount }} 张可用次卡 ·
@@ -51,12 +59,18 @@
 				><text>{{
 					keyword
 						? "没有匹配的会员"
-						: purpose === "openCard"
+						: purpose !== "deduct"
 							? "还没有会员"
 							: "暂无可扣次会员"
 				}}</text
 				><text>{{
-					keyword ? "试试其他姓名、手机号或微信昵称" : "先建立会员档案并为会员开通次卡。"
+					keyword
+						? "试试其他姓名、手机号或微信昵称"
+						: purpose === "deduct"
+							? "先建立会员档案并为会员开通次卡。"
+							: purpose === "appointment"
+								? "先建立会员档案，再选择预约会员。"
+								: "先建立会员档案，再为会员开卡。"
 				}}</text
 				><qm-button v-if="!keyword" @click="create">新增会员</qm-button></view
 			>
@@ -86,7 +100,7 @@
 					></view
 				></template
 			>
-			<text v-if="purpose !== 'openCard'" class="qm-hint selector-hint"
+			<text v-if="purpose === 'deduct'" class="qm-hint selector-hint"
 				>仅可选择有有效次卡且余次大于 0 的会员。</text
 			>
 		</template>
@@ -120,6 +134,7 @@ const purpose = ref("deduct"),
 	rows = ref<DirectoryMember[]>([]),
 	visibleCount = ref(30);
 let initialized = false;
+let selectionToken = "";
 const matching = computed(() =>
 	rows.value.filter(
 		(member) =>
@@ -130,12 +145,12 @@ const matching = computed(() =>
 	),
 );
 const available = computed(() =>
-	purpose.value === "openCard"
+	purpose.value !== "deduct"
 		? matching.value
 		: matching.value.filter((member) => Number(member.validCardCount) > 0),
 );
 const unavailable = computed(() =>
-	purpose.value === "openCard" ? [] : matching.value.filter((member) => !member.validCardCount),
+	purpose.value !== "deduct" ? [] : matching.value.filter((member) => !member.validCardCount),
 );
 function displayName(member: DirectoryMember) {
 	return member.name || member.nickName || "未命名会员";
@@ -150,7 +165,7 @@ async function load() {
 			sort: "desc",
 		});
 		rows.value =
-			purpose.value === "openCard"
+			purpose.value !== "deduct"
 				? members
 				: await hydrateMemberCards(members, (id) => cards.list({ memberId: id }) as any);
 	} catch (e: any) {
@@ -161,6 +176,17 @@ async function load() {
 	}
 }
 function select(member: DirectoryMember) {
+	if (purpose.value === "appointment") {
+		if (!selectionToken) return;
+		uni.$emit("chime:appointment-member:" + selectionToken, {
+			id: member.id,
+			name: member.name,
+			nickName: member.nickName,
+			phone: member.phone,
+		});
+		router.back();
+		return;
+	}
 	if (purpose.value === "openCard") return businessSheet.value?.openCard(member);
 	if (purpose.value !== "openCard" && !member.validCardCount) return;
 	router.push({
@@ -173,7 +199,13 @@ function create() {
 }
 watch(keyword, () => (visibleCount.value = 30));
 onLoad((query) => {
-	purpose.value = query?.purpose === "openCard" ? "openCard" : "deduct";
+	purpose.value =
+		query?.purpose === "appointment"
+			? "appointment"
+			: query?.purpose === "openCard"
+				? "openCard"
+				: "deduct";
+	selectionToken = query?.selectionToken || "";
 	load();
 });
 onShow(() => {

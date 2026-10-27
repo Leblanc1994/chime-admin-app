@@ -43,18 +43,13 @@
 						>
 					</button>
 				</view>
-				<view class="qm-segments" aria-label="会员分类"
-					><button
-						v-for="item in categories"
-						:key="item.value"
-						:id="'member-category-' + item.value"
-						:class="{ 'is-active': category === item.value }"
-						:aria-pressed="category === item.value"
-						@tap="setCategory(item.value)"
-					>
-						{{ item.label }}
-					</button></view
-				>
+				<qm-tabs
+					:model-value="category"
+					:options="categories"
+					label="会员分类"
+					id-prefix="member-category-"
+					@change="(value) => setCategory(String(value))"
+				/>
 				<view class="member-quick-filters"
 					><view
 						><button
@@ -80,7 +75,7 @@
 						</button></view
 					><button @tap="openFilter">
 						<image src="/static/business/v53/sort.svg" mode="aspectFit" />{{
-							filterCount ? "筛选 · " + filterCount : "默认顺序"
+							filterCount ? "筛选 · " + filterCount : "姓名 A–Z"
 						}}
 					</button></view
 				>
@@ -97,91 +92,123 @@
 					}}</text>
 				</view>
 			</view>
-			<scroll-view
-				class="member-scroll"
-				scroll-y
-				:scroll-top="scrollTop"
-				:refresher-enabled="!loading"
-				:refresher-triggered="refreshing"
-				refresher-background="#f8f5f0"
-				:aria-busy="loading"
-				@scroll="scrollTop = $event.detail.scrollTop"
-				@scrolltolower="more"
-				@refresherrefresh="refresh"
-			>
-				<view v-if="loading && !loaded" class="member-loading" aria-hidden="true"
-					><view v-for="n in 4" :key="n" class="qm-skeleton"
-				/></view>
-				<template v-else>
-					<view v-if="error" class="qm-error" role="alert"
-						>{{ error }}<button class="qm-inline" @tap="reload">重新加载</button></view
-					><view class="member-list"
+			<view class="member-results">
+				<scroll-view
+					class="member-scroll"
+					scroll-y
+					enhanced
+					:show-scrollbar="false"
+					:scroll-top="scrollTop"
+					:scroll-into-view="scrollTarget"
+					:refresher-enabled="!loading"
+					:refresher-triggered="refreshing"
+					refresher-background="#f8f5f0"
+					:aria-busy="loading"
+					@scroll="scrollTop = $event.detail.scrollTop"
+					@scrolltolower="more"
+					@refresherrefresh="refresh"
+				>
+					<view v-if="loading && !loaded" class="member-loading" aria-hidden="true"
+						><view v-for="n in 4" :key="n" class="qm-skeleton"
+					/></view>
+					<template v-else>
+						<view v-if="error" class="qm-error" role="alert"
+							>{{ error
+							}}<button class="qm-inline" @tap="reload">重新加载</button></view
+						><view class="member-list">
+							<template v-for="(item, index) in list" :key="item.id">
+								<view
+									v-if="filters.order === 'name' && (!index || memberInitial(list[index - 1]) !== memberInitial(item))"
+									:id="groupAnchor(memberInitial(item))"
+									class="member-group"
+								>{{ memberInitial(item) }}</view>
+								<button
+									:data-member-id="item.id"
+									class="qm-panel member-card"
+									:class="{
+										'is-low': memberStatus(item) === '低余次',
+										'is-muted': item.cards && !(item.validCardCount > 0),
+									}"
+									@tap="detail(item)"
+								>
+									<view class="qm-identity"
+										><view class="qm-avatar">{{ name(item).slice(0, 1) }}</view
+										><view class="member-copy"
+											><text class="qm-identity__name"
+												>{{ name(item)
+												}}<text
+													v-if="memberStatus(item)"
+													class="qm-tag"
+													:class="{
+														'is-warning': memberStatus(item) === '低余次',
+													}"
+													>{{ memberStatus(item) }}</text
+												></text
+											><text class="qm-identity__meta">{{
+												phone(item.phone)
+											}}</text></view
+										><view class="member-balance"
+											><text>{{ item.cards ? item.remainTimes ?? 0 : '—' }}<text> 次</text></text
+											><text>{{ item.cards ? (item.validCardCount ?? 0) + ' 张次卡' : '次卡待同步' }}</text></view
+										></view
+									><view class="member-meta"
+										><text>{{ item.cardLoadError ? '次卡资料加载失败，请下拉刷新' : memberCardCaption(item) }}</text
+										><text>{{
+											item.lastConsumeTime
+												? dayjs(item.lastConsumeTime).format("MM.DD") + " 消费"
+												: "暂无消费"
+										}}</text></view
+									><text v-if="memberAction" class="member-action"
+										>{{
+											memberAction === "openCard"
+												? "为此会员开卡"
+												: "为此会员扣次"
+										}}
+										›</text
+									>
+								</button>
+							</template>
+						</view
+						><view v-if="loaded && !list.length && !error" class="qm-empty"
+							><text>{{
+								filters.keyWord ||
+								category !== "all" ||
+								attention ||
+								filterCount ||
+								initial
+									? "没有匹配的会员"
+									: "还没有会员"
+							}}</text
+							><text>{{
+								filters.keyWord ||
+								category !== "all" ||
+								attention ||
+								filterCount ||
+								initial
+									? "调整搜索或筛选条件后再试"
+									: "先建立一份档案，开始记录每次服务。"
+							}}</text
+							><qm-button @click="create">新增会员</qm-button></view
 						><button
-							v-for="item in list"
-							:key="item.id"
-							class="qm-panel member-card"
-							:class="{
-								'is-low': memberStatus(item) === '低余次',
-								'is-muted': !(item.validCardCount > 0),
-							}"
-							@tap="detail(item)"
+							v-if="list.length && !finished"
+							class="qm-inline"
+							:disabled="loading"
+							@tap="more"
 						>
-							<view class="qm-identity"
-								><view class="qm-avatar">{{ name(item).slice(0, 1) }}</view
-								><view class="member-copy"
-									><text class="qm-identity__name"
-										>{{ name(item)
-										}}<text
-											v-if="memberStatus(item)"
-											class="qm-tag"
-											:class="{
-												'is-warning': memberStatus(item) === '低余次',
-											}"
-											>{{ memberStatus(item) }}</text
-										></text
-									><text class="qm-identity__meta">{{
-										phone(item.phone)
-									}}</text></view
-								><view class="member-balance"
-									><text>{{ item.remainTimes ?? 0 }}<text> 次</text></text
-									><text>{{ item.validCardCount ?? 0 }} 张次卡</text></view
-								></view
-							><view class="member-meta"
-								><text>{{ memberCardCaption(item) }}</text
-								><text>{{
-									item.lastConsumeTime
-										? dayjs(item.lastConsumeTime).format("MM.DD") + " 消费"
-										: "暂无消费"
-								}}</text></view
-							><text v-if="memberAction" class="member-action"
-								>{{
-									memberAction === "openCard" ? "为此会员开卡" : "为此会员扣次"
-								}}
-								›</text
-							>
-						</button></view
-					><view v-if="loaded && !list.length && !error" class="qm-empty"
-						><text>{{
-							filters.keyWord || category !== "all" || attention || filterCount
-								? "没有匹配的会员"
-								: "还没有会员"
-						}}</text
-						><text>{{
-							filters.keyWord || category !== "all" || attention || filterCount
-								? "调整搜索或筛选条件后再试"
-								: "先建立一份档案，开始记录每次服务。"
-						}}</text
-						><qm-button @click="create">新增会员</qm-button></view
-					><button
-						v-if="list.length && !finished"
-						class="qm-inline"
+							{{ loading ? "正在加载…" : "加载更多" }}</button
+						><text v-else-if="list.length" class="member-end">已显示全部结果</text>
+						<view v-if="filters.order === 'name' && list.length" :style="{ height: scrollPadding + 'px' }" aria-hidden="true" />
+					</template>
+				</scroll-view>
+				<view v-if="showAlphabetIndex" class="member-index">
+					<qm-alphabet-index
+						:model-value="initial"
+						:counts="initialCounts"
 						:disabled="loading"
-						@tap="more"
-					>
-						{{ loading ? "正在加载…" : "加载更多" }}</button
-					><text v-else-if="list.length" class="member-end">已显示全部结果</text>
-				</template>
-			</scroll-view>
+						@change="setInitial"
+					/>
+				</view>
+			</view>
 		</view>
 		<!-- #ifndef MP-WEIXIN -->
 		<tabbar design />
@@ -223,7 +250,9 @@
 import QmMemberBusinessSheet from "./components/qm-member-business-sheet.vue";
 const businessSheet = ref<InstanceType<typeof QmMemberBusinessSheet>>();
 import { useMiniNavigation } from "./utils/use-mini-navigation";
-import { ref, reactive, computed, watch, onUnmounted } from "vue";
+import {
+	ref, shallowRef, reactive, computed, watch, onUnmounted, nextTick, getCurrentInstance,
+} from "vue";
 import { onShow, onHide } from "@dcloudio/uni-app";
 import dayjs from "dayjs";
 import { useCool } from "/@/cool";
@@ -232,7 +261,9 @@ import MemberService from "../../service/member/info";
 import Tabbar from "./components/tabbar.vue";
 // #endif
 import QmButton from "./components/qm-button.vue";
+import QmTabs from "./components/qm-tabs.vue";
 import QmSheet from "./components/qm-sheet.vue";
+import QmAlphabetIndex from "./components/qm-alphabet-index.vue";
 import CardService from "../../service/member/card-account";
 import {
 	collectMemberPages,
@@ -240,20 +271,35 @@ import {
 	matchesMemberFilter,
 	memberCardCaption,
 	memberStatus,
+	memberInitial,
+	sortMembersByName,
 } from "./utils/member-directory";
 import { pendingMemberQuickAction, pendingMemberFilter } from "./utils/member-quick-action";
 const { router } = useCool(),
 	service = new MemberService(),
 	cardService = new CardService();
 const navigation = useMiniNavigation();
+const instance = getCurrentInstance();
 const category = ref("all"),
-	attention = ref("");
+	attention = ref(""),
+	initial = ref("");
 const categories = [
 	{ label: "全部", value: "all" },
 	{ label: "持卡会员", value: "carded" },
 	{ label: "非持卡会员", value: "uncarded" },
 ];
-let filteredCache: any[] | null = null;
+const filteredCache = shallowRef<any[] | null>(null);
+const initialCounts = computed(() => {
+	const counts: Record<string, number> = {};
+	for (const member of filteredCache.value || []) {
+		const letter = memberInitial(member);
+		counts[letter] = (counts[letter] || 0) + 1;
+	}
+	return counts;
+});
+const showAlphabetIndex = computed(
+	() => filters.order === "name" && (loaded.value || filteredCache.value !== null),
+);
 const cardCache = new Map<number, any[]>();
 async function withCards(rows: any[], seq: number) {
 	return hydrateMemberCards(rows, async (id) => {
@@ -277,6 +323,8 @@ const list = ref<any[]>([]),
 	loaded = ref(false),
 	statusBarHeight = ref(0),
 	scrollTop = ref(0),
+	scrollTarget = ref(""),
+	scrollPadding = ref(0),
 	refreshing = ref(false),
 	error = ref(""),
 	finished = ref(false),
@@ -287,9 +335,9 @@ const pagination = reactive({ page: 1, size: 15, total: 0 }),
 		keyWord: "",
 		gender: -1,
 		source: -1,
-		order: "createTime",
+		order: "name",
 	}),
-	draft = reactive({ gender: -1, source: -1, order: "createTime" });
+	draft = reactive({ gender: -1, source: -1, order: "name" });
 let generation = 0,
 	dirty = true;
 const sources = { 1: "抖音", 2: "美团", 3: "朋友介绍" },
@@ -306,6 +354,7 @@ const sources = { 1: "抖音", 2: "美团", 3: "朋友介绍" },
 		{ label: "朋友介绍", value: 3 },
 	],
 	orders = [
+		{ label: "姓名首字母 A–Z", value: "name" },
 		{ label: "最新加入", value: "createTime" },
 		{ label: "最近消费", value: "lastConsumeTime" },
 		{ label: "剩余次数", value: "remainTimes" },
@@ -320,7 +369,7 @@ const filterCount = computed(
 	() =>
 		Number(filters.gender !== -1) +
 		Number(filters.source !== -1) +
-		Number(filters.order !== "createTime"),
+		Number(filters.order !== "name"),
 );
 function name(item: any) {
 	return item.name || item.nickName || "未命名会员";
@@ -333,30 +382,44 @@ async function fetch(append = false) {
 	loading.value = true;
 	error.value = "";
 	try {
+		const byName = filters.order === "name";
+		const needsCardFilter = category.value !== "all" || !!attention.value;
 		const params = {
 			...filters,
+			order: byName ? "createTime" : filters.order,
 			gender: filters.gender === -1 ? undefined : filters.gender,
 			source: filters.source === -1 ? undefined : filters.source,
 			sort: "desc",
 		};
 		let rows: any[], total: number;
-		if (category.value !== "all" || attention.value) {
-			if (!filteredCache) {
+		if (byName || needsCardFilter) {
+			if (!filteredCache.value) {
 				const all = await collectMemberPages((params) => service.page(params), params);
 				if (seq !== generation) return;
-				const hydrated = await withCards(all, seq);
-				if (seq !== generation) return;
-				filteredCache = hydrated.filter(
-					(row) =>
-						matchesMemberFilter(row, category.value) &&
-						matchesMemberFilter(row, attention.value),
-				);
+				const ordered = byName ? sortMembersByName(all) : all;
+				if (needsCardFilter) {
+					const hydrated = await withCards(ordered, seq);
+					if (seq !== generation) return;
+					filteredCache.value = hydrated.filter(
+						(row) =>
+							matchesMemberFilter(row, category.value) &&
+							matchesMemberFilter(row, attention.value),
+					);
+				} else {
+					filteredCache.value = ordered;
+				}
 			}
-			total = filteredCache.length;
-			rows = filteredCache.slice(
-				(pagination.page - 1) * pagination.size,
-				pagination.page * pagination.size,
-			);
+			total = filteredCache.value.length;
+			rows = byName
+				? filteredCache.value.slice()
+				: filteredCache.value.slice(
+					(pagination.page - 1) * pagination.size,
+					pagination.page * pagination.size,
+				);
+			if (!needsCardFilter) {
+				const firstPage = await withCards(rows.slice(0, pagination.size), seq);
+				rows.splice(0, firstPage.length, ...firstPage);
+			}
 		} else {
 			const res: any = await service.page({
 				...params,
@@ -373,6 +436,10 @@ async function fetch(append = false) {
 		finished.value = list.value.length >= total || rows.length < pagination.size;
 		loaded.value = true;
 		dirty = false;
+		nextTick(() => {
+			updateScrollPadding(seq);
+			observeMemberCards(seq);
+		});
 	} catch (e: any) {
 		if (seq !== generation) return;
 		error.value = e?.message || "会员列表加载失败";
@@ -382,11 +449,16 @@ async function fetch(append = false) {
 	}
 }
 function reload() {
+	jumpSequence++;
+	stopCardObserver();
 	cardCache.clear();
-	filteredCache = null;
+	filteredCache.value = null;
 	loaded.value = false;
 	list.value = [];
 	scrollTop.value = 0;
+	scrollTarget.value = "";
+	scrollPadding.value = 0;
+	initial.value = "";
 	pagination.page = 1;
 	finished.value = false;
 	return fetch();
@@ -404,6 +476,88 @@ function more() {
 	if (loading.value || finished.value) return;
 	pagination.page++;
 	fetch(true);
+}
+let jumpSequence = 0;
+function groupAnchor(letter: string) {
+	return "member-group-" + (letter === "#" ? "other" : letter);
+}
+function updateScrollPadding(seq: number) {
+	if (seq !== generation || filters.order !== "name" || !list.value.length) return;
+	const query = uni.createSelectorQuery().in(instance?.proxy);
+	query.select(".member-scroll").boundingClientRect();
+	query.select(".member-list").boundingClientRect();
+	query.selectAll(".member-group").boundingClientRect();
+	query.select(".member-end").boundingClientRect();
+	query.exec((result) => {
+		if (seq !== generation) return;
+		const [viewport, content, groups, end] = result;
+		const last = groups?.[groups.length - 1];
+		if (!viewport || !content || !last) return;
+		// Let even the final letter reach the top of the list.
+		scrollPadding.value = Math.max(
+			0,
+			Math.ceil(viewport.height - (content.bottom - last.top) - (end?.height || 0)),
+		);
+	});
+}
+async function setInitial(letter: string) {
+	if (loading.value || !initialCounts.value[letter]) return;
+	const seq = ++jumpSequence;
+	initial.value = letter;
+	scrollTarget.value = "";
+	await nextTick();
+	if (seq !== jumpSequence) return;
+	scrollTarget.value = groupAnchor(letter);
+}
+
+let cardObserver: ReturnType<typeof uni.createIntersectionObserver> | undefined;
+const cardQueue = new Map<number, any>();
+const cardInFlight = new Set<string>();
+let activeCardRequests = 0;
+function stopCardObserver() {
+	cardObserver?.disconnect();
+	cardObserver = undefined;
+	cardQueue.clear();
+}
+function observeMemberCards(seq: number) {
+	if (seq !== generation) return;
+	stopCardObserver();
+	if (!list.value.some((row) => !row.cards)) return;
+	cardObserver = uni.createIntersectionObserver(instance?.proxy, { observeAll: true });
+	cardObserver.relativeTo(".member-scroll", { bottom: 200 }).observe(".member-card", (result) => {
+		if (seq !== generation || result.intersectionRatio <= 0) return;
+		const id = Number(result.dataset.memberId);
+		const row = list.value.find((member) => member.id === id);
+		if (!row || row.cards || cardInFlight.has(seq + ":" + id)) return;
+		cardQueue.set(id, row);
+		drainCardQueue();
+	});
+}
+function drainCardQueue() {
+	while (activeCardRequests < 6 && cardQueue.size) {
+		const [id, row] = cardQueue.entries().next().value!;
+		cardQueue.delete(id);
+		const seq = generation;
+		const key = seq + ":" + id;
+		cardInFlight.add(key);
+		activeCardRequests++;
+		withCards([row], seq)
+			.then(([hydrated]) => {
+				if (seq !== generation) return;
+				const index = list.value.findIndex((member) => member.id === id);
+				if (index !== -1) list.value[index] = hydrated;
+			})
+			.catch(() => {
+				if (seq !== generation) return;
+				const member = list.value.find((member) => member.id === id);
+				if (member) member.cardLoadError = true;
+			})
+			.finally(() => {
+				cardInFlight.delete(key);
+				activeCardRequests--;
+				drainCardQueue();
+			});
+	}
 }
 function create() {
 	businessSheet.value?.openCreate();
@@ -425,10 +579,11 @@ function openFilter() {
 	filterVisible.value = true;
 }
 function resetFilter() {
-	Object.assign(draft, { gender: -1, source: -1, order: "createTime" });
+	Object.assign(draft, { gender: -1, source: -1, order: "name" });
 }
 function applyFilter() {
 	Object.assign(filters, draft);
+	if (filters.order !== "name") initial.value = "";
 	filterVisible.value = false;
 	reload();
 }
@@ -444,12 +599,14 @@ function pending() {
 }
 function markDirty() {
 	cardCache.clear();
-	filteredCache = null;
+	filteredCache.value = null;
 	dirty = true;
 }
 uni.$on("chime:members-changed", markDirty);
 uni.$on("chime:member-changed", markDirty);
 onUnmounted(() => {
+	stopCardObserver();
+	generation++;
 	uni.$off("chime:members-changed", markDirty);
 	uni.$off("chime:member-changed", markDirty);
 });
@@ -461,13 +618,18 @@ onShow(() => {
 		pendingMemberFilter.value = undefined;
 		category.value = "all";
 		attention.value = intent === "all" ? "" : intent;
-		filteredCache = null;
+		initial.value = "";
+		filteredCache.value = null;
 		dirty = true;
 	}
 	pending();
 	if (dirty) reload();
+	else nextTick(() => observeMemberCards(generation));
 });
-onHide(() => (memberAction.value = undefined));
+onHide(() => {
+	memberAction.value = undefined;
+	stopCardObserver();
+});
 </script>
 <style scoped lang="scss">
 .member-page {
@@ -494,11 +656,35 @@ onHide(() => (memberAction.value = undefined));
 	align-items: center;
 	box-sizing: border-box;
 }
-.member-scroll {
+.member-results {
+	position: relative;
 	flex: 1;
 	height: 0;
 	min-height: 0;
+}
+.member-scroll {
+	width: 100%;
+	height: 100%;
 	overscroll-behavior-y: contain;
+}
+/* #ifdef H5 */
+.member-scroll :deep(.uni-scroll-view) {
+	scrollbar-width: none;
+}
+.member-scroll :deep(.uni-scroll-view::-webkit-scrollbar) {
+	display: none;
+	width: 0;
+	height: 0;
+}
+/* #endif */
+.member-index {
+	position: absolute;
+	top: 8rpx;
+	right: -28rpx;
+	bottom: 8rpx;
+	z-index: 3;
+	width: 52rpx;
+	pointer-events: none;
 }
 .member-loading .qm-skeleton {
 	height: 184rpx;
@@ -599,6 +785,12 @@ onHide(() => (memberAction.value = undefined));
 	padding: 24rpx 26rpx !important;
 	text-align: left;
 	margin-bottom: 16rpx !important;
+}
+.member-group {
+	padding: 12rpx 4rpx 16rpx;
+	font-size: 24rpx;
+	font-weight: 600;
+	color: var(--qm-muted);
 }
 .member-copy {
 	flex: 1;

@@ -21,16 +21,12 @@
 				×
 			</button></view
 		>
-		<view class="qm-segments"
-			><button
-				v-for="item in ranges"
-				:key="item.value"
-				:class="{ 'is-active': range === item.value }"
-				@tap="item.value === 'custom' ? openDate() : setRange(item.value)"
-			>
-				{{ item.label }}
-			</button></view
-		>
+		<qm-tabs
+			:model-value="range"
+			:options="ranges"
+			label="消费日期范围"
+			@select="(value) => (value === 'custom' ? openDate() : setRange(String(value)))"
+		/>
 		<button class="records-range" @tap="openDate">
 			<text>{{ start.replace(/-/g, ".") }} 至 {{ end.replace(/-/g, ".") }}</text
 			><image src="/static/business/v53/select-chevron.svg" mode="aspectFit" />
@@ -114,6 +110,7 @@ import { useCool } from "/@/cool";
 import Service from "../../service/member/consume-record";
 import QmPage from "./components/qm-page.vue";
 import QmButton from "./components/qm-button.vue";
+import QmTabs from "./components/qm-tabs.vue";
 import QmSheet from "./components/qm-sheet.vue";
 import { collectConsumeSummary } from "./utils/consume-summary";
 const { router } = useCool(),
@@ -123,7 +120,7 @@ const consumeType = ref(""),
 	totalsLoading = ref(false),
 	totalsError = ref("");
 let totalsGeneration = 0;
-const consumeTypes = ["", "会员次卡", "美团团购", "抖音新客福利", "纹绣", "眼线"];
+const consumeTypes = ["", "会员次卡", "美团团购", "抖音新客福利", "纹绣", "眼线", "美睫"];
 const keyword = ref(""),
 	start = ref(dayjs().startOf("month").format("YYYY-MM-DD")),
 	end = ref(dayjs().format("YYYY-MM-DD")),

@@ -92,7 +92,7 @@ const form = reactive({
 	consumeRemark: "",
 });
 const dateMode = ["year", "month", "date", "hour", "minute"],
-	types = ["抖音新客福利", "美团团购", "纹绣", "眼线"].map((value) => ({ label: value, value }));
+	types = ["抖音新客福利", "美团团购", "纹绣", "眼线", "美睫"].map((value) => ({ label: value, value }));
 function records() {
 	router.push({ path: "/pages/index/consume-statistics", mode: "redirectTo" });
 }

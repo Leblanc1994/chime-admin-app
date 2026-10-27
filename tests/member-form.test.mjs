@@ -37,7 +37,7 @@ test("member creation requires nickname, WeChat ID and a known source", () => {
 	assert.equal(payload.name, "李晓妍");
 	assert.equal(payload.phone, "13800000001");
 	assert.equal(payload.remark, "护理偏好");
-	assert.equal(payload.gender, 0);
+	assert.equal(payload.gender, 2);
 });
 test("continue opening a card uses the exact server-created ID and rejects ambiguous responses", () => {
 	for (const value of [100, "100", { id: 100 }, { id: "100" }])

@@ -28,7 +28,13 @@
 		<!-- 内容 -->
 		<view
 			class="cl-popup"
-			:style="{ height, width, backgroundColor, borderRadius: parseRpx(borderRadius) }"
+			:style="{
+				height,
+				width,
+				backgroundColor,
+				borderRadius: parseRpx(borderRadius),
+				paddingBottom: safeAreaBottom ? undefined : '0px',
+			}"
 		>
 			<view class="cl-popup__header" v-if="title && showHeader">
 				<slot name="header">{{ title }}</slot>
@@ -69,6 +75,8 @@ export default defineComponent({
 		},
 		// 底部弹层在软键盘上方的偏移
 		offsetBottom: { type: Number, default: 0 },
+		// 内容已自行处理安全区时，关闭外层的底部留白
+		safeAreaBottom: { type: Boolean, default: true },
 		// 弹出方向
 		direction: {
 			type: String as PropType<"top" | "right" | "bottom" | "center" | "left">,

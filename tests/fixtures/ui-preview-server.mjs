@@ -224,6 +224,58 @@ let staff = [
 	},
 ];
 const failures = new Map();
+const appointmentDate = new Date(Date.now() + 8 * 3600000).toISOString().slice(0, 10);
+const appointmentProjects = [
+	{ id: 1, code: "lash", name: "美睫", color: "purple", durationMinutes: 120 },
+	{ id: 2, code: "brow", name: "纹绣", color: "gold", durationMinutes: 120 },
+	{ id: 3, code: "removal", name: "洗眉", color: "green", durationMinutes: 120 },
+];
+const appointments = [
+	{
+		id: 201,
+		customerName: "林女士",
+		projectId: 3,
+		projectName: "洗眉",
+		projectColor: "green",
+		startTime: appointmentDate + " 11:00:00",
+		endTime: appointmentDate + " 13:00:00",
+		status: 1,
+		remark: "",
+	},
+	{
+		id: 202,
+		customerName: "张女士",
+		projectId: 1,
+		projectName: "美睫",
+		projectColor: "purple",
+		startTime: appointmentDate + " 13:00:00",
+		endTime: appointmentDate + " 15:00:00",
+		status: 1,
+		remark: "自然款，第一次到店",
+	},
+	{
+		id: 203,
+		customerName: "陈女士",
+		projectId: 2,
+		projectName: "纹绣",
+		projectColor: "gold",
+		startTime: appointmentDate + " 14:30:00",
+		endTime: appointmentDate + " 16:30:00",
+		status: 1,
+		remark: "",
+	},
+	{
+		id: 204,
+		customerName: "李女士",
+		projectId: 3,
+		projectName: "洗眉",
+		projectColor: "green",
+		startTime: appointmentDate + " 16:30:00",
+		endTime: appointmentDate + " 18:30:00",
+		status: 1,
+		remark: "",
+	},
+];
 let delay = 0;
 const audit = [];
 function page(list, body, direct = false) {
@@ -298,6 +350,50 @@ function applyConsume(b, old) {
 	};
 }
 function api(path, b, q) {
+	if (path === "/admin/appointment/project/list") return appointmentProjects;
+	if (path.startsWith("/admin/appointment/schedule/")) {
+		const action = path.split("/").at(-1);
+		if (action === "list")
+			return appointments
+				.filter(
+					(a) =>
+						a.status === 1 &&
+						a.startTime < b.endDate + " 00:00:00" &&
+						a.endTime > b.startDate + " 00:00:00",
+				)
+				.sort((a, b) => a.startTime.localeCompare(b.startTime));
+		if (action === "info") return requireRow(appointments, q.id);
+		if (action === "cancel") {
+			const row = requireRow(appointments, b.id);
+			row.status = 0;
+			row.cancelledAt = appointmentDate + " 12:40:00";
+			return null;
+		}
+		if (action === "add" || action === "update") {
+			if (!b.customerName?.trim() || b.endTime <= b.startTime)
+				throw Error("请核对姓名与预约时间");
+			const project = requireRow(appointmentProjects, b.projectId);
+			if (action === "add") {
+				const previous = appointments.find((a) => a.requestId === b.requestId);
+				if (previous) return previous.id;
+			}
+			const row =
+				action === "update" ? requireRow(appointments, b.id) : { id: nextId++, status: 1 };
+			if (row.status === 0) throw Error("已取消的预约不能编辑");
+			const member = b.memberId ? requireRow(members, b.memberId) : null;
+			Object.assign(row, b, {
+				memberId: member?.id || null,
+				memberPhone: member?.phone || null,
+				customerName: member
+					? member.name || member.nickName || "未命名会员"
+					: b.customerName.trim(),
+				projectName: project.name,
+				projectColor: project.color,
+			});
+			if (action === "add") appointments.push(row);
+			return row.id;
+		}
+	}
 	if (path.endsWith("/person")) return user;
 	if (path.endsWith("/personUpdate")) {
 		Object.assign(user, b);

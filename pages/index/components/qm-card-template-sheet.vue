@@ -77,21 +77,13 @@
 			</view>
 			<view class="qm-field">
 				<text class="qm-label">状态</text>
-				<view class="qm-segments catalog-status" role="radiogroup" aria-label="卡项状态">
-					<button
-						v-for="state in states"
-						:key="state.value"
-						role="radio"
-						tabindex="0"
-						:aria-checked="form.status === state.value"
-						:class="{ 'is-active': form.status === state.value }"
-						@keydown.enter.prevent="form.status = state.value"
-						@keydown.space.prevent="form.status = state.value"
-						@tap="form.status = state.value"
-					>
-						{{ state.label }}
-					</button>
-				</view>
+				<qm-tabs
+					v-model="form.status"
+					class="catalog-status"
+					:options="states"
+					label="卡项状态"
+					role="radiogroup"
+				/>
 				<text class="qm-hint">停用后将不再用于新开卡，已开卡会员可继续使用</text>
 			</view>
 			<view id="catalog-remark" class="qm-field">
@@ -128,6 +120,7 @@ import {
 } from "../utils/card-template";
 import QmSheet from "./qm-sheet.vue";
 import QmButton from "./qm-button.vue";
+import QmTabs from "./qm-tabs.vue";
 const emit = defineEmits<{ (e: "saved"): void }>();
 const service = new Service();
 const visible = ref(false),

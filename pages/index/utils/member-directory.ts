@@ -1,3 +1,4 @@
+import pinyin from "js-pinyin";
 import { canConsume, isExpired, type CardAccount } from "./card-policy";
 
 export interface DirectoryMember {
@@ -12,8 +13,39 @@ export interface DirectoryMember {
 	[key: string]: any;
 }
 
-// The existing member API paginates before applying UI card categories. Scan all
-// pages for those categories so matches beyond the first page are not omitted.
+function memberNameKey(member: DirectoryMember) {
+	const name = member.name?.trim() || member.nickName?.trim() || "";
+	return pinyin.getFullChars(name).toUpperCase();
+}
+
+export function memberInitial(member: DirectoryMember): string {
+	return memberNameKey(member).match(/^[A-Z]/)?.[0] || "#";
+}
+
+export function filterMembersByInitial(
+	members: DirectoryMember[],
+	initial: string,
+): DirectoryMember[] {
+	return initial ? members.filter((member) => memberInitial(member) === initial) : members;
+}
+
+export function sortMembersByName(members: DirectoryMember[]): DirectoryMember[] {
+	return members
+		.map((member) => {
+			const key = memberNameKey(member);
+			return { member, key, group: /^[A-Z]/.test(key) ? 0 : key ? 1 : 2 };
+		})
+		.sort(
+			(a, b) =>
+				a.group - b.group ||
+				(a.key < b.key ? -1 : a.key > b.key ? 1 : 0) ||
+				a.member.id - b.member.id,
+		)
+		.map(({ member }) => member);
+}
+
+// The API paginates before applying UI card categories or pinyin sorting. Scan
+// all pages first so filtering and name order remain correct across UI pages.
 export async function collectMemberPages(
 	request: (params: Record<string, unknown>) => Promise<any>,
 	params: Record<string, unknown> = {},

@@ -5,6 +5,7 @@
 		:size="dialog ? 'calc(100% - 76rpx)' : 'auto'"
 		:show-header="false"
 		:padding="0"
+		:safe-area-bottom="false"
 		:border-radius="dialog ? '38rpx' : '44rpx 44rpx 0 0'"
 		background-color="#f8f5f0"
 		modal-background="rgba(33,22,46,.35)"
@@ -19,7 +20,11 @@
 			:id="id"
 			class="chime-business qm-sheet"
 			:class="{ 'qm-sheet--dialog': dialog, 'qm-sheet--form': form }"
-			:style="form ? { height: sheetHeight + 'px', maxHeight: sheetHeight + 'px' } : {}"
+			:style="
+				dialog
+					? {}
+					: { height: form ? sheetHeight + 'px' : undefined, maxHeight: sheetHeight + 'px' }
+			"
 			role="dialog"
 			tabindex="-1"
 			aria-modal="true"
@@ -56,6 +61,7 @@
 <script setup lang="ts">
 import { ref, nextTick, watch, onMounted, onBeforeUnmount } from "vue";
 import { holdSheetTabbar, releaseSheetTabbar } from "../utils/sheet-tabbar";
+import { useMiniNavigation } from "../utils/use-mini-navigation";
 const props = withDefaults(
 	defineProps<{
 		modelValue: boolean;
@@ -70,6 +76,7 @@ const props = withDefaults(
 );
 const emit = defineEmits<{ (e: "update:modelValue", value: boolean): void; (e: "closed"): void }>();
 const id = "qm-layer-" + Math.random().toString(36).slice(2);
+const navigation = useMiniNavigation();
 let previous: HTMLElement | null = null;
 const scrollTarget = ref("");
 async function revealField() {
@@ -88,7 +95,7 @@ const keyboardInset = ref(0),
 let baseHeight = 0,
 	keyboardHeight = 0;
 function measure() {
-	if (!props.form || !props.modelValue) return;
+	if (props.dialog || !props.modelValue) return;
 	const info = uni.getSystemInfoSync();
 	const height = info.windowHeight || 700;
 	baseHeight = Math.max(baseHeight, height);
@@ -102,11 +109,13 @@ function measure() {
 	}
 	// #endif
 	keyboardInset.value = bottom;
-	sheetHeight.value = Math.max(
-		180,
-		Math.min(baseHeight * 0.88, available - (info.statusBarHeight || 20) - 48),
-	);
+	// Keep the entire sheet below the native capsule row, including while the keyboard is open.
+	const topInset = navigation.enabled
+		? navigation.navigationBottom + 12
+		: (info.statusBarHeight || 20) + 48;
+	sheetHeight.value = Math.max(0, Math.min(baseHeight * 0.84, available - topInset));
 }
+watch(() => navigation.navigationBottom, measure);
 function viewportChanged() {
 	measure();
 	revealField();
@@ -122,9 +131,9 @@ function closed() {
 	emit("closed");
 }
 onMounted(() => {
-	if (!props.form) return;
+	if (props.dialog) return;
 	// #ifdef MP-WEIXIN
-	uni.onKeyboardHeightChange(keyboardChanged);
+	if (props.form) uni.onKeyboardHeightChange(keyboardChanged);
 	uni.onWindowResize(measure);
 	// #endif
 	// #ifdef H5
@@ -209,14 +218,14 @@ function onKeydown(event: KeyboardEvent) {
 }
 watch(
 	() => props.modelValue,
-	async (visible) => {
-		if (props.form) {
-			if (visible) {
-				baseHeight = 0;
-				keyboardHeight = 0;
-				holdSheetTabbar(id);
-				measure();
-			} else uni.hideKeyboard();
+	async (visible, wasVisible) => {
+		if (visible && !props.dialog) {
+			baseHeight = 0;
+			keyboardHeight = 0;
+			if (props.form) holdSheetTabbar(id);
+			measure();
+		} else if (!visible && wasVisible && props.form) {
+			uni.hideKeyboard();
 		}
 		// #ifdef H5
 		if (visible) {
@@ -230,12 +239,13 @@ watch(
 		}
 		// #endif
 	},
+	{ immediate: true },
 );
 onBeforeUnmount(() => {
 	releaseSheetTabbar(id);
 	// #ifdef MP-WEIXIN
-	if (props.form) {
-		uni.offKeyboardHeightChange(keyboardChanged);
+	if (!props.dialog) {
+		if (props.form) uni.offKeyboardHeightChange(keyboardChanged);
 		uni.offWindowResize(measure);
 	}
 	// #endif
@@ -256,8 +266,8 @@ onBeforeUnmount(() => {
 .qm-sheet {
 	display: flex;
 	flex-direction: column;
-	max-height: 88vh;
-	max-height: 88dvh;
+	max-height: 84vh;
+	max-height: 84dvh;
 	background: #f8f5f0;
 	border-radius: 44rpx 44rpx 0 0;
 	overflow: hidden;

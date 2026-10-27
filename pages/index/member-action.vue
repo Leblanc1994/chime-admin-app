@@ -292,7 +292,7 @@ const form = reactive({
 	remark: "",
 });
 const dateMode = ["year", "month", "date", "hour", "minute"];
-const types = ["会员次卡", "抖音新客福利", "美团团购", "纹绣", "眼线"].map((value) => ({
+const types = ["会员次卡", "抖音新客福利", "美团团购", "纹绣", "眼线", "美睫"].map((value) => ({
 	label: value,
 	value,
 }));

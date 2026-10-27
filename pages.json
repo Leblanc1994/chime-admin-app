@@ -8,6 +8,9 @@
 			}
 		},
 		{ "path": "pages/index/member-select", "style": { "navigationStyle": "custom" } },
+		{ "path": "pages/index/appointment", "style": { "navigationStyle": "custom", "navigationBarTitleText": "预约日程" } },
+		{ "path": "pages/index/appointment-form", "style": { "navigationStyle": "custom", "navigationBarTitleText": "新增预约" } },
+		{ "path": "pages/index/appointment-detail", "style": { "navigationStyle": "custom", "navigationBarTitleText": "预约详情" } },
 		{
 			"path": "pages/index/workbench",
 			"style": {
