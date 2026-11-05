@@ -1,6 +1,15 @@
 <template>
-	<qm-page :title="id ? '编辑预约' : '新增预约'" :busy="saving">
-		<view v-if="loading" class="qm-skeleton" />
+	<qm-page :title="id ? '编辑预约' : created ? '预约已保存' : '新增预约'" :busy="saving || addingCalendar" :footer-stacked="created && calendarAvailable && !calendarAdded">
+		<view v-if="created" class="qm-panel appointment-created">
+			<text class="appointment-created__symbol" aria-hidden="true">✓</text>
+			<text class="appointment-created__title">预约已保存</text>
+			<text class="appointment-created__summary">{{ form.customerName.trim() }} · {{ project?.name }}</text>
+			<text class="appointment-created__time">{{ dateLabel(form.date, true) }} {{ form.start }}–{{ timeLabel(form.endDate + ' ' + form.end, form.date) }}</text>
+			<text v-if="calendarAdded" class="appointment-created__hint">已添加到手机日历，设置为开始时提醒。</text>
+			<text v-else-if="calendarAvailable" class="appointment-created__hint">可创建手机日历日程，设置为开始时提醒。</text>
+			<text v-if="calendarError" class="qm-error appointment-created__error" role="alert">{{ calendarError }}</text>
+		</view>
+		<view v-else-if="loading" class="qm-skeleton" />
 		<view v-else-if="loadError" class="qm-empty"
 			><text>预约资料加载失败</text><text>{{ loadError }}</text
 			><qm-button @click="load">重新加载</qm-button></view
@@ -113,12 +122,16 @@
 					count
 			/></view>
 		</template>
-		<template #footer
-			><view v-if="error" class="qm-error" role="alert">{{ error }}</view
-			><qm-button :loading="saving" :disabled="loading || !!loadError" @click="save">{{
-				id ? "保存修改" : "保存预约"
-			}}</qm-button></template
-		>
+		<template #footer>
+			<view v-if="created" class="appointment-created__actions">
+				<qm-button v-if="calendarAvailable && !calendarAdded" :loading="addingCalendar" loading-text="正在添加…" @click="addCalendar">添加到手机日历</qm-button>
+				<qm-button :variant="calendarAvailable && !calendarAdded ? 'secondary' : 'primary'" :disabled="addingCalendar" @click="router.back()">完成</qm-button>
+			</view>
+			<template v-else>
+				<view v-if="error" class="qm-error" role="alert">{{ error }}</view>
+				<qm-button :loading="saving" :disabled="loading || !!loadError" @click="save">{{ id ? "保存修改" : "保存预约" }}</qm-button>
+			</template>
+		</template>
 		<qm-sheet v-model="projectVisible" title="选择项目" :busy="saving">
 			<button
 				v-for="p in projects"
@@ -176,6 +189,7 @@ import {
 	clearAppointmentMember,
 	appointmentFormError,
 	appointmentPayload,
+	appointmentPhoneCalendarEvent,
 	addMinutes,
 	durationLabel,
 	dateLabel,
@@ -195,6 +209,17 @@ const loading = ref(true),
 	saving = ref(false),
 	error = ref(""),
 	loadError = ref("");
+const created = ref(false),
+	addingCalendar = ref(false),
+	calendarAdded = ref(false),
+	calendarAvailable = ref(false),
+	calendarError = ref("");
+declare const wx: {
+	addPhoneCalendar?: (options: ReturnType<typeof appointmentPhoneCalendarEvent> & {
+		success: () => void;
+		fail: (result: { errMsg?: string }) => void;
+	}) => void;
+};
 const projectVisible = ref(false),
 	timeVisible = ref(false),
 	timeField = ref<"start" | "end">("start"),
@@ -275,7 +300,7 @@ async function load() {
 	}
 }
 async function save() {
-	if (saving.value || loading.value || loadError.value) return;
+	if (created.value || saving.value || loading.value || loadError.value) return;
 	error.value = appointmentFormError(form, projects.value);
 	if (error.value) return;
 	saving.value = true;
@@ -284,16 +309,54 @@ async function save() {
 		if (id.value) await service.update({ id: id.value, ...payload });
 		else await service.add({ ...payload, requestId });
 		uni.$emit("chime:appointments-changed", { date: form.date });
-		uni.showToast({ title: id.value ? "预约已更新" : "预约已保存", icon: "success" });
-		router.back();
+		if (id.value) {
+			uni.showToast({ title: "预约已更新", icon: "success" });
+			router.back();
+		} else {
+			created.value = true;
+		}
 	} catch (e: any) {
 		error.value = e?.message || "保存失败，已保留填写内容，请重试";
 	} finally {
 		saving.value = false;
 	}
 }
+function addCalendar() {
+	if (!created.value || addingCalendar.value || calendarAdded.value || !calendarAvailable.value) return;
+	if (typeof wx === "undefined" || typeof wx.addPhoneCalendar !== "function") {
+		calendarError.value = "当前微信版本暂不支持添加到手机日历，请更新微信后重试。";
+		return;
+	}
+	addingCalendar.value = true;
+	calendarError.value = "";
+	try {
+		// wx.addPhoneCalendar must be called directly from this button's tap handler.
+		wx.addPhoneCalendar!({
+			...appointmentPhoneCalendarEvent(form, project.value?.name || "预约项目"),
+			success: () => {
+				calendarAdded.value = true;
+				addingCalendar.value = false;
+			},
+			fail: (result) => {
+				const message = result?.errMsg || "";
+				calendarError.value = /auth|authorize|permission/i.test(message)
+					? "日历权限未开启，请在微信设置中允许访问日历后重试。"
+					: /cancel/i.test(message)
+						? "已取消添加，可再次点击添加到手机日历。"
+						: "手机日历添加失败，请重试。";
+				addingCalendar.value = false;
+			},
+		});
+	} catch {
+		calendarError.value = "手机日历添加失败，请重试。";
+		addingCalendar.value = false;
+	}
+}
 onLoad((q) => {
 	id.value = Number(q?.id) || 0;
+	// #ifdef MP-WEIXIN
+	calendarAvailable.value = !id.value;
+	// #endif
 	const date = q?.date && Number.isFinite(wallTime(q.date)) ? q.date : form.date;
 	const start = q?.start && /^([01]\d|2[0-3]):[0-5]\d$/.test(q.start) ? q.start : form.start;
 	Object.assign(form, newAppointmentForm(date, start));
@@ -301,6 +364,59 @@ onLoad((q) => {
 });
 </script>
 <style scoped lang="scss">
+.appointment-created {
+	padding: 54rpx 34rpx;
+	border-radius: 34rpx;
+	text-align: center;
+}
+.appointment-created__symbol {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 78rpx;
+	height: 78rpx;
+	margin: 0 auto 24rpx;
+	border-radius: 50%;
+	background: var(--qm-success-bg);
+	color: var(--qm-success);
+	font-size: 42rpx;
+}
+.appointment-created__title,
+.appointment-created__summary,
+.appointment-created__time,
+.appointment-created__hint {
+	display: block;
+}
+.appointment-created__title {
+	color: var(--qm-deep);
+	font-size: 36rpx;
+	font-weight: 650;
+}
+.appointment-created__summary {
+	margin-top: 22rpx;
+	color: var(--qm-deep);
+	font-size: 29rpx;
+	overflow-wrap: anywhere;
+}
+.appointment-created__time {
+	margin-top: 12rpx;
+	color: var(--qm-muted);
+	font-size: 25rpx;
+}
+.appointment-created__hint {
+	margin-top: 34rpx;
+	color: var(--qm-muted);
+	font-size: 24rpx;
+}
+.appointment-created__error {
+	margin-top: 24rpx;
+	text-align: left;
+}
+.appointment-created__actions {
+	display: flex;
+	flex-direction: column;
+	gap: 18rpx;
+}
 .appointment-customer-label {
 	display: flex;
 	align-items: center;

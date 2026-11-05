@@ -1,7 +1,7 @@
 <template>
 	<qm-page title="预约日程">
 		<view class="calendar-toolbar">
-			<picker mode="date" :value="selected" @change="selectDate($event.detail.value)">
+			<picker mode="date" :value="visible" @change="selectDate($event.detail.value)">
 				<view class="calendar-month" role="button" aria-label="选择日期">{{
 					monthLabel
 				}}</view>
@@ -52,15 +52,15 @@
 					:key="date"
 					class="calendar-date"
 					:class="{
-						selected: date === selected,
+						selected: date === activeDate,
 						today: date === today,
-						muted: date.slice(0, 7) !== selected.slice(0, 7),
+						muted: date.slice(0, 7) !== visible.slice(0, 7),
 					}"
 					:aria-label="
 						dateLabel(date) +
 						(counts[date] ? '，' + counts[date] + '项预约' : '，无预约')
 					"
-					:aria-pressed="date === selected"
+					:aria-pressed="date === activeDate"
 					@tap="selectDate(date)"
 				>
 					<text>{{ Number(date.slice(8)) }}</text
@@ -72,17 +72,17 @@
 					v-for="date in dates"
 					:key="date"
 					class="calendar-month-day"
-					:class="{ 'is-outside': date.slice(0, 7) !== selected.slice(0, 7) }"
+					:class="{ 'is-outside': date.slice(0, 7) !== visible.slice(0, 7) }"
 					@tap="selectDate(date)"
 				>
 					<button
 						class="calendar-date"
-						:class="{ selected: date === selected, today: date === today }"
+						:class="{ selected: date === activeDate, today: date === today }"
 						:aria-label="
 							dateLabel(date) +
 							(counts[date] ? '，' + counts[date] + '项预约' : '，无预约')
 						"
-						:aria-pressed="date === selected"
+						:aria-pressed="date === activeDate"
 						@tap.stop="selectDate(date)"
 					>
 						<text>{{ Number(date.slice(8)) }}</text>
@@ -123,7 +123,7 @@
 		</view>
 		<view id="appointment-day-agenda" class="calendar-summary"
 			><text
-				>{{ dateLabel(selected)
+				>{{ activeDate ? dateLabel(activeDate) : "每日预约"
 				}}<text v-if="!loading && !error && daily.length">
 					· {{ daily.length }}项预约</text
 				></text
@@ -136,12 +136,15 @@
 			><text>预约加载失败</text><text>{{ error }}</text
 			><qm-button @click="load">重新加载</qm-button></view
 		>
+		<view v-else-if="!activeDate" class="calendar-empty"
+			><text>点选上方日期查看安排</text></view
+		>
 		<view v-else-if="view === 'month' && !daily.length" class="calendar-empty"
 			><image src="/static/appointment/empty.svg" /><text>这一天还没有预约</text
 			><text>为顾客安排一段专属时光</text
 			><qm-button @click="create()">新增预约</qm-button></view
 		>
-		<view v-show="view === 'day' && !loading && !error">
+		<view v-show="view === 'day' && !loading && !error && activeDate">
 			<scroll-view
 				scroll-y
 				:scroll-into-view="scrollTarget"
@@ -239,7 +242,7 @@ import {
 	todayKey,
 	wallTime,
 	addDays,
-	shiftMonth,
+	browseMonth,
 	weekDates,
 	monthDates,
 	calendarRange,
@@ -257,6 +260,7 @@ const { router } = useCool(),
 	service = new AppointmentService();
 const navigation = useMiniNavigation();
 const selected = ref(todayKey()),
+	visible = ref(selected.value),
 	today = ref(todayKey()),
 	view = ref<"day" | "month">("day");
 const views = [
@@ -275,12 +279,15 @@ let loadedRange = "",
 	touchY = 0,
 	timer: ReturnType<typeof setInterval> | undefined;
 const monthLabel = computed(
-	() => `${selected.value.slice(0, 4)}年${Number(selected.value.slice(5, 7))}月`,
+	() => `${visible.value.slice(0, 4)}年${Number(visible.value.slice(5, 7))}月`,
 );
 const dates = computed(() =>
-	view.value === "day" ? weekDates(selected.value) : monthDates(selected.value),
+	view.value === "day" ? weekDates(visible.value) : monthDates(visible.value),
 );
-const daily = computed(() => appointmentsOn(rows.value, selected.value));
+const activeDate = computed(() =>
+	selected.value.slice(0, 7) === visible.value.slice(0, 7) ? selected.value : "",
+);
+const daily = computed(() => (activeDate.value ? appointmentsOn(rows.value, activeDate.value) : []));
 const dateRows = computed(() =>
 	Object.fromEntries(
 		dates.value.map((date) => [
@@ -292,7 +299,7 @@ const dateRows = computed(() =>
 const counts = computed(() =>
 	Object.fromEntries(dates.value.map((date) => [date, dateRows.value[date].length])),
 );
-const layout = computed(() => timelineLayout(rows.value, selected.value));
+const layout = computed(() => timelineLayout(rows.value, activeDate.value || visible.value));
 const hours = computed(() =>
 	Array.from(
 		{ length: layout.value.endHour - layout.value.startHour + 1 },
@@ -315,7 +322,7 @@ const timelineHeight = computed(() =>
 	),
 );
 const nowMinute = computed(() => {
-	if (selected.value !== todayKey(clock.value)) return null;
+	if (activeDate.value !== todayKey(clock.value)) return null;
 	const d = new Date(clock.value + 8 * 3600000),
 		minute = d.getUTCHours() * 60 + d.getUTCMinutes();
 	return minute >= layout.value.startHour * 60 && minute <= layout.value.endHour * 60
@@ -335,7 +342,7 @@ function eventStyle(item: ReturnType<typeof timelineLayout>["items"][number]) {
 }
 async function load() {
 	const current = ++sequence,
-		range = calendarRange(selected.value),
+		range = calendarRange(visible.value),
 		key = JSON.stringify(range);
 	loading.value = true;
 	error.value = "";
@@ -354,9 +361,9 @@ async function load() {
 // Apply the initial position after the native scroll-view is mounted. Resetting the
 // anchor also restores the right hour after switching dates or month/day views.
 watch(
-	[selected, view, loading],
+	[activeDate, view, loading],
 	async () => {
-		if (view.value !== "day" || loading.value || error.value) return;
+		if (view.value !== "day" || !activeDate.value || loading.value || error.value) return;
 		scrollTarget.value = "";
 		await nextTick();
 		const minute = daily.value.length
@@ -370,15 +377,21 @@ watch(
 function selectDate(date: string) {
 	if (!Number.isFinite(wallTime(date))) return;
 	selected.value = date;
+	visible.value = date;
 	if (JSON.stringify(calendarRange(date)) !== loadedRange || error.value) load();
 }
 function moveMonth(offset: number) {
-	selectDate(shiftMonth(selected.value, offset));
+	visible.value = browseMonth(visible.value, selected.value, offset);
+	if (JSON.stringify(calendarRange(visible.value)) !== loadedRange || error.value) load();
 }
 function create(start?: string) {
+	if (!activeDate.value) {
+		uni.showToast({ title: "请先选择预约日期", icon: "none" });
+		return;
+	}
 	router.push({
 		path: "/pages/index/appointment-form",
-		query: { date: selected.value, ...(start ? { start } : {}) },
+		query: { date: activeDate.value, ...(start ? { start } : {}) },
 	});
 }
 function detail(row: Appointment) {
@@ -411,7 +424,10 @@ async function showDayAppointments(date: string) {
 	});
 }
 function appointmentsChanged(change?: { date?: string }) {
-	if (change?.date && Number.isFinite(wallTime(change.date))) selected.value = change.date;
+	if (change?.date && Number.isFinite(wallTime(change.date))) {
+		selected.value = change.date;
+		visible.value = change.date;
+	}
 	loadedRange = "";
 }
 uni.$on("chime:appointments-changed", appointmentsChanged);
@@ -424,15 +440,15 @@ function touchEnd(e: any) {
 		dy = e.changedTouches[0].clientY - touchY;
 	if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.5) {
 		const direction = dx > 0 ? -1 : 1;
-		selectDate(
-			view.value === "day"
-				? addDays(selected.value, direction * 7)
-				: shiftMonth(selected.value, direction),
-		);
+		if (view.value === "day") selectDate(addDays(activeDate.value || visible.value, direction * 7));
+		else moveMonth(direction);
 	}
 }
 onLoad((q) => {
-	if (q?.date && Number.isFinite(wallTime(q.date))) selected.value = q.date;
+	if (q?.date && Number.isFinite(wallTime(q.date))) {
+		selected.value = q.date;
+		visible.value = q.date;
+	}
 });
 onShow(() => {
 	today.value = todayKey();

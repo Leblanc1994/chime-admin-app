@@ -98,13 +98,14 @@
 					scroll-y
 					enhanced
 					:show-scrollbar="false"
-					:scroll-top="scrollTop"
+					:scroll-top="requestedScrollTop"
 					:scroll-into-view="scrollTarget"
-					:refresher-enabled="!loading"
+					:refresher-enabled="!loading || refreshing"
 					:refresher-triggered="refreshing"
 					refresher-background="#f8f5f0"
 					:aria-busy="loading"
-					@scroll="scrollTop = $event.detail.scrollTop"
+					@scroll="onListScroll"
+					@touchstart="onListTouchStart"
 					@scrolltolower="more"
 					@refresherrefresh="refresh"
 				>
@@ -118,8 +119,9 @@
 						><view class="member-list">
 							<template v-for="(item, index) in list" :key="item.id">
 								<view
-									v-if="filters.order === 'name' && (!index || memberInitial(list[index - 1]) !== memberInitial(item))"
+									v-if="!index || memberInitial(list[index - 1]) !== memberInitial(item)"
 									:id="groupAnchor(memberInitial(item))"
+									:data-initial="memberInitial(item)"
 									class="member-group"
 								>{{ memberInitial(item) }}</view>
 								<button
@@ -197,7 +199,6 @@
 						>
 							{{ loading ? "正在加载…" : "加载更多" }}</button
 						><text v-else-if="list.length" class="member-end">已显示全部结果</text>
-						<view v-if="filters.order === 'name' && list.length" :style="{ height: scrollPadding + 'px' }" aria-hidden="true" />
 					</template>
 				</scroll-view>
 				<view v-if="showAlphabetIndex" class="member-index">
@@ -275,6 +276,7 @@ import {
 	sortMembersByName,
 } from "./utils/member-directory";
 import { pendingMemberQuickAction, pendingMemberFilter } from "./utils/member-quick-action";
+import { initialAtScrollTop, type MemberGroupOffset } from "./utils/member-scroll-index";
 const { router } = useCool(),
 	service = new MemberService(),
 	cardService = new CardService();
@@ -298,7 +300,7 @@ const initialCounts = computed(() => {
 	return counts;
 });
 const showAlphabetIndex = computed(
-	() => filters.order === "name" && (loaded.value || filteredCache.value !== null),
+	() => loaded.value || filteredCache.value !== null,
 );
 const cardCache = new Map<number, any[]>();
 async function withCards(rows: any[], seq: number) {
@@ -322,9 +324,8 @@ const list = ref<any[]>([]),
 	loading = ref(false),
 	loaded = ref(false),
 	statusBarHeight = ref(0),
-	scrollTop = ref(0),
+	requestedScrollTop = ref(0),
 	scrollTarget = ref(""),
-	scrollPadding = ref(0),
 	refreshing = ref(false),
 	error = ref(""),
 	finished = ref(false),
@@ -354,7 +355,6 @@ const sources = { 1: "抖音", 2: "美团", 3: "朋友介绍" },
 		{ label: "朋友介绍", value: 3 },
 	],
 	orders = [
-		{ label: "姓名首字母 A–Z", value: "name" },
 		{ label: "最新加入", value: "createTime" },
 		{ label: "最近消费", value: "lastConsumeTime" },
 		{ label: "剩余次数", value: "remainTimes" },
@@ -382,53 +382,35 @@ async function fetch(append = false) {
 	loading.value = true;
 	error.value = "";
 	try {
-		const byName = filters.order === "name";
 		const needsCardFilter = category.value !== "all" || !!attention.value;
 		const params = {
 			...filters,
-			order: byName ? "createTime" : filters.order,
+			order: filters.order === "name" ? "createTime" : filters.order,
 			gender: filters.gender === -1 ? undefined : filters.gender,
 			source: filters.source === -1 ? undefined : filters.source,
 			sort: "desc",
 		};
-		let rows: any[], total: number;
-		if (byName || needsCardFilter) {
-			if (!filteredCache.value) {
-				const all = await collectMemberPages((params) => service.page(params), params);
-				if (seq !== generation) return;
-				const ordered = byName ? sortMembersByName(all) : all;
-				if (needsCardFilter) {
-					const hydrated = await withCards(ordered, seq);
-					if (seq !== generation) return;
-					filteredCache.value = hydrated.filter(
-						(row) =>
-							matchesMemberFilter(row, category.value) &&
-							matchesMemberFilter(row, attention.value),
-					);
-				} else {
-					filteredCache.value = ordered;
-				}
-			}
-			total = filteredCache.value.length;
-			rows = byName
-				? filteredCache.value.slice()
-				: filteredCache.value.slice(
-					(pagination.page - 1) * pagination.size,
-					pagination.page * pagination.size,
-				);
-			if (!needsCardFilter) {
-				const firstPage = await withCards(rows.slice(0, pagination.size), seq);
-				rows.splice(0, firstPage.length, ...firstPage);
-			}
-		} else {
-			const res: any = await service.page({
-				...params,
-				page: pagination.page,
-				size: pagination.size,
-			});
+		if (!filteredCache.value) {
+			const all = await collectMemberPages((params) => service.page(params), params);
 			if (seq !== generation) return;
-			rows = await withCards(res.list || [], seq);
-			total = res.pagination?.total ?? res.total ?? rows.length;
+			const ordered = sortMembersByName(all);
+			if (needsCardFilter) {
+				const hydrated = await withCards(ordered, seq);
+				if (seq !== generation) return;
+				filteredCache.value = hydrated.filter(
+					(row) =>
+						matchesMemberFilter(row, category.value) &&
+						matchesMemberFilter(row, attention.value),
+				);
+			} else {
+				filteredCache.value = ordered;
+			}
+		}
+		const total = filteredCache.value.length;
+		const rows = filteredCache.value.slice();
+		if (!needsCardFilter) {
+			const firstPage = await withCards(rows.slice(0, pagination.size), seq);
+			rows.splice(0, firstPage.length, ...firstPage);
 		}
 		if (seq !== generation) return;
 		list.value = append ? [...list.value, ...rows] : rows;
@@ -437,7 +419,7 @@ async function fetch(append = false) {
 		loaded.value = true;
 		dirty = false;
 		nextTick(() => {
-			updateScrollPadding(seq);
+			updateGroupOffsets(seq);
 			observeMemberCards(seq);
 		});
 	} catch (e: any) {
@@ -450,24 +432,33 @@ async function fetch(append = false) {
 }
 function reload() {
 	jumpSequence++;
+	groupOffsets = [];
 	stopCardObserver();
 	cardCache.clear();
 	filteredCache.value = null;
-	loaded.value = false;
-	list.value = [];
-	scrollTop.value = 0;
 	scrollTarget.value = "";
-	scrollPadding.value = 0;
+	if (!refreshing.value) {
+		loaded.value = false;
+		list.value = [];
+		requestedScrollTop.value = Math.max(0, currentScrollTop);
+		nextTick(() => {
+			requestedScrollTop.value = 0;
+		});
+	}
+	currentScrollTop = 0;
+	scrollHeight = 0;
 	initial.value = "";
 	pagination.page = 1;
 	finished.value = false;
 	return fetch();
 }
 async function refresh() {
-	if (loading.value) return;
+	if (loading.value || refreshing.value) return;
 	refreshing.value = true;
 	try {
+		await nextTick();
 		await reload();
+		await nextTick();
 	} finally {
 		refreshing.value = false;
 	}
@@ -478,26 +469,48 @@ function more() {
 	fetch(true);
 }
 let jumpSequence = 0;
+let groupOffsets: MemberGroupOffset[] = [];
+let viewportHeight = 0;
+let scrollHeight = 0;
+let currentScrollTop = 0;
+function visibleInitial() {
+	if (!groupOffsets.length) return "";
+	if (
+		viewportHeight > 0 &&
+		scrollHeight > viewportHeight &&
+		currentScrollTop + viewportHeight >= scrollHeight - 2
+	) {
+		return groupOffsets[groupOffsets.length - 1].initial;
+	}
+	return initialAtScrollTop(groupOffsets, currentScrollTop);
+}
+function onListScroll(event: { detail: { scrollTop: number; scrollHeight?: number } }) {
+	currentScrollTop = event.detail.scrollTop;
+	if (event.detail.scrollHeight !== undefined) scrollHeight = event.detail.scrollHeight;
+	if (groupOffsets.length) initial.value = visibleInitial();
+}
+function onListTouchStart() {
+	scrollTarget.value = "";
+}
 function groupAnchor(letter: string) {
 	return "member-group-" + (letter === "#" ? "other" : letter);
 }
-function updateScrollPadding(seq: number) {
-	if (seq !== generation || filters.order !== "name" || !list.value.length) return;
+function updateGroupOffsets(seq: number) {
+	if (seq !== generation || !list.value.length) return;
 	const query = uni.createSelectorQuery().in(instance?.proxy);
 	query.select(".member-scroll").boundingClientRect();
 	query.select(".member-list").boundingClientRect();
 	query.selectAll(".member-group").boundingClientRect();
-	query.select(".member-end").boundingClientRect();
 	query.exec((result) => {
 		if (seq !== generation) return;
-		const [viewport, content, groups, end] = result;
-		const last = groups?.[groups.length - 1];
-		if (!viewport || !content || !last) return;
-		// Let even the final letter reach the top of the list.
-		scrollPadding.value = Math.max(
-			0,
-			Math.ceil(viewport.height - (content.bottom - last.top) - (end?.height || 0)),
-		);
+		const [viewport, content, groups] = result;
+		if (!viewport || !content || !groups?.length) return;
+		viewportHeight = viewport.height;
+		groupOffsets = groups.map((group: any) => ({
+			initial: group.dataset.initial,
+			top: group.top - content.top,
+		}));
+		initial.value = visibleInitial();
 	});
 }
 async function setInitial(letter: string) {
@@ -546,11 +559,13 @@ function drainCardQueue() {
 				if (seq !== generation) return;
 				const index = list.value.findIndex((member) => member.id === id);
 				if (index !== -1) list.value[index] = hydrated;
+				nextTick(() => updateGroupOffsets(seq));
 			})
 			.catch(() => {
 				if (seq !== generation) return;
 				const member = list.value.find((member) => member.id === id);
 				if (member) member.cardLoadError = true;
+				nextTick(() => updateGroupOffsets(seq));
 			})
 			.finally(() => {
 				cardInFlight.delete(key);
@@ -583,7 +598,6 @@ function resetFilter() {
 }
 function applyFilter() {
 	Object.assign(filters, draft);
-	if (filters.order !== "name") initial.value = "";
 	filterVisible.value = false;
 	reload();
 }
@@ -624,7 +638,10 @@ onShow(() => {
 	}
 	pending();
 	if (dirty) reload();
-	else nextTick(() => observeMemberCards(generation));
+	else nextTick(() => {
+		updateGroupOffsets(generation);
+		observeMemberCards(generation);
+	});
 });
 onHide(() => {
 	memberAction.value = undefined;

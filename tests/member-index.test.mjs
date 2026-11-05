@@ -141,9 +141,29 @@ test("clicking a selected letter navigates again instead of clearing it; unavail
 	assert.deepEqual(events, ["L", "L"]);
 });
 
-function directorySetup() {
-	const members = Array.from({ length: 40 }, (_, i) => ({ id: i + 1, name: i < 20 ? "阿芳" : "张敏" }));
+function groupMeasurements() {
+	const callbacks = [];
+	return {
+		callbacks,
+		query() {
+			return {
+				in() { return this; }, select() { return this; }, selectAll() { return this; },
+				boundingClientRect() { return this; }, exec(callback) { callbacks.push(callback); },
+			};
+		},
+		result(letters) {
+			return [
+				{ top: 200, height: 500 }, { top: -300, bottom: 900 },
+				letters.map((initial, index) => ({ top: -300 + index * 200, dataset: { initial } })),
+				{ height: 30 },
+			];
+		},
+	};
+}
+
+function directorySetup(measurements, members = Array.from({ length: 40 }, (_, i) => ({ id: i + 1, name: i < 20 ? "阿芳" : "张敏" })), onPage) {
 	let pageCalls = 0;
+	const pageRequests = [];
 	const cardCalls = [];
 	const observers = [];
 	const mocks = {
@@ -153,12 +173,13 @@ function directorySetup() {
 		"/@/cool": { useCool: () => ({ router: {} }) },
 		"./utils/use-mini-navigation": { useMiniNavigation: () => ({ enabled: false }) },
 		"./utils/member-quick-action": { pendingMemberQuickAction: vue.ref(), pendingMemberFilter: vue.ref() },
-		"../../service/member/info": { default: class { async page() { pageCalls++; return { list: members, total: members.length }; } } },
+		"../../service/member/info": { default: class { async page(params) { pageCalls++; pageRequests.push(params); await onPage?.(pageCalls); return { list: members.slice((params.page - 1) * params.size, params.page * params.size), total: members.length }; } } },
 		"../../service/member/card-account": { default: class { async list({ memberId }) { cardCalls.push(memberId); return []; } } },
 	};
 	const uni = {
 		$on() {}, $off() {},
 		createSelectorQuery() {
+			if (measurements) return measurements.query();
 			return { in() { return this; }, select() { return this; }, selectAll() { return this; }, boundingClientRect() { return this; }, exec() {} };
 		},
 		createIntersectionObserver() {
@@ -173,8 +194,34 @@ function directorySetup() {
 	};
 	const component = load("pages/index/member.vue", mocks, { uni }).default;
 	const state = component.setup({}, { expose() {} });
-	return { state, cardCalls, observers, pageCalls: () => pageCalls };
+	return { state, cardCalls, observers, pageRequests, pageCalls: () => pageCalls };
 }
+
+test("every filter order keeps the full directory in A–Z order with working letter navigation", async () => {
+	const members = Array.from({ length: 120 }, (_, i) => ({ id: i + 1, name: i < 110 ? "张敏" : "阿芳" }));
+	for (const order of ["createTime", "lastConsumeTime", "remainTimes", "validCardCount"]) {
+		const measurements = groupMeasurements();
+		const { state, pageRequests, cardCalls } = directorySetup(measurements, members);
+		state.draft.order = order;
+		state.applyFilter();
+		await new Promise((resolve) => setImmediate(resolve));
+		assert.equal(state.error.value, "");
+		assert.equal(state.list.value.length, 120);
+		assert.equal(state.list.value[0].name, "阿芳");
+		assert.equal(state.list.value[10].name, "张敏");
+		assert.equal(state.finished.value, true);
+		assert.equal(state.showAlphabetIndex.value, true);
+		assert.deepEqual(Object.keys(state.initialCounts.value), ["A", "Z"]);
+		assert.equal(pageRequests.length, 2);
+		assert.ok(pageRequests.every((params) => params.order === order));
+		assert.equal(cardCalls.length, 15);
+		measurements.callbacks.at(-1)(measurements.result(["A", "Z"]));
+		state.onListScroll({ detail: { scrollTop: 200 } });
+		assert.equal(state.initial.value, "Z");
+		await state.setInitial("A");
+		assert.equal(state.scrollTarget.value, "member-group-A");
+	}
+});
 
 test("directory navigation reaches groups beyond the first page without filtering or refetching", async () => {
 	const { state, cardCalls, pageCalls } = directorySetup();
@@ -215,7 +262,82 @@ test("offscreen cards load only on entry and stale callbacks cannot update a ref
 	assert.equal(cardCalls.length, count);
 });
 
-async function selectorSetup(purpose = "appointment") {
+test("scrolling the directory updates the selected letter in both directions and ignores stale layout", async () => {
+	const measurements = groupMeasurements();
+	const { state, pageCalls, cardCalls } = directorySetup(measurements);
+	await state.reload();
+	await vue.nextTick();
+	const measure = measurements.callbacks.at(-1);
+	measure(measurements.result(["A", "Z"]));
+	assert.equal(state.initial.value, "A");
+	state.onListScroll({ detail: { scrollTop: 200 } });
+	assert.equal(state.initial.value, "Z");
+	state.onListScroll({ detail: { scrollTop: 800 } });
+	assert.equal(state.initial.value, "Z");
+	state.onListScroll({ detail: { scrollTop: 60 } });
+	assert.equal(state.initial.value, "A");
+	await state.setInitial("Z");
+	state.onListScroll({ detail: { scrollTop: 199.5 } });
+	assert.equal(state.initial.value, "Z");
+	assert.equal(pageCalls(), 1);
+	assert.equal(cardCalls.length, 15);
+	await state.reload();
+	measure(measurements.result(["L"]));
+	assert.equal(state.initial.value, "");
+	state.onListScroll({ detail: { scrollTop: 200 } });
+	assert.equal(state.initial.value, "");
+});
+
+test("the last letter stays selected when its heading cannot reach the top", async () => {
+	const measurements = groupMeasurements();
+	const { state } = directorySetup(measurements);
+	await state.reload();
+	await vue.nextTick();
+	const geometry = measurements.result(["A", "Z"]);
+	geometry[2][1].top = 300; // Z begins 600px into a 900px list, below the 400px maximum scroll offset.
+	measurements.callbacks.at(-1)(geometry);
+	state.onListScroll({ detail: { scrollTop: 350, scrollHeight: 900 } });
+	assert.equal(state.initial.value, "A");
+	state.onListScroll({ detail: { scrollTop: 400, scrollHeight: 900 } });
+	assert.equal(state.initial.value, "Z");
+	state.onListScroll({ detail: { scrollTop: 350, scrollHeight: 900 } });
+	assert.equal(state.initial.value, "A");
+});
+
+test("manual scrolling does not feed positions back into the scroll control", async () => {
+	const { state } = directorySetup();
+	await state.reload();
+	await state.setInitial("Z");
+	assert.equal(state.scrollTarget.value, "member-group-Z");
+	state.onListTouchStart();
+	assert.equal(state.scrollTarget.value, "");
+	state.onListScroll({ detail: { scrollTop: 350, scrollHeight: 900 } });
+	state.onListScroll({ detail: { scrollTop: 430, scrollHeight: 900 } });
+	assert.equal(state.requestedScrollTop.value, 0);
+});
+
+test("pull refresh keeps the list mounted until new rows are ready", async () => {
+	let releaseRefresh;
+	const pendingPage = new Promise((resolve) => { releaseRefresh = resolve; });
+	const { state } = directorySetup(undefined, undefined, (call) => call === 2 ? pendingPage : undefined);
+	await state.reload();
+	const previousList = state.list.value;
+	state.onListScroll({ detail: { scrollTop: -70, scrollHeight: 900 } });
+	const pendingRefresh = state.refresh();
+	await new Promise((resolve) => setImmediate(resolve));
+	assert.equal(state.refreshing.value, true);
+	assert.equal(state.loading.value, true);
+	assert.equal(state.loaded.value, true);
+	assert.equal(state.list.value, previousList);
+	assert.equal(state.requestedScrollTop.value, 0);
+	releaseRefresh();
+	await pendingRefresh;
+	assert.equal(state.refreshing.value, false);
+	assert.equal(state.loading.value, false);
+	assert.equal(state.list.value.length, 40);
+});
+
+async function selectorSetup(purpose = "appointment", measurements) {
 	let onLoad;
 	let pageCalls = 0;
 	const events = [];
@@ -238,6 +360,7 @@ async function selectorSetup(purpose = "appointment") {
 	const uni = {
 		$emit(name, member) { events.push({ name, member }); },
 		createSelectorQuery() {
+			if (measurements) return measurements.query();
 			return { in() { return this; }, select() { return this; }, selectAll() { return this; }, boundingClientRect() { return this; }, exec() {} };
 		},
 	};
@@ -295,4 +418,30 @@ test("deduction selection retains eligibility rules and the existing action rout
 	assert.equal(navigation[0].path, "/pages/index/member-action");
 	assert.equal(navigation[0].query.memberId, 1);
 	assert.equal(events.length, 0);
+});
+
+test("appointment list scrolling follows groups and search discards old offsets", async () => {
+	const measurements = groupMeasurements();
+	const { state, events, pageCalls } = await selectorSetup("appointment", measurements);
+	const measure = measurements.callbacks.at(-1);
+	measure(measurements.result(["C", "L", "W", "Z", "#"]));
+	assert.equal(state.initial.value, "C");
+	state.onListScroll({ detail: { scrollTop: 600 } });
+	assert.equal(state.initial.value, "Z");
+	state.onListScroll({ detail: { scrollTop: 850 } });
+	assert.equal(state.initial.value, "#");
+	state.onListScroll({ detail: { scrollTop: 250 } });
+	assert.equal(state.initial.value, "L");
+	state.onListScroll({ detail: { scrollTop: -40 } });
+	assert.equal(state.initial.value, "C");
+	assert.equal(pageCalls(), 2);
+	assert.equal(events.length, 0);
+	state.keyword.value = "晓妍";
+	await vue.nextTick();
+	measure(measurements.result(["C", "L", "W", "Z", "#"]));
+	assert.equal(state.initial.value, "");
+	measurements.callbacks.at(-1)(measurements.result(["L"]));
+	assert.equal(state.initial.value, "L");
+	state.onListScroll({ detail: { scrollTop: 1000 } });
+	assert.equal(state.initial.value, "L");
 });

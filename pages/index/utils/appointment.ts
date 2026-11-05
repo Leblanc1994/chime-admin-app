@@ -31,6 +31,10 @@ export function shiftMonth(date: string, offset: number) {
 	d.setUTCDate(Math.min(day, last));
 	return d.toISOString().slice(0, 10);
 }
+export function browseMonth(visibleDate: string, selectedDate: string, offset: number) {
+	const first = shiftMonth(visibleDate.slice(0, 7) + "-01", offset);
+	return first.slice(0, 7) === selectedDate.slice(0, 7) ? selectedDate : first;
+}
 export function weekDates(date: string) {
 	const weekday = (new Date(wallTime(date)).getUTCDay() + 6) % 7;
 	const first = addDays(date, -weekday);
@@ -124,6 +128,24 @@ export function appointmentPayload(form: AppointmentForm) {
 		startTime: `${form.date} ${form.start}:00`,
 		endTime: `${form.endDate} ${form.end}:00`,
 		remark: form.remark.trim(),
+	};
+}
+export function appointmentPhoneCalendarEvent(form: AppointmentForm, projectName: string) {
+	const payload = appointmentPayload(form);
+	return appointmentPhoneCalendarEventFromRow({ ...payload, projectName });
+}
+export function appointmentPhoneCalendarEventFromRow(
+	row: Pick<Appointment, "customerName" | "projectName" | "startTime" | "endTime" | "remark">,
+) {
+	// The server stores Shanghai wall time; the phone calendar expects Unix seconds.
+	const shanghaiOffset = 8 * 3600 * 1000;
+	return {
+		title: `预约 · ${row.customerName.trim()} · ${row.projectName}`,
+		startTime: (wallTime(row.startTime) - shanghaiOffset) / 1000,
+		endTime: (wallTime(row.endTime) - shanghaiOffset) / 1000,
+		description: row.remark?.trim() || "门店预约日程",
+		alarm: true,
+		alarmOffset: 0,
 	};
 }
 export function selectAppointmentMember(

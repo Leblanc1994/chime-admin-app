@@ -1,7 +1,7 @@
 <template>
 	<view class="qm-quick-actions" aria-label="日常业务">
 		<button class="qm-quick-actions__primary" @tap="run('deduct')">
-			<image src="/static/business/v53/quick-deduct.svg" mode="aspectFit" />
+			<image :src="primaryIcon" mode="aspectFit" />
 			<view
 				><text>会员扣次</text
 				><image src="/static/business/v53/chevron-light.svg" mode="aspectFit"
@@ -10,7 +10,7 @@
 		</button>
 		<view class="qm-quick-actions__secondary">
 			<button v-for="item in secondary" :key="item.action" @tap="run(item.action)">
-				<image :src="'/static/business/v53/' + item.icon + '.svg'" mode="aspectFit" />
+				<image :src="item.icon" mode="aspectFit" />
 				<text>{{ item.label }}</text>
 			</button>
 		</view>
@@ -18,18 +18,27 @@
 	<qm-member-business-sheet ref="businessSheet" @saved="emit('saved')" />
 </template>
 <script setup lang="ts">
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import QmMemberBusinessSheet from "./qm-member-business-sheet.vue";
 const businessSheet = ref<InstanceType<typeof QmMemberBusinessSheet>>();
 import { useCool } from "/@/cool";
+const props = defineProps<{ appointmentShortcut?: boolean }>();
 const { router } = useCool();
 const emit = defineEmits<{ (e: "saved"): void }>();
-const secondary = [
-	{ label: "会员开卡", action: "openCard", icon: "quick-open" },
-	{ label: "散客消费", action: "guest", icon: "quick-receipt" },
-	{ label: "新增会员", action: "addMember", icon: "quick-member" },
-];
+const iconPath = (name: string) =>
+	props.appointmentShortcut
+		? `/static/business/v54/quick-${name}.png`
+		: `/static/business/v53/quick-${name}.svg`;
+const primaryIcon = computed(() => iconPath("deduct"));
+const secondary = computed(() => [
+	props.appointmentShortcut
+		? { label: "预约日程", action: "appointment", icon: iconPath("appointment") }
+		: { label: "会员开卡", action: "openCard", icon: iconPath("open") },
+	{ label: "散客消费", action: "guest", icon: iconPath("receipt") },
+	{ label: "新增会员", action: "addMember", icon: iconPath("member") },
+]);
 function run(action: string) {
+	if (action === "appointment") return router.push("/pages/index/appointment");
 	if (action === "guest") return router.push("/pages/index/consume-form");
 	if (action === "addMember") return businessSheet.value?.openCreate();
 	router.push({ path: "/pages/index/member-select", query: { purpose: action } });

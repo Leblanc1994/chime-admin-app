@@ -6,7 +6,7 @@
 	>
 		<view
 			class="chime-business qm-page"
-			:class="{ 'qm-page--footer': $slots.footer, 'qm-page--stacked': footerStacked, 'qm-page--fill': fill }"
+			:class="{ 'qm-page--footer': footerVisible && $slots.footer, 'qm-page--stacked': footerStacked, 'qm-page--fill': fill }"
 		>
 			<view
 				class="qm-page__navigation"
@@ -41,7 +41,7 @@
 				</view>
 			</view>
 			<view class="qm-page__body"><slot /></view>
-			<view v-if="$slots.footer" class="qm-page__footer"><slot name="footer" /></view>
+			<view v-if="footerVisible && $slots.footer" class="qm-page__footer"><slot name="footer" /></view>
 		</view>
 	</cl-page>
 </template>
@@ -49,7 +49,16 @@
 import { onMounted, watch } from "vue";
 import { useCool } from "/@/cool";
 import { useMiniNavigation } from "../utils/use-mini-navigation";
-const props = defineProps<{ title: string; busy?: boolean; footerStacked?: boolean; fill?: boolean }>();
+const props = withDefaults(
+	defineProps<{
+		title: string;
+		busy?: boolean;
+		footerStacked?: boolean;
+		footerVisible?: boolean;
+		fill?: boolean;
+	}>(),
+	{ footerVisible: true },
+);
 const { router } = useCool();
 const navigation = useMiniNavigation();
 onMounted(() => uni.setNavigationBarTitle({ title: props.title }));

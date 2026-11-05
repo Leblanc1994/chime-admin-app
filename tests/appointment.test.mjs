@@ -21,6 +21,10 @@ test("Shanghai today, strict date validation, month ends and Monday calendar gri
 	assert.equal(a.shiftMonth("2026-01-31", 1), "2026-02-28");
 	assert.equal(a.shiftMonth("2024-01-31", 1), "2024-02-29");
 	assert.equal(a.shiftMonth("2026-12-31", 1), "2027-01-31");
+	assert.equal(a.browseMonth("2026-10-02", "2026-10-02", 1), "2026-11-01");
+	assert.equal(a.browseMonth("2026-10-02", "2026-10-02", -1), "2026-09-01");
+	assert.equal(a.browseMonth("2026-11-01", "2026-10-02", -1), "2026-10-02");
+	assert.equal(a.browseMonth("2026-01-31", "2026-01-31", 1), "2026-02-01");
 	assert.deepEqual(a.weekDates("2026-10-27"), [
 		"2026-10-26",
 		"2026-10-27",
@@ -74,6 +78,32 @@ test("form validates real projects and ordered times; payload trims free text", 
 	assert.equal(a.appointmentPayload(form).customerName, "张女士");
 	assert.equal(a.appointmentPayload(form).remark, "自然款");
 	assert.equal(a.appointmentPayload(form).startTime, "2026-10-27 13:00:00");
+});
+test("phone calendar event uses Shanghai appointment time and creates a timed alert", () => {
+	const form = {
+		...a.newAppointmentForm("2026-12-31", "23:30"),
+		customerName: " 张女士 ",
+		projectId: 1,
+		remark: " 自然款 ",
+	};
+	assert.deepEqual(a.appointmentPhoneCalendarEvent(form, "美睫"), {
+		title: "预约 · 张女士 · 美睫",
+		startTime: Date.parse("2026-12-31T15:30:00Z") / 1000,
+		endTime: Date.parse("2026-12-31T17:30:00Z") / 1000,
+		description: "自然款",
+		alarm: true,
+		alarmOffset: 0,
+	});
+	assert.deepEqual(
+		a.appointmentPhoneCalendarEventFromRow({
+			customerName: "张女士",
+			projectName: "美睫",
+			startTime: "2026-12-31 23:30:00",
+			endTime: "2027-01-01 01:30:00",
+			remark: "自然款",
+		}),
+		a.appointmentPhoneCalendarEvent(form, "美睫"),
+	);
 });
 test("cross-day calendar membership excludes cancelled and midnight endpoint", () => {
 	const rows = [

@@ -1,5 +1,5 @@
 <template>
-	<qm-page title="员工管理"
+	<qm-page title="员工管理" :footer-visible="!showEmptyAdd"
 		><text class="staff-store-label">千绵美学 · 本店员工</text>
 		<view class="qm-search"
 			><image
@@ -48,13 +48,15 @@
 					? "更换关键词或筛选条件后再试"
 					: "添加店员，一起处理门店日常事务"
 			}}</text
-			><qm-button v-if="!keyword && status === -1" @click="edit()">新增员工</qm-button></view
+			><qm-button v-if="showEmptyAdd" @click="edit()">新增员工</qm-button></view
 		>
 		<button v-if="rows.length && !finished" class="qm-inline" :disabled="loading" @tap="more">
 			{{ loading ? "正在加载…" : "加载更多" }}
 		</button>
-		<template #footer><qm-button @click="edit()">＋ 新增员工</qm-button></template
-		><view class="qm-signoff"
+		<template #footer>
+			<qm-button @click="edit()">＋ 新增员工</qm-button>
+		</template>
+		<view class="qm-signoff"
 			><image src="/static/business/chime-mark.png" mode="aspectFit" /><text
 				>仅管理当前门店员工</text
 			></view
@@ -62,7 +64,7 @@
 	</qm-page>
 </template>
 <script setup lang="ts">
-import { ref, onUnmounted } from "vue";
+import { computed, ref, onUnmounted } from "vue";
 import { onShow, onReachBottom, onPullDownRefresh } from "@dcloudio/uni-app";
 import { useCool } from "/@/cool";
 import Service, { type StoreStaff } from "../../service/store/staff";
@@ -87,6 +89,9 @@ const statuses = [
 	{ label: "在职", value: 1 },
 	{ label: "已停用", value: 0 },
 ];
+const showEmptyAdd = computed(
+	() => loaded.value && !error.value && !rows.value.length && !keyword.value && status.value === -1,
+);
 async function fetch(append = false) {
 	const seq = ++generation;
 	loading.value = true;

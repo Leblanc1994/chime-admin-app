@@ -43,7 +43,7 @@
 				>{{ error
 				}}<button class="qm-inline" :disabled="loading" @tap="load">重新同步</button></view
 			>
-			<qm-quick-actions @saved="load" />
+			<qm-quick-actions appointment-shortcut @saved="load" />
 			<view class="home-section-title"
 				><view
 					><text>会员关怀</text

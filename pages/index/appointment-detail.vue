@@ -1,5 +1,5 @@
 <template>
-	<qm-page title="预约详情" :busy="cancelling">
+	<qm-page title="预约详情" :busy="cancelling || addingCalendar">
 		<view v-if="loading" class="qm-skeleton" />
 		<view v-else-if="error" class="qm-empty"
 			><text>预约加载失败</text><text>{{ error }}</text
@@ -41,13 +41,24 @@
 					? "取消记录已保留，不再显示于日历。"
 					: "此日程用于门店预约安排，不会自动扣次或生成消费记录。"
 			}}</text>
+			<view v-if="row.status === 1 && calendarAvailable" class="appointment-calendar">
+				<qm-button
+					variant="secondary"
+					:loading="addingCalendar"
+					loading-text="正在添加…"
+					:disabled="cancelling || calendarAdded"
+					@click="addCalendar"
+				>{{ calendarAdded ? "已添加到手机日历" : "添加到手机日历" }}</qm-button>
+				<text class="appointment-calendar__hint">如已添加，请勿重复操作；修改或取消预约后，需自行更新手机日历。</text>
+				<text v-if="calendarError" class="qm-error appointment-calendar__error" role="alert">{{ calendarError }}</text>
+			</view>
 		</template>
 		<template v-if="row && !loading && !error && row.status === 1" #footer
 			><view class="appointment-detail-actions"
 				><view class="appointment-detail-action"
 					><qm-button
 						variant="secondary"
-						:disabled="cancelling"
+						:disabled="cancelling || addingCalendar"
 						@click="
 							cancelVisible = true;
 							cancelError = '';
@@ -55,7 +66,7 @@
 						>取消预约</qm-button
 					></view
 				><view class="appointment-detail-action"
-					><qm-button :disabled="cancelling" @click="edit">编辑预约</qm-button></view
+					><qm-button :disabled="cancelling || addingCalendar" @click="edit">编辑预约</qm-button></view
 				></view
 			></template
 		>
@@ -76,12 +87,12 @@
 	</qm-page>
 </template>
 <script setup lang="ts">
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { onLoad, onShow } from "@dcloudio/uni-app";
 import { useCool } from "/@/cool";
 import AppointmentService from "../../service/appointment/schedule";
 import type { Appointment } from "../../service/appointment/schedule";
-import { dateLabel, appointmentTime, durationLabel } from "./utils/appointment";
+import { dateLabel, appointmentTime, durationLabel, appointmentPhoneCalendarEventFromRow } from "./utils/appointment";
 import QmPage from "./components/qm-page.vue";
 import QmButton from "./components/qm-button.vue";
 import QmConfirm from "./components/qm-confirm.vue";
@@ -94,6 +105,29 @@ const id = ref(0),
 const cancelVisible = ref(false),
 	cancelling = ref(false),
 	cancelError = ref("");
+const calendarAvailable = ref(false),
+	addingCalendar = ref(false),
+	calendarError = ref(""),
+	addedCalendarSignature = ref("");
+declare const wx: {
+	addPhoneCalendar?: (options: ReturnType<typeof appointmentPhoneCalendarEventFromRow> & {
+		success: () => void;
+		fail: (result: { errMsg?: string }) => void;
+	}) => void;
+};
+function calendarSignature(appointment: Appointment) {
+	return JSON.stringify([
+		appointment.id,
+		appointment.customerName,
+		appointment.projectName,
+		appointment.startTime,
+		appointment.endTime,
+		appointment.remark,
+	]);
+}
+const calendarAdded = computed(
+	() => !!row.value && addedCalendarSignature.value === calendarSignature(row.value),
+);
 async function load() {
 	loading.value = true;
 	error.value = "";
@@ -110,8 +144,39 @@ async function load() {
 function edit() {
 	router.push({ path: "/pages/index/appointment-form", query: { id: id.value } });
 }
+function addCalendar() {
+	const appointment = row.value;
+	if (!appointment || appointment.status !== 1 || !calendarAvailable.value || addingCalendar.value || calendarAdded.value) return;
+	if (typeof wx === "undefined" || typeof wx.addPhoneCalendar !== "function") {
+		calendarError.value = "当前微信版本暂不支持添加到手机日历，请更新微信后重试。";
+		return;
+	}
+	addingCalendar.value = true;
+	calendarError.value = "";
+	try {
+		wx.addPhoneCalendar!({
+			...appointmentPhoneCalendarEventFromRow(appointment),
+			success: () => {
+				addedCalendarSignature.value = calendarSignature(appointment);
+				addingCalendar.value = false;
+			},
+			fail: (result) => {
+				const message = result?.errMsg || "";
+				calendarError.value = /auth|authorize|permission/i.test(message)
+					? "日历权限未开启，请在微信设置中允许访问日历后重试。"
+					: /cancel/i.test(message)
+						? "已取消添加，可再次点击添加到手机日历。"
+						: "手机日历添加失败，请重试。";
+				addingCalendar.value = false;
+			},
+		});
+	} catch {
+		calendarError.value = "手机日历添加失败，请重试。";
+		addingCalendar.value = false;
+	}
+}
 async function cancel() {
-	if (cancelling.value) return;
+	if (cancelling.value || addingCalendar.value) return;
 	cancelling.value = true;
 	cancelError.value = "";
 	try {
@@ -128,6 +193,9 @@ async function cancel() {
 }
 onLoad((q) => {
 	id.value = Number(q?.id) || 0;
+	// #ifdef MP-WEIXIN
+	calendarAvailable.value = true;
+	// #endif
 });
 onShow(load);
 </script>
@@ -185,16 +253,33 @@ onShow(load);
 	display: block;
 	font-size: 23rpx;
 }
+.appointment-calendar {
+	margin-top: 30rpx;
+}
+.appointment-calendar__hint {
+	display: block;
+	margin-top: 16rpx;
+	color: var(--qm-muted);
+	font-size: 23rpx;
+	line-height: 1.55;
+}
+.appointment-calendar__error {
+	margin-top: 16rpx;
+}
 .appointment-detail-actions {
 	display: flex;
 	align-items: stretch;
+	width: 100%;
+	box-sizing: border-box;
 }
 // Native views take part in the mini-program flex layout outside component boundaries.
 .appointment-detail-action {
-	flex: 1;
+	flex: 0 0 48%;
+	width: 48%;
 	min-width: 0;
+	box-sizing: border-box;
 }
 .appointment-detail-action + .appointment-detail-action {
-	margin-left: 20rpx;
+	margin-left: 4%;
 }
 </style>

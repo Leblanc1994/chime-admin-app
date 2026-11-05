@@ -34,7 +34,7 @@
 					:scroll-top="scrollTop"
 					:scroll-into-view="scrollTarget"
 					:aria-busy="loading"
-					@scroll="scrollTop = $event.detail.scrollTop"
+					@scroll="onListScroll"
 				>
 					<view v-if="loading" aria-hidden="true">
 						<view v-for="n in 4" :key="n" class="qm-skeleton selector-skeleton" />
@@ -49,6 +49,7 @@
 								<view
 									v-if="!index || memberInitial(available[index - 1]) !== memberInitial(member)"
 									:id="groupAnchor(memberInitial(member))"
+									:data-initial="memberInitial(member)"
 									class="selector-group"
 								>{{ memberInitial(member) }}</view>
 								<button class="selector-directory-member qm-panel" @tap="select(member)">
@@ -187,6 +188,7 @@ const businessSheet = ref<InstanceType<typeof QmMemberBusinessSheet>>();
 import QmPage from "./components/qm-page.vue";
 import QmButton from "./components/qm-button.vue";
 import QmAlphabetIndex from "./components/qm-alphabet-index.vue";
+import { initialAtScrollTop, type MemberGroupOffset } from "./utils/member-scroll-index";
 const { router } = useCool();
 const instance = getCurrentInstance();
 const service = new MemberService(),
@@ -203,6 +205,7 @@ const initial = ref(""),
 	scrollPadding = ref(0);
 let jumpSequence = 0;
 let layoutSequence = 0;
+let groupOffsets: MemberGroupOffset[] = [];
 let initialized = false;
 let selectionToken = "";
 const matching = computed(() =>
@@ -233,6 +236,10 @@ const initialCounts = computed(() => {
 function groupAnchor(letter: string) {
 	return "selector-group-" + (letter === "#" ? "other" : letter);
 }
+function onListScroll(event: { detail: { scrollTop: number } }) {
+	scrollTop.value = event.detail.scrollTop;
+	if (groupOffsets.length) initial.value = initialAtScrollTop(groupOffsets, scrollTop.value);
+}
 async function setInitial(letter: string) {
 	if (loading.value || !initialCounts.value[letter]) return;
 	const seq = ++jumpSequence;
@@ -244,6 +251,7 @@ async function setInitial(letter: string) {
 function resetDirectory() {
 	jumpSequence++;
 	const seq = ++layoutSequence;
+	groupOffsets = [];
 	initial.value = "";
 	scrollTarget.value = "";
 	scrollTop.value = 0;
@@ -259,6 +267,11 @@ function resetDirectory() {
 		const [viewport, content, groups, end] = result;
 		const last = groups?.[groups.length - 1];
 		if (!viewport || !content || !last) return;
+		groupOffsets = groups.map((group: any) => ({
+			initial: group.dataset.initial,
+			top: group.top - content.top,
+		}));
+		initial.value = initialAtScrollTop(groupOffsets, scrollTop.value);
 		scrollPadding.value = Math.max(
 			0,
 			Math.ceil(viewport.height - (content.bottom - last.top) - (end?.height || 0)),

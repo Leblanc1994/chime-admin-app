@@ -204,17 +204,9 @@
 				><view class="qm-kv"
 					><text>性别</text
 					><text>{{ ["未知", "男", "女"][member.gender || 0] }}</text></view
-				><view class="qm-kv"
-					><text>加入时间</text><text>{{ date(member.createTime, true) }}</text></view
-				><button
-					class="qm-danger-link"
-					@tap="
-						deleteError = '';
-						deleteVisible = true;
-					"
-				>
-					删除会员
-				</button></view
+					><view class="qm-kv"
+						><text>加入时间</text><text>{{ date(member.createTime, true) }}</text></view
+				></view
 			>
 		</template>
 		<template #footer
@@ -226,18 +218,6 @@
 				>返回会员列表</qm-button
 			></template
 		>
-		<qm-confirm
-			v-model="deleteVisible"
-			title="删除会员？"
-			confirm-text="确认删除"
-			danger
-			:busy="deleting"
-			:error="deleteError"
-			:message="
-				'将删除 ' + name + ' 的会员档案，此操作无法撤销。有关联业务时，以系统校验结果为准。'
-			"
-			@confirm="remove"
-		/>
 		<qm-member-business-sheet ref="businessSheet" @saved="load" />
 	</qm-page>
 </template>
@@ -256,7 +236,6 @@ const businessSheet = ref<InstanceType<typeof QmMemberBusinessSheet>>();
 import QmPage from "./components/qm-page.vue";
 import QmButton from "./components/qm-button.vue";
 import QmCard from "./components/qm-card.vue";
-import QmConfirm from "./components/qm-confirm.vue";
 const { router } = useCool(),
 	members = new MemberService(),
 	cardService = new CardService(),
@@ -277,10 +256,7 @@ const id = ref(0),
 	listError = ref(""),
 	total = ref(0),
 	page = ref(1),
-	filter = ref(""),
-	deleteVisible = ref(false),
-	deleteError = ref(""),
-	deleting = ref(false);
+	filter = ref("");
 let dirty = false,
 	initialized = false,
 	generation = 0;
@@ -456,21 +432,6 @@ function recordDetail(row: any) {
 			},
 		},
 	});
-}
-async function remove() {
-	if (deleting.value) return;
-	deleting.value = true;
-	deleteError.value = "";
-	try {
-		await members.delete({ ids: [id.value] });
-		deleteVisible.value = false;
-		uni.$emit("chime:members-changed");
-		router.switchTab("member");
-	} catch (e: any) {
-		deleteError.value = e?.message || "删除失败，可能存在关联业务";
-	} finally {
-		deleting.value = false;
-	}
 }
 function markDirty(changedId?: number) {
 	if (!changedId || changedId === id.value) dirty = true;
