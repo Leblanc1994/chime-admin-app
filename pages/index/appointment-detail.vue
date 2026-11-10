@@ -92,7 +92,7 @@ import { onLoad, onShow } from "@dcloudio/uni-app";
 import { useCool } from "/@/cool";
 import AppointmentService from "../../service/appointment/schedule";
 import type { Appointment } from "../../service/appointment/schedule";
-import { dateLabel, appointmentTime, durationLabel, appointmentPhoneCalendarEventFromRow } from "./utils/appointment";
+import { dateLabel, appointmentTime, durationLabel, appointmentPhoneCalendarEventFromRow, phoneCalendarFailure } from "./utils/appointment";
 import QmPage from "./components/qm-page.vue";
 import QmButton from "./components/qm-button.vue";
 import QmConfirm from "./components/qm-confirm.vue";
@@ -161,12 +161,7 @@ function addCalendar() {
 				addingCalendar.value = false;
 			},
 			fail: (result) => {
-				const message = result?.errMsg || "";
-				calendarError.value = /auth|authorize|permission/i.test(message)
-					? "日历权限未开启，请在微信设置中允许访问日历后重试。"
-					: /cancel/i.test(message)
-						? "已取消添加，可再次点击添加到手机日历。"
-						: "手机日历添加失败，请重试。";
+				calendarError.value = phoneCalendarFailure(result);
 				addingCalendar.value = false;
 			},
 		});

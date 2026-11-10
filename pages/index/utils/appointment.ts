@@ -148,6 +148,14 @@ export function appointmentPhoneCalendarEventFromRow(
 		alarmOffset: 0,
 	};
 }
+export function phoneCalendarFailure(result?: { errMsg?: string }) {
+	const message = result?.errMsg || "";
+	return /auth|authorize|permission/i.test(message)
+		? "日历权限未开启，请在微信设置中允许访问日历后重试。"
+		: /cancel/i.test(message)
+			? "已取消添加，可再次点击添加到手机日历。"
+			: "手机日历添加失败，请重试。";
+}
 export function selectAppointmentMember(
 	form: AppointmentForm,
 	member: { id: number; name?: string; nickName?: string; phone?: string },
